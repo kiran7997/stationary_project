@@ -14,6 +14,7 @@ use Hash;
 
 class UserController extends Controller
 {
+    //initial commit
     /**
      * Display a listing of the resource.
      *
