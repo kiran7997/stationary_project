@@ -23,8 +23,8 @@ Route::get('admin-login', 'Auth\LoginController@showLoginForm');
 Route::get('employees-login', 'Auth\EmployeeController@showLoginForm');
 Route::post('employees-login', 'Auth\EmployeeController@login')->name('employees-login');
 //Customer Login Route
-Route::get('/', 'Auth\CustomerController@showLoginForm');
-Route::post('customers-login', 'Auth\CustomerController@login')->name('customers-login');
+Route::get('/', 'Auth\CustomerLoginController@showLoginForm');
+Route::post('customers-login', 'Auth\CustomerLoginController@login')->name('customers-login');
 
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -37,3 +37,5 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('get-district', 'UserController@get_district');
     Route::post('check_username', 'UserController@check_username');
 });
+//customer routes
+Route::get('customer-dashboard', 'CustomerController@dashboard');
