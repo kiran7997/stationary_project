@@ -39,3 +39,30 @@ Route::group(['middleware' => ['auth']], function () {
 });
 //customer routes
 Route::get('customer-dashboard', 'CustomerController@dashboard');
+
+Route::get('/index','CategoriesController@index');
+Route::post('/store','CategoriesController@store');
+Route::get('/categories/{cat_id}','CategoriesController@getCatagoryrById');
+Route::post('/categories','CategoriesController@updateCategory');
+Route::delete('/categories/{cat_id}','CategoriesController@deleteCategories');
+
+
+Route::get('/index2','ProductsVariationController@index');
+Route::post('/storproductsv','ProductsVariationController@store');
+Route::get('/productsv/{variation_id}','ProductsVariationController@getProductvById');
+Route::post('/productsv','ProductsVariationController@updateProductv');
+Route::delete('/productsv/{variation_id}','ProductsVariationController@deleteProductv');
+
+Route::get('/index3','UnitsController@index');
+Route::post('/storeunit','UnitsController@store');
+Route::get('/units/{unit_id}','UnitsController@getUnitsById');
+Route::post('/units','UnitsController@updateUnits');
+Route::delete('/units/{unit_id}','UnitsController@deleteunits');
+
+
+Route::get('/pro','ProductsController@index');
+Route::post('/addpro','ProductsController@store');
+Route::get('/editp/{product_id}','ProductsController@edit');
+Route::post('/editpro','ProductsController@update');
+Route::delete('/delep/{product_id}','ProductsController@destroy');
+
