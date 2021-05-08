@@ -10,14 +10,14 @@
                 <div class="row breadcrumbs-top">
                     <div class="col-12">
                         <h2 class="content-header-title float-left mb-0">
-                            User Edit
+                            Employee Edit
                         </h2>
                         <div class="breadcrumb-wrapper">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item">
                                     <a href="index.html">Home</a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="{{route('users.index')}}">User</a></li>
+                                <li class="breadcrumb-item"><a href="{{route('users.index')}}">Employee</a></li>
                                 <li class="breadcrumb-item active">Edit</li>
                             </ol>
                         </div>
@@ -33,7 +33,7 @@
                     <div class="col-md-6 col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">User Edit</h4>
+                                <h4 class="card-title">Employee Edit</h4>
                             </div>
                             <div class="card-body">
                                 @if (count($errors) > 0)
