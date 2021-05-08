@@ -10,14 +10,14 @@
             <div class="content-header-left col-md-9 col-12 mb-2">
                 <div class="row breadcrumbs-top">
                     <div class="col-12">
-                        <h2 class="content-header-title float-left mb-0">Users Management</h2>
+                        <h2 class="content-header-title float-left mb-0">Employees Management</h2>
                         <div class="breadcrumb-wrapper">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="index.html">Home</a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="{{route('users.index')}}">Users</a>
+                                <li class="breadcrumb-item"><a href="{{route('users.index')}}">Employee</a>
                                 </li>
-                                <li class="breadcrumb-item active">User
+                                <li class="breadcrumb-item active">Show
                                 </li>
                             </ol>
                         </div>
@@ -31,7 +31,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header border-bottom">
-                                <h4 class="card-title">Users Details</h4>
+                                <h4 class="card-title">Show Employee</h4>
                             </div>
                             <div style="margin:20px;">
                                 @if ($message = Session::get('success'))
