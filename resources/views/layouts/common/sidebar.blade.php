@@ -56,13 +56,13 @@
           <li><a class="d-flex align-items-center" href="{{route('roles.index')}}"><i data-feather="circle"></i><span
                 class="menu-item text-truncate" data-i18n="List">Department</span></a>
           </li>
-          <li><a class="d-flex align-items-center" href="app-invoice-preview.html"><i data-feather="circle"></i><span
+          <li><a class="d-flex align-items-center" href="{{url('index')}}"><i data-feather="circle"></i><span
                 class="menu-item text-truncate" data-i18n="Preview">Category</span></a>
           </li>
-          <li><a class="d-flex align-items-center" href="app-invoice-edit.html"><i data-feather="circle"></i><span
+          <li><a class="d-flex align-items-center" href="{{url('index3')}}"><i data-feather="circle"></i><span
                 class="menu-item text-truncate" data-i18n="Edit">Unit</span></a>
           </li>
-          <li><a class="d-flex align-items-center" href="app-invoice-add.html"><i data-feather="circle"></i><span
+          <li><a class="d-flex align-items-center" href="{{url('index2')}}"><i data-feather="circle"></i><span
                 class="menu-item text-truncate" data-i18n="Add">Product Variation</span></a>
           </li>
           <li><a class="d-flex align-items-center" href="{{url('pro')}}"><i data-feather="circle"></i><span
