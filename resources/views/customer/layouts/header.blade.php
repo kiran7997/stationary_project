@@ -56,7 +56,7 @@
           id="dropdown-user" href="javascript:void(0);" data-toggle="dropdown" aria-haspopup="true"
           aria-expanded="false">
           <div class="user-nav d-sm-flex d-none"><span
-              class="user-name font-weight-bolder">{{ Auth::guard('customer')->user()->customer_firstname }}</span>
+              class="user-name font-weight-bolder login-user-name">{{ Auth::guard('customer')->user()->customer_firstname }}</span>
             {{-- <span
               class="user-status">{{ Auth::user()->role }}</span> --}}
           </div><span class="avatar"><img class="round"
