@@ -145,7 +145,7 @@
          <div class="form-group">
          
          <label for="product_id">Select Type</label> &nbsp;&nbsp;
-         <select name="product_id" id="product_id"  class="form-control" >
+         <select name="product_id" id="product_id"  class="form-control"  required>
             <option >Select Option</option>
              <option value="1">Pen</option>
              <option value="2">Text Book</option>
@@ -186,7 +186,7 @@
          <div class="form-group">
          
          <label for="product_id">Select Type</label> &nbsp;&nbsp;
-         <select name="product_id" id="product_id"  class="form-control" >
+         <select name="product_id" id="product_id"  class="form-control" required>
             <option >Select Option</option>
              <option value="1">Pen</option>
              <option value="2">Text Book</option>
@@ -200,7 +200,7 @@
             <br>
         <div class="form-group">
                 <label for="item_quantity">Item Quantity </label>
-                 <input type="text" name="item_quantity" id="item_quantity" class="form-control" placeholder="Quantity">
+                 <input type="text" name="item_quantity" id="item_quantity" class="form-control" placeholder="Quantity" required>
             </div><br>
      
             
@@ -241,7 +241,7 @@
             <br>
         <div class="form-group">
                 <label for="item_quantity">Item Quantity </label>
-                 <input type="text" name="item_quantity2" id="item_quantity2" class="form-control" placeholder="Quantity">
+                 <input type="text" name="item_quantity2" id="item_quantity2" class="form-control" placeholder="Quantity" required>
             </div><br>
             <br><br>
             <button type="submit" class="btn btn-primary">Submit</button>
