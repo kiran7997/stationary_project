@@ -303,6 +303,9 @@
           src="../../../app-assets/images/pages/eCommerce/4.png"
           alt="img-placeholder"
       /></a>
+      <td>
+        <img >
+    </td>
     </div>
     <div class="card-body">
       <div class="item-wrapper">
@@ -702,61 +705,61 @@
           <li>
             <div class="custom-control custom-radio">
               <input type="radio" id="category1" name="category-filter" class="custom-control-input" checked />
-              <label class="custom-control-label" for="category1">Appliances</label>
+              <label class="custom-control-label" for="category1">Books</label>
             </div>
           </li>
           <li>
             <div class="custom-control custom-radio">
               <input type="radio" id="category2" name="category-filter" class="custom-control-input" />
-              <label class="custom-control-label" for="category2">Audio</label>
+              <label class="custom-control-label" for="category2">Pens</label>
             </div>
           </li>
           <li>
             <div class="custom-control custom-radio">
               <input type="radio" id="category3" name="category-filter" class="custom-control-input" />
-              <label class="custom-control-label" for="category3">Cameras & Camcorders</label>
+              <label class="custom-control-label" for="category3">Campas</label>
             </div>
           </li>
           <li>
             <div class="custom-control custom-radio">
               <input type="radio" id="category4" name="category-filter" class="custom-control-input" />
-              <label class="custom-control-label" for="category4">Car Electronics & GPS</label>
+              <label class="custom-control-label" for="category4">Stick Product</label>
             </div>
           </li>
           <li>
             <div class="custom-control custom-radio">
               <input type="radio" id="category5" name="category-filter" class="custom-control-input" />
-              <label class="custom-control-label" for="category5">Cell Phones</label>
+              <label class="custom-control-label" for="category5">Calculators</label>
             </div>
           </li>
           <li>
             <div class="custom-control custom-radio">
               <input type="radio" id="category6" name="category-filter" class="custom-control-input" />
-              <label class="custom-control-label" for="category6">Computers & Tablets</label>
+              <label class="custom-control-label" for="category6">Kids Appliances</label>
             </div>
           </li>
           <li>
             <div class="custom-control custom-radio">
               <input type="radio" id="category7" name="category-filter" class="custom-control-input" />
-              <label class="custom-control-label" for="category7">Health, Fitness & Beauty</label>
+              <label class="custom-control-label" for="category7">Cd Drivers</label>
             </div>
           </li>
           <li>
             <div class="custom-control custom-radio">
               <input type="radio" id="category8" name="category-filter" class="custom-control-input" />
-              <label class="custom-control-label" for="category8">Office & School Supplies</label>
+              <label class="custom-control-label" for="category8">Text Book</label>
             </div>
           </li>
           <li>
             <div class="custom-control custom-radio">
               <input type="radio" id="category9" name="category-filter" class="custom-control-input" />
-              <label class="custom-control-label" for="category9">TV & Home Theater</label>
+              <label class="custom-control-label" for="category9">Electronic Appliances</label>
             </div>
           </li>
           <li>
             <div class="custom-control custom-radio">
               <input type="radio" id="category10" name="category-filter" class="custom-control-input" />
-              <label class="custom-control-label" for="category10">Video Games</label>
+              <label class="custom-control-label" for="category10">Container</label>
             </div>
           </li>
         </ul>
@@ -770,70 +773,71 @@
           <li>
             <div class="custom-control custom-checkbox">
               <input type="checkbox" class="custom-control-input" id="productBrand1" />
-              <label class="custom-control-label" for="productBrand1">Insignia™</label>
+              <label class="custom-control-label" for="productBrand1">Navneet</label>
             </div>
             <span>746</span>
           </li>
           <li>
             <div class="custom-control custom-checkbox">
               <input type="checkbox" class="custom-control-input" id="productBrand2" checked />
-              <label class="custom-control-label" for="productBrand2">Samsung</label>
+              <label class="custom-control-label" for="productBrand2">ITC Classmates</label>
             </div>
             <span>633</span>
           </li>
           <li>
             <div class="custom-control custom-checkbox">
               <input type="checkbox" class="custom-control-input" id="productBrand3" />
-              <label class="custom-control-label" for="productBrand3">Metra</label>
+              <label class="custom-control-label" for="productBrand3">Repro India</label>
             </div>
             <span>591</span>
           </li>
           <li>
             <div class="custom-control custom-checkbox">
               <input type="checkbox" class="custom-control-input" id="productBrand4" />
-              <label class="custom-control-label" for="productBrand4">HP</label>
+              <label class="custom-control-label" for="productBrand4"> JK Paper Limited</label>
             </div>
             <span>530</span>
           </li>
           <li>
             <div class="custom-control custom-checkbox">
               <input type="checkbox" class="custom-control-input" id="productBrand5" checked />
-              <label class="custom-control-label" for="productBrand5">Apple</label>
+              <label class="custom-control-label" for="productBrand5"> Kokuyo Camlin Limited</label>
             </div>
             <span>442</span>
           </li>
           <li>
             <div class="custom-control custom-checkbox">
               <input type="checkbox" class="custom-control-input" id="productBrand6" />
-              <label class="custom-control-label" for="productBrand6">GE</label>
+              <label class="custom-control-label" for="productBrand6">Reynolds</label>
             </div>
             <span>394</span>
           </li>
           <li>
             <div class="custom-control custom-checkbox">
               <input type="checkbox" class="custom-control-input" id="productBrand7" />
-              <label class="custom-control-label" for="productBrand7">Sony</label>
+              <label class="custom-control-label" for="productBrand7">Archies Limited
+</label>
             </div>
             <span>350</span>
           </li>
           <li>
             <div class="custom-control custom-checkbox">
               <input type="checkbox" class="custom-control-input" id="productBrand8" />
-              <label class="custom-control-label" for="productBrand8">Incipio</label>
+              <label class="custom-control-label" for="productBrand8">Sundaram </label>
             </div>
             <span>320</span>
           </li>
           <li>
             <div class="custom-control custom-checkbox">
               <input type="checkbox" class="custom-control-input" id="productBrand9" />
-              <label class="custom-control-label" for="productBrand9">KitchenAid</label>
+              <label class="custom-control-label" for="productBrand9">Typo</label>
             </div>
             <span>318</span>
           </li>
           <li>
             <div class="custom-control custom-checkbox">
               <input type="checkbox" class="custom-control-input" id="productBrand10" />
-              <label class="custom-control-label" for="productBrand10">Whirlpool</label>
+              <label class="custom-control-label" for="productBrand10">Crane Currency</label>
             </div>
             <span>298</span>
           </li>
