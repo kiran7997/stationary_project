@@ -47,6 +47,10 @@
               </li>
 			  <li><a class="d-flex align-items-center" href="app-invoice-add.html"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Add">Product</span></a>
               </li>
+			  <li><a class="d-flex align-items-center" href="app-invoice-add.html"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Add">Inventory</span></a>
+              </li>
+			  <li><a class="d-flex align-items-center" href="app-invoice-add.html"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Add">Stock</span></a>
+              </li>
             </ul>
           </li>
           
