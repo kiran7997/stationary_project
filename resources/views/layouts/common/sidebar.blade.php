@@ -52,6 +52,12 @@
           
           
           <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather="user"></i><span class="menu-title text-truncate" data-i18n="User">User</span></a>
+		  		<ul class="menu-content">
+                        <li><a class="d-flex align-items-center" href="app-user-list.html"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-circle"><circle cx="12" cy="12" r="10"></circle></svg><span class="menu-item text-truncate" data-i18n="List">Employee</span></a>
+                        </li>
+                        <li><a class="d-flex align-items-center" href="app-user-view.html"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-circle"><circle cx="12" cy="12" r="10"></circle></svg><span class="menu-item text-truncate" data-i18n="View">Customer</span></a>
+                        </li>
+                    </ul>
           </li>
           
           <li class=" navigation-header"><span data-i18n="Forms &amp; Tables">Reports</span><i data-feather="more-horizontal"></i>
