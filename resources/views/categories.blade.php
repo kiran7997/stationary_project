@@ -221,8 +221,8 @@ label.error{
 
               
 <!-- Add Categories Modal -->
-<script src="ajaxcdn.js"></script>
 
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
 <script>  
 
@@ -251,46 +251,43 @@ $("#CategoryForm").submit(function(e){
     });
 });
 </script>
-
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
-    function editCategory(variation_id)
+    function editCategory(cat_id)
     {
-        $.get('/productsv/'+variation_id,function(categories){
-               $("#variation_id").val(categories.variation_id);
-               $("#variation_name1").val(categories.variation_name);
-                $("#variation_abbrevation1").val(categories.variation_abbrevation);
-                $("#variation_add_on_price1").val(categories.add_on_price);
-                $("#EditProductv").modal('toggle');
+        $.get('/categories/'+cat_id,function(categories){
+               $("#cat_id").val(categories.cat_id);
+               $("#cat_name1").val(categories.cat_name);
+                $("#cat_description1").val(categories.cat_description);
+                $("#cat_image1").val(categories.cat_image);
+                $("#EditCategory").modal('toggle');
         });
     }
-    $("#EditProductvForm").submit(function(e){
+    $("#EditCategoryForm").submit(function(e){
         e.preventDefault();
-        let variation_id=$("#variation_id").val();
-        let variation_name=$("#variation_name1").val();
-        let variation_abbrevation=$("#variation_abbrevation1").val();
-        let add_on_price=$("#variation_add_on_price1").val();
+        let cat_id=$("#cat_id").val();
+        let cat_name=$("#cat_name1").val();
+        let cat_description=$("#cat_description1").val();
+        let cat_image=$("#cat_image1").val();
         let _token=$("input[name=_token]").val();
         
         $.ajax({
-            url:"{{url('productsv')}}",
+            url:"{{url('categories')}}",
             type:"post",
             data:{
-               variation_id:variation_id,
-               variation_name:variation_name,
-               variation_abbrevation:variation_abbrevation,
-               add_on_price:add_on_price,
+               cat_id:cat_id,
+               cat_name:cat_name,
+            cat_description:cat_description,
+            cat_image:cat_image,
                 _token:_token
             },
             success:function(response){
-                // $('#sid' +response.id+' td:nth-child(1)').text(response.vendor_name);
-                // $('#sid' +response.id+' td:nth-child(2)').text(response.location);
-                // $('#sid' +response.id+' td:nth-child(3)').text(response.phone);
-                // $('#sid' +response.id+' td:nth-child(4)').text(response.email);
-                // $('#sid' +response.id+' td:nth-child(5)').text(response.INV_No);
-                // $('#sid' +response.id+' td:nth-child(6)').text(response.Transport);
-
-                $("#EditProductv").modal('toggle');
-                $('#EditProductvForm')[0].reset();
+                $('#sid' +response.cat_id+' td:nth-child(1)').text(response.cat_name);
+                $('#sid' +response.cat_id+' td:nth-child(2)').text(response.cat_description);
+                $('#sid' +response.cat_id+' td:nth-child(3)').text(response.cat_image);
+               
+                $("#EditCategory").modal('toggle');
+                $('#EditCategoryForm')[0].reset();
                 location.reload();
             }
         });
@@ -298,7 +295,6 @@ $("#CategoryForm").submit(function(e){
     });
 
 </script>
-
 <script>
     function deleteCategory(id)
     {
@@ -322,10 +318,6 @@ $("#CategoryForm").submit(function(e){
         }
     }
 </script>
-<script src="ajaxcdn.js"></script>
-<script src="js/jquery.min.js"></script>
-<script src="js/jquery.validate.min.js"></script>
-<script src="js/category.js"></script>
 
 </html>     
 

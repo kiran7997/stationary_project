@@ -135,13 +135,9 @@
     <script src="../../../app-assets/js/core/app.min.js"></script>
     <script src="../../../app-assets/js/scripts/customizer.min.js"></script>
    
-    
-  </body>
-  <!-- END: Body-->
-</html>
-
-<!-- Add Product Variation -->
-<div class="modal fade text-left"
+  
+<div
+                class="modal fade text-left"
                 id="AddProductv"
                 tabindex="-1"
                 role="dialog"
@@ -155,10 +151,8 @@
                       
                     </div>
                     <form id="ProductvForm" name="ProductvForm">
-                  
                     @csrf
                       <div class="modal-body">
-                      <div class="form-group">
                       <div class="form-group">
                     <label for="location">Product variation Name</label>
                     <input type="text" class="form-control" id="variation_name" name="variation_name"/>
@@ -182,9 +176,43 @@
                   </div>
                 </div>
               </div>
-<!-- Edit Product Variation -->
 
-   <div
+
+<!-- Add Categories Modal -->
+<div class="modal fade" id="AddProductv" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+        <div class="modal-body">
+            <form  id="ProductvForm" name="ProductvForm">
+           @csrf
+                <div class="form-group">
+                    <label for="location">Product variation Name</label>
+                    <input type="text" class="form-control" id="variation_name" name="variation_name"/>
+                </div>
+
+                       
+                <div class="form-group">
+                    <label for="Transport">Product variation Abbrivation</label>
+                    <input type="text" class="form-control" id="variation_abbrevation" name="variation_abbrevation">
+                </div>
+
+                <div class="form-group">
+                    <label for="Transport">Product variation Ad on Price</label>
+                    <input type="text" class="form-control" id="variation_add_on_price" name="variation_add_on_price">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div
                 class="modal fade text-left"
                 id="EditProductv"
                 tabindex="-1"
@@ -198,34 +226,34 @@
                       
                       
                     </div>
-                    <form  id="EditProductvForm" name="EditProductvForm">
+                    <form id="EditProductvForm" name="EditProductvForm">
                     <input type="hidden" id="variation_id" name="variation_id" >
                     @csrf
                       <div class="modal-body">
                       <div class="form-group">
-                      <div class="form-group">
-                    <label for="location">Product variation Name</label>
-                    <input type="text" class="form-control" id="variation_name1" name="variation_name1"/>
-                </div>
+                <label for="location">Product variation Name</label>
+                <input type="text" class="form-control" id="variation_name1" name="variation_name1"/>
+            </div>
 
-                       
-                <div class="form-group">
-                    <label for="Transport">Product variation Abbrivation</label>
-                    <input type="text" class="form-control" id="variation_abbrevation1" name="variation_abbrevation1">
-                </div>
-
-                <div class="form-group">
-                    <label for="Transport">Product variation Ad on Price</label>
-                    <input type="text" class="form-control" id="add_on_price1" name="add_on_price1">
-                </div>
+            <div class="form-group">
+                <label for="phone">Product variation Abbrivation</label>
+                <input type="text" class="form-control" id="variation_abbrevation1" name="variation_abbrevation1"/>
+            </div>
+            
+            <div class="form-group">
+                <label for="Transport">Product variation Add on Price</label>
+                <input type="text" class="form-control" id="variation_add_on_price1" name="variation_add_on_price1">
+                
+            </div>
                 </div>
                       <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary" >Submit</button>
+                        <button type="submit" class="btn btn-primary" >Update</button>
                       </div>
                     </form>
                   </div>
                 </div>
               </div>
+
 
 <script>  
 $("#ProductvForm").submit(function(e){
@@ -268,33 +296,23 @@ $("#ProductvForm").submit(function(e){
     {
         $.get('/productsv/'+variation_id,function(categories){
                $("#variation_id").val(categories.variation_id);
-              
                $("#variation_name1").val(categories.variation_name);
-             
                 $("#variation_abbrevation1").val(categories.variation_abbrevation);
-                alert(categories.variation_abbrevation);
-                $("#add_on_price1").val(categories.add_on_price);
-                
-                
+                $("#variation_add_on_price1").val(categories.add_on_price);
                 $("#EditProductv").modal('toggle');
         });
     }
-    
     $("#EditProductvForm").submit(function(e){
         e.preventDefault();
-       
         let variation_id=$("#variation_id").val();
-        
         let variation_name=$("#variation_name1").val();
-        alert(variation_name);
         let variation_abbrevation=$("#variation_abbrevation1").val();
-        let add_on_price=$("#add_on_price1").val();
+        let add_on_price=$("#variation_add_on_price1").val();
         let _token=$("input[name=_token]").val();
         
         $.ajax({
             url:"{{url('productsv')}}",
             type:"post",
-            
             data:{
                variation_id:variation_id,
                variation_name:variation_name,
@@ -302,7 +320,6 @@ $("#ProductvForm").submit(function(e){
                add_on_price:add_on_price,
                 _token:_token
             },
-            
             success:function(response){
                 // $('#sid' +response.id+' td:nth-child(1)').text(response.vendor_name);
                 // $('#sid' +response.id+' td:nth-child(2)').text(response.location);
@@ -343,6 +360,10 @@ $("#ProductvForm").submit(function(e){
         }
     }
 </script>
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.validate.min.js"></script>
+<script src="js/productv.js"></script>
+</html>     
 
 
 </html>     

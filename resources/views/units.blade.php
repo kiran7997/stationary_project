@@ -100,20 +100,19 @@
             </tr>
           </thead>
          
-<tbody>
-                            @foreach($units as $vendor)
-                            <tr id="sid{{$vendor->id}}">
-                                <td>{{$vendor->unit_id}}</td>
-                                <td>{{$vendor->unit_name}}</td>
-                                <td>{{$vendor->unit_description}}</td>
-                                <td>
-                               
-                                        <a href="javascript:void(0)" onclick="editUnits({{$vendor->unit_id}})" class="fa fa-secondary" style="font-size:24px"><i class="fa fa-pencil"></i></a> &nbsp;
-                                        <a href="javascript:void(0)"  onclick="deleteUnits({{$vendor->unit_id}})"  class="fa fa-trash" ></a>
-                              </td>
-                            </tr>
-                                @endforeach
-                            </tbody>
+          <tbody>
+              @foreach($units as $vendor)
+            <tr id="sid{{$vendor->id}}">
+              <td>{{$vendor->unit_id}}</td>
+              <td>{{$vendor->unit_name}}</td>
+              <td>{{$vendor->unit_description}}</td>
+              <td>
+              <a href="javascript:void(0)" onclick="editUnits({{$vendor->unit_id}})" class="fa fa-secondary" style="font-size:24px"><i class="fa fa-pencil"></i></a> &nbsp;
+              <a href="javascript:void(0)"  onclick="deleteUnits({{$vendor->unit_id}})"  class="fa fa-trash" style="font-size:24px;color:red"></a>
+              </td>
+              </tr>
+              @endforeach
+              </tbody>            
                             
         </table>
       </div>
@@ -123,52 +122,23 @@
    </div>
       </div>
     </div>
-      
-
   <hr />
-
- 
- 
-
- 
-</div>
+  </div>
 
     </div>
-    <!-- End: Customizer-->
-
-    <!-- Buynow Button-->
     
     <div class="sidenav-overlay"></div>
     <div class="drag-target"></div>
-
-    <!-- BEGIN: Footer-->
-   
-
-
-    <!-- BEGIN: Vendor JS-->
     <script src="../../../app-assets/vendors/js/vendors.min.js"></script>
-    <!-- BEGIN Vendor JS-->
-
-    <!-- BEGIN: Page Vendor JS-->
     <script src="../../../app-assets/vendors/js/ui/jquery.sticky.js"></script>
-    <!-- END: Page Vendor JS-->
-
-    <!-- BEGIN: Theme JS-->
     <script src="../../../app-assets/js/core/app-menu.min.js"></script>
     <script src="../../../app-assets/js/core/app.min.js"></script>
     <script src="../../../app-assets/js/scripts/customizer.min.js"></script>
-    <!-- END: Theme JS-->
-
-    <!-- BEGIN: Page JS-->
-    <!-- END: Page JS-->
-
-    
-  </body>
-  <!-- END: Body-->
-</html>
+  
+  <!-- Modal -->
 <div
                 class="modal fade text-left"
-                id="Addunit"
+                id="AddUnit"
                 tabindex="-1"
                 role="dialog"
                 aria-labelledby="myModalLabel33"
@@ -184,14 +154,13 @@
                     @csrf
                       <div class="modal-body">
                       <div class="form-group">
+                          <label for="location">Unit Name</label>
+                          <input type="text" class="form-control" id="unit_name" name="unit_name"/>
+                      </div>
                       <div class="form-group">
-                <label for="location">Unit Name</label>
-                <input type="text" class="form-control" id="unit_name" name="unit_name"/>
-            </div>
-            <div class="form-group">
-                <label for="phone">Unit Description</label>
-                <input type="text" class="form-control" id="unit_description" name="unit_description"/>
-            </div>
+                          <label for="phone">Unit Description</label>
+                          <input type="text" class="form-control" id="unit_description" name="unit_description"/>
+                      </div>
                 </div>
                       <div class="modal-footer">
                         <button type="submit" class="btn btn-primary" >Submit</button>
@@ -218,18 +187,16 @@
                     </div>
                     <form id="EditUnitForm" name="EditUnitForm">
                     <input type="hidden" id="unit_id" name="unit_id" >
-
                     @csrf
                       <div class="modal-body">
                       <div class="form-group">
-                      <div class="form-group">
-                <label for="location">Unit Name</label>
+                <label for="location">Category Name</label>
                 <input type="text" class="form-control" id="unit_name1" name="unit_name1"/>
             </div>
             <div class="form-group">
-                <label for="phone">Unit Description</label>
+                <label for="phone">Category Description</label>
                 <input type="text" class="form-control" id="unit_description1" name="unit_description1"/>
-            </div>
+            </div><br>
                 </div>
                       <div class="modal-footer">
                         <button type="submit" class="btn btn-primary" >Submit</button>
@@ -239,18 +206,15 @@
                 </div>
               </div>
 
+
 <!-- AJAX insert Unit model -->
-<script src="ajaxcdn.js"></script>
-<script src="js/jquery.min.js"></script>
-<script src="js/jquery.validate.min.js"></script>
-<script src="js/units.js"></script>
 <script>  
 $("#UnitForm").submit(function(e){
   e.preventDefault();
     let unit_name=$("#unit_name").val();
     let unit_description=$("#unit_description").val();
     let _token=$("input[name=_token]").val();
-  
+
     $.ajax({
         url:"{{url('storeunit')}}",
         type:"post",
@@ -279,11 +243,10 @@ $("#UnitForm").submit(function(e){
 </script>
 <!-- AJAX Update Unit model -->
 <script>
-    function editUnits(unit_id)
+    function editUnits(id)
     {
-        $.get('/units/'+unit_id,function(categories){
+        $.get('/units/'+id,function(categories){
                $("#unit_id").val(categories.unit_id);
-               alert(categories.unit_id);
                $("#unit_name1").val(categories.unit_name);
                 $("#unit_description1").val(categories.unit_description);
                 $("#EditUnits").modal('toggle');
@@ -334,7 +297,6 @@ $("#UnitForm").submit(function(e){
                 success:function(response)
                 {
                     $('#sid'+id).remove();
-                    alert("eleted");
                     location.reload();
                   
                 }
@@ -342,6 +304,13 @@ $("#UnitForm").submit(function(e){
         }
     }
 </script>
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.validate.min.js"></script>
+<script src="js/unit.js"></script>
+
+</html>     
+
+
 
 </html>     
 
