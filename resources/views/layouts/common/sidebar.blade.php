@@ -62,46 +62,16 @@
           <li><a class="d-flex align-items-center" href="app-invoice-edit.html"><i data-feather="circle"></i><span
                 class="menu-item text-truncate" data-i18n="Edit">Unit</span></a>
           </li>
-<<<<<<< HEAD
-          <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather="grid"></i><span class="menu-title text-truncate" data-i18n="Invoice">Master</span></a>
-            <ul class="menu-content">
-              <li><a class="d-flex align-items-center" href="app-invoice-list.html"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="List">Department</span></a>
-              </li>
-              <li><a class="d-flex align-items-center" href="app-invoice-preview.html"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Preview">Category</span></a>
-              </li>
-              <li><a class="d-flex align-items-center" href="app-invoice-edit.html"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Edit">Unit</span></a>
-              </li>
-              <li><a class="d-flex align-items-center" href="app-invoice-add.html"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Add">Product Variation</span></a>
-              </li>
-			  <li><a class="d-flex align-items-center" href="{{url('pro')}}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Add">Product</span></a>
-              </li>
-			  <li><a class="d-flex align-items-center" href="{{url('inven')}}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Add">Inventory</span></a>
-              </li>
-			  <li><a class="d-flex align-items-center" href="{{url('stock')}}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Add">Stock</span></a>
-              </li>
-            </ul>
-          </li>
-          
-          
-          <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather="user"></i><span class="menu-title text-truncate" data-i18n="User">User</span></a>
-		  		<ul class="menu-content">
-                        <li><a class="d-flex align-items-center" href="app-user-list.html"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-circle"><circle cx="12" cy="12" r="10"></circle></svg><span class="menu-item text-truncate" data-i18n="List">Employee</span></a>
-                        </li>
-                        <li><a class="d-flex align-items-center" href="{{url('cust')}}"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-circle"><circle cx="12" cy="12" r="10"></circle></svg><span class="menu-item text-truncate" data-i18n="View">Customer</span></a>
-                        </li>
-                    </ul>
-=======
           <li><a class="d-flex align-items-center" href="app-invoice-add.html"><i data-feather="circle"></i><span
                 class="menu-item text-truncate" data-i18n="Add">Product Variation</span></a>
           </li>
-          <li><a class="d-flex align-items-center" href="app-invoice-add.html"><i data-feather="circle"></i><span
+          <li><a class="d-flex align-items-center" href="{{url('pro')}}"><i data-feather="circle"></i><span
                 class="menu-item text-truncate" data-i18n="Add">Product</span></a>
->>>>>>> 797aafb2edef995592e4643ab9284ddaba509d0a
           </li>
-          <li><a class="d-flex align-items-center" href="app-invoice-add.html"><i data-feather="circle"></i><span
+          <li><a class="d-flex align-items-center" href="{{url('inven')}}"><i data-feather="circle"></i><span
                 class="menu-item text-truncate" data-i18n="Add">Inventory</span></a>
           </li>
-          <li><a class="d-flex align-items-center" href="app-invoice-add.html"><i data-feather="circle"></i><span
+          <li><a class="d-flex align-items-center" href="{{url('stock')}}"><i data-feather="circle"></i><span
                 class="menu-item text-truncate" data-i18n="Add">Stock</span></a>
           </li>
         </ul>
@@ -118,7 +88,7 @@
                 <circle cx="12" cy="12" r="10"></circle>
               </svg><span class="menu-item text-truncate" data-i18n="List">Employee</span></a>
           </li>
-          <li><a class="d-flex align-items-center" href="app-user-view.html"><svg xmlns="http://www.w3.org/2000/svg"
+          <li><a class="d-flex align-items-center" href="{{url('cust')}}"><svg xmlns="http://www.w3.org/2000/svg"
                 width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                 stroke-linecap="round" stroke-linejoin="round" class="feather feather-circle">
                 <circle cx="12" cy="12" r="10"></circle>
