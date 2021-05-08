@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Auth;
 use App\Aproducts;
 use Illuminate\Http\Request;
 
@@ -43,6 +43,9 @@ class ProductsController extends Controller
         // echo "<pre>";
         // print_r($products);
         // exit;
+        $products['created_by']=Auth::user()->id;
+        $products['updated_by']=Auth::user()->id;
+        
         $products->save();
         $products->image_url = $destinationPath . '/' . $filename; //this for only after insert view image set
         return response()->json($products);
@@ -80,6 +83,9 @@ class ProductsController extends Controller
         } else {
             $products->image_url = $req->old_image;
         }
+        
+        $products['updated_by']=Auth::user()->id;
+        
         $products->save();
         return response()->json($products);
     }

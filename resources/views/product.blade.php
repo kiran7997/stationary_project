@@ -1,6 +1,5 @@
-
 @extends('layouts.app')
-@section('title', 'Product Variation')
+@section('title', 'Product')
 @section('content')
 
 <!DOCTYPE html>
@@ -17,7 +16,7 @@
     }
 
 </style>
-
+<meta name="csrf-token" content="{{ csrf_token() }}" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0,minimal-ui">
@@ -83,8 +82,8 @@
           </div>
         </div>
         <div class="content-body"><!-- Basic Tables start -->
-        <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#AddProductv">
-                Add New Product Variation
+        <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#productModal">
+                Add New Product
               </button><br>
 <div class="row" id="basic-table">
   <div class="col-12">
@@ -92,10 +91,10 @@
       
       
       <div class="table-responsive">
-        <table id="custTable" class="table">
+        <table class="table">
         <thead>
         <tr>
-                                    <th>product_name</th>
+                                <th>product_name</th>
                                     <th>cat_id</th>
                                     <th>unit_id</th>
                                     <th>variation_id</th>
@@ -104,8 +103,8 @@
                                     <th>base_price</th>
                                     <th>code</th>
                                     <th>taxable</th>
-                                    <th>Actions</th>
-                                </tr>                             
+                                    <th>Actions</th>                                     
+                            </thead>
                             </thead>
                             <tbody>
 
@@ -133,6 +132,9 @@
 @endforeach
 </tbody>
                   
+              
+
+                  
         </table>
       </div>
     </div>
@@ -144,8 +146,9 @@
       
 
   <hr />
-
-
+  
+@endsection
+<!-- Add Product Model -->
     <div class="modal fade text-left"
                 id="productModal"
                 tabindex="-1"
@@ -242,7 +245,7 @@
                 <div class="modal-dialog modal-dialog-centered" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h4 class="modal-title" id="myModalLabel33">Add Inventories</h4>
+                      <h4 class="modal-title" id="myModalLabel33">Add Products</h4>
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
@@ -256,60 +259,76 @@
 
                          <label for="product_name">Product_Name </label>
                           <div class="form-group">
-                          <input type="text" name="product_name2" id="product_name2" class="form-control">
+                          <input type="text" name="product_name" id="product_name2" class="form-control">
                          </div>
 
                          <label for="cat_id">Cat_Id </label>
                            <div class="form-group">
-                        <input type="text" name="cat_id2" id="cat_id2" class="form-control">
+                        <input type="text" name="cat_id" id="cat_id2" class="form-control">
                          </div>
                           
                          <label for="unit_id">Unit_Id </label>
                             
                         <div class="form-group">
-                        <input type="text" name="unit_id2" id="unit_id2" class="form-control">
+                        <input type="text" name="unit_id" id="unit_id2" class="form-control">
                          </div>
 
                          <label for="variation_id">Variation_Id </label>
                         <div class="form-group">
-                        <input type="text" name="variation_id2" id="variation_id2" class="form-control">
+                        <input type="text" name="variation_id" id="variation_id2" class="form-control">
                          </div>
 
+
+
+                         <div class="form-group">
+                            <label for="description">Profile Image </label>
+                            <input type='file' class='form-control' accept=".jpg,.jpeg,.png" name='image_url'
+                                id='image_url2'>
+                            <input type='hidden' class='form-control' name='old_image' id='old_image'>
+                            <span class="text-danger" id="image-input-error"></span>
+                            <img id="preview_image" width='100' height="100">
+                        </div>
+                        <br>
+
+
+
+
+
+
+<!-- 
                          <label for="description">Profile Image </label>
                             
                             <div class="form-group">
-                            <input type='file' class='form-control' name='image_url2' id='image_url2'
+                            <input type='file' class='form-control' name='image_url' id='image_url2'
                                 accept=".jpg,.jpeg,.png" />
-                        </div>
+                                <input type='hidden' class='form-control' name='old_image' id='old_image'>
+                            <span class="text-danger" id="image-input-error"></span>
+                            <img id="preview_image" width='100' height="100">
+                        </div> -->
                         
                 
                         <label for="description">Description </label>
                             
                         <div class="form-group">
-                        <input type="text" name="description2" id="description2" class="form-control">
+                        <input type="text" name="description" id="description2" class="form-control">
                         </div>
 
                         <label for="base_price">Base_Price </label>
                            
                         <div class="form-group">
-                        <input type="text" name="base_price2" id="base_price2" class="form-control">
+                        <input type="text" name="base_price" id="base_price2" class="form-control">
                         </div>
 
-                    
-                     <label for="login_ip">Login_Ip</label>
-                        <div class="form-group">
-                        <input type="text" name="login_ip2" id="login_ip2" class="form-control" >
-                        </div>
 
                        
                         <label for="code">Code </label>
                            <div class="form-group">
-                         <input type="text" name="code2" id="code2" class="form-control">
+                         <input type="text" name="code" id="code2" class="form-control">
                         </div>
                        
                         <label for="taxable">taxable </label>
                            <div class="form-group">
-                           <input type="text" name="taxable2" id="taxable2" class="form-control">
+                           <input type="text" name="taxable" id="taxable2" class="form-control">
                         </div>
                         
                            
@@ -475,10 +494,11 @@
     </script>
 
     <script>
+    
         function editproduct(product_id)
     {   
         $.get('/editp/'+product_id,function(product){
-        //   alert(JSON.stringify(product)); 
+          alert(JSON.stringify(product)); 
           $("#product_id").val(product.product_id);
           $("#product_name2").val(product.product_name);
           $("#cat_id2").val(product.cat_id);
@@ -541,6 +561,7 @@
             processData: false,
             success:function(response)
             {     
+              
                 alert("Data Updated Successfully");
                 location.reload();
             }
@@ -550,8 +571,7 @@
 
     </script>
 
-
-    <script>
+   <script>
         function deleteproduct(product_id)
 {
     if(confirm("Do you want to delete this record?"))
