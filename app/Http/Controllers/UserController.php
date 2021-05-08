@@ -22,9 +22,8 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $data = User::where('deleted', 0)->orderBy('id', 'DESC')->paginate(5);
-        return view('users.index', compact('data'))
-            ->with('i', ($request->input('page', 1) - 1) * 5);
+        $data = User::where('deleted', 0)->where('role', '!=', '1')->orderBy('id', 'DESC')->get();
+        return view('users.index', compact('data'));
     }
 
     /**
