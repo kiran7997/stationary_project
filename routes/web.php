@@ -69,3 +69,27 @@ Route::post('/addcust','CustomerController@store');
 Route::get('/editc/{customer_id}','CustomerController@edit');
 Route::post('/editcust','CustomerController@update');
 Route::delete('/delec/{customer_id}','CustomerController@destroy');
+
+Route::get('shop',function(){
+    return view('shop');
+});
+
+
+Route::get('/index','CategoriesController@index');
+Route::post('/store','CategoriesController@store');
+Route::get('/categories/{cat_id}','CategoriesController@getCatagoryrById');
+Route::post('/categories','CategoriesController@updateCategory');
+Route::delete('/categories/{cat_id}','CategoriesController@deleteCategories');
+
+
+Route::get('/index2','ProductsVariationController@index');
+Route::post('/storproductsv','ProductsVariationController@store');
+Route::get('/productsv/{variation_id}','ProductsVariationController@getProductvById');
+Route::post('/productsv','ProductsVariationController@updateProductv');
+Route::delete('/productsv/{variation_id}','ProductsVariationController@deleteProductv');
+
+Route::get('/index3','UnitsController@index');
+Route::post('/storeunit','UnitsController@store');
+Route::get('/units/{unit_id}','UnitsController@getUnitsById');
+Route::post('/units','UnitsController@updateUnits');
+Route::delete('/units/{unit_id}','UnitsController@deleteunits');
