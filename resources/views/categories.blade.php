@@ -221,9 +221,9 @@ label.error{
 
               
 <!-- Add Categories Modal -->
-<script src="ajaxcdn.js"></script>
 
 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script>  
 
 $("#CategoryForm").submit(function(e){
@@ -322,10 +322,6 @@ $("#CategoryForm").submit(function(e){
         }
     }
 </script>
-<script src="ajaxcdn.js"></script>
-<script src="js/jquery.min.js"></script>
-<script src="js/jquery.validate.min.js"></script>
-<script src="js/category.js"></script>
 
 </html>     
 

@@ -140,7 +140,6 @@
     </div>
       
 
- @endsection
 
 
 
@@ -643,3 +642,5 @@ function deletecust(customer_id)
 
 </body>
 </html>
+
+@endsection

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Product Variation')
+@section('title', 'Stock')
 @section('content')
 
 <!DOCTYPE html>
@@ -128,62 +128,41 @@
       
 
   <hr />
-  
-@endsection
-
-
-<!-- Modal to add new record -->
-
-<div class="modal fade" id="stockModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-            Add Stock
-                    </div>
-     <form id="stockForm" name="stockForm"> 
-         @csrf
-         <div class="form-group">
-         
-         <label for="product_id">Select Type</label> &nbsp;&nbsp;
-         <select name="product_id" id="product_id"  class="form-control"  required>
-            <option >Select Option</option>
-             <option value="1">Pen</option>
-             <option value="2">Text Book</option>
-             <option value="3">Pencil</option>
-             <option value="4">Colorbox</option>
-             <option value="5">Drawing Book</option>
-             
-        </select>
-                
-            </div>
-            <br>
-        <div class="form-group">
-                <label for="item_quantity">Item Quantity </label>
-                 <input type="text" name="item_quantity" id="item_quantity" class="form-control" placeholder="Quantity">
-            </div><br>
-     
-            
-        
-            <button type="submit" class="btn btn-primary ">Submit</button>
-          <button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
-
-        </form>
-
-        </div>
-    </div>
   </div>
-</div>
+
+    </div>
+    
+    <div class="sidenav-overlay"></div>
+    <div class="drag-target"></div>
+    <script src="../../../app-assets/vendors/js/vendors.min.js"></script>
+    <script src="../../../app-assets/vendors/js/ui/jquery.sticky.js"></script>
+    <script src="../../../app-assets/js/core/app-menu.min.js"></script>
+    <script src="../../../app-assets/js/core/app.min.js"></script>
+    <script src="../../../app-assets/js/scripts/customizer.min.js"></script>
+  
+  
+
+
 <!-- Edit Stock Model -->
-       
-<div class="modal fade" id="stockModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-            Add Stock
+
+
+<div
+                class="modal fade text-left"
+                id="stockModal"
+                tabindex="-1"
+                role="dialog"
+                aria-labelledby="myModalLabel33"
+                aria-hidden="true"
+              >
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      
+                    Add Stock
                     </div>
-     <form id="stockForm" name="stockForm"> 
-         @csrf
-         <div class="form-group">
+                    <form id="stockForm" name="stockForm">
+                    @csrf
+                    <div class="form-group">
          
          <label for="product_id">Select Type</label> &nbsp;&nbsp;
          <select name="product_id" id="product_id"  class="form-control" required>
@@ -202,32 +181,38 @@
                 <label for="item_quantity">Item Quantity </label>
                  <input type="text" name="item_quantity" id="item_quantity" class="form-control" placeholder="Quantity" required>
             </div><br>
-     
-            
-        
-            <button type="submit" class="btn btn-primary">Submit</button>
+                      <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary" >Submit</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
 
-        </form>
 
-        </div>
-    </div>
-  </div>
-</div>
-  <!-- Edit Stock Modal -->
-<div class="modal fade" id="stockEditModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-      <form id="stockEditForm" name="stockEditForm">
-         @csrf
-         <input type="hidden" name="stock_id" id="stock_id">
-         <div class="form-group">
+<!-- exit -->
+
+<div
+                class="modal fade text-left"
+                id="stockEditModal"
+                tabindex="-1"
+                role="dialog"
+                aria-labelledby="myModalLabel33"
+                aria-hidden="true"
+              >
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      
+                    Edit Stock
+                    </div>
+                    <form id="stockEditForm" name="stockEditForm">
+                    <input type="hidden" id="stock_id" name="stock_id" >
+                    @csrf
+                    <div class="form-group">
          
          <label for="product_id">Select Type</label> &nbsp;&nbsp;
-         <select name="product_id2" id="product_id2"  class="form-control" >
+         <select name="product_id2" id="product_id2"  class="form-control" required>
             <option >Select Option</option>
              <option value="1">Pen</option>
              <option value="2">Text Book</option>
@@ -243,13 +228,14 @@
                 <label for="item_quantity">Item Quantity </label>
                  <input type="text" name="item_quantity2" id="item_quantity2" class="form-control" placeholder="Quantity" required>
             </div><br>
-            <br><br>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
+                      <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary" >Submit</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+
 <!-- AJAX insert Stock model -->
 
 
@@ -369,3 +355,4 @@ function deletestock(stock_id)
 
 </body>
 </html>
+@endsection

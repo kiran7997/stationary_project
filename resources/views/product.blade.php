@@ -111,23 +111,15 @@
 @foreach($products as $product)
 <tr id="sid{{$product->product_id}}">
     <td>{{$product->product_name}}</td>
-    <td>{{$product->cat_id}}</td>
-    <td>{{$product->unit_id}}</td>
-    <td>{{$product->variation_id}}</td>
+   
     <td>
         <img src="{{url('product_images/'.$product->image_url)}}" width='100'
             height="100">
     </td>
     <td>{{$product->description}}</td>
     <td>{{$product->base_price}}</td>
-    <td>{{$product->code}}</td>
-    <td>{{$product->taxable}}</td>
-    <td>
-        <a href="javascript:void(0)" onclick="editproduct({{$product->product_id}})"
-            class="fa fa-edit" style="font-size:24px"></a>
-        <a href="javascript:void(0)" onclick="deleteproduct({{$product->product_id}})"
-            class="fa fa-trash" style="font-size:24px;color:red"></a>
-    </td>
+    
+    
 </tr>
 @endforeach
 </tbody>
@@ -146,8 +138,24 @@
       
 
   <hr />
+  </div>
+
+    </div>
+    
+    <div class="sidenav-overlay"></div>
+    <div class="drag-target"></div>
+    <script src="../../../app-assets/vendors/js/vendors.min.js"></script>
+    <script src="../../../app-assets/vendors/js/ui/jquery.sticky.js"></script>
+    <script src="../../../app-assets/js/core/app-menu.min.js"></script>
+    <script src="../../../app-assets/js/core/app.min.js"></script>
+    <script src="../../../app-assets/js/scripts/customizer.min.js"></script>
   
-@endsection
+  
+
+
+
+  
+
 <!-- Add Product Model -->
     <div class="modal fade text-left"
                 id="productModal"
@@ -233,7 +241,7 @@
               </div>
             </div>
 
-<!-- Edit Customer Model -->
+<!-- Edit Product Model -->
  <div class="modal fade text-left"
                 id="productEditModal"
                 tabindex="-1"
@@ -595,3 +603,4 @@
 
 
 </html>
+@endsection

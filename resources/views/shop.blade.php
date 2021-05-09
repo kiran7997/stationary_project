@@ -1,4 +1,6 @@
-
+@extends('layouts.app')
+@section('title', 'Product')
+@section('content')
     <!-- BEGIN: Vendor CSS-->
     <link rel="stylesheet" type="text/css" href="../../../app-assets/vendors/css/vendors.min.css">
     <link rel="stylesheet" type="text/css" href="../../../app-assets/vendors/css/extensions/nouislider.min.css">
@@ -34,9 +36,7 @@
     
 
 
-  @extends('layouts.app')
-@section('title', 'Product')
-@section('content')
+ 
 
     <!-- BEGIN: Content-->
     <div class="app-content content ecommerce-application">
@@ -47,6 +47,15 @@
           <div class="content-header-left col-md-9 col-12 mb-2">
             <div class="row breadcrumbs-top">
               <div class="col-12">
+              <h2 class="content-header-title float-left mb-0">Customer Dashboard</h2>
+                        <div class="breadcrumb-wrapper">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Home</a>
+                                </li>
+                                <li class="breadcrumb-item"><a href="#">Dashboard</a>
+                                </li>
+                                <li class="breadcrumb-item active">Shop
+                                </li>
                 
                   </ol>
                 </div>
@@ -191,6 +200,16 @@
   <div class="card ecommerce-card">
     <div class="item-img text-center">
       <a href="app-ecommerce-details.html">
+      foreach($products as $product)
+
+    <td>
+        <img src="{{url('product_images/'.$product->image_url)}}" width='100'
+            height="100">
+    </td>
+    <td>{{$product->description}}</td>
+    <td>{{$product->base_price}}</td>
+    
+    <td>
         <img
           class="img-fluid card-img-top"
           src="../../../app-assets/images/pages/eCommerce/2.png"

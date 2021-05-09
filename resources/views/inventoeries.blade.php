@@ -94,13 +94,13 @@
         <table class="table">
         <thead>
         <tr>
-                                <th>inventory_name</th>
-                                <th>inventory_address</th>
-                                <th>inventory_contact</th>
-                                <th>inventory_email</th>
-                                <th>product_id</th>
-                                <th>quantity</th>
-                                <th>invntory_status</th>
+                                <th>Inventory_Name</th>
+                                <th>Inventory_Address</th>
+                                <th>Inventory_Contact</th>
+                                <th>Inventory_Email</th>
+                                <th>Product_Id</th>
+                                <th>Quantity</th>
+                                <th>Invntory_Status</th>
                                 <th>Actions</th>
                                 </tr>                                        
                             </thead>
@@ -141,7 +141,7 @@
 
   <hr />
   
-@endsection
+
 <div class="modal fade text-left"
                 id="invenModal"
                 tabindex="-1"
@@ -199,14 +199,23 @@
                         
                           <input type="text" name="quantity" id="quantity" class="form-control" >
                         </div>
-                        <label for="invntory_status">Invntory_Status  </label>
-                        <div class="form-group">
-                        
-                          <input type="text" name="invntory_status" id="invntory_status" class="form-control" >
-                        </div>
+ 
+           <label for="invntory_status">Invntory_Status  </label>
+         <select name="invntory_status" id="invntory_status"  class="form-control" required>
+            <option >Inventory Status</option>
+             <option value="Active">Active</option>
+             <option value="Deactive">Deactive</option>
+             <option value="Block">Block</option>
+            
+        </select>
+                
+               </div>
+
+
+                      
                         
             
-                      </div>
+                    
                       <div class="modal-footer">
                         <button type="submit" class="btn btn-primary" >Submit</button>
                       </div>
@@ -265,11 +274,16 @@
                         
                           <input type="text" name="quantity2" id="quantity2" class="form-control" >
                         </div>
-                        <label for="invntory_status"> invntory_status</label>
+                        <label for="invntory_status">Invntory_Status  </label>
                         <div class="form-group">
-                        
-                          <input type="text" name="invntory_status2" id="invntory_status2" class="form-control" >
-                        </div>
+         <select name="invntory_status2" id="invntory_status2"  class="form-control" required>
+            <option >Inventory Status</option>
+             <option value="Active">Active</option>
+             <option value="Deactive">Deactive</option>
+             <option value="Block">Block</option>
+            
+        </select>
+        
                         </div>
                       <div class="modal-footer">
                         <button type="submit" class="btn btn-primary" >Submit</button>
@@ -493,3 +507,4 @@ function deleteinven(inventory_id)
 
 </body>
 </html>
+@endsection
