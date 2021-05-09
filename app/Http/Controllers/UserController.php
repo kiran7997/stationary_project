@@ -222,6 +222,7 @@ class UserController extends Controller
 
     public function dashboard()
     {
+        //employee dashboard
         return view('employee_dash');
     }
 }
