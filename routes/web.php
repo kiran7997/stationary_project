@@ -44,35 +44,37 @@ Route::get('customer-dashboard', 'CustomerController@dashboard');
 
 
 //Add Stocks //
-Route::get('/stock','StockController@index');
+Route::get('/Stock','StockController@index');
 Route::post('/addstock','StockController@store');
 Route::get('/edit/{stock_id}','StockController@edit');
 Route::post('/editstock','StockController@update');
 Route::delete('/dele/{stock_id}','StockController@destroy');
 
-Route::get('/inven','InventoriesController@index');
+//Add Inventories
+
+Route::get('/Inventories','InventoriesController@index');
 Route::post('/addinven','InventoriesController@store');
 Route::get('/editi/{inventory_id}','InventoriesController@edit');
 Route::post('/editinven','InventoriesController@update');
 Route::delete('/delei/{inventory_id}','InventoriesController@destroy');
 
-
-Route::get('/pro','ProductsController@index');
+//Add Product
+Route::get('/Product','ProductsController@index');
 Route::post('/addpro','ProductsController@store');
 Route::get('/editp/{product_id}','ProductsController@edit');
 Route::post('/editpro','ProductsController@update');
 Route::delete('/delep/{product_id}','ProductsController@destroy');
 
+//Add Shop
+Route::get('/shop','ShopController@index');
+Route::get('/details','ShopController@details');
 
-Route::get('/cust','CustomerController@index');
+
+Route::get('/Customer','CustomerController@index');
 Route::post('/addcust','CustomerController@store');
 Route::get('/editc/{customer_id}','CustomerController@edit');
 Route::post('/editcust','CustomerController@update');
 Route::delete('/delec/{customer_id}','CustomerController@destroy');
-
-Route::get('shop',function(){
-    return view('shop');
-});
 
 
 Route::get('/index','CategoriesController@index');
@@ -93,3 +95,9 @@ Route::post('/storeunit','UnitsController@store');
 Route::get('/units/{unit_id}','UnitsController@getUnitsById');
 Route::post('/units','UnitsController@updateUnits');
 Route::delete('/units/{unit_id}','UnitsController@deleteunits');
+
+
+
+//Add Shop
+Route::get('/shop','ShopController@index');
+Route::get('/details','ShopController@details');
