@@ -60,7 +60,7 @@
               class="user-status">
               @if(!empty(Auth::user()->getRoleNames()))
               @foreach(Auth::user()->getRoleNames() as $v)
-              {{ $v }}
+              {{ $user_role = $v }}
               @endforeach
               @endif</p>
             </span></div><span class="avatar">
@@ -83,12 +83,19 @@
           <div class="dropdown-divider"></div><a class="dropdown-item" href="page-account-settings.html"><i
               class="mr-50" data-feather="settings"></i> Settings</a><a class="dropdown-item"
             href="page-pricing.html"><i class="mr-50" data-feather="credit-card"></i> Pricing</a><a
-            class="dropdown-item" href="page-faq.html"><i class="mr-50" data-feather="help-circle"></i> FAQ</a><a
-            class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-              document.getElementById('logout-form').submit();"><i class="mr-50" data-feather="power"></i> Logout</a>
-          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-            @csrf
-          </form>
+            class="dropdown-item" href="page-faq.html"><i class="mr-50" data-feather="help-circle"></i> FAQ</a>
+          @if(@$user_role=='Admin')
+          <a class="dropdown-item" href="{{ url('admin-logout') }}"><i class="mr-50" data-feather="power"></i>
+            Logout</a>
+          @else
+          <a class="dropdown-item" href="{{ url('employee-logout') }}"><i class="mr-50" data-feather="power"></i>
+            Logout</a>
+          @endif
+          {{-- <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+          document.getElementById('logout-form').submit();"><i class="mr-50" data-feather="power"></i> Logout</a> --}}
+          {{-- <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+          @csrf
+          </form> --}}
         </div>
       </li>
     </ul>

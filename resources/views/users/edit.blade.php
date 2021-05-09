@@ -27,19 +27,18 @@
         </div>
         <div class="content-body">
             <!-- Validation -->
-            <section class="bs-validation">
+            <section id="multiple-column-form">
                 <div class="row">
-                    <!-- Bootstrap Validation -->
-                    <div class="col-md-6 col-12">
+                    <div class="col-12">
                         <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">Employee Edit</h4>
-                            </div>
+                            {{-- <div class="card-header">
+                                <h4 class="card-title">Employee Creation</h4>
+                            </div> --}}
                             <div class="card-body">
                                 @if (count($errors) > 0)
                                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                     <div class="alert-body">
-                                        <strong>Whoops!</strong> There were some problems with your input.<br>
+                                        <strong>Whoops!</strong> There were some problems with your input.<br><br>
                                     </div>
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
@@ -57,148 +56,205 @@
                                 $user->id],'enctype'=>'multipart/form-data'])
                                 !!}
                                 @csrf
-                                <div class="form-group">
-                                    <label class="form-label" for="basic-addon-name">First Name</label>
-                                    <input type="text" id="basic-addon-name" class="form-control"
-                                        placeholder="First Name" aria-label="Name" aria-describedby="basic-addon-name"
-                                        name="firstname" value="{{$user->firstname}}" required />
-                                    <div class="valid-feedback">Looks good!</div>
-                                    <div class="invalid-feedback">
-                                        Please enter your first name.
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label" for="basic-addon-lname">Last Name</label>
-                                    <input type="text" id="basic-addon-lname" class="form-control"
-                                        placeholder="Last Name" aria-label="Name" aria-describedby="basic-addon-lname"
-                                        name="lastname" value="{{$user->lastname}}" required />
-                                    <div class="valid-feedback">Looks good!</div>
-                                    <div class="invalid-feedback">
-                                        Please enter your Last Name.
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label" for="basic-default-email1">Email</label>
-                                    <input type="email" id="basic-default-email1" class="form-control"
-                                        placeholder="john.doe@email.com" aria-label="john.doe@email.com" name='email'
-                                        value="{{$user->email}}" required />
-                                    <div class="valid-feedback">Looks good!</div>
-                                    <div class="invalid-feedback">
-                                        Please enter a valid email
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label" for="basic-addon-mobile">Phone Number</label>
-                                    <input type="text" id="basic-addon-mobile" class="form-control"
-                                        placeholder="Phone Number" aria-label="Name"
-                                        aria-describedby="basic-addon-mobile" required name='phone_no'
-                                        value="{{$user->phone_no}}" />
-                                    <div class="valid-feedback">Looks good!</div>
-                                    <div class="invalid-feedback">
-                                        Please enter your phone no.
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="d-block" for="validationBioBootstrap">Address</label>
-                                    <textarea class="form-control" id="validationBioBootstrap" name="address" rows="3"
-                                        required>{{$user->address}}</textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label" for="username">Userame</label>
-                                    <input type="text" id="username" class="form-control" placeholder="Userame"
-                                        aria-label="Name" aria-describedby="basic-addon-Userame" name="username"
-                                        required value="{{$user->username}}" />
-                                    <div class="valid-feedback">Looks good!</div>
-                                    <div class="invalid-feedback">
-                                        Please enter your username.
-                                    </div>
-                                    <div id='err_username' style='width: 100%;margin-top: .25rem;font-size: .857rem;
-                                            color: #EA5455;'>
-                                        Username is already taken.
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label" for="basic-default-password1">Password</label>
-                                    <input type="password" id="basic-default-password1" class="form-control"
-                                        name="password"
-                                        placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" />
-                                    <div class="valid-feedback">Looks good!</div>
-                                    <div class="invalid-feedback">
-                                        Please enter your password.
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="form-label" for="cpassword">Confirm Password</label>
-                                    <input type="password" id="cpassword" class="form-control" name='confirm-password'
-                                        placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" />
-                                    <div class="valid-feedback">Looks good!</div>
-                                    <div class="invalid-feedback">
-                                        Please enter your Confirm password.
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="state">State</label>
-                                    <select class="form-control" name="state" id="state" required>
-                                        <option value="">Select State</option>
-                                        @foreach($states as $state)
-                                        <option value="{{$state->state_id}}" @if($user->state==$state->state_id)
-                                            selected @endif>{{$state->state_title}}</option>
-                                        @endforeach
-                                    </select>
-                                    <div class="valid-feedback">Looks good!</div>
-                                    <div class="invalid-feedback">
-                                        Please select your state
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="district">District</label>
-                                    <select class="form-control" name="district" id="district" required>
-                                        <option value="">Select District</option>
-                                        @foreach($districts as $district)
-                                        <option value="{{$district->districtid}}" @if($user->
-                                            district==$district->districtid)
-                                            selected @endif>{{$district->district_title}}</option>
-                                        @endforeach
-                                    </select>
-                                    <div class="valid-feedback">Looks good!</div>
-                                    <div class="invalid-feedback">
-                                        Please select your District
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="department">Department</label>
-                                    {!! Form::select('roles[]', $roles,$userRole, array('class' => 'form-control'))
-                                    !!}
-                                    <div class="valid-feedback">Looks good!</div>
-                                    <div class="invalid-feedback">
-                                        Please select your Department
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="profile_image">Profile pic</label>
-                                    <div class="custom-file">
-                                        <input type="file" accept=".jpg,.jpeg,.png" class="custom-file-input"
-                                            name='profile_image' id='profile_image' />
-                                        <label class="custom-file-label" for="customFile1">Choose profile
-                                            pic</label>
-                                    </div>
-                                    <div class="valid-feedback">Looks good!</div>
-                                    <div class="invalid-feedback">
-                                        Please Choose Profile Pic
-                                    </div>
-                                    <input type='hidden' name='old_profile_image' value="{{$user->profile_image}}">
-                                </div>
                                 <div class="row">
+                                    <div class="col-md-4 col-12">
+                                        <div class="form-group">
+                                            <label class="form-label" for="firstname">First Name</label>
+                                            <input type="text" id="firstname" class="form-control"
+                                                placeholder="First Name" aria-label="Name" aria-describedby="firstname"
+                                                name="firstname" value="{{$user->firstname}}" required />
+                                            <div class="valid-feedback">Looks good!</div>
+                                            <div class="invalid-feedback">
+                                                Please enter your first name.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-12">
+                                        <div class="form-group">
+                                            <label class="form-label" for="lastname">Last Name</label>
+                                            <input type="text" id="lastname" class="form-control"
+                                                placeholder="Last Name" aria-label="Name" aria-describedby="lastname"
+                                                name="lastname" value="{{$user->lastname}}" required />
+                                            <div class="valid-feedback">Looks good!</div>
+                                            <div class="invalid-feedback">
+                                                Please enter your Last Name.
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4 col-12">
+                                        <div class="form-group">
+                                            <label class="form-label" for="basic-default-email1">Email</label>
+                                            <input type="email" id="basic-default-email1" class="form-control"
+                                                placeholder="john.doe@email.com" aria-label="john.doe@email.com"
+                                                name='email' value="{{$user->email}}" required />
+                                            <div class="valid-feedback">Looks good!</div>
+                                            <div class="invalid-feedback">
+                                                Please enter a valid email
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-12">
+                                        <div class="form-group">
+                                            <label class="form-label" for="phone_no">Phone Number</label>
+                                            <input type="text" id="phone_no" class="form-control"
+                                                placeholder="Phone Number" aria-label="Name" aria-describedby="phone_no"
+                                                required name='phone_no' value="{{$user->phone_no}}" />
+                                            <div class="valid-feedback">Looks good!</div>
+                                            <div class="invalid-feedback">
+                                                Please enter your phone no.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label class="d-block" for="address">Address</label>
+                                            <textarea class="form-control" id="address" rows="2" name='address'
+                                                required>{{$user->address}}</textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-12">
+                                        <div class="form-group">
+                                            <label class="form-label" for="username">Userame</label>
+                                            <input type="text" id="username" class="form-control" placeholder="Userame"
+                                                aria-label="Name" aria-describedby="basic-addon-Userame" name="username"
+                                                required value="{{$user->username}}" />
+                                            <div class="valid-feedback">Looks good!</div>
+                                            <div class="invalid-feedback">
+                                                Please enter your username.
+                                            </div>
+                                            <div id='err_username' style='width: 100%;margin-top: .25rem;font-size: .857rem;
+                                                    color: #EA5455;'>
+                                                Username is already taken.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-12">
+                                        <div class="form-group">
+                                            <label class="form-label" for="basic-default-password1">Password</label>
+                                            <input type="password" id="basic-default-password1" class="form-control"
+                                                name="password"
+                                                placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" />
+                                            <div class="valid-feedback">Looks good!</div>
+                                            <div class="invalid-feedback">
+                                                Please enter your password.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-12">
+                                        <div class="form-group">
+                                            <label class="form-label" for="cpassword">Confirm Password</label>
+                                            <input type="password" id="cpassword" class="form-control"
+                                                name='confirm-password'
+                                                placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" />
+                                            <div class="valid-feedback">Looks good!</div>
+                                            <div class="invalid-feedback">
+                                                Please enter your Confirm password.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-12">
+                                        <div class="form-group">
+                                            <label for="state">State</label>
+                                            <select class="form-control" name="state" id="state" required>
+                                                <option value="">Select State</option>
+                                                @foreach($states as $state)
+                                                <option value="{{$state->state_id}}" @if($user->state==$state->state_id)
+                                                    selected @endif>{{$state->state_title}}</option>
+                                                @endforeach
+                                            </select>
+                                            <div class="valid-feedback">Looks good!</div>
+                                            <div class="invalid-feedback">
+                                                Please select your state
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-12">
+                                        <div class="form-group">
+                                            <label for="district">District</label>
+                                            <select class="form-control" name="district" id="district" required>
+                                                <option value="">Select District</option>
+                                                @foreach($districts as $district)
+                                                <option value="{{$district->districtid}}" @if($user->
+                                                    district==$district->districtid)
+                                                    selected @endif>{{$district->district_title}}</option>
+                                                @endforeach
+                                            </select>
+                                            <div class="valid-feedback">Looks good!</div>
+                                            <div class="invalid-feedback">
+                                                Please select your District
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-12">
+                                        <div class="form-group">
+                                            <label class="form-label" for="city">City</label>
+                                            <input type="text" id="city" class="form-control" placeholder="City"
+                                                aria-label="city" aria-describedby="city" name="city"
+                                                value="{{$user->city}}" />
+                                            <div class="valid-feedback">Looks good!</div>
+                                            <div class="invalid-feedback">
+                                                Please enter your city.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-12">
+                                        <div class="form-group">
+                                            <label for="department">Department</label>
+                                            {!! Form::select('roles[]', $roles,$userRole, array('class' =>
+                                            'form-control'))
+                                            !!}
+                                            <div class="valid-feedback">Looks good!</div>
+                                            <div class="invalid-feedback">
+                                                Please select your Department
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 col-12">
+                                        <div class="form-group">
+                                            <label for="profile_image">Profile pic</label>
+                                            <div class="custom-file">
+                                                <input type="file" accept=".jpg,.jpeg,.png" class="custom-file-input"
+                                                    name='profile_image' id='profile_image' />
+                                                <label class="custom-file-label" for="customFile1">Choose profile
+                                                    pic</label>
+                                            </div>
+                                            <div class="valid-feedback">Looks good!</div>
+                                            <div class="invalid-feedback">
+                                                Please Choose Profile Pic
+                                            </div>
+                                            <div id='err_imag' style='width: 100%;margin-top: .25rem;font-size: .857rem;
+                                                color: #EA5455;'>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 col-12">
+                                        <div class="form-group">
+                                            <div class="custom-file">
+                                                <label for="profile_image">Old Profile pic</label>
+                                                <input type='hidden' name='old_profile_image'
+                                                    value="{{$user->profile_image}}">
+                                                <img src="{{url('user_images/'.$user->profile_image)}}" width='100'
+                                                    height="100">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 col-12">
+                                        <div class="form-group">
+                                            <div class="custom-file">
+                                                <label for="profile_image">Preview Profile pic</label>
+                                                <img id="preview_img" width="100" height="100" style='display:none'>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
                                     <div class="col-12">
-                                        <img src="{{url('user_images/'.$user->profile_image)}}" width='150'
-                                            height="150"><br>
-                                        <br>
-                                        <button type="submit" class="btn btn-primary" id='btn_submit'>
+                                        <button type="submit" class="btn btn-primary mr-1" id='btn_submit'>
                                             Update
                                         </button>
-                                        <a href="{{route('users.index')}}"><button type="button" class="btn btn-danger">
+                                        <a href="{{route('users.index')}}"><button type="button"
+                                                class="btn btn-outline-danger">
                                                 Cancel
                                             </button></a>
                                     </div>
@@ -207,7 +263,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- /Bootstrap Validation -->
                 </div>
             </section>
             <!-- /Validation -->
@@ -240,7 +295,7 @@
             if (size >= 2097152)
             {        
                 $('#err_imag').html("File size should be less than or equal 2 MB.");
-                $('#profile_image').val('');
+                $(this).val('');
                 $('#btn_submit').attr('disabled','ture');
             }else{
                 var file = $(this).val();   
@@ -279,5 +334,32 @@
                 }
             });
         })
+
+        $('#firstname,#lastname,#city').keypress(function(){
+            return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122));
+        });
+
+        $('#phone_no').keypress(function(e){ 
+            if (this.value.length == 0 && e.which == 48 ){
+                return false;
+            }
+        });
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                
+                reader.onload = function (e) {
+                    $('#preview_img').attr('src', e.target.result);
+                    $("#preview_img").show();
+                }
+                
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    
+        $("#profile_image").change(function(){
+            readURL(this);
+        });
     });
 </script>
