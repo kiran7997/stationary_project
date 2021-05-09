@@ -144,10 +144,10 @@
 <!-- E-commerce Search Bar Ends -->
 
 <!-- E-commerce Products Starts -->
-@foreach($product_data as $data)
+
 <section id="ecommerce-products" class="grid-view">
 <!-- 1st product -->
- 
+@foreach($product_data as $data)
 
   <div class="card ecommerce-card">
     <div class="item-img text-center">
@@ -205,9 +205,9 @@
   </div>
  
   <!-- 2nd product -->
-
+  @endforeach
 </section>
-@endforeach
+
 <!-- E-commerce Products Ends -->
 
 <!-- E-commerce Pagination Starts -->
