@@ -78,10 +78,6 @@ Route::post('/editcust','CustomerController@update');
 Route::delete('/delec/{customer_id}','CustomerController@destroy');
 
 
-Route::get('try',function(){
-    return view('try');
-});
-
 Route::get('/catagories','CategoriesController@index');
 Route::post('/store','CategoriesController@store');
 Route::get('/categories/{cat_id}','CategoriesController@getCatagoryrById');
