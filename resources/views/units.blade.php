@@ -1,21 +1,25 @@
 @extends('layouts.app')
-@section('title', 'Unit')
+@section('title', 'Categories')
 @section('content')
 <!DOCTYPE html>
-
+<html lang="en">
+<head>
+<style>
+label.error{
+    color:#dc3545;
+    font-size:14px;
+}
+</style>
+<!DOCTYPE html>
 <html class="loading" lang="en" data-textdirection="ltr">
   <!-- BEGIN: Head-->
   <head>
   <style>
-
-
  label.error {
-         color: #dc3545;
+         color: #DC3545;
          font-size: 14px;
     }
-
 </style>
-
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0,minimal-ui">
@@ -26,11 +30,9 @@
     <link rel="apple-touch-icon" href="../../../app-assets/images/ico/apple-icon-120.png">
     <link rel="shortcut icon" type="image/x-icon" href="../../../app-assets/images/ico/favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600" rel="stylesheet">
-
     <!-- BEGIN: Vendor CSS-->
     <link rel="stylesheet" type="text/css" href="../../../app-assets/vendors/css/vendors.min.css">
     <!-- END: Vendor CSS-->
-
     <!-- BEGIN: Theme CSS-->
     <link rel="stylesheet" type="text/css" href="../../../app-assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="../../../app-assets/css/bootstrap-extended.min.css">
@@ -39,20 +41,14 @@
     <link rel="stylesheet" type="text/css" href="../../../app-assets/css/themes/dark-layout.min.css">
     <link rel="stylesheet" type="text/css" href="../../../app-assets/css/themes/bordered-layout.min.css">
     <link rel="stylesheet" type="text/css" href="../../../app-assets/css/themes/semi-dark-layout.min.css">
-
     <!-- BEGIN: Page CSS-->
     <link rel="stylesheet" type="text/css" href="../../../app-assets/css/core/menu/menu-types/horizontal-menu.min.css">
     <!-- END: Page CSS-->
-
     <!-- BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="../../../assets/css/style.css">
     <!-- END: Custom CSS-->
-
   </head>
-  
   <body class="horizontal-layout horizontal-menu  navbar-floating footer-static  " data-open="hover" data-menu="horizontal-menu" data-col="">
-
-   
     <div class="app-content content ">
       <div class="content-overlay"></div>
       <div class="header-navbar-shadow"></div>
@@ -61,11 +57,8 @@
           <div class="content-header-left col-md-9 col-12 mb-2">
             <div class="row breadcrumbs-top">
               <div class="col-12">
-                
                 <div class="breadcrumb-wrapper">
                   <ol class="breadcrumb">
-                    
-                    
                   </ol>
                 </div>
               </div>
@@ -81,25 +74,22 @@
           </div>
         </div>
         <div class="content-body"><!-- Basic Tables start -->
-        <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#Addunit">
-                Add New Unit
+        <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#AddUnit">
+        Add New Units
               </button>
 <div class="row" id="basic-table">
   <div class="col-12">
     <div class="card">
-      
-    
       <div class="table-responsive">
         <table class="table">
-          <thead>
+        <thead>
             <tr>
             <th>Unit ID</th>
            <th>Unit Name</th>
-						<th>Unit Description</th>
+            <th>Unit Description</th>
             <th>Actions</th>
             </tr>
           </thead>
-         
           <tbody>
               @foreach($units as $vendor)
             <tr id="sid{{$vendor->id}}">
@@ -113,7 +103,6 @@
               </tr>
               @endforeach
               </tbody>            
-                            
         </table>
       </div>
     </div>
@@ -123,20 +112,7 @@
       </div>
     </div>
   <hr />
-  </div>
-
-    </div>
-    
-    <div class="sidenav-overlay"></div>
-    <div class="drag-target"></div>
-    <script src="../../../app-assets/vendors/js/vendors.min.js"></script>
-    <script src="../../../app-assets/vendors/js/ui/jquery.sticky.js"></script>
-    <script src="../../../app-assets/js/core/app-menu.min.js"></script>
-    <script src="../../../app-assets/js/core/app.min.js"></script>
-    <script src="../../../app-assets/js/scripts/customizer.min.js"></script>
-  
-  <!-- Modal -->
-<div
+  <div
                 class="modal fade text-left"
                 id="AddUnit"
                 tabindex="-1"
@@ -147,8 +123,6 @@
                 <div class="modal-dialog modal-dialog-centered" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
-                      
-                      
                     </div>
                     <form id="UnitForm" name="UnitForm">
                     @csrf
@@ -169,8 +143,6 @@
                   </div>
                 </div>
               </div>
-
-
               <div
                 class="modal fade text-left"
                 id="EditUnits"
@@ -182,8 +154,6 @@
                 <div class="modal-dialog modal-dialog-centered" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
-                      
-                      
                     </div>
                     <form id="EditUnitForm" name="EditUnitForm">
                     <input type="hidden" id="unit_id" name="unit_id" >
@@ -205,37 +175,26 @@
                   </div>
                 </div>
               </div>
-
-
-<!-- AJAX insert Unit model -->
+<!-- Add Categories Modal -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>  
 $("#UnitForm").submit(function(e){
   e.preventDefault();
-    let unit_name=$("#unit_name").val();
-    let unit_description=$("#unit_description").val();
-    let _token=$("input[name=_token]").val();
-
+  var registerForm = $("#UnitForm");
+  var formData = registerForm.serialize();
     $.ajax({
         url:"{{url('storeunit')}}",
+        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
         type:"post",
-        data:{
-            unit_name:unit_name,
-            unit_description:unit_description,
-           
-            _token:_token
-        },
+        data:formData,
         success:function(response)
         {   
-
             if(response)
             {
-               
-               $("#studentTable tbody").append('<tr><td>'+response.unit_name+'</td><td>'+ response.unit_description +'</td><td>'+response.unit_image+'</td></tr>');
+               $("#studentTable tbody").append('<tr><td>'+response.cat_name+'</td><td>'+ response.cat_description +'</td><td>'+response.cat_image+'</td></tr>');
                 $('#UnitForm')[0].reset();
-                alert("inserted");
-                $('#Addunit').modal('toggle');
+                $('#AddUnit').modal('toggle');
                 location.reload();
-
             }
         }
     });
@@ -258,7 +217,6 @@ $("#UnitForm").submit(function(e){
         let unit_name=$("#unit_name1").val();
         let unit_description=$("#unit_description1").val();
         let _token=$("input[name=_token]").val();
-        
         $.ajax({
             url:"{{url('units')}}",
             type:"post",
@@ -276,37 +234,27 @@ $("#UnitForm").submit(function(e){
                 location.reload()
             }
         });
-
     });
-
 </script>
-<!-- AJAX Delete Unit model -->
 <script>
     function deleteUnits(id)
     {
         if(confirm("Do You Really want to delete this record?"))
         {
-          
             $.ajax({
                 url:'/units/'+id,
                 type:'DELETE',
                 data:{
                   _token:$("input[name=_token]").val()
-
                 },
                 success:function(response)
                 {
                     $('#sid'+id).remove();
                     location.reload();
-                  
                 }
             })
         }
     }
 </script>
-
-
-
 </html>     
-
 @endsection
