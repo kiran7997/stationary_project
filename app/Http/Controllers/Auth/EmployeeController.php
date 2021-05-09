@@ -57,7 +57,7 @@ class EmployeeController extends Controller
             if (!empty($user->getRoleNames()))
                 foreach ($user->getRoleNames() as $v) {
                     if (($v != "Admin") && ($v != "Customer")) {
-                        return redirect('home');
+                        return redirect('employee-dashboard');
                     } else {
                         Auth::logout();
                         return back()->withErrors(['email' => 'These credentials do not match our records.']);
@@ -66,5 +66,11 @@ class EmployeeController extends Controller
         } else {
             return back()->withErrors(['email' => 'These credentials do not match our records.']);
         }
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect('employees-login');
     }
 }
