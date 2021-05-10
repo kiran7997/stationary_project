@@ -52,13 +52,14 @@ class UserController extends Controller
             'lastname' => 'required',
             'phone_no' => 'required',
             'address' => 'required',
-            // 'department' => 'required',
+            'username' => 'required',
             'state' => 'required',
             'district' => 'required',
             'email' => 'required|email|unique:users,email',
             // 'username' => 'required|unique:users,username',
             'password' => 'required|same:confirm-password',
-            'roles' => 'required'
+            'roles' => 'required',
+            'profile_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
         $input = $request->all();
@@ -134,7 +135,7 @@ class UserController extends Controller
             'lastname' => 'required',
             'phone_no' => 'required',
             'address' => 'required',
-            // 'department' => 'required',
+            'username' => 'required',
             'state' => 'required',
             'district' => 'required',
             'email' => 'required|email|unique:users,email,' . $id,
@@ -217,5 +218,47 @@ class UserController extends Controller
             $response = 1;
         }
         return $response;
+    }
+
+    public function dashboard()
+    {
+        //employee dashboard
+        return view('employee_dash');
+    }
+
+    public function profile()
+    {
+        return view('users.profile');
+    }
+
+    public function save_profile(Request $request, $id)
+    {
+
+        $input = $request->all();
+        if ($request->hasfile('profile_image')) {
+            $file = $request->file('profile_image');
+            $filename = rand(0, 999) . $file->getClientOriginalName();
+            $destinationPath = public_path('user_images/');
+            if (!file_exists($destinationPath)) {
+                mkdir($destinationPath, 777, true);
+                exec('chmod -R 777 ' . $destinationPath);
+            } else {
+                exec('chmod -R 777 ' . $destinationPath);
+            }
+            $file->move($destinationPath, $filename);
+            $input['profile_image'] = $filename;
+        } else {
+            $input['profile_image'] = $request->old_profile_image;
+        }
+
+        if (!empty($input['password'])) {
+            $input['password'] = Hash::make($input['password']);
+        } else {
+            $input = Arr::except($input, array('password'));
+        }
+
+        $user = User::find($id);
+        $user->update($input);
+        return redirect('profile')->with('success', 'User updated successfully');
     }
 }

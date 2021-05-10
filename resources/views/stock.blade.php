@@ -94,8 +94,8 @@
         <table class="table">
         <thead>
         <tr>
-        <th>Pdrouct_ID</th>
-              <th>Item_Quantity</th>
+        <th>Pdrouct ID</th>
+              <th>Item Quantity</th>
               <th>Actions</th> 
                                 </tr>                                        
                             </thead>
@@ -164,7 +164,7 @@
                     @csrf
                     <div class="form-group">
          
-         <label for="product_id">Select Type</label> &nbsp;&nbsp;
+         <label for="product_id">Product Type</label> &nbsp;&nbsp;
          <select name="product_id" id="product_id"  class="form-control" required>
             <option >Select Option</option>
              <option value="1">Pen</option>
@@ -211,7 +211,7 @@
                     @csrf
                     <div class="form-group">
          
-         <label for="product_id">Select Type</label> &nbsp;&nbsp;
+         <label for="product_id">Product Type</label> &nbsp;&nbsp;
          <select name="product_id2" id="product_id2"  class="form-control" required>
             <option >Select Option</option>
              <option value="1">Pen</option>

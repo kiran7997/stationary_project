@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Product Variation')
+@section('title', 'Inventories')
 @section('content')
 
 <!DOCTYPE html>
@@ -94,13 +94,13 @@
         <table class="table">
         <thead>
         <tr>
-                                <th>Inventory_Name</th>
-                                <th>Inventory_Address</th>
-                                <th>Inventory_Contact</th>
-                                <th>Inventory_Email</th>
-                                <th>Product_Id</th>
+                                <th>Company Name</th>
+                                <th>Inventory Address</th>
+                                <th>Inventory Contact</th>
+                                <th>Inventory Email</th>
+                                <th>Product Id</th>
                                 <th>Quantity</th>
-                                <th>Invntory_Status</th>
+                                <th>Invntory Status</th>
                                 <th>Actions</th>
                                 </tr>                                        
                             </thead>
@@ -160,28 +160,28 @@
                     <form id="invenForm" name="invenForm"> 
                     <input type="hidden" name="inventory_id" id="inventory_id">
                       <div class="modal-body">
-                      <label for="inventory_name">Inventory_Name </label>
+                      <label for="inventory_name">Company Name </label>
                         <div class="form-group">
                         <input type="text" name="inventory_name" id="inventory_name" class="form-control" >
                          </div>
 
-                         <label for="inventory_address">Inventory_address</label>
+                         <label for="inventory_address">Inventory Address</label>
                         <div class="form-group">
                         <input type="text" name="inventory_address" id="inventory_address" class="form-control" >
                          </div>
 
                           
-                         <label for="inventory_contact">inventory_contact </label>
+                         <label for="inventory_contact">Inventory Contact </label>
                         <div class="form-group">
                         <input type="text" name="inventory_contact" id="inventory_contact" class="form-control" >
                          </div>
 
-                         <label for="inventory_email"> inventory_email</label>
+                         <label for="inventory_email"> Inventory Email</label>
                         <div class="form-group">
                         <input type="text" name="inventory_email" id="inventory_email" class="form-control" >
                         </div>
 
-                        <label for="product_id">Select Type</label> &nbsp;&nbsp;
+                        <label for="product_id">Product Type</label> &nbsp;&nbsp;
                         <div class="form-group">
                         <select name="product_id" id="product_id"  class="form-control" >
                             <option >Select Option</option>
@@ -200,12 +200,13 @@
                           <input type="text" name="quantity" id="quantity" class="form-control" >
                         </div>
  
-           <label for="invntory_status">Invntory_Status  </label>
+           <label for="invntory_status">Invntory Status  </label>
          <select name="invntory_status" id="invntory_status"  class="form-control" required>
-            <option >Inventory Status</option>
-             <option value="Active">Active</option>
-             <option value="Deactive">Deactive</option>
-             <option value="Block">Block</option>
+            <option>Select Option</option>
+            <option value="Add">Add</option>
+             <option value="Minus">Minus</option>
+             <option value="Set">Set</option>
+            
             
         </select>
                 
@@ -235,23 +236,23 @@
       </div>
       <form id="invenEditForm" name="invenEditForm"> 
       <div class="modal-body">
-                      <label for="inventory_name">Inventory_Name </label>
+                      <label for="inventory_name">Comapany Name </label>
                         <div class="form-group">
                         <input type="text" name="inventory_name2" id="inventory_name2" class="form-control" placeholder="inventory_name">
                          </div>
 
-                         <label for="inventory_address">Inventory_Address</label>
+                         <label for="inventory_address">Inventory Address</label>
                         <div class="form-group">
                         <input type="text" name="inventory_addres2" id="inventory_address2" class="form-control" placeholder="inventory_address">
                          </div>
 
                           
-                         <label for="inventory_contact">Inventory_Contact </label>
+                         <label for="inventory_contact">Inventory Contact </label>
                         <div class="form-group">
                         <input type="text" name="inventory_contact2" id="inventory_contact2" class="form-control" placeholder="inventory_contact">
                          </div>
 
-                         <label for="inventory_email"> Inventory_Email</label>
+                         <label for="inventory_email"> Inventory Email</label>
                         <div class="form-group">
                         <input type="text" name="inventory_email2" id="inventory_email2" class="form-control" placeholder="inventory_email">
                         </div>
@@ -274,13 +275,14 @@
                         
                           <input type="text" name="quantity2" id="quantity2" class="form-control" >
                         </div>
-                        <label for="invntory_status">Invntory_Status  </label>
+                        <label for="invntory_status">Invntory Status  </label>
                         <div class="form-group">
          <select name="invntory_status2" id="invntory_status2"  class="form-control" required>
-            <option >Inventory Status</option>
-             <option value="Active">Active</option>
-             <option value="Deactive">Deactive</option>
-             <option value="Block">Block</option>
+            <option>Select Option</option>
+             <option value="Add">Add</option>
+             <option value="Minus">Minus</option>
+             <option value="Set">Set</option>
+            
             
         </select>
         
@@ -359,7 +361,7 @@
 $("#invenForm").submit(function(e){
   e.preventDefault();
     let inventory_name=$("#inventory_name").val();
-    alert(inventory_name);
+   // alert(inventory_name);
     let inventory_address=$("#inventory_address").val();
     let inventory_contact=$("#inventory_contact").val();
     let inventory_email=$("#inventory_email").val();

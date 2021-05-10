@@ -47,4 +47,10 @@ class CustomerLoginController extends Controller
             return back()->withErrors(['email' => 'These credentials do not match our records.']);
         }
     }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect('/');
+    }
 }

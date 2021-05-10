@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Categories')
+@section('title', 'Units')
 @section('content')
 <!DOCTYPE html>
 <html lang="en">

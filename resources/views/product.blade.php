@@ -94,15 +94,15 @@
         <table class="table">
         <thead>
         <tr>
-                                <th>product_name</th>
-                                    <th>cat_id</th>
-                                    <th>unit_id</th>
-                                    <th>variation_id</th>
-                                    <th>image_url</th>
-                                    <th>description</th>
-                                    <th>base_price</th>
-                                    <th>code</th>
-                                    <th>taxable</th>
+                                    <th>Product</th>
+                                    <th>Product Name</th>
+                                    <th>Catagory</th>
+                                    <th>Unit</th>
+                                    <th>Variation</th>
+                                    <th>Description</th>
+                                    <th>Base Price</th>
+                                    <th>Code</th>
+                                    <th>Taxable</th>
                                     <th>Actions</th>                                     
                             </thead>
                             </thead>
@@ -110,16 +110,25 @@
 
 @foreach($products as $product)
 <tr id="sid{{$product->product_id}}">
-    <td>{{$product->product_name}}</td>
-   
-    <td>
+<td>
         <img src="{{url('product_images/'.$product->image_url)}}" width='100'
             height="100">
     </td>
+    <td>{{$product->product_name}}</td>
+    <td>{{$product->cat_id}}</td>
+    <td>{{$product->unit_id}}</td>
+    <td>{{$product->variation_id}}</td>
+  
     <td>{{$product->description}}</td>
     <td>{{$product->base_price}}</td>
-    
-    
+    <td>{{$product->code}}</td>
+    <td>{{$product->taxable}}</td>
+    <td>
+        <a href="javascript:void(0)" onclick="editproduct({{$product->product_id}})"
+            class="fa fa-edit" style="font-size:24px"></a>
+        <a href="javascript:void(0)" onclick="deleteproduct({{$product->product_id}})"
+            class="fa fa-trash" style="font-size:24px;color:red"></a>
+    </td>
 </tr>
 @endforeach
 </tbody>
@@ -138,22 +147,6 @@
       
 
   <hr />
-  </div>
-
-    </div>
-    
-    <div class="sidenav-overlay"></div>
-    <div class="drag-target"></div>
-    <script src="../../../app-assets/vendors/js/vendors.min.js"></script>
-    <script src="../../../app-assets/vendors/js/ui/jquery.sticky.js"></script>
-    <script src="../../../app-assets/js/core/app-menu.min.js"></script>
-    <script src="../../../app-assets/js/core/app.min.js"></script>
-    <script src="../../../app-assets/js/scripts/customizer.min.js"></script>
-  
-  
-
-
-
   
 
 <!-- Add Product Model -->
@@ -175,28 +168,28 @@
                       <div class="modal-body">
                      
 
-                         <label for="product_name">Product_Name </label>
+                         <label for="product_name">Product Name </label>
                           <div class="form-group">
                           <input type="text" name="product_name" id="product_name" class="form-control">
                          </div>
 
-                         <label for="cat_id">Cat_Id </label>
+                         <label for="cat_id">Catagory </label>
                            <div class="form-group">
                         <input type="text" name="cat_id" id="cat_id" class="form-control">
                          </div>
                           
-                         <label for="unit_id">Unit_Id </label>
+                         <label for="unit_id">Unit </label>
                             
                         <div class="form-group">
                         <input type="text" name="unit_id" id="unit_id" class="form-control">
                          </div>
 
-                         <label for="variation_id">Variation_Id </label>
+                         <label for="variation_id">Variation </label>
                         <div class="form-group">
                         <input type="text" name="variation_id" id="variation_id" class="form-control">
                          </div>
 
-                         <label for="description">Profile Image </label>
+                         <label for="description">Product Image </label>
                             <div class="form-group">
                             
                             <input type='file' class='form-control' name='image_url' id='image_url'
@@ -224,12 +217,17 @@
                          <input type="text" name="code" id="code" class="form-control">
                         </div>
                        
-                        <label for="taxable">Taxable </label>
-                           <div class="form-group">
-                           <input type="text" name="taxable" id="taxable" class="form-control">
-                        </div>
+                     
                         
-                           
+                        <label for="taxable">Taxable Type</label> &nbsp;&nbsp;
+         <select name="taxable" id="taxable"  class="form-control" required>
+            <option >Select Option</option>
+             <option value="0">Yes</option>
+             <option value="1">No</option>
+            
+        </select>
+                
+        
                       
                         </div>
                       <div class="modal-footer">
@@ -241,7 +239,7 @@
               </div>
             </div>
 
-<!-- Edit Product Model -->
+<!-- Edit Customer Model -->
  <div class="modal fade text-left"
                 id="productEditModal"
                 tabindex="-1"
@@ -264,23 +262,23 @@
                         @csrf
                         <input type="hidden" name="product_id" id="product_id">
 
-                         <label for="product_name">Product_Name </label>
+                         <label for="product_name">Product Name </label>
                           <div class="form-group">
                           <input type="text" name="product_name" id="product_name2" class="form-control">
                          </div>
 
-                         <label for="cat_id">Cat_Id </label>
+                         <label for="cat_id">Catagory </label>
                            <div class="form-group">
                         <input type="text" name="cat_id" id="cat_id2" class="form-control">
                          </div>
                           
-                         <label for="unit_id">Unit_Id </label>
+                         <label for="unit_id">Unit</label>
                             
                         <div class="form-group">
                         <input type="text" name="unit_id" id="unit_id2" class="form-control">
                          </div>
 
-                         <label for="variation_id">Variation_Id </label>
+                         <label for="variation_id">Variation</label>
                         <div class="form-group">
                         <input type="text" name="variation_id" id="variation_id2" class="form-control">
                          </div>
@@ -288,7 +286,7 @@
 
 
                          <div class="form-group">
-                            <label for="description">Profile Image </label>
+                            <label for="description">Product Image </label>
                             <input type='file' class='form-control' accept=".jpg,.jpeg,.png" name='image_url'
                                 id='image_url2'>
                             <input type='hidden' class='form-control' name='old_image' id='old_image'>
@@ -320,7 +318,7 @@
                         <input type="text" name="description" id="description2" class="form-control">
                         </div>
 
-                        <label for="base_price">Base_Price </label>
+                        <label for="base_price">Base Price </label>
                            
                         <div class="form-group">
                         <input type="text" name="base_price" id="base_price2" class="form-control">
@@ -333,11 +331,17 @@
                          <input type="text" name="code" id="code2" class="form-control">
                         </div>
                        
-                        <label for="taxable">taxable </label>
-                           <div class="form-group">
-                           <input type="text" name="taxable" id="taxable2" class="form-control">
-                        </div>
                         
+                         
+                        <label for="taxable">Taxable Type</label> &nbsp;&nbsp;
+         <select name="taxable" id="taxable2"  class="form-control" required>
+            <option >Select Option</option>
+             <option value="0">Yes</option>
+             <option value="1">No</option>
+            
+        </select>
+                
+        
                            
                         </div>
                       <div class="modal-footer">

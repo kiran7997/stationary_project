@@ -10,7 +10,7 @@
             <div class="content-header-left col-md-9 col-12 mb-2">
                 <div class="row breadcrumbs-top">
                     <div class="col-12">
-                        <h2 class="content-header-title float-left mb-0">Employees Management</h2>
+                        <h2 class="content-header-title float-left mb-0">Employee</h2>
                         <div class="breadcrumb-wrapper">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="index.html">Home</a>
@@ -31,7 +31,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header border-bottom">
-                                <h4 class="card-title">Employees Management</h4>
+                                <h4 class="card-title">Employee</h4>
                                 <a class="btn btn-outline-primary pull-right" href="{{ route('users.create') }}">
                                     Create Employee</a>
                             </div>

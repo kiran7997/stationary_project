@@ -25,7 +25,7 @@ class StockController extends Controller
         $stock->save();
         return response()->json($stock);
     }
-     public function edit($stock_id)
+    public function edit($stock_id)
     {
         $stock= Stocks::find($stock_id);
         return response()->json($stock);

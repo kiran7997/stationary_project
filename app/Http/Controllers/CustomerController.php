@@ -6,7 +6,7 @@ use App\customers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-
+use Hash;
 class CustomerController extends Controller
 {
     public function dashboard()
@@ -32,7 +32,7 @@ class CustomerController extends Controller
         $customers->email = $req->email;
         $customers->customer_phone = $req->customer_phone;
         $customers->username = $req->username;
-        $customers->password = $req->password;
+        $customers->password = Hash::make($req->password);
         $customers->customer_status = $req->customer_status;
         $customers->login_ip = $req->login_ip;
         $customers->last_login_at = $req->last_login_at;
@@ -56,7 +56,8 @@ class CustomerController extends Controller
         $customers->email = $req->email;
         $customers->customer_phone = $req->customer_phone;
         $customers->username = $req->username;
-        $customers->password = $req->password;
+        $customers->password = Hash::make($req->password);
+       
         $customers->customer_status = $req->customer_status;
         $customers->login_ip = $req->login_ip;
         $customers->last_login_at = $req->last_login_at;
