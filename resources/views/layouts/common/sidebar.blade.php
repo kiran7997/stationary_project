@@ -62,8 +62,9 @@
           <li><a class="d-flex align-items-center" href="{{url('/units')}}"><i data-feather="circle"></i><span
                 class="menu-item text-truncate" data-i18n="Edit">Unit</span></a>
           </li>
-          <li><a class="d-flex align-items-center" href="{{url('/product_variation')}}"><i data-feather="circle"></i><span
-                class="menu-item text-truncate" data-i18n="Add">Product Variation</span></a>
+          <li><a class="d-flex align-items-center" href="{{url('/product_variation')}}"><i
+                data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Add">Product
+                Variation</span></a>
           </li>
           <li><a class="d-flex align-items-center" href="{{url('/product')}}"><i data-feather="circle"></i><span
                 class="menu-item text-truncate" data-i18n="Add">Product</span></a>
@@ -73,9 +74,6 @@
           </li>
           <li><a class="d-flex align-items-center" href="{{url('/stock')}}"><i data-feather="circle"></i><span
                 class="menu-item text-truncate" data-i18n="Add">Stock</span></a>
-          </li>
-          <li><a class="d-flex align-items-center" href="{{url('/shop')}}"><i data-feather="circle"></i><span
-                class="menu-item text-truncate" data-i18n="Add">Customer Dashboards</span></a>
           </li>
         </ul>
       </li>

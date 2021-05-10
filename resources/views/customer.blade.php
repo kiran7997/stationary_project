@@ -82,12 +82,11 @@
         </button>
       </div>
       <form id="custForm" name="custForm">
-        @csrf
+
         <div class="modal-body">
           <label for="company_name">Company Name </label>
           <div class="form-group">
             <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
-
             <input type="text" name="company_name" id="company_name" class="form-control">
           </div>
 
@@ -392,49 +391,60 @@
 <script>
   $("#custForm").submit(function(e){
   e.preventDefault();
-    // let company_name=$("#company_name").val();
-    // let customer_firstname=$("#customer_firstname").val();
-    // let customer_lastname=$("#customer_lastname").val();
-    // let email=$("#email").val();
-    // let customer_phone=$("#customer_phone").val();
-    // let username=$("#username").val();
-    // let password=$("#password").val();
-    // let customer_status=$("#customer_status").val();
-    // let login_ip=$("#login_ip").val();
-    // let last_login_at=$("#last_login_at").val();
-    // let _token=$("input[name=_token]").val();
+    let company_name=$("#company_name").val();
+    let customer_firstname=$("#customer_firstname").val();
+    let customer_lastname=$("#customer_lastname").val();
+    let email=$("#email").val();
+    let customer_phone=$("#customer_phone").val();
+    let username=$("#username").val();
+    let password=$("#password").val();
+    let customer_status=$("#customer_status").val();
+    let login_ip=$("#login_ip").val();
+    let last_login_at=$("#last_login_at").val();
+    let _token=$("input[name=_token]").val();
 
     $.ajax({
-        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
         url:"{{url('addcust')}}",
+        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
         type:"post",
-        data:new FormData(this),
+        data:{
+            company_name:company_name,
+            customer_firstname:customer_firstname,
+            customer_lastname:customer_lastname,
+            email:email,
+            customer_phone:customer_phone,
+            username:username,
+            password:password,
+            customer_status:customer_status,
+            login_ip:login_ip,
+            last_login_at:last_login_at,
+            _token:_token
+        },
         success:function(response)
-        {     
-          alert("Data Inserted Successfully");
-        location.reload();
-            // if(response)
-            // {
-            //      //alert(JSON.stringify(response));
+        {     alert("Data Inserted Successfully");
+
+            if(response)
+            {
+                 //alert(JSON.stringify(response));
                
-            //   //  $("#vendorTable tbody").append(response.vendor_name+'</td><td>'+ response.location +'</td><td>'+response.phone +'</td><td>'+ response.email +'</td><td>'+ response.INV_No +'</td><td>'+ response.Transport);
-            //     $("#custTable tbody").append('<tr><td>'+response.company_name+
-            //     '</td><td>'+response.customer_lastname+'</td><td>'
-            //     +response.email+'</td><td>'
-            //     +response.customer_phone+'</td><td>'
-            //     +response.username+'</td><td>'
-            //     +response.customer_status+'</td><td>'
-            //     +response.login_ip+'</td><td>'
-            //     +response.last_login_at+'</td><td>'
-            //    );
+              //  $("#vendorTable tbody").append(response.vendor_name+'</td><td>'+ response.location +'</td><td>'+response.phone +'</td><td>'+ response.email +'</td><td>'+ response.INV_No +'</td><td>'+ response.Transport);
+                $("#custTable tbody").append('<tr><td>'+response.company_name+
+                '</td><td>'+response.customer_lastname+'</td><td>'
+                +response.email+'</td><td>'
+                +response.customer_phone+'</td><td>'
+                +response.username+'</td><td>'
+                +response.customer_status+'</td><td>'
+                +response.login_ip+'</td><td>'
+                +response.last_login_at+'</td><td>'
+               );
 
-            //     $('#custForm')[0].reset();
+                $('#custForm')[0].reset();
               
-            //     $('#custModal').modal('toggle');
-            //     location.reload();
+                $('#custModal').modal('toggle');
+                location.reload();
 
 
-            // }
+            }
         }
     });
 });
