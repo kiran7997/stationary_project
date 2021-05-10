@@ -93,16 +93,16 @@
       <div class="table-responsive">
         <table class="table">
         <thead>
-                                 <th>Company_Name</th>
-                                <th>Cust_Firstname</th>
-                                <th>Cust_Lastname</th>
-                                <th>Cust_Email</th>
-                                <th>Cust_Phone</th>
-                                <th>Cust_Username</th>
+                                 <th>Company Name</th>
+                                <th>Firstname</th>
+                                <th>Lastname</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Username</th>
                                
-                                <th>Cust_Status</th>
-                                <th>Login_Ip</th>
-                                <th>Last_Login_At</th>
+                                <th>Status</th>
+                                <th>Login Ip</th>
+                                <th>Last Login At</th>
                                 <th>Actions</th>                            
                             </thead>
                             <tbody>
@@ -164,62 +164,62 @@
                     <form id="custForm" name="custForm"> 
                    
                       <div class="modal-body">
-                      <label for="company_name">Company_Name </label>
+                      <label for="company_name">Company Name </label>
                         <div class="form-group">
                          <input type="text" name="company_name" id="company_name" class="form-control" >
                          </div>
 
-                         <label for="customer_firstname">Customer_Firstname</label>
+                         <label for="customer_firstname">Customer Firstname</label>
                          <div class="form-group">
                         <input type="text" name="customer_firstname" id="customer_firstname" class="form-control" >
                          </div>
 
                           
-                         <label for="inventory_contact">Customer_Lastname </label>
+                         <label for="inventory_contact">Customer Lastname </label>
                         <div class="form-group">
                         <input type="text" name="customer_lastname" id="customer_lastname" class="form-control" >
                          </div>
 
-                         <label for="customer_phone">Customer_Phone</label>
+                         <label for="customer_phone">Customer Phone</label>
                         <div class="form-group">
                         <input type="text" name="customer_phone" id="customer_phone" class="form-control" >
                          </div>
 
-                         <label for="email"> Customer_Email</label>
+                         <label for="email"> Customer Email</label>
                             <div class="form-group">
                         <input type="text" name="email" id="email" class="form-control" >
                         </div>
                         
                 
-                     <label for="username">Customer_Username</label>
+                     <label for="username">Customer Username</label>
                         <div class="form-group">
                         <input type="text" name="username" id="username" class="form-control" >
                         </div>
 
-                        <label for="password">Customer_Password</label>
+                        <label for="password">Customer Password</label>
                         <div class="form-group">
                         <input type="password" name="password" id="password" class="form-control" >
                         </div>
 
                         
                 
-                        <label for="product_id">Select Type</label> &nbsp;&nbsp;
+                        <label for="product_id">Customer Status</label> &nbsp;&nbsp;
                         <div class="form-group">
                     <select name="customer_status" id="customer_status"  class="form-control" >
                         <option >Select Option</option>
                          <option value="active">Active</option>
-                        <option value="deactive">Deactive</option>
+                        <option value="deactive">Inactive</option>
                         <option value="block">Block</option>
                      </select>
                      </div>
                     
-                     <label for="login_ip">Login_Ip</label>
+                     <label for="login_ip">Login Ip</label>
                         <div class="form-group">
                         <input type="text" name="login_ip" id="login_ip" class="form-control" >
                         </div>
 
                        
-                    <label for="last_login_at">Last_Login_At </label>
+                    <label for="last_login_at">Last Login At </label>
                         <div class="form-group">
                         
                         <input type="text" name="last_login_at" id="last_login_at" class="form-control" >
@@ -258,45 +258,45 @@
                     <form id="custEditForm" name="custEditForm"> 
                     <input type="hidden" name="customer_id" id="customer_id">
                       <div class="modal-body">
-                      <label for="company_name">Company_Name </label>
+                      <label for="company_name">Company Name </label>
                         <div class="form-group">
                          <input type="text" name="company_name2" id="company_name2" class="form-control" >
                          </div>
 
-                         <label for="customer_firstname">Customer_Firstname</label>
+                         <label for="customer_firstname">Customer Firstname</label>
                          <div class="form-group">
                         <input type="text" name="customer_firstname2" id="customer_firstname2" class="form-control" >
                          </div>
 
                           
-                         <label for="inventory_contact">Customer_Lastname </label>
+                         <label for="inventory_contact">Customer Lastname </label>
                         <div class="form-group">
                         <input type="text" name="customer_lastname2" id="customer_lastname2" class="form-control" >
                          </div>
-                         <label for="customer_phone2">Customer_Phone</label>
+                         <label for="customer_phone2">Customer Phone</label>
                         <div class="form-group">
                         <input type="text" name="customer_phone2" id="customer_phone2" class="form-control" >
                          </div>
 
-                         <label for="email2"> Customer_Email</label>
+                         <label for="email2"> Customer Email</label>
                             <div class="form-group">
                         <input type="text" name="email2" id="email2" class="form-control" >
                         </div>
                         
                 
-                     <label for="username">Customer_Username</label>
+                     <label for="username">Customer Username</label>
                         <div class="form-group">
                         <input type="text" name="username2" id="username2" class="form-control" >
                         </div>
 
-                        <label for="password2">Customer_Password</label>
+                        <label for="password2">Customer Password</label>
                         <div class="form-group">
                         <input type="password" name="password2" id="password2" class="form-control" >
                         </div>
 
                         
                 
-                        <label for="product_id">Select Type</label> &nbsp;&nbsp;
+                        <label for="product_id">Customer Status</label> &nbsp;&nbsp;
                         <div class="form-group">
                     <select name="customer_status2" id="customer_status2"  class="form-control" >
                         <option >Select Option</option>
@@ -306,13 +306,13 @@
                      </select>
                      </div>
                     
-                     <label for="login_ip">Login_Ip</label>
+                     <label for="login_ip">Login Ip</label>
                         <div class="form-group">
                         <input type="text" name="login_ip2" id="login_ip2" class="form-control" >
                         </div>
 
                        
-                    <label for="last_login_at">last_login_at </label>
+                    <label for="last_login_at">Last Login At </label>
                         <div class="form-group">
                         
                         <input type="text" name="last_login_at2" id="last_login_at2" class="form-control" >
@@ -549,8 +549,8 @@
                 $("#customer_lastname2").val(customer.customer_lastname);
                 $("#email2").val(customer.email);
                 $("#customer_phone2").val(customer.customer_phone);
-                $("#username2").val(username);
-                $("#password2").val(password);
+                $("#username2").val(customer.username);
+                $("#password2").val(customer.password);
                 $("#customer_status2").val(customer.customer_status);
                 $("#login_ip2").val(customer.login_ip);
                 $("#last_login_at2").val(customer.last_login_at);
