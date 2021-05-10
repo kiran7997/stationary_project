@@ -225,4 +225,40 @@ class UserController extends Controller
         //employee dashboard
         return view('employee_dash');
     }
+
+    public function profile()
+    {
+        return view('users.profile');
+    }
+
+    public function save_profile(Request $request, $id)
+    {
+
+        $input = $request->all();
+        if ($request->hasfile('profile_image')) {
+            $file = $request->file('profile_image');
+            $filename = rand(0, 999) . $file->getClientOriginalName();
+            $destinationPath = public_path('user_images/');
+            if (!file_exists($destinationPath)) {
+                mkdir($destinationPath, 777, true);
+                exec('chmod -R 777 ' . $destinationPath);
+            } else {
+                exec('chmod -R 777 ' . $destinationPath);
+            }
+            $file->move($destinationPath, $filename);
+            $input['profile_image'] = $filename;
+        } else {
+            $input['profile_image'] = $request->old_profile_image;
+        }
+
+        if (!empty($input['password'])) {
+            $input['password'] = Hash::make($input['password']);
+        } else {
+            $input = Arr::except($input, array('password'));
+        }
+
+        $user = User::find($id);
+        $user->update($input);
+        return redirect('profile')->with('success', 'User updated successfully');
+    }
 }
