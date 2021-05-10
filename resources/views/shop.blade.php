@@ -7,15 +7,7 @@
     <link rel="stylesheet" type="text/css" href="../../../app-assets/vendors/css/extensions/toastr.min.css">
     <!-- END: Vendor CSS-->
 
-    <!-- BEGIN: Theme CSS-->
-    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/bootstrap-extended.min.css">
-    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/colors.min.css">
-    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/components.min.css">
-    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/themes/dark-layout.min.css">
-    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/themes/bordered-layout.min.css">
-    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/themes/semi-dark-layout.min.css">
-
+    
     <!-- BEGIN: Page CSS-->
     <link rel="stylesheet" type="text/css" href="../../../app-assets/css/core/menu/menu-types/vertical-menu.min.css">
     <link rel="stylesheet" type="text/css" href="../../../app-assets/css/plugins/extensions/ext-component-sliders.min.css">
@@ -23,19 +15,9 @@
     <link rel="stylesheet" type="text/css" href="../../../app-assets/css/plugins/extensions/ext-component-toastr.min.css">
     <!-- END: Page CSS-->
 
-    <!-- BEGIN: Custom CSS-->
-    <link rel="stylesheet" type="text/css" href="../../../assets/css/style.css">
-    <!-- END: Custom CSS-->
-
-  </head>
-  <!-- END: Head-->
-
-  <!-- BEGIN: Body-->
-  <body class="vertical-layout vertical-menu-modern content-detached-left-sidebar navbar-floating footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="content-detached-left-sidebar">
-
     
-
-
+  </head>
+ 
  
 
     <!-- BEGIN: Content-->
@@ -62,13 +44,7 @@
               </div>
             </div>
           </div>
-          <div class="content-header-right text-md-right col-md-3 col-12 d-md-block d-none">
-            <div class="form-group breadcrumb-right">
-              <div class="dropdown">
-                <button class="btn-icon btn btn-primary btn-round btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i data-feather="grid"></i></button>
-                <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="app-todo.html"><i class="mr-1" data-feather="check-square"></i><span class="align-middle">Todo</span></a><a class="dropdown-item" href="app-chat.html"><i class="mr-1" data-feather="message-square"></i><span class="align-middle">Chat</span></a><a class="dropdown-item" href="app-email.html"><i class="mr-1" data-feather="mail"></i><span class="align-middle">Email</span></a><a class="dropdown-item" href="app-calendar.html"><i class="mr-1" data-feather="calendar"></i><span class="align-middle">Calendar</span></a></div>
-              </div>
-            </div>
+          
           </div>
         </div>
         <div class="content-detached content-right">
@@ -81,26 +57,9 @@
           <button class="navbar-toggler shop-sidebar-toggler" type="button" data-toggle="collapse">
             <span class="navbar-toggler-icon d-block d-lg-none"><i data-feather="menu"></i></span>
           </button>
-          <div class="search-results">16285 results found</div>
+        
         </div>
-        <div class="view-options d-flex">
-          <div class="btn-group dropdown-sort">
-            <button
-              type="button"
-              class="btn btn-outline-primary dropdown-toggle mr-1"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              <span class="active-sorting">Featured</span>
-            </button>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="javascript:void(0);">Featured</a>
-              <a class="dropdown-item" href="javascript:void(0);">Lowest</a>
-              <a class="dropdown-item" href="javascript:void(0);">Highest</a>
-            </div>
-          </div>
-          <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
             <label class="btn btn-icon btn-outline-primary view-btn grid-view-btn">
               <input type="radio" name="radio_options" id="radio_option1" checked />
               <i data-feather="grid" class="font-medium-3"></i>
@@ -165,15 +124,7 @@
     </div>
     <div class="card-body">
       <div class="item-wrapper">
-        <div class="item-rating">
-          <ul class="unstyled-list list-inline">
-            <li class="ratings-list-item"><i data-feather="star" class="filled-star"></i></li>
-            <li class="ratings-list-item"><i data-feather="star" class="filled-star"></i></li>
-            <li class="ratings-list-item"><i data-feather="star" class="filled-star"></i></li>
-            <li class="ratings-list-item"><i data-feather="star" class="filled-star"></i></li>
-            <li class="ratings-list-item"><i data-feather="star" class="unfilled-star"></i></li>
-          </ul>
-        </div>
+        
         <div>
           <div class="item-cost">
           
@@ -196,10 +147,7 @@
           <p class="card-text shipping"><span class="badge badge-pill badge-light-success">Free Shipping</span></p>
         </div>
       </div>
-      <a href="javascript:void(0)" class="btn btn-light btn-wishlist">
-        <i data-feather="heart"></i>
-        <span>Wishlist</span>
-      </a>
+     
       <a href="javascript:void(0)" class="btn btn-primary btn-cart">
         <i data-feather="shopping-cart"></i>
         <span class="add-to-cart">Add to cart</span>
@@ -212,167 +160,7 @@
 </section>
 
 <!-- E-commerce Products Ends -->
-
-<!-- E-commerce Pagination Starts -->
-   <!-- BEGIN: Customizer-->
-    <div class="customizer d-none d-md-block"><a class="customizer-toggle d-flex align-items-center justify-content-center" href="javascript:void(0);"><i class="spinner" data-feather="settings"></i></a><div class="customizer-content">
-  <!-- Customizer header -->
-  <div class="customizer-header px-2 pt-1 pb-0 position-relative">
-    <h4 class="mb-0">Theme Customizer</h4>
-    <p class="m-0">Customize & Preview in Real Time</p>
-
-    <a class="customizer-close" href="javascript:void(0);"><i data-feather="x"></i></a>
-  </div>
-
-  <hr />
-
-  <!-- Styling & Text Direction -->
-  <div class="customizer-styling-direction px-2">
-    <p class="font-weight-bold">Skin</p>
-    <div class="d-flex">
-      <div class="custom-control custom-radio mr-1">
-        <input
-          type="radio"
-          id="skinlight"
-          name="skinradio"
-          class="custom-control-input layout-name"
-          checked
-          data-layout=""
-        />
-        <label class="custom-control-label" for="skinlight">Light</label>
-      </div>
-      <div class="custom-control custom-radio mr-1">
-        <input
-          type="radio"
-          id="skinbordered"
-          name="skinradio"
-          class="custom-control-input layout-name"
-          data-layout="bordered-layout"
-        />
-        <label class="custom-control-label" for="skinbordered">Bordered</label>
-      </div>
-      <div class="custom-control custom-radio mr-1">
-        <input
-          type="radio"
-          id="skindark"
-          name="skinradio"
-          class="custom-control-input layout-name"
-          data-layout="dark-layout"
-        />
-        <label class="custom-control-label" for="skindark">Dark</label>
-      </div>
-      <div class="custom-control custom-radio">
-        <input
-          type="radio"
-          id="skinsemidark"
-          name="skinradio"
-          class="custom-control-input layout-name"
-          data-layout="semi-dark-layout"
-        />
-        <label class="custom-control-label" for="skinsemidark">Semi Dark</label>
-      </div>
-    </div>
-  </div>
-
-  <hr />
-
-  <!-- Menu -->
-  <div class="customizer-menu px-2">
-    <div id="customizer-menu-collapsible" class="d-flex">
-      <p class="font-weight-bold mr-auto m-0">Menu Collapsed</p>
-      <div class="custom-control custom-control-primary custom-switch">
-        <input type="checkbox" class="custom-control-input" id="collapse-sidebar-switch" />
-        <label class="custom-control-label" for="collapse-sidebar-switch"></label>
-      </div>
-    </div>
-  </div>
-  <hr />
-
-  <!-- Layout Width -->
-  <div class="customizer-footer px-2">
-    <p class="font-weight-bold">Layout Width</p>
-    <div class="d-flex">
-      <div class="custom-control custom-radio mr-1">
-        <input type="radio" id="layout-width-full" name="layoutWidth" class="custom-control-input" checked />
-        <label class="custom-control-label" for="layout-width-full">Full Width</label>
-      </div>
-      <div class="custom-control custom-radio mr-1">
-        <input type="radio" id="layout-width-boxed" name="layoutWidth" class="custom-control-input" />
-        <label class="custom-control-label" for="layout-width-boxed">Boxed</label>
-      </div>
-    </div>
-  </div>
-  <hr />
-
-  <!-- Navbar -->
-  <div class="customizer-navbar px-2">
-    <div id="customizer-navbar-colors">
-      <p class="font-weight-bold">Navbar Color</p>
-      <ul class="list-inline unstyled-list">
-        <li class="color-box bg-white border selected" data-navbar-default=""></li>
-        <li class="color-box bg-primary" data-navbar-color="bg-primary"></li>
-        <li class="color-box bg-secondary" data-navbar-color="bg-secondary"></li>
-        <li class="color-box bg-success" data-navbar-color="bg-success"></li>
-        <li class="color-box bg-danger" data-navbar-color="bg-danger"></li>
-        <li class="color-box bg-info" data-navbar-color="bg-info"></li>
-        <li class="color-box bg-warning" data-navbar-color="bg-warning"></li>
-        <li class="color-box bg-dark" data-navbar-color="bg-dark"></li>
-      </ul>
-    </div>
-
-    <p class="navbar-type-text font-weight-bold">Navbar Type</p>
-    <div class="d-flex">
-      <div class="custom-control custom-radio mr-1">
-        <input type="radio" id="nav-type-floating" name="navType" class="custom-control-input" checked />
-        <label class="custom-control-label" for="nav-type-floating">Floating</label>
-      </div>
-      <div class="custom-control custom-radio mr-1">
-        <input type="radio" id="nav-type-sticky" name="navType" class="custom-control-input" />
-        <label class="custom-control-label" for="nav-type-sticky">Sticky</label>
-      </div>
-      <div class="custom-control custom-radio mr-1">
-        <input type="radio" id="nav-type-static" name="navType" class="custom-control-input" />
-        <label class="custom-control-label" for="nav-type-static">Static</label>
-      </div>
-      <div class="custom-control custom-radio">
-        <input type="radio" id="nav-type-hidden" name="navType" class="custom-control-input" />
-        <label class="custom-control-label" for="nav-type-hidden">Hidden</label>
-      </div>
-    </div>
-  </div>
-  <hr />
-
-  
-    <div class="sidenav-overlay"></div>
-    <div class="drag-target"></div>
-
-    <!-- BEGIN: Footer-->
-    <footer class="footer footer-static footer-light">
-      <p class="clearfix mb-0"><span class="float-md-left d-block d-md-inline-block mt-25">COPYRIGHT  &copy; 2021<a class="ml-25" href="https://1.envato.market/pixinvent_portfolio" target="_blank">Pixinvent</a><span class="d-none d-sm-inline-block">, All rights Reserved</span></span><span class="float-md-right d-none d-md-block">Hand-crafted & Made with<i data-feather="heart"></i></span></p>
-    </footer>
-    <button class="btn btn-primary btn-icon scroll-top" type="button"><i data-feather="arrow-up"></i></button>
-    <!-- END: Footer-->
-
-
-    <!-- BEGIN: Vendor JS-->
-    <script src="../../../app-assets/vendors/js/vendors.min.js"></script>
-    <!-- BEGIN Vendor JS-->
-
-    <!-- BEGIN: Page Vendor JS-->
-    <script src="../../../app-assets/vendors/js/extensions/wNumb.min.js"></script>
-    <script src="../../../app-assets/vendors/js/extensions/nouislider.min.js"></script>
-    <script src="../../../app-assets/vendors/js/extensions/toastr.min.js"></script>
-    <!-- END: Page Vendor JS-->
-
-    <!-- BEGIN: Theme JS-->
-    <script src="../../../app-assets/js/core/app-menu.min.js"></script>
-    <script src="../../../app-assets/js/core/app.min.js"></script>
-    <script src="../../../app-assets/js/scripts/customizer.min.js"></script>
-    <!-- END: Theme JS-->
-
-    <!-- BEGIN: Page JS-->
-    <script src="../../../app-assets/js/scripts/pages/app-ecommerce.min.js"></script>
-    <!-- END: Page JS-->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
     <script>
       $(window).on('load',  function(){
@@ -381,26 +169,19 @@
         }
       })
     </script>
+    
     <script>
     
      function getProduct(product_id)
     {
-      $.get('/deatils/'+product_id,function(aproduct){
+      $.get('/deatils/'+product_id,function(aproduct)
+      {
       alert(product_id);
-      });
-      $.ajax({
-            url:"{{url('deatils/{product_id}')}}",
-            dataType: 'json',
-            type:"post",
-            
-            },
-            success:function(response){
-                alert("Working Fine");
-               
-            }
+
+    
         });
 
-    });
+    }
     
     </script>
   </body>
