@@ -108,4 +108,12 @@ class CustomerController extends Controller
         $user->update($input);
         return redirect('customer-profile')->with('success', 'Customer Profile updated successfully');
     }
+
+    public function customer_reg(Request $request)
+    {
+        $input = $request->all();
+        $input['password'] = Hash::make($request->password);
+        $customers = customers::create($input);
+        return redirect('/')->with('success', 'Your Registred Successfully Login Here');
+    }
 }
