@@ -4,14 +4,25 @@ namespace App\Http\Controllers;
 
 use Auth;
 use App\Aproducts;
+use App\Categories;
+use App\Units;
+use App\Productvariation;
 use Illuminate\Http\Request;
 
 class ProductsController extends Controller
 {
     public function index()
     {
-        $products = Aproducts::where(['deleted' => 0])->get();
-        return view('product', compact('products'));
+        // $products = Aproducts::where(['deleted' => 0])->get();
+        $products = Aproducts::select('aproducts.*', 'categories.cat_name', 'units.unit_name', 'productvariations.variation_name')
+            ->leftjoin('categories', 'categories.cat_id', '=', 'aproducts.product_id')
+            ->leftjoin('units', 'units.unit_id', '=', 'aproducts.unit_id')
+            ->leftjoin('productvariations', 'productvariations.variation_id', '=', 'aproducts.variation_id')
+            ->where(['aproducts.deleted' => 0])->get();
+        $categories = Categories::where(['deleted' => 0])->get();
+        $units = Units::where(['deleted' => 0])->get();
+        $product_variation = Productvariation::where(['deleted' => 0])->get();
+        return view('product', compact('products', 'categories', 'units', 'product_variation'));
     }
     public function store(Request $req)
     {

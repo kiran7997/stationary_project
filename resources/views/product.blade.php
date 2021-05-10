@@ -106,9 +106,9 @@
 										@foreach($products as $product)
 										<tr id="sid{{$product->product_id}}">
 											<td>{{$product->product_name}}</td>
-											<td>{{$product->cat_id}}</td>
-											<td>{{$product->unit_id}}</td>
-											<td>{{$product->variation_id}}</td>
+											<td>{{$product->cat_name}}</td>
+											<td>{{$product->unit_name}}</td>
+											<td>{{$product->variation_name}}</td>
 											<td>{{$product->description}}</td>
 											<td>{{$product->base_price}}</td>
 											<td>{{$product->code}}</td>
@@ -163,18 +163,37 @@
 
 						<label for="cat_id">Catagory </label>
 						<div class="form-group">
-							<input type="text" name="cat_id" id="cat_id" class="form-control">
+							<select class="form-control" name="cat_id" id="cat_id">
+								<option value="">Select Catagory</option>
+								@foreach($categories as $categorie)
+								<option value="{{$categorie->cat_id}}">{{$categorie->cat_name}}
+								</option>
+								@endforeach
+							</select>
 						</div>
 
 						<label for="unit_id">Unit </label>
 
 						<div class="form-group">
-							<input type="text" name="unit_id" id="unit_id" class="form-control">
+							<select class="form-control" name="unit_id" id="unit_id">
+								<option value="">Select Unit</option>
+								@foreach($units as $unit)
+								<option value="{{$unit->unit_id}}">{{$unit->unit_name}}
+								</option>
+								@endforeach
+							</select>
 						</div>
 
 						<label for="variation_id">Variation </label>
 						<div class="form-group">
-							<input type="text" name="variation_id" id="variation_id" class="form-control">
+
+							<select class="form-control" name="variation_id" id="variation_id">
+								<option value="">Select Variation</option>
+								@foreach($product_variation as $product_var)
+								<option value="{{$product_var->variation_id}}">{{$product_var->variation_name}}
+								</option>
+								@endforeach
+							</select>
 						</div>
 
 						<label for="description">Product Image </label>
@@ -263,18 +282,36 @@
 
 						<label for="cat_id">Catagory </label>
 						<div class="form-group">
-							<input type="text" name="cat_id" id="cat_id2" class="form-control">
+							<select class="form-control" name="cat_id" id="cat_id2">
+								<option value="">Select Catagory</option>
+								@foreach($categories as $categorie)
+								<option value="{{$categorie->cat_id}}">{{$categorie->cat_name}}
+								</option>
+								@endforeach
+							</select>
 						</div>
 
 						<label for="unit_id">Unit</label>
 
 						<div class="form-group">
-							<input type="text" name="unit_id" id="unit_id2" class="form-control">
+							<select class="form-control" name="unit_id" id="unit_id2">
+								<option value="">Select Unit</option>
+								@foreach($units as $unit)
+								<option value="{{$unit->unit_id}}">{{$unit->unit_name}}
+								</option>
+								@endforeach
+							</select>
 						</div>
 
 						<label for="variation_id">Variation</label>
 						<div class="form-group">
-							<input type="text" name="variation_id" id="variation_id2" class="form-control">
+							<select class="form-control" name="variation_id" id="variation_id2">
+								<option value="">Select Variation</option>
+								@foreach($product_variation as $product_var)
+								<option value="{{$product_var->variation_id}}">{{$product_var->variation_name}}
+								</option>
+								@endforeach
+							</select>
 						</div>
 
 						<label for="description">Description </label>
@@ -558,9 +595,12 @@
         $.get('/editp/'+product_id,function(product){
           $("#product_id").val(product.product_id);
           $("#product_name2").val(product.product_name);
-          $("#cat_id2").val(product.cat_id);
-          $("#unit_id2").val(product.unit_id);
-          $("#variation_id2").val(product.variation_id);
+        //   $("#cat_id2").val(product.cat_id);
+		  $('#cat_id2 option[value='+product.cat_id+']').attr("selected", "selected");
+		//   $("#unit_id2").val(product.unit_id);
+		  $('#unit_id2 option[value='+product.unit_id+']').attr("selected", "selected");
+		//   $("#variation_id2").val(product.variation_id);
+		  $('#variation_id2 option[value='+product.variation_id+']').attr("selected", "selected");
           var pro_image = JSON.parse(product.image_url);
         //   var html="<table class='table' border='1'><tr><th>Image</th><th>#</th></tr>";
         //   $.each(pro_image, function(key,val) {             
@@ -659,10 +699,10 @@
     }
 }
 <<<<<<< HEAD
-    </script>
-    <script src="jss/jquery.min.js"></script>
-    <script src="jss/jquery.validate.min.js"></script>
-=======
+	</script>
+	<script src="jss/jquery.min.js"></script>
+	<script src="jss/jquery.validate.min.js"></script>
+	=======
 	</script>
 	<script src="jss/jquery.min.js"></script>
 	<script src="jss/jquery.validate.min.js"></script>
