@@ -31,8 +31,8 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header border-bottom">
-                                <h4 class="card-title">Department</h4>
-                                <a class="btn btn-outline-primary pull-right" href="{{ route('roles.create') }}">
+                                <h4 class="card-title"></h4>
+                                <a class="btn btn-outline-primary float-right" href="{{ route('roles.create') }}">
                                     Create Department</a>
                             </div>
                             <div style="margin:20px;">
@@ -89,9 +89,6 @@
     </div>
 </div>
 
-
-
-@endsection
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
@@ -110,3 +107,4 @@
 
 
 </script>
+@endsection
