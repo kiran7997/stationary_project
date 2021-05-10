@@ -1,53 +1,93 @@
 @extends('layouts.app')
 @section('title', 'Categories')
 @section('content')
-    <div class="app-content content ">
-      	<div class="content-wrapper">
-        	<div class="content-body"><!-- Basic Tables start -->
-        		<button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#AddCategory">
-        			Add New Categories
-              	</button>
-				
-				<div class="row" id="basic-table">
-  					<div class="col-12">
-    					<div class="card">
-      						<div class="table-responsive">
-        						<table class="table">
-        							<thead>
-        								<tr>
+
+<!-- Responsive Datatable -->
+<!-- BEGIN: Content-->
+<div class="app-content content ">
+    <div class="content-overlay"></div>
+    <div class="header-navbar-shadow"></div>
+    <div class="content-wrapper">
+        <div class="content-header row">
+            <div class="content-header-left col-md-9 col-12 mb-2">
+                <div class="row breadcrumbs-top">
+                    <div class="col-12">
+                        <h2 class="content-header-title float-left mb-0">Category</h2>
+                        <div class="breadcrumb-wrapper">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="{{ url('/home') }}">Home</a>
+                                </li>
+                                <li class="breadcrumb-item"><a href="{{ url('/catagories') }}">Category</a>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content-body">
+            <section id="responsive-datatable">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header border-bottom">
+                                <h4 class="card-title"></h4>
+                                <button type="button" class="btn btn-outline-primary float-right" data-toggle="modal" data-target="#AddCategory">
+                                    Add New Categories
+                                </button>
+                            </div>
+                            <div style="margin:20px;">
+                                @if ($message = Session::get('success'))
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <div class="alert-body">
+                                        <p>{{ $message }}</p>
+                                    </div>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                @endif
+                
+                                <table id="example" class="display nowrap stripe" style="width:100%;">
+                                    <thead>
+                                        <tr>
             								<th>Category ID</th>
                  							<th>Category Name</th>
 								    		<th>Category Description</th>
                                     		<th>Actions</th>
-                                		</tr>                                 
-                            		</thead>
-                            		<tbody>
-										@foreach($categories as $vendor)
-											<tr id="sid{{$vendor->id}}">
-												<td>{{$vendor->cat_id}}</td>
-												<td>{{$vendor->cat_name}}</td>
-												<td>{{$vendor->cat_description}}</td>
-												<td>
+                                		</tr>  
+                                    </thead>
+                                    <tbody>
+
+                                    @foreach($categories as $vendor)
+										<tr id="sid{{$vendor->id}}">
+										    <td>{{$vendor->cat_id}}</td>
+											<td>{{$vendor->cat_name}}</td>
+											<td>{{$vendor->cat_description}}</td>
+											<td>
 												<a href="javascript:void(0)" onclick="editCategory({{$vendor->cat_id}})" class="fa fa-secondary" style="font-size:24px"><i class="fa fa-pencil"></i></a> &nbsp;
 												<a href="javascript:void(0)"  onclick="deleteCategory({{$vendor->cat_id}})"  class="fa fa-trash" style="font-size:24px;color:red"></a>
-												</td>
-											</tr>
-										@endforeach
-                            		</tbody>
-                  
-        						</table>
-      						</div>
-    					</div>
-  					</div>
-				</div>
-   			</div>
-      	</div>
+											</td>
+										</tr>
+									@endforeach
+
+
+                                        
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
     </div>
+</div>
 
-  	<hr />
 
-	<!-- Modal -->
-	<div class="modal fade text-left" id="AddCategory" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true" >
+<!-- Modal -->
+<div class="modal fade text-left" id="AddCategory" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true" >
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -111,10 +151,22 @@
 
               
 <!-- Add Categories Modal -->
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+<script>
+    $(document).ready(function() {
+    // $('#example').DataTable();
+    $('#example').DataTable( {
+        // "scrollY": 200,
+        "scrollX": true
+    } );
 
-<script>  
+    $(".delete").on("click", function () {
+    return confirm('Are you sure you want to Delete?');
+});
+} );
 
 $("#CategoryForm").submit(function(e){
   e.preventDefault();
@@ -140,9 +192,7 @@ $("#CategoryForm").submit(function(e){
         }
     });
 });
-</script>
 
-<script>
     function editCategory(cat_id)
     {
         $.get('/categories/'+cat_id,function(categories){
@@ -180,8 +230,6 @@ $("#CategoryForm").submit(function(e){
 
     });
 
-</script>
-<script>
     function deleteCategory(id)
     {
         if(confirm("Do You Really want to delete this record?"))
@@ -203,6 +251,6 @@ $("#CategoryForm").submit(function(e){
             })
         }
     }
-</script> 
 
+</script>
 @endsection
