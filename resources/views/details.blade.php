@@ -84,20 +84,24 @@
           </div>
         </div>
         @foreach($product_data as $data)
-        <div class="content-body">
+ <div class="content-body">
         <!-- app e-commerce details start -->
 
 <section class="app-ecommerce-details">
+  
   <div class="card">
     <!-- Product Details starts -->
+    
     <div class="card-body">
+   
       <div class="row my-2">
+      
         <div class="col-12 col-md-5 d-flex align-items-center justify-content-center mb-2 mb-md-0">
           <div class="d-flex align-items-center justify-content-center">
             <img
             src="{{url('product_images/'.$data->image_url)}}" width='100' height="100"
               class="img-fluid product-img"
-              alt="product image"
+              alt="product image" 
             />
           </div>
         </div>
@@ -484,27 +488,7 @@
   </div>
   <hr />
 
-  <!-- Footer -->
-  <div class="customizer-footer px-2">
-    <p class="font-weight-bold">Footer Type</p>
-    <div class="d-flex">
-      <div class="custom-control custom-radio mr-1">
-        <input type="radio" id="footer-type-sticky" name="footerType" class="custom-control-input" />
-        <label class="custom-control-label" for="footer-type-sticky">Sticky</label>
-      </div>
-      <div class="custom-control custom-radio mr-1">
-        <input type="radio" id="footer-type-static" name="footerType" class="custom-control-input" checked />
-        <label class="custom-control-label" for="footer-type-static">Static</label>
-      </div>
-      <div class="custom-control custom-radio mr-1">
-        <input type="radio" id="footer-type-hidden" name="footerType" class="custom-control-input" />
-        <label class="custom-control-label" for="footer-type-hidden">Hidden</label>
-      </div>
-    </div>
-  </div>
-</div>
-
-    </div>
+ 
     <!-- End: Customizer-->
 
     <!-- Buynow Button-->

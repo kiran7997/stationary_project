@@ -69,8 +69,10 @@ Route::delete('/delep/{product_id}','ProductsController@destroy');
 
 //Add Shop
 Route::get('/shop','ShopController@index');
-Route::get('/details','ShopController@details');
+//Route::get('/getid/{product_id}','ShopController@getProductId');
+Route::post('/details/{product_id}','ShopController@details');
 
+//Add Customer
 Route::get('/customer','CustomerController@index');
 Route::post('/addcust','CustomerController@store');
 Route::get('/editc/{customer_id}','CustomerController@edit');
@@ -99,7 +101,5 @@ Route::delete('/units/{unit_id}','UnitsController@deleteunits');
 
 
 
-//Add Shop
-Route::get('/shop','ShopController@index');
-Route::get('/details','ShopController@details');
+
 Route::get('employee-dashboard', 'UserController@dashboard');

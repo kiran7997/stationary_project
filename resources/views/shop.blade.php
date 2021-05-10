@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Product')
+@section('title', 'Shop')
 @section('content')
     <!-- BEGIN: Vendor CSS-->
     <link rel="stylesheet" type="text/css" href="../../../app-assets/vendors/css/vendors.min.css">
@@ -147,11 +147,13 @@
 
 <section id="ecommerce-products" class="grid-view">
 <!-- 1st product -->
+
 @foreach($product_data as $data)
 
   <div class="card ecommerce-card">
     <div class="item-img text-center">
-      <a href="{{url('details')}}">
+   
+      <a href= "javascript:void(0);" onclick="getProduct({{$data->product_id}})">
      
 
       <img
@@ -159,6 +161,7 @@
           src="{{url('product_images/'.$data->image_url)}}" width='100' height="100"
           alt="img-placeholder"
       /></a>
+      
     </div>
     <div class="card-body">
       <div class="item-wrapper">
@@ -377,6 +380,28 @@
           feather.replace({ width: 14, height: 14 });
         }
       })
+    </script>
+    <script>
+    
+     function getProduct(product_id)
+    {
+      $.get('/deatils/'+product_id,function(aproduct){
+      alert(product_id);
+      });
+      $.ajax({
+            url:"{{url('deatils/{product_id}')}}",
+            dataType: 'json',
+            type:"post",
+            
+            },
+            success:function(response){
+                alert("Working Fine");
+               
+            }
+        });
+
+    });
+    
     </script>
   </body>
   <!-- END: Body-->
