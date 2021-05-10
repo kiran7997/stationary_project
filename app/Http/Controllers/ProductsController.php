@@ -9,7 +9,7 @@ class ProductsController extends Controller
 {
     public function index()
     {
-        $products = Aproducts::where(['deleted' => 0])->paginate(5);
+        $products = Aproducts::where(['deleted' => 0])->get();
         return view('product', compact('products'));
     }
     public function store(Request $req)
