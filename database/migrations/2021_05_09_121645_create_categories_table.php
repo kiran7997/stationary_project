@@ -18,7 +18,6 @@ class CreateCategoriesTable extends Migration
             $table->id('cat_id');
             $table->string('cat_name')->unique()->nullable();
             $table->string('cat_description')->nullable();
-            $table->string('cat_image')->nullable();
             $table->boolean('deleted')->default(0);
             $table->integer('created_by')->nullable();
             $table->integer('updated_by')->nullable();

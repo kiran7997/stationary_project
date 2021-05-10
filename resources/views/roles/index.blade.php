@@ -15,11 +15,9 @@
                         <h2 class="content-header-title float-left mb-0">Department</h2>
                         <div class="breadcrumb-wrapper">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.html">Home</a>
+                                <li class="breadcrumb-item"><a href="{{ url('/home') }}">Home</a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="#">Department</a>
-                                </li>
-                                <li class="breadcrumb-item active">Department
+                                <li class="breadcrumb-item"><a href="{{ url('/roles') }}">Department</a>
                                 </li>
                             </ol>
                         </div>
