@@ -15,17 +15,6 @@ class ShopController extends Controller
     }
     public function details()
     {
-<<<<<<< HEAD
-        
-        return view ('details', ['product_data' => $product_data]);
-       
-    }
-
- 
-
-    
-}
-=======
         // $product_data= Aproducts::select('product_name', 'description','base_price','image_url')
         // ->where(['deleted'=>0])->get();
         return view ('details/{{(product_id)}}');
@@ -42,4 +31,3 @@ class ShopController extends Controller
 
     
 }
->>>>>>> 4b74a80dff4a2e52e537833a5946cafa3c609f94

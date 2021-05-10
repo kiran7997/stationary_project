@@ -1,6 +1,102 @@
 @extends('layouts.app')
 @section('title', 'Product Variation')
 @section('content')
+
+
+
+@section('content')
+<!-- Responsive Datatable -->
+<!-- BEGIN: Content-->
+<div class="app-content content ">
+    <div class="content-overlay"></div>
+    <div class="header-navbar-shadow"></div>
+    <div class="content-wrapper">
+        <div class="content-header row">
+            <div class="content-header-left col-md-9 col-12 mb-2">
+                <div class="row breadcrumbs-top">
+                    <div class="col-12">
+                        <h2 class="content-header-title float-left mb-0">Product Variation</h2>
+                        <div class="breadcrumb-wrapper">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="{{ url('/home') }}">Home</a>
+                                </li>
+                                <li class="breadcrumb-item"><a href="{{ url('/roles') }}">Product Variation</a>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content-body">
+            <section id="responsive-datatable">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header border-bottom">
+                                <h4 class="card-title"></h4>
+                                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#AddProductv">
+                                    Add New Product Variation
+                                </button>
+                            </div>
+                            <div style="margin:20px;">
+                                <table id="example" class="display nowrap stripe" style="width:100%;">
+                                    <thead>
+          								<tr>
+            								<th>Product Variation ID</th>
+            								<th>Product Variation Name</th>
+											<th>Product Variation Abbrevation</th>
+            								<th>Product Add on Price</th>
+            								<th>Actions</th>
+          								</tr>                                
+          							</thead>
+            						<tbody>
+										@foreach($products as $vendor)
+											<tr id="sid{{$vendor->id}}">
+												<td>{{$vendor->variation_id	}}</td>
+												<td>{{$vendor->variation_name}}</td>
+												<td>{{$vendor->variation_abbrevation}}</td>
+												<td>{{$vendor->add_on_price}}</td>
+												<td>
+												<a href="javascript:void(0)" onclick="editProductv({{$vendor->variation_id}})"class="fa fa-secondary" style="font-size:24px"><i class="fa fa-pencil"></i></a> &nbsp;
+												<a href="javascript:void(0)"  onclick="deleteProductv({{$vendor->variation_id}})"  class="fa fa-trash" style="font-size:24px;color:red"></a>
+												</td>
+											</tr>
+										@endforeach
+									</tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+<script>
+    $(document).ready(function() {
+    // $('#example').DataTable();
+    $('#example').DataTable( {
+        // "scrollY": 200,
+        "scrollX": true
+    } );
+
+    $(".delete").on("click", function () {
+    return confirm('Are you sure you want to Delete?');
+});
+} );
+
+
+</script>
+
+
+
+
   	<div class="app-content content ">
       	<div class="content-overlay"></div>
       	<div class="header-navbar-shadow"></div>
