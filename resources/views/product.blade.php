@@ -6,40 +6,41 @@
 <!-- Responsive Datatable -->
 <!-- BEGIN: Content-->
 <div class="app-content content ">
-    <div class="content-overlay"></div>
-    <div class="header-navbar-shadow"></div>
-    <div class="content-wrapper">
-        <div class="content-header row">
-            <div class="content-header-left col-md-9 col-12 mb-2">
-                <div class="row breadcrumbs-top">
-                    <div class="col-12">
-                        <h2 class="content-header-title float-left mb-0">Product</h2>
-                        <div class="breadcrumb-wrapper">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="{{ url('/home') }}">Home</a>
-                                </li>
-                                <li class="breadcrumb-item"><a href="{{ url('/product') }}">Product</a>
-                                </li>
-                            </ol>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="content-body">
-            <section id="responsive-datatable">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-header border-bottom">
-                                <h4 class="card-title"></h4>
-                                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#productModal">
-					                Add New Product
-				                </button>
-                            </div>
-                            <div style="margin:20px;">
-                                <table id="example" class="display nowrap stripe" style="width:100%;">
-								<thead>
+	<div class="content-overlay"></div>
+	<div class="header-navbar-shadow"></div>
+	<div class="content-wrapper">
+		<div class="content-header row">
+			<div class="content-header-left col-md-9 col-12 mb-2">
+				<div class="row breadcrumbs-top">
+					<div class="col-12">
+						<h2 class="content-header-title float-left mb-0">Product</h2>
+						<div class="breadcrumb-wrapper">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item"><a href="{{ url('/home') }}">Home</a>
+								</li>
+								<li class="breadcrumb-item"><a href="{{ url('/product') }}">Product</a>
+								</li>
+							</ol>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="content-body">
+			<section id="responsive-datatable">
+				<div class="row">
+					<div class="col-12">
+						<div class="card">
+							<div class="card-header border-bottom">
+								<h4 class="card-title"></h4>
+								<button type="button" class="btn btn-outline-primary" data-toggle="modal"
+									data-target="#productModal">
+									Add New Product
+								</button>
+							</div>
+							<div style="margin:20px;">
+								<table id="example" class="display nowrap stripe" style="width:100%;">
+									<thead>
 										<tr>
 											<th>Product Name</th>
 											<th>Variations</th>
@@ -48,9 +49,9 @@
 											<th>Code</th>
 											<th>Taxable</th>
 											<th>Actions</th>
-											</tr>
+										</tr>
 									</thead>
-									
+
 									<tbody>
 
 										@foreach($products as $product)
@@ -72,215 +73,257 @@
 										</tr>
 										@endforeach
 									</tbody>
-                                </table>
+								</table>
 
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-    </div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
 </div>
 
 <!-- Add Product Model -->
 <div class="modal fade text-left" id="productModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33"
-		aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="modal-title" id="myModalLabel33">Add Product</h4>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					</button>
+	aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title" id="myModalLabel33">Add Product</h4>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				</button>
+			</div>
+			<form id="productForm" name="productForm" enctype="multipart/form-data">
+				@csrf
+				<div class="modal-body">
+
+
+					<label for="product_name">Product Name </label>
+					<div class="form-group">
+						<input type="text" name="product_name" id="product_name" class="form-control">
+					</div>
+
+					<label for="cat_id">Catagory </label>
+					<div class="form-group">
+						<select class="form-control" name="cat_id" id="cat_id">
+							<option value="">Select Catagory</option>
+							@foreach($categories as $categorie)
+							<option value="{{$categorie->cat_id}}">{{$categorie->cat_name}}
+							</option>
+							@endforeach
+						</select>
+					</div>
+
+					<label for="unit_id">Unit </label>
+
+					<div class="form-group">
+						<select class="form-control" name="unit_id" id="unit_id">
+							<option value="">Select Unit</option>
+							@foreach($units as $unit)
+							<option value="{{$unit->unit_id}}">{{$unit->unit_name}}
+							</option>
+							@endforeach
+						</select>
+					</div>
+
+					<label for="variation_id">Variation </label>
+					<div class="form-group">
+
+						<select class="form-control" name="variation_id" id="variation_id">
+							<option value="">Select Variation</option>
+							@foreach($product_variation as $product_var)
+							<option value="{{$product_var->variation_id}}">{{$product_var->variation_name}}
+							</option>
+							@endforeach
+						</select>
+					</div>
+
+					<label for="description">Product Image </label>
+					<div class="form-group">
+
+						<input type='file' class='form-control' name='image_url[]' id='image_url'
+							accept=".jpg,.jpeg,.png" multiple />
+
+					</div>
+					<div class="alert alert-danger alert-dismissible fade show" role="alert" id='err_img_url'
+						style='display:none'>
+						<div class="alert-body">
+							<strong>Please choose files less or equal to Eight!</strong>
+						</div>
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+
+					</div>
+
+
+					<label for="description">Description </label>
+
+					<div class="form-group">
+						<input type="text" name="description" id="description" class="form-control">
+					</div>
+
+					<label for="base_price">Base_Price </label>
+
+					<div class="form-group">
+						<input type="text" name="base_price" id="base_price" class="form-control">
+					</div>
+
+
+
+
+					<label for="code">Code </label>
+					<div class="form-group">
+						<input type="text" name="code" id="code" class="form-control">
+					</div>
+
+
+
+					<label for="taxable">Taxable Type</label> &nbsp;&nbsp;
+					<select name="taxable" id="taxable" class="form-control" required>
+						<option>Select Option</option>
+						<option value="0">Yes</option>
+						<option value="1">No</option>
+
+					</select>
+
+
+
 				</div>
-				<form id="productForm" name="productForm" enctype="multipart/form-data">
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-primary">Submit</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade text-left" id="productEditModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33"
+	aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title" id="myModalLabel33">Update Products</h4>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<form id="productEditForm" name="productEditForm" enctype="multipart/form-data">
+
+				<div class="modal-body">
+
 					@csrf
-					<div class="modal-body">
+					<input type="hidden" name="product_id" id="product_id">
 
+					<label for="product_name">Product Name
+					</label>
+					<div class="form-group">
+						<input type="text" name="product_name" id="product_name2" class="form-control">
+					</div>
 
-						<label for="product_name">Product Name </label>
-						<div class="form-group">
-							<input type="text" name="product_name" id="product_name" class="form-control">
-						</div>
+					<label for="cat_id">Catagory </label>
+					<div class="form-group">
+						<select class="form-control" name="cat_id" id="cat_id2">
+							<option value="">Select Catagory</option>
+							@foreach($categories as $categorie)
+							<option value="{{$categorie->cat_id}}">{{$categorie->cat_name}}
+							</option>
+							@endforeach
+						</select>
+					</div>
 
-						<label for="cat_id">Catagory </label>
-						<div class="form-group">
-							<select class="form-control" name="cat_id" id="cat_id">
-								<option value="">Select Catagory</option>
-								@foreach($categories as $categorie)
-								<option value="{{$categorie->cat_id}}">{{$categorie->cat_name}}
-								</option>
-								@endforeach
-							</select>
-						</div>
+					<label for="unit_id">Unit </label>
 
-						<label for="unit_id">Unit </label>
+					<div class="form-group">
+						<select class="form-control" name="unit_id" id="unit_id2">
+							<option value="">Select Unit</option>
+							@foreach($units as $unit)
+							<option value="{{$unit->unit_id}}">{{$unit->unit_name}}
+							</option>
+							@endforeach
+						</select>
+					</div>
 
-						<div class="form-group">
-							<select class="form-control" name="unit_id" id="unit_id">
-								<option value="">Select Unit</option>
-								@foreach($units as $unit)
-								<option value="{{$unit->unit_id}}">{{$unit->unit_name}}
-								</option>
-								@endforeach
-							</select>
-						</div>
+					<label for="variation_id">Variation </label>
+					<div class="form-group">
+						<select class="form-control" name="variation_id" id="variation_id2">
+							<option value="">Select Variation</option>
+							@foreach($product_variation as $product_var)
+							<option value="{{$product_var->variation_id}}">{{$product_var->variation_name}}
+							</option>
+							@endforeach
+						</select>
+					</div>
+					<br>
 
-						<label for="variation_id">Variation </label>
-						<div class="form-group">
+					<label for="description">Description </label>
 
-							<select class="form-control" name="variation_id" id="variation_id">
-								<option value="">Select Variation</option>
-								@foreach($product_variation as $product_var)
-								<option value="{{$product_var->variation_id}}">{{$product_var->variation_name}}
-								</option>
-								@endforeach
-							</select>
-						</div>
+					<div class="form-group">
+						<input type="text" name="description" id="description2" class="form-control">
+					</div>
 
-						<label for="description">Product Image </label>
-						<div class="form-group">
+					<label for="base_price">Base Price </label>
 
-							<input type='file' class='form-control' name='image_url[]' id='image_url'
-								accept=".jpg,.jpeg,.png" multiple />
-
-						</div>
-						<div class="alert alert-danger alert-dismissible fade show" role="alert" id='err_img_url'
-							style='display:none'>
-							<div class="alert-body">
-								<strong>Please choose files less or equal to Eight!</strong>
-							</div>
-							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-
-						</div>
-
-
-						<label for="description">Description </label>
-
-						<div class="form-group">
-							<input type="text" name="description" id="description" class="form-control">
-						</div>
-
-						<label for="base_price">Base_Price </label>
-
-						<div class="form-group">
-							<input type="text" name="base_price" id="base_price" class="form-control">
-						</div>
+					<div class="form-group">
+						<input type="text" name="base_price" id="base_price2" class="form-control">
+					</div>
 
 
 
+					<label for="code">Code </label>
+					<div class="form-group">
+						<input type="text" name="code" id="code2" class="form-control">
+					</div>
 
-						<label for="code">Code </label>
-						<div class="form-group">
-							<input type="text" name="code" id="code" class="form-control">
-						</div>
-
-
-
-						<label for="taxable">Taxable Type</label> &nbsp;&nbsp;
-						<select name="taxable" id="taxable" class="form-control" required>
+					<label for="taxable">taxable </label>
+					<div class="form-group">
+						<select name="taxable" id="taxable2" class="form-control">
 							<option>Select Option</option>
 							<option value="0">Yes</option>
 							<option value="1">No</option>
-
 						</select>
-
-
-
 					</div>
-					<div class="modal-footer">
-						<button type="submit" class="btn btn-primary">Submit</button>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
 
-	<!-- Add Product Model -->
-	<div class="modal fade text-left" id="productModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33"
-		aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="modal-title" id="myModalLabel33">Add Product</h4>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					</button>
-				</div>
-				<form id="productForm" name="productForm" enctype="multipart/form-data">
-					@csrf
-					<div class="modal-body">
-						<label for="product_name">Product_Name </label>
-						<div class="form-group">
-							<input type="text" name="product_name" id="product_name" class="form-control">
-						</div>
-
-						<label for="cat_id">Cat_Id </label>
-						<div class="form-group">
-							<input type="text" name="cat_id" id="cat_id" class="form-control">
-						</div>
-
-						<label for="unit_id">Unit_Id </label>
-						<div class="form-group">
-							<input type="text" name="unit_id" id="unit_id" class="form-control">
-						</div>
-
-						<label for="variation_id">Variation_Id </label>
-						<div class="form-group">
-							<input type="text" name="variation_id" id="variation_id" class="form-control">
-						</div>
-
+					<br>
+					<div class="form-group">
 						<label for="description">Product Image </label>
-						<div class="form-group">
-							<input type='file' class='form-control' name='image_url[]' id='image_url'
-									accept=".jpg,.jpeg,.png" multiple />
-						</div>
-						<div class="alert alert-danger alert-dismissible fade show" role="alert" id='err_img_url'
-								style='display:none'>
-							<div class="alert-body">
-								<strong>Please choose files less or equal to Eight!</strong>
-							</div>
-							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-
-
-						<label for="description">Description </label>
-						<div class="form-group">
-							<input type="text" name="description" id="description" class="form-control">
-						</div>
-
-						<label for="base_price">Base_Price </label>
-						<div class="form-group">
-							<input type="text" name="base_price" id="base_price" class="form-control">
-						</div>
-
-						<label for="code">Code </label>
-						<div class="form-group">
-							<input type="text" name="code" id="code" class="form-control">
-						</div>
-
-						<label for="taxable">Taxable </label>
-						<div class="form-group">
-							<input type="text" name="taxable" id="taxable" class="form-control">
-						</div>
+						<input type='file' class='form-control' accept=".jpg,.jpeg,.png" name='image_url[]'
+							id='image_url2' multiple>
+						{{-- <input type='hidden' class='form-control' name='old_image' id='old_image'> --}}
+						<span class="text-danger" id="image-input-error"></span>
 					</div>
-					<div class="modal-footer">
-						<button type="submit" class="btn btn-primary">Submit</button>
+
+					<div class="alert alert-danger alert-dismissible fade show" role="alert" id='err_img_up'
+						style='display:none'>
+						<div class="alert-body">
+							<strong>Please choose files less or equal to Eight!</strong>
+						</div>
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+
 					</div>
-				</form>
-			</div>
+					<div class="form-group" id='list_images'>
+					</div>
+
+
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-primary">Submit</button>
+				</div>
+			</form>
 		</div>
 	</div>
+</div>
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
 <script src="jss/jquery.validate.min.js"></script>
 <script>
-    $(document).ready(function() {
+	$(document).ready(function() {
     // $('#example').DataTable();
     $('#example').DataTable( {
         // "scrollY": 200,
@@ -311,35 +354,29 @@
             });
         });
 
-		function editproduct(product_id)
+	function editproduct(product_id)
     {   
+		$("#list_images").empty();
         $.get('/editp/'+product_id,function(product){
           $("#product_id").val(product.product_id);
           $("#product_name2").val(product.product_name);
-        //   $("#cat_id2").val(product.cat_id);
 		  $('#cat_id2 option[value='+product.cat_id+']').attr("selected", "selected");
-		//   $("#unit_id2").val(product.unit_id);
 		  $('#unit_id2 option[value='+product.unit_id+']').attr("selected", "selected");
-		//   $("#variation_id2").val(product.variation_id);
 		  $('#variation_id2 option[value='+product.variation_id+']').attr("selected", "selected");
+		  $('#taxable2 option[value='+product.taxable+']').attr("selected", "selected");
           var pro_image = JSON.parse(product.image_url);
-        //   var html="<table class='table' border='1'><tr><th>Image</th><th>#</th></tr>";
-        //   $.each(pro_image, function(key,val) {             
-        //     html+="<td><img src="+val+" height='50' width='50'><input type='hidden' value="+val+" name='old_image[]''></td><td><i class='fa fa-trash' onclick='delete_row()'></i></td></tr>";    
-        //    });  
-        // html+="</table>";
-        var html="<div>";
+          var html="<div>";
           $.each(pro_image, function(key,val) {  
-            html+="<span class='p-1 m-1 listimg' id='list_img_"+key+"' ><img src="+val+" height='80' width='80' class='mb-2' style='border:1px solid lightgray'><input type='hidden' value="+val+" name='old_image[]''><i class='fa fa-trash text-danger' style='font-size:20px!important' onclick='delete_row("+key+")'></i></span>";    
+            html+="<span class='p-1 m-1 listimg' id='list_img_"+key+"' ><img src="+val+" height='70' width='70' class='mb-2' style='border:1px solid lightgray'><input type='hidden' value="+val+" name='old_image[]''><i class='fa fa-trash text-danger' style='font-size:20px!important' onclick='delete_row("+key+")'></i></span>";    
            });  
-        html+="</div>";
-        $("#list_images").append(html);
-          $("#description2").val(product.description);
-          $("#base_price2").val(product.base_price);
-          $("#code2").val(product.code);
-          $("#taxable2").val(product.taxable);
-          $("#productEditModal").modal('toggle');
-        });
+			html+="</div>";
+			$("#list_images").append(html);
+			$("#description2").val(product.description);
+			$("#base_price2").val(product.base_price);
+			$("#code2").val(product.code);
+			$("#taxable2").val(product.taxable);
+			$("#productEditModal").modal('toggle');
+			});
     }
     
           function delete_row(key){
@@ -398,8 +435,8 @@
 
     });
 
-		function deleteproduct(product_id)
-{
+	function deleteproduct(product_id)
+	{
     if(confirm("Do you want to delete this record?"))
     {
         $.ajax({
