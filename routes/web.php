@@ -46,36 +46,6 @@ Route::get('customer-dashboard', 'CustomerController@dashboard');
 
 
 //Add Stocks //
-<<<<<<< HEAD
-Route::get('/stock','StockController@index');
-Route::post('/addstock','StockController@store');
-Route::get('/edit/{stock_id}','StockController@edit');
-Route::post('/editstock','StockController@update');
-Route::delete('/dele/{stock_id}','StockController@destroy');
-
-Route::get('/inven','InventoriesController@index');
-Route::post('/addinven','InventoriesController@store');
-Route::get('/editi/{inventory_id}','InventoriesController@edit');
-Route::post('/editinven','InventoriesController@update');
-Route::delete('/delei/{inventory_id}','InventoriesController@destroy');
-
-
-Route::get('/pro','ProductsController@index');
-Route::post('/addpro','ProductsController@store');
-Route::get('/editp/{product_id}','ProductsController@edit');
-Route::post('/editpro','ProductsController@update');
-Route::delete('/delep/{product_id}','ProductsController@destroy');
-
-
-Route::get('/cust','CustomerController@index');
-Route::post('/addcust','CustomerController@store');
-Route::get('/editc/{customer_id}','CustomerController@edit');
-Route::post('/editcust','CustomerController@update');
-Route::delete('/delec/{customer_id}','CustomerController@destroy');
-
-Route::get('/shop','ShopController@index');
-Route::get('/deatils/{product_id}','ShopController@getProductId');
-=======
 Route::get('/stock', 'StockController@index');
 Route::post('/addstock', 'StockController@store');
 Route::get('/edit/{stock_id}', 'StockController@edit');
@@ -129,7 +99,6 @@ Route::get('/units/{unit_id}', 'UnitsController@getUnitsById');
 Route::post('/units', 'UnitsController@updateUnits');
 Route::delete('/units/{unit_id}', 'UnitsController@deleteunits');
 
->>>>>>> 4b74a80dff4a2e52e537833a5946cafa3c609f94
 
 
 
