@@ -36,17 +36,17 @@
                             <div class="card-header border-bottom">
                                 <h4 class="card-title"></h4>
                                 <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#AddProductv">
-                                    Add New Product Variation
+                                    Add Product Variation
                                 </button>
                             </div>
                             <div style="margin:20px;">
                                 <table id="example" class="display nowrap stripe" style="width:100%;">
                                     <thead>
           								<tr>
-            								<th>Product Variation ID</th>
-            								<th>Product Variation Name</th>
-											<th>Product Variation Abbrevation</th>
-            								<th>Product Add on Price</th>
+            								<th>Variation ID</th>
+            								<th>Variation Name</th>
+											<th>Abbrevation</th>
+            								<th>Add on Price</th>
             								<th>Actions</th>
           								</tr>                                
           							</thead>
@@ -75,107 +75,6 @@
     </div>
 </div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
-<script>
-    $(document).ready(function() {
-    // $('#example').DataTable();
-    $('#example').DataTable( {
-        // "scrollY": 200,
-        "scrollX": true
-    } );
-
-    $(".delete").on("click", function () {
-    return confirm('Are you sure you want to Delete?');
-});
-} );
-
-
-</script>
-
-
-
-
-  	<div class="app-content content ">
-      	<div class="content-overlay"></div>
-      	<div class="header-navbar-shadow"></div>
-      	<div class="content-wrapper">
-        	<div class="content-body"><!-- Basic Tables start -->
-        		<button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#AddProductv">
-                	Add New Product Variation
-              	</button><br>
-				<div class="row" id="basic-table">
-  					<div class="col-12">
-    					<div class="card">
-      						<div class="table-responsive">
-        						<table class="table">
-        							<thead>
-          								<tr>
-            								<th>Product Variation ID</th>
-            								<th>Product Variation Name</th>
-											<th>Product Variation Abbrevation</th>
-            								<th>Product Add on Price</th>
-            								<th>Actions</th>
-          								</tr>                                
-          							</thead>
-            						<tbody>
-										@foreach($products as $vendor)
-											<tr id="sid{{$vendor->id}}">
-												<td>{{$vendor->variation_id	}}</td>
-												<td>{{$vendor->variation_name}}</td>
-												<td>{{$vendor->variation_abbrevation}}</td>
-												<td>{{$vendor->add_on_price}}</td>
-												<td>
-												<a href="javascript:void(0)" onclick="editProductv({{$vendor->variation_id}})"class="fa fa-secondary" style="font-size:24px"><i class="fa fa-pencil"></i></a> &nbsp;
-												<a href="javascript:void(0)"  onclick="deleteProductv({{$vendor->variation_id}})"  class="fa fa-trash" style="font-size:24px;color:red"></a>
-												</td>
-											</tr>
-										@endforeach
-									</tbody>
-        						</table>
-      						</div>
-    					</div>
-  					</div>
-				</div>
-   			</div>
-      	</div>
-    </div>
-  	<hr/>
-</div>
-   
-<div class="modal fade text-left" id="AddProductv" tabindex="-1"  role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true" >
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-            </div>
-            
-			<form id="ProductvForm" name="ProductvForm">
-                @csrf
-                <div class="modal-body">
-                    <div class="form-group">
-                    	<label for="location">Product variation Name</label>
-                    	<input type="text" class="form-control" id="variation_name" name="variation_name"/>
-                	</div>
-					<div class="form-group">
-						<label for="Transport">Product variation Abbrivation</label>
-						<input type="text" class="form-control" id="variation_abbrevation" name="variation_abbrevation">
-					</div>
-
-					<div class="form-group">
-						<label for="Transport">Product variation Ad on Price</label>
-						<input type="text" class="form-control" id="variation_add_on_price" name="variation_add_on_price">
-					</div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" >Submit</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-
 <!-- Add Categories Modal -->
 <div class="modal fade" id="AddProductv" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   	<div class="modal-dialog">
@@ -187,17 +86,17 @@
             	<form  id="ProductvForm" name="ProductvForm">
            			@csrf
 					<div class="form-group">
-						<label for="location">Product variation Name</label>
+						<label for="location">Variation Name</label>
 						<input type="text" class="form-control" id="variation_name" name="variation_name"/>
 					</div>
                        
 					<div class="form-group">
-						<label for="Transport">Product variation Abbrivation</label>
+						<label for="Transport">Abbrivation</label>
 						<input type="text" class="form-control" id="variation_abbrevation" name="variation_abbrevation">
 					</div>
 
 					<div class="form-group">
-						<label for="Transport">Product variation Ad on Price</label>
+						<label for="Transport">Add on Price</label>
 						<input type="text" class="form-control" id="variation_add_on_price" name="variation_add_on_price">
 					</div>
                 	<button type="submit" class="btn btn-primary">Submit</button>
@@ -219,12 +118,12 @@
                 <input type="hidden" id="variation_id" name="variation_id" >
             	<div class="modal-body">
                   	<div class="form-group">
-                		<label for="location">Product variation Name</label>
+                		<label for="location">Variation Name</label>
                 		<input type="text" class="form-control" id="variation_name1" name="variation_name1"/>
             		</div>
 
 					<div class="form-group">
-						<label for="phone">Product variation Abbrivation</label>
+						<label for="phone">Abbrivation</label>
 						<input type="text" class="form-control" id="variation_abbrevation1" name="variation_abbrevation1"/>
 					</div>
 						
@@ -242,7 +141,22 @@
 </div>
 
 
-<script>  
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+<script>
+    $(document).ready(function() {
+    // $('#example').DataTable();
+    $('#example').DataTable( {
+        // "scrollY": 200,
+        "scrollX": true
+    } );
+
+    $(".delete").on("click", function () {
+    return confirm('Are you sure you want to Delete?');
+});
+} );
+  
 $("#ProductvForm").submit(function(e){
   e.preventDefault();
     let variation_name=$("#variation_name").val();
@@ -276,9 +190,7 @@ $("#ProductvForm").submit(function(e){
         }
     });
 });
-</script>
 
-<script>
     function editProductv(variation_id)
     {
         $.get('/productsv/'+variation_id,function(categories){
@@ -323,8 +235,6 @@ $("#ProductvForm").submit(function(e){
 
     });
 
-</script>
-<script>
     function deleteProductv(id)
     {
         if(confirm("Do You Really want to delete this record?"))
@@ -347,9 +257,4 @@ $("#ProductvForm").submit(function(e){
         }
     }
 </script>
-
-
-
-</html>     
-
 @endsection
