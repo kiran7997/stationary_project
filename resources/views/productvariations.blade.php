@@ -20,7 +20,7 @@
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{ url('/home') }}">Home</a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="{{ url('/roles') }}">Product Variation</a>
+                                <li class="breadcrumb-item"><a href="{{ url('/product_variation') }}">Product Variation</a>
                                 </li>
                             </ol>
                         </div>
@@ -36,7 +36,7 @@
                             <div class="card-header border-bottom">
                                 <h4 class="card-title"></h4>
                                 <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#AddProductv">
-                                    Add Product Variation
+                                    Add New Product Variation
                                 </button>
                             </div>
                             <div style="margin:20px;">
@@ -128,7 +128,7 @@
 					</div>
 						
 					<div class="form-group">
-						<label for="Transport">Product variation Add on Price</label>
+						<label for="Transport">Add on Price</label>
 						<input type="text" class="form-control" id="variation_add_on_price1" name="variation_add_on_price1">					
 					</div>
                 </div>
