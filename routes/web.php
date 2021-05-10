@@ -70,10 +70,8 @@ Route::get('/editc/{customer_id}','CustomerController@edit');
 Route::post('/editcust','CustomerController@update');
 Route::delete('/delec/{customer_id}','CustomerController@destroy');
 
-Route::get('shop',function(){
-    return view('shop');
-});
-
+Route::get('/shop','ShopController@index');
+Route::get('/deatils/{product_id}','ShopController@getProductId');
 
 Route::get('/index','CategoriesController@index');
 Route::post('/store','CategoriesController@store');
