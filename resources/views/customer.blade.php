@@ -1,257 +1,249 @@
 @extends('layouts.app')
 @section('title', 'Customer')
-@section('content')   
-    <div class="app-content content ">
-      <div class="content-wrapper">
-        
-        <div class="content-body"><!-- Basic Tables start -->
-        <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#custModal">
-                Add New Customer
-              </button><br>
-<div class="row" id="basic-table">
-  <div class="col-12">
-    <div class="card">
-      
-      
-      <div class="table-responsive">
-        <table class="table">
-        <thead>
-                                 <th>Company Name</th>
-                                <th>Firstname</th>
-                                <th>Lastname</th>
-                                <th>Email</th>
-                                <th>Phone</th>
-                                <th>Username</th>
-                               
-                                <th>Status</th>
-                                <th>Login Ip</th>
-                                <th>Last Login At</th>
-                                <th>Actions</th>                            
-                            </thead>
-                            <tbody>
-                               
-                               @foreach($customers as $customer)
-                             <tr id="sid{{$customer->customer_id}}">
-                                 <td>{{$customer->company_name}}</td>
-                                 <td>{{$customer->customer_firstname}}</td>
-                                 <td>{{$customer->customer_lastname}}</td>
-                                 <td>{{$customer->email}}</td>
-                                 <td>{{$customer->customer_phone}}</td>
-                                 <td>{{$customer->username}}</td>
-                               
-                                 <td>{{$customer->customer_status}}</td>
-                                 <td>{{$customer->login_ip}}</td>
-                                 <td>{{$customer->last_login_at}}</td>
-                                 
- 
-                                 <td>
-                                 
-                                          
-                                  <a href="javascript:void(0)" onclick="editcust({{$customer->customer_id}})" class="fa fa-edit"style="font-size:24px"></a>
-                                 <a href="javascript:void(0)"  onclick="deletecust({{$customer->customer_id}})"  class="fa fa-trash"style="font-size:24px;color:red"></a>
-                                  </td>
-                                     </tr>
-                                 @endforeach
-                             </tbody>
-        </table>
+@section('content')
+<div class="app-content content ">
+  <div class="content-wrapper">
+
+    <div class="content-body">
+      <!-- Basic Tables start -->
+      <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#custModal">
+        Add New Customer
+      </button><br>
+      <div class="row" id="basic-table">
+        <div class="col-12">
+          <div class="card">
+
+
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <th>Company Name</th>
+                  <th>Firstname</th>
+                  <th>Lastname</th>
+                  <th>Email</th>
+                  <th>Phone</th>
+                  <th>Username</th>
+
+                  <th>Status</th>
+                  <th>Login Ip</th>
+                  <th>Last Login At</th>
+                  <th>Actions</th>
+                </thead>
+                <tbody>
+
+                  @foreach($customers as $customer)
+                  <tr id="sid{{$customer->customer_id}}">
+                    <td>{{$customer->company_name}}</td>
+                    <td>{{$customer->customer_firstname}}</td>
+                    <td>{{$customer->customer_lastname}}</td>
+                    <td>{{$customer->email}}</td>
+                    <td>{{$customer->customer_phone}}</td>
+                    <td>{{$customer->username}}</td>
+
+                    <td>{{$customer->customer_status}}</td>
+                    <td>{{$customer->login_ip}}</td>
+                    <td>{{$customer->last_login_at}}</td>
+
+
+                    <td>
+
+
+                      <a href="javascript:void(0)" onclick="editcust({{$customer->customer_id}})" class="fa fa-edit"
+                        style="font-size:24px"></a>
+                      <a href="javascript:void(0)" onclick="deletecust({{$customer->customer_id}})" class="fa fa-trash"
+                        style="font-size:24px;color:red"></a>
+                    </td>
+                  </tr>
+                  @endforeach
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
-   </div>
+
+
+
+
+
+
+<!-- Customer model -->
+<div class="modal fade text-left" id="custModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel33">Add Inventories</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
+      <form id="custForm" name="custForm">
+
+        <div class="modal-body">
+          <label for="company_name">Company Name </label>
+          <div class="form-group">
+            <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
+            <input type="text" name="company_name" id="company_name" class="form-control">
+          </div>
+
+          <label for="customer_firstname">Customer Firstname</label>
+          <div class="form-group">
+            <input type="text" name="customer_firstname" id="customer_firstname" class="form-control">
+          </div>
+
+
+          <label for="inventory_contact">Customer Lastname </label>
+          <div class="form-group">
+            <input type="text" name="customer_lastname" id="customer_lastname" class="form-control">
+          </div>
+
+          <label for="customer_phone">Customer Phone</label>
+          <div class="form-group">
+            <input type="text" name="customer_phone" id="customer_phone" class="form-control">
+          </div>
+
+          <label for="email"> Customer Email</label>
+          <div class="form-group">
+            <input type="text" name="email" id="email" class="form-control">
+          </div>
+
+
+          <label for="username">Customer Username</label>
+          <div class="form-group">
+            <input type="text" name="username" id="username" class="form-control">
+          </div>
+
+          <label for="password">Customer Password</label>
+          <div class="form-group">
+            <input type="password" name="password" id="password" class="form-control">
+          </div>
+
+
+
+          <label for="product_id">Customer Status</label> &nbsp;&nbsp;
+          <div class="form-group">
+            <select name="customer_status" id="customer_status" class="form-control">
+              <option>Select Option</option>
+              <option value="active">Active</option>
+              <option value="deactive">Inactive</option>
+              <option value="block">Block</option>
+            </select>
+          </div>
+
+          <label for="login_ip">Login Ip</label>
+          <div class="form-group">
+            <input type="text" name="login_ip" id="login_ip" class="form-control">
+          </div>
+
+
+          <label for="last_login_at">Last Login At </label>
+          <div class="form-group">
+
+            <input type="text" name="last_login_at" id="last_login_at" class="form-control">
+          </div>
+
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </form>
     </div>
-      
+  </div>
+</div>
+</div>
 
 
 
+<div class="modal fade text-left" id="custEditModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel33">Add Inventories</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form id="custEditForm" name="custEditForm">
+        <input type="hidden" name="customer_id" id="customer_id">
+        <div class="modal-body">
+          <label for="company_name">Company Name </label>
+          <div class="form-group">
+            <input type="text" name="company_name2" id="company_name2" class="form-control">
+          </div>
+
+          <label for="customer_firstname">Customer Firstname</label>
+          <div class="form-group">
+            <input type="text" name="customer_firstname2" id="customer_firstname2" class="form-control">
+          </div>
 
 
-   <!-- Customer model -->
-   <div
-                class="modal fade text-left"
-                id="custModal"
-                tabindex="-1"
-                role="dialog"
-                aria-labelledby="myModalLabel33"
-                aria-hidden="true"
-              >
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h4 class="modal-title" id="myModalLabel33">Add Inventories</h4>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <form id="custForm" name="custForm"> 
-                   
-                      <div class="modal-body">
-                      <label for="company_name">Company Name </label>
-                        <div class="form-group">
-                         <input type="text" name="company_name" id="company_name" class="form-control" >
-                         </div>
+          <label for="inventory_contact">Customer Lastname </label>
+          <div class="form-group">
+            <input type="text" name="customer_lastname2" id="customer_lastname2" class="form-control">
+          </div>
+          <label for="customer_phone2">Customer Phone</label>
+          <div class="form-group">
+            <input type="text" name="customer_phone2" id="customer_phone2" class="form-control">
+          </div>
 
-                         <label for="customer_firstname">Customer Firstname</label>
-                         <div class="form-group">
-                        <input type="text" name="customer_firstname" id="customer_firstname" class="form-control" >
-                         </div>
+          <label for="email2"> Customer Email</label>
+          <div class="form-group">
+            <input type="text" name="email2" id="email2" class="form-control">
+          </div>
 
-                          
-                         <label for="inventory_contact">Customer Lastname </label>
-                        <div class="form-group">
-                        <input type="text" name="customer_lastname" id="customer_lastname" class="form-control" >
-                         </div>
 
-                         <label for="customer_phone">Customer Phone</label>
-                        <div class="form-group">
-                        <input type="text" name="customer_phone" id="customer_phone" class="form-control" >
-                         </div>
+          <label for="username">Customer Username</label>
+          <div class="form-group">
+            <input type="text" name="username2" id="username2" class="form-control">
+          </div>
 
-                         <label for="email"> Customer Email</label>
-                            <div class="form-group">
-                        <input type="text" name="email" id="email" class="form-control" >
-                        </div>
-                        
-                
-                     <label for="username">Customer Username</label>
-                        <div class="form-group">
-                        <input type="text" name="username" id="username" class="form-control" >
-                        </div>
-
-                        <label for="password">Customer Password</label>
-                        <div class="form-group">
-                        <input type="password" name="password" id="password" class="form-control" >
-                        </div>
-
-                        
-                
-                        <label for="product_id">Customer Status</label> &nbsp;&nbsp;
-                        <div class="form-group">
-                    <select name="customer_status" id="customer_status"  class="form-control" >
-                        <option >Select Option</option>
-                         <option value="active">Active</option>
-                        <option value="deactive">Inactive</option>
-                        <option value="block">Block</option>
-                     </select>
-                     </div>
-                    
-                     <label for="login_ip">Login Ip</label>
-                        <div class="form-group">
-                        <input type="text" name="login_ip" id="login_ip" class="form-control" >
-                        </div>
-
-                       
-                    <label for="last_login_at">Last Login At </label>
-                        <div class="form-group">
-                        
-                        <input type="text" name="last_login_at" id="last_login_at" class="form-control" >
-                        </div>
-                       
-                        
-            
-                      </div>
-                      <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary" >Submit</button>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <label for="password2">Customer Password</label>
+          <div class="form-group">
+            <input type="password" name="password2" id="password2" class="form-control">
+          </div>
 
 
 
-            <div
-                class="modal fade text-left"
-                id="custEditModal"
-                tabindex="-1"
-                role="dialog"
-                aria-labelledby="myModalLabel33"
-                aria-hidden="true"
-              >
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h4 class="modal-title" id="myModalLabel33">Add Inventories</h4>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <form id="custEditForm" name="custEditForm"> 
-                    <input type="hidden" name="customer_id" id="customer_id">
-                      <div class="modal-body">
-                      <label for="company_name">Company Name </label>
-                        <div class="form-group">
-                         <input type="text" name="company_name2" id="company_name2" class="form-control" >
-                         </div>
+          <label for="product_id">Customer Status</label> &nbsp;&nbsp;
+          <div class="form-group">
+            <select name="customer_status2" id="customer_status2" class="form-control">
+              <option>Select Option</option>
+              <option value="active">Active</option>
+              <option value="deactive">Deactive</option>
+              <option value="block">Block</option>
+            </select>
+          </div>
 
-                         <label for="customer_firstname">Customer Firstname</label>
-                         <div class="form-group">
-                        <input type="text" name="customer_firstname2" id="customer_firstname2" class="form-control" >
-                         </div>
+          <label for="login_ip">Login Ip</label>
+          <div class="form-group">
+            <input type="text" name="login_ip2" id="login_ip2" class="form-control">
+          </div>
 
-                          
-                         <label for="inventory_contact">Customer Lastname </label>
-                        <div class="form-group">
-                        <input type="text" name="customer_lastname2" id="customer_lastname2" class="form-control" >
-                         </div>
-                         <label for="customer_phone2">Customer Phone</label>
-                        <div class="form-group">
-                        <input type="text" name="customer_phone2" id="customer_phone2" class="form-control" >
-                         </div>
 
-                         <label for="email2"> Customer Email</label>
-                            <div class="form-group">
-                        <input type="text" name="email2" id="email2" class="form-control" >
-                        </div>
-                        
-                
-                     <label for="username">Customer Username</label>
-                        <div class="form-group">
-                        <input type="text" name="username2" id="username2" class="form-control" >
-                        </div>
+          <label for="last_login_at">Last Login At </label>
+          <div class="form-group">
 
-                        <label for="password2">Customer Password</label>
-                        <div class="form-group">
-                        <input type="password" name="password2" id="password2" class="form-control" >
-                        </div>
+            <input type="text" name="last_login_at2" id="last_login_at2" class="form-control">
+          </div>
 
-                        
-                
-                        <label for="product_id">Customer Status</label> &nbsp;&nbsp;
-                        <div class="form-group">
-                    <select name="customer_status2" id="customer_status2"  class="form-control" >
-                        <option >Select Option</option>
-                         <option value="active">Active</option>
-                        <option value="deactive">Deactive</option>
-                        <option value="block">Block</option>
-                     </select>
-                     </div>
-                    
-                     <label for="login_ip">Login Ip</label>
-                        <div class="form-group">
-                        <input type="text" name="login_ip2" id="login_ip2" class="form-control" >
-                        </div>
 
-                       
-                    <label for="last_login_at">Last Login At </label>
-                        <div class="form-group">
-                        
-                        <input type="text" name="last_login_at2" id="last_login_at2" class="form-control" >
-                        </div>
-                        
-                        
-            
-                      </div>
-                      <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary" >Submit</button>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+</div>
 <!-- 
 <div class="modal fade" id="custModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -396,9 +388,8 @@
 </div>  -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
-<script> 
- 
- $("#custForm").submit(function(e){
+<script>
+  $("#custForm").submit(function(e){
   e.preventDefault();
     let company_name=$("#company_name").val();
     let customer_firstname=$("#customer_firstname").val();
@@ -461,8 +452,7 @@
 </script>
 
 <script>
- 
-    function editcust(customer_id)
+  function editcust(customer_id)
     {
         $.get('/editc/'+customer_id,function(customer){
             alert(JSON.stringify(customer)); 
@@ -542,7 +532,7 @@
 
 
 <script>
-function deletecust(customer_id)
+  function deletecust(customer_id)
 {
     if(confirm("Do you want to delete this record?"))
     {

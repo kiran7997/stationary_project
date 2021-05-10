@@ -106,3 +106,6 @@ Route::get('employee-dashboard', 'UserController@dashboard');
 
 Route::get('profile', 'UserController@profile');
 Route::post('save_profile/{id}', 'UserController@save_profile');
+
+Route::get('customer-profile', 'CustomerController@profile');
+Route::post('save_customer_profile/{id}', 'CustomerController@save_profile');
