@@ -46,8 +46,6 @@ Route::get('customer-dashboard', 'CustomerController@dashboard');
 
 
 //Add Stocks //
-
-
 Route::get('/stock', 'StockController@index');
 Route::post('/addstock', 'StockController@store');
 Route::get('/edit/{stock_id}', 'StockController@edit');
@@ -108,3 +106,8 @@ Route::get('employee-dashboard', 'UserController@dashboard');
 
 Route::get('profile', 'UserController@profile');
 Route::post('save_profile/{id}', 'UserController@save_profile');
+
+Route::get('customer-profile', 'CustomerController@profile');
+Route::post('save_customer_profile/{id}', 'CustomerController@save_profile');
+//customer registration
+Route::post('customer-register', 'CustomerController@customer_reg');

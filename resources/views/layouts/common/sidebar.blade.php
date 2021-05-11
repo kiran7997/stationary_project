@@ -56,26 +56,24 @@
           <li><a class="d-flex align-items-center" href="{{route('roles.index')}}"><i data-feather="circle"></i><span
                 class="menu-item text-truncate" data-i18n="List">Department</span></a>
           </li>
-          <li><a class="d-flex align-items-center" href="{{url('catagories')}}"><i data-feather="circle"></i><span
+          <li><a class="d-flex align-items-center" href="{{url('/catagories')}}"><i data-feather="circle"></i><span
                 class="menu-item text-truncate" data-i18n="Preview">Category</span></a>
           </li>
-          <li><a class="d-flex align-items-center" href="{{url('units')}}"><i data-feather="circle"></i><span
+          <li><a class="d-flex align-items-center" href="{{url('/units')}}"><i data-feather="circle"></i><span
                 class="menu-item text-truncate" data-i18n="Edit">Unit</span></a>
           </li>
-          <li><a class="d-flex align-items-center" href="{{url('product_variation')}}"><i data-feather="circle"></i><span
-                class="menu-item text-truncate" data-i18n="Add">Product Variation</span></a>
+          <li><a class="d-flex align-items-center" href="{{url('/product_variation')}}"><i
+                data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Add">Product
+                Variation</span></a>
           </li>
-          <li><a class="d-flex align-items-center" href="{{url('product')}}"><i data-feather="circle"></i><span
+          <li><a class="d-flex align-items-center" href="{{url('/product')}}"><i data-feather="circle"></i><span
                 class="menu-item text-truncate" data-i18n="Add">Product</span></a>
           </li>
-          <li><a class="d-flex align-items-center" href="{{url('inventories')}}"><i data-feather="circle"></i><span
+          <li><a class="d-flex align-items-center" href="{{url('/inventories')}}"><i data-feather="circle"></i><span
                 class="menu-item text-truncate" data-i18n="Add">Inventory</span></a>
           </li>
-          <li><a class="d-flex align-items-center" href="{{url('stock')}}"><i data-feather="circle"></i><span
+          <li><a class="d-flex align-items-center" href="{{url('/stock')}}"><i data-feather="circle"></i><span
                 class="menu-item text-truncate" data-i18n="Add">Stock</span></a>
-          </li>
-          <li><a class="d-flex align-items-center" href="{{url('shop')}}"><i data-feather="circle"></i><span
-                class="menu-item text-truncate" data-i18n="Add">Customer Dashboards</span></a>
           </li>
         </ul>
       </li>
@@ -91,7 +89,7 @@
                 <circle cx="12" cy="12" r="10"></circle>
               </svg><span class="menu-item text-truncate" data-i18n="List">Employee</span></a>
           </li>
-          <li><a class="d-flex align-items-center" href="{{url('customer')}}"><svg xmlns="http://www.w3.org/2000/svg"
+          <li><a class="d-flex align-items-center" href="{{url('/customer')}}"><svg xmlns="http://www.w3.org/2000/svg"
                 width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                 stroke-linecap="round" stroke-linejoin="round" class="feather feather-circle">
                 <circle cx="12" cy="12" r="10"></circle>

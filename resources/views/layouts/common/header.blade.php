@@ -58,11 +58,7 @@
           <div class="user-nav d-sm-flex d-none"><span
               class="user-name font-weight-bolder login-user-name">{{ ucwords(Auth::user()->firstname) }}</span><span
               class="user-status">
-              @if(!empty(Auth::user()->getRoleNames()))
-              @foreach(Auth::user()->getRoleNames() as $v)
-              {{ $user_role = $v }}
-              @endforeach
-              @endif</p>
+              {{ Auth::user()->name }}</p>
             </span></div><span class="avatar">
             @if(Auth::user()->profile_image!='')
             <img class="round" src="{{ url("user_images/".Auth::user()->profile_image) }}" alt="avatar" height="40"

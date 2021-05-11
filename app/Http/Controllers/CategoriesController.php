@@ -42,12 +42,10 @@ class CategoriesController extends Controller
             
             'cat_name' => 'required',
             'cat_description'=>'required',
-            'cat_image'=>'required',
         ]);
         $categories=new Categories();
         $categories->cat_name=$request->cat_name;
         $categories->cat_description=$request->cat_description;
-        $categories->cat_image=$request->cat_image;
         $categories['created_by']=Auth::user()->id;
         $categories['updated_by']=Auth::user()->id;
         $categories->save();  
@@ -89,7 +87,6 @@ class CategoriesController extends Controller
         $categories=Categories::find($request->cat_id);
         $categories->cat_name=$request->cat_name;
         $categories->cat_description=$request->cat_description;
-        $categories->cat_image=$request->cat_image;
         $categories['created_by']=Auth::user()->id;
         $categories['updated_by']=Auth::user()->id;
         // echo "<pre>".print_r($categories); exit;

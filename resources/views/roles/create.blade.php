@@ -16,7 +16,7 @@
                         <div class="breadcrumb-wrapper">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item">
-                                    <a href="index.html">Home</a>
+                                    <a href="{{ url('/home') }}">Home</a>
                                 </li>
                                 <li class="breadcrumb-item"><a href="{{route('roles.index')}}">Department</a></li>
                                 <li class="breadcrumb-item active">Create</li>

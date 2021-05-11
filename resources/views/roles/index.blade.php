@@ -15,11 +15,9 @@
                         <h2 class="content-header-title float-left mb-0">Department</h2>
                         <div class="breadcrumb-wrapper">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.html">Home</a>
+                                <li class="breadcrumb-item"><a href="{{ url('/home') }}">Home</a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="#">Department</a>
-                                </li>
-                                <li class="breadcrumb-item active">Department
+                                <li class="breadcrumb-item"><a href="{{ url('/roles') }}">Department</a>
                                 </li>
                             </ol>
                         </div>
@@ -33,8 +31,8 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header border-bottom">
-                                <h4 class="card-title">Department</h4>
-                                <a class="btn btn-outline-primary pull-right" href="{{ route('roles.create') }}">
+                                <h4 class="card-title"></h4>
+                                <a class="btn btn-outline-primary float-right" href="{{ route('roles.create') }}">
                                     Create Department</a>
                             </div>
                             <div style="margin:20px;">
@@ -91,9 +89,6 @@
     </div>
 </div>
 
-
-
-@endsection
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
@@ -112,3 +107,4 @@
 
 
 </script>
+@endsection
