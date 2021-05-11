@@ -17,6 +17,12 @@ class StockController extends Controller
      public function store(Request $req)
     {
         $stock=new Stocks();
+        $req->validate([
+            'product_id' => 'required',
+            'item_quantity' => 'required',
+            
+        ]);
+
         $stock->product_id = $req->product_id;
         $stock->item_quantity = $req->item_quantity;
         $stock['created_by']=Auth::user()->id;

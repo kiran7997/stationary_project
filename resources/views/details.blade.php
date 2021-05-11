@@ -98,6 +98,7 @@
       
         <div class="col-12 col-md-5 d-flex align-items-center justify-content-center mb-2 mb-md-0">
           <div class="d-flex align-items-center justify-content-center">
+          {{$data->product_id}}
             <img
             src="{{url('product_images/'.$data->image_url)}}" width='100' height="100"
               class="img-fluid product-img"

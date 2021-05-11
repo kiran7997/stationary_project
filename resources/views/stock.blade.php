@@ -160,6 +160,12 @@
                       
                     Add Stock
                     </div>
+                    @if($errors->any())
+                    @foreach($errors->any() as $err)
+                    <li>{{$err}}</li>
+                    @endforeach
+                    @endif
+                   
                     <form id="stockForm" name="stockForm">
                     @csrf
                     <div class="form-group">
