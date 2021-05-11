@@ -72,14 +72,7 @@
             <span class="avatar-status-online"></span></span>
         </a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-user"><a class="dropdown-item"
-            href="{{ url('profile') }}"><i class="mr-50" data-feather="user"></i> Profile</a><a class="dropdown-item"
-            href="app-email.html"><i class="mr-50" data-feather="mail"></i> Inbox</a><a class="dropdown-item"
-            href="app-todo.html"><i class="mr-50" data-feather="check-square"></i> Task</a><a class="dropdown-item"
-            href="app-chat.html"><i class="mr-50" data-feather="message-square"></i> Chats</a>
-          <div class="dropdown-divider"></div><a class="dropdown-item" href="page-account-settings.html"><i
-              class="mr-50" data-feather="settings"></i> Settings</a><a class="dropdown-item"
-            href="page-pricing.html"><i class="mr-50" data-feather="credit-card"></i> Pricing</a><a
-            class="dropdown-item" href="page-faq.html"><i class="mr-50" data-feather="help-circle"></i> FAQ</a>
+            href="{{ url('profile') }}"><i class="mr-50" data-feather="user"></i> Profile</a>
           @if(@$user_role=='Admin')
           <a class="dropdown-item" href="{{ url('admin-logout') }}"><i class="mr-50" data-feather="power"></i>
             Logout</a>
