@@ -47,40 +47,7 @@
 
     </div>
   </div>
-  <div class="content-detached content-right">
-    <div class="content-body">
-      <!-- E-commerce Content Section Starts -->
-      <section id="ecommerce-header">
-        <div class="row">
-          <div class="col-sm-12">
-            <div class="ecommerce-header-items">
-              <div class="result-toggler">
-                <button class="navbar-toggler shop-sidebar-toggler" type="button" data-toggle="collapse">
-                  <span class="navbar-toggler-icon d-block d-lg-none"><i data-feather="menu"></i></span>
-                </button>
-
-              </div>
-              <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                <label class="btn btn-icon btn-outline-primary view-btn grid-view-btn">
-                  <input type="radio" name="radio_options" id="radio_option1" checked />
-                  <i data-feather="grid" class="font-medium-3"></i>
-                </label>
-                <label class="btn btn-icon btn-outline-primary view-btn list-view-btn">
-                  <input type="radio" name="radio_options" id="radio_option2" />
-                  <i data-feather="list" class="font-medium-3"></i>
-                </label>
-              </div>
-            </div>
-          </div>
-        </div>
-    </div>
-    </section>
-    <!-- E-commerce Content Section Starts -->
-
-    <!-- background Overlay when sidebar is shown  starts-->
-    <div class="body-content-overlay"></div>
-    <!-- background Overlay when sidebar is shown  ends-->
-
+    
     <!-- E-commerce Search Bar Starts -->
     <section id="ecommerce-searchbar" class="ecommerce-searchbar">
       <div class="row mt-1">
@@ -107,8 +74,8 @@
       <div class="card ecommerce-card">
         <div class="item-img text-center">
 
-          <a href="javascript:void(0);" onclick="getProduct({{$data->product_id}})">
-
+          <!-- <a href="javascript:void(0);" onclick="getProduct({{$data->product_id}})"> -->
+<a href="details/{{$data->product_id}}">
 
             <img class="img-fluid card-img-top" src="{{url('product_images/'.$data->image_url)}}" width='100'
               height="100" alt="img-placeholder" /></a>
@@ -126,7 +93,7 @@
           </div>
           <h6 class="item-name">
             <a class="text-body" href="app-ecommerce-details.html">{{$data->product_name}}</a>
-            <span class="card-text item-company">By <a href="javascript:void(0)" class="company-name">Navneet</a></span>
+            
           </h6>
           <p class="card-text item-description">
             {{$data->description}} </p>

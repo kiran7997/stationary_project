@@ -13,13 +13,13 @@ class ShopController extends Controller
         return view ('shop', ['product_data' => $product_data]);
        
     }
-    public function details()
+    public function details($product_id)
     {
-        // $product_data= Aproducts::select('product_name', 'description','base_price','image_url')
-        // ->where(['deleted'=>0])->get();
-        return view ('details/{{(product_id)}}');
+        $product_data=   Aproducts::find($product_id);
+         //->where(['product_id'=>0])->get();
+        return view ('details', ['product_data' => $product_data]);
        
-    // }
+     }
 
     // // public function getProductId($product_id)
     // // {

@@ -1,20 +1,7 @@
 
- @extends('layouts.app')
+ @extends('customer.layouts.app')
 @section('title', 'Deatils')
 @section('content')
-<html class="loading bordered-layout" lang="en" data-layout="bordered-layout" data-textdirection="ltr">
-  <!-- BEGIN: Head-->
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0,minimal-ui">
-    <meta name="description" content="Vuexy admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
-    <meta name="keywords" content="admin template, Vuexy admin template, dashboard template, flat admin template, responsive admin template, web app">
-    <meta name="author" content="PIXINVENT">
-    <title>Product Details - Vuexy - Bootstrap HTML admin template</title>
-    <link rel="apple-touch-icon" href="../../../app-assets/images/ico/apple-icon-120.png">
-    <link rel="shortcut icon" type="image/x-icon" href="../../../app-assets/images/ico/favicon.ico">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600" rel="stylesheet">
 
     <!-- BEGIN: Vendor CSS-->
     <link rel="stylesheet" type="text/css" href="../../../app-assets/vendors/css/vendors.min.css">
@@ -83,7 +70,7 @@
             </div>
           </div>
         </div>
-        @foreach($product_data as $data)
+
  <div class="content-body">
         <!-- app e-commerce details start -->
 
@@ -98,109 +85,41 @@
       
         <div class="col-12 col-md-5 d-flex align-items-center justify-content-center mb-2 mb-md-0">
           <div class="d-flex align-items-center justify-content-center">
-          {{$data->product_id}}
+        
             <img
-            src="{{url('product_images/'.$data->image_url)}}" width='100' height="100"
+            src="{{url('product_images/'.$product_data->image_url)}}" width='100' height="100"
               class="img-fluid product-img"
               alt="product image" 
             />
           </div>
         </div>
         <div class="col-12 col-md-7">
-          <h4>{{$data->product_name}}</h4>
-          <span class="card-text item-company">By <a href="javascript:void(0)" class="company-name">Apple</a></span>
+          <h4>{{$product_data->product_name}}</h4>
+          
           <div class="ecommerce-details-price d-flex flex-wrap mt-1">
-            <h4 class="item-price mr-1">${{$data->base_price}}</h4>
-            <ul class="unstyled-list list-inline pl-1 border-left">
-              <li class="ratings-list-item"><i data-feather="star" class="filled-star"></i></li>
-              <li class="ratings-list-item"><i data-feather="star" class="filled-star"></i></li>
-              <li class="ratings-list-item"><i data-feather="star" class="filled-star"></i></li>
-              <li class="ratings-list-item"><i data-feather="star" class="filled-star"></i></li>
-              <li class="ratings-list-item"><i data-feather="star" class="unfilled-star"></i></li>
-            </ul>
+            <h4 class="item-price mr-1">${{$product_data->base_price}}</h4>
+            
           </div>
           <p class="card-text">Available - <span class="text-success">In stock</span></p>
           <p class="card-text">
-          {{$data->description}}
+          {{$product_data->description}}
           </p>
-          <ul class="product-features list-unstyled">
-            <li><i data-feather="shopping-cart"></i> <span>Free Shipping</span></li>
-            <li>
-              <i data-feather="dollar-sign"></i>
-              <span>EMI options available</span>
-            </li>
-          </ul>
+          
           <hr />
-          <div class="product-color-options">
-            <h6>Colors</h6>
-            <ul class="list-unstyled mb-0">
-              <li class="d-inline-block selected">
-                <div class="color-option b-primary">
-                  <div class="filloption bg-primary"></div>
-                </div>
-              </li>
-              <li class="d-inline-block">
-                <div class="color-option b-success">
-                  <div class="filloption bg-success"></div>
-                </div>
-              </li>
-              <li class="d-inline-block">
-                <div class="color-option b-danger">
-                  <div class="filloption bg-danger"></div>
-                </div>
-              </li>
-              <li class="d-inline-block">
-                <div class="color-option b-warning">
-                  <div class="filloption bg-warning"></div>
-                </div>
-              </li>
-              <li class="d-inline-block">
-                <div class="color-option b-info">
-                  <div class="filloption bg-info"></div>
-                </div>
-              </li>
-            </ul>
-          </div>
-          <hr />
+          
+          
           <div class="d-flex flex-column flex-sm-row pt-1">
             <a href="javascript:void(0)" class="btn btn-primary btn-cart mr-0 mr-sm-1 mb-1 mb-sm-0">
               <i data-feather="shopping-cart" class="mr-50"></i>
               <span class="add-to-cart">Add to cart</span>
             </a>
-            <a href="javascript:void(0)" class="btn btn-outline-secondary btn-wishlist mr-0 mr-sm-1 mb-1 mb-sm-0">
-              <i data-feather="heart" class="mr-50"></i>
-              <span>Wishlist</span>
-            </a>
-            <div class="btn-group dropdown-icon-wrapper btn-share">
-              <button
-                type="button"
-                class="btn btn-icon hide-arrow btn-outline-secondary dropdown-toggle"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                <i data-feather="share-2"></i>
-              </button>
-              <div class="dropdown-menu dropdown-menu-right">
-                <a href="javascript:void(0)" class="dropdown-item">
-                  <i data-feather="facebook"></i>
-                </a>
-                <a href="javascript:void(0)" class="dropdown-item">
-                  <i data-feather="twitter"></i>
-                </a>
-                <a href="javascript:void(0)" class="dropdown-item">
-                  <i data-feather="youtube"></i>
-                </a>
-                <a href="javascript:void(0)" class="dropdown-item">
-                  <i data-feather="instagram"></i>
-                </a>
-              </div>
-            </div>
+           
+                        </div>
           </div>
         </div>
       </div>
     </div>
-    @endforeach
+  
     <!-- Product Details ends -->
    
     <!-- Item features starts -->
