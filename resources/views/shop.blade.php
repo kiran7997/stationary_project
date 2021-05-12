@@ -42,90 +42,90 @@
 
     </div>
   </div>
-    
-    <!-- E-commerce Search Bar Starts -->
-    <section id="ecommerce-searchbar" class="ecommerce-searchbar">
-      <div class="row mt-1">
-        <div class="col-sm-12">
-          <div class="input-group input-group-merge">
-            <input type="text" class="form-control search-product" id="shop-search" placeholder="Search Product"
-              aria-label="Search..." aria-describedby="shop-search" />
-            <div class="input-group-append">
-              <span class="input-group-text"><i data-feather="search" class="text-muted"></i></span>
-            </div>
+
+  <!-- E-commerce Search Bar Starts -->
+  <section id="ecommerce-searchbar" class="ecommerce-searchbar">
+    <div class="row mt-1">
+      <div class="col-sm-12">
+        <div class="input-group input-group-merge">
+          <input type="text" class="form-control search-product" id="shop-search" placeholder="Search Product"
+            aria-label="Search..." aria-describedby="shop-search" />
+          <div class="input-group-append">
+            <span class="input-group-text"><i data-feather="search" class="text-muted"></i></span>
           </div>
         </div>
       </div>
-    </section>
-    <!-- E-commerce Search Bar Ends -->
+    </div>
+  </section>
+  <!-- E-commerce Search Bar Ends -->
 
-    <!-- E-commerce Products Starts -->
+  <!-- E-commerce Products Starts -->
 
-    <section id="ecommerce-products" class="grid-view">
-      <!-- 1st product -->
+  <section id="ecommerce-products" class="grid-view">
+    <!-- 1st product -->
 
-      @foreach($product_data as $data)
+    @foreach($product_data as $data)
 
-      <div class="card ecommerce-card">
-        <div class="item-img text-center">
+    <div class="card ecommerce-card">
+      <div class="item-img text-center">
 
-          <!-- <a href="javascript:void(0);" onclick="getProduct({{$data->product_id}})"> -->
-<a href="details/{{$data->product_id}}">
+        <!-- <a href="javascript:void(0);" onclick="getProduct({{$data->product_id}})"> -->
+        <a href="details/{{$data->product_id}}">
 
-            <img class="img-fluid card-img-top" src="{{url('product_images/'.$data->image_url)}}" width='100'
-              height="100" alt="img-placeholder" /></a>
+          <img class="img-fluid card-img-top" src="{{url('product_images/'.$data->image_url)}}" width='100' height="100"
+            alt="img-placeholder" /></a>
 
-        </div>
-        <div class="card-body">
-          <div class="item-wrapper">
+      </div>
+      <div class="card-body">
+        <div class="item-wrapper">
 
-            <div>
-              <div class="item-cost">
-
-                <h6 class="item-price">{{$data->base_price}}</h6>
-              </div>
-            </div>
-          </div>
-          <h6 class="item-name">
-            <a class="text-body" href="app-ecommerce-details.html">{{$data->product_name}}</a>
-            
-          </h6>
-          <p class="card-text item-description">
-            {{$data->description}} </p>
-        </div>
-
-        <div class="item-options text-center">
-          <div class="item-wrapper">
+          <div>
             <div class="item-cost">
-              <h4 class="item-price">$999.99</h4>
-              <p class="card-text shipping"><span class="badge badge-pill badge-light-success">Free Shipping</span></p>
+
+              <h6 class="item-price">{{$data->base_price}}</h6>
             </div>
           </div>
-
-          <a href="javascript:void(0)" class="btn btn-primary btn-cart">
-            <i data-feather="shopping-cart"></i>
-            <span class="add-to-cart">Add to cart</span>
-          </a>
         </div>
+        <h6 class="item-name">
+          <a class="text-body" href="app-ecommerce-details.html">{{$data->product_name}}</a>
+
+        </h6>
+        <p class="card-text item-description">
+          {{$data->description}} </p>
       </div>
 
-      <!-- 2nd product -->
-      @endforeach
-    </section>
+      <div class="item-options text-center">
+        <div class="item-wrapper">
+          <div class="item-cost">
+            <h4 class="item-price">$999.99</h4>
+            <p class="card-text shipping"><span class="badge badge-pill badge-light-success">Free Shipping</span></p>
+          </div>
+        </div>
 
-    <!-- E-commerce Products Ends -->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <a href="javascript:void(0)" class="btn btn-primary btn-cart">
+          <i data-feather="shopping-cart"></i>
+          <span class="add-to-cart">Add to cart</span>
+        </a>
+      </div>
+    </div>
 
-    <script>
-      $(window).on('load',  function(){
+    <!-- 2nd product -->
+    @endforeach
+  </section>
+
+  <!-- E-commerce Products Ends -->
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+  <script>
+    $(window).on('load',  function(){
         if (feather) {
           feather.replace({ width: 14, height: 14 });
         }
       })
-    </script>
+  </script>
 
-    <script>
-      function getProduct(product_id)
+  <script>
+    function getProduct(product_id)
     {
       $.get('/deatils/'+product_id,function(aproduct)
       {
@@ -136,6 +136,15 @@
 
     }
     
+<<<<<<< HEAD
     </script>
    
     @endsection
+=======
+  </script>
+  </body>
+  <!-- END: Body-->
+
+  </html>
+  @endsection
+>>>>>>> e7190d5633907d2c3095aba332139040c325c3e2

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\customers;
+use App\Aproducts;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Arr;
@@ -12,7 +13,9 @@ class CustomerController extends Controller
 {
     public function dashboard()
     {
-        return view('customer_dash');
+        $product_data = Aproducts::select('product_id', 'product_name', 'description', 'base_price', 'image_url')
+            ->where(['deleted' => 0])->get();
+        return view('customer_dash', compact('product_data'));
     }
 
 
