@@ -15,19 +15,9 @@ class ShopController extends Controller
     }
     public function details($product_id)
     {
-        $product_data=   Aproducts::find($product_id);
-         //->where(['product_id'=>0])->get();
+        $product_data = array();
+        $product_data = Aproducts::find($product_id);
         return view ('details', ['product_data' => $product_data]);
-       
-     }
-
-    // // public function getProductId($product_id)
-    // // {
-    //     $productId= Aproducts::find($product_id);
-    //     return view ('deatils', ['product_id' => $productId]);
-    //    // return response()->json($productId);
-    //   //  echo $productId;
-    // }
-
+    }
     
 }

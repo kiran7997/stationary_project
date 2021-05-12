@@ -2,8 +2,6 @@
 @section('title', 'Customer-dashboard')
 @section('content')
 
-
-
 <div class="app-content content ecommerce-application">
     <div class="content-overlay"></div>
     <div class="header-navbar-shadow"></div>
@@ -22,7 +20,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
         <div class="content-detached ">
             <div class="content-body">
@@ -62,7 +59,7 @@
                         <div class="card-body">
                             <div class="item-wrapper">
                                 <div>
-                                    <h6 class="item-price">RS - {{$data->base_price}}</h6>
+                                    <h6 class="item-price">RS. {{$data->base_price}}</h6>
                                 </div>
                             </div>
                             <h6 class="item-name">
@@ -70,13 +67,8 @@
                                 <span class="card-text item-company">By <a href="javascript:void(0)"
                                         class="company-name">Apple</a></span>
                             </h6>
+                            
                             <p class="card-text item-description">{{$data->description}}</p>
-                        </div>
-                        <div class="item-options text-center">
-                            <a href="javascript:void(0)" class="btn btn-primary btn-cart">
-                                {{-- <i data-feather="shopping-cart"></i> --}}
-                                <span class="add-to-cart">Add</span>
-                            </a>
                         </div>
                     </div>
                     @endforeach

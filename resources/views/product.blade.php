@@ -5,6 +5,8 @@
 @section('content')
 <!-- Responsive Datatable -->
 <!-- BEGIN: Content-->
+<meta name="csrf_token" content="{{ csrf_token() }}" />
+
 <div class="app-content content ">
 	<div class="content-overlay"></div>
 	<div class="header-navbar-shadow"></div>
@@ -210,10 +212,8 @@
 				</button>
 			</div>
 			<form id="productEditForm" name="productEditForm" enctype="multipart/form-data">
-
+				@csrf
 				<div class="modal-body">
-
-					@csrf
 					<input type="hidden" name="product_id" id="product_id">
 
 					<label for="product_name">Product Name
