@@ -55,11 +55,16 @@
       <li class="nav-item dropdown dropdown-user"><a class="nav-link dropdown-toggle dropdown-user-link"
           id="dropdown-user" href="javascript:void(0);" data-toggle="dropdown" aria-haspopup="true"
           aria-expanded="false">
-          <div class="user-nav d-sm-flex d-none"><span
-              class="user-name font-weight-bolder login-user-name">{{ ucwords(Auth::user()->firstname) }}</span><span
-              class="user-status">
-              {{ Auth::user()->name }}</p>
-            </span></div><span class="avatar">
+          <div class="user-nav d-sm-flex d-none">
+            <span class="user-name font-weight-bolder login-user-name">
+              @if(Auth::user()->firstname)
+              {{ ucwords(Auth::user()->firstname) }}
+              @else
+              {{ ucwords(Auth::user()->name) }}
+              @endif
+            </span>
+            {{-- <span class="user-status">{{ Auth::user()->name }}</span> --}}
+          </div><span class="avatar">
             @if(Auth::user()->profile_image!='')
             <img class="round" src="{{ url("user_images/".Auth::user()->profile_image) }}" alt="avatar" height="40"
               width="40">
@@ -73,6 +78,11 @@
         </a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-user"><a class="dropdown-item"
             href="{{ url('profile') }}"><i class="mr-50" data-feather="user"></i> Profile</a>
+          @if(!empty(Auth::user()->getRoleNames()))
+          @foreach(Auth::user()->getRoleNames() as $v)
+          <?php $user_role = $v; ?>
+          @endforeach
+          @endif
           @if(@$user_role=='Admin')
           <a class="dropdown-item" href="{{ url('admin-logout') }}"><i class="mr-50" data-feather="power"></i>
             Logout</a>
