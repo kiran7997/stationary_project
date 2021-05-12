@@ -9,7 +9,7 @@ class StockController extends Controller
 {
     public function index()
     {
-        $stocks= stocks::where(['deleted'=>0])->paginate(5);
+        $stocks= stocks::where(['deleted'=>0])->get();
        
         return view ('stock',compact('stocks'));
        
