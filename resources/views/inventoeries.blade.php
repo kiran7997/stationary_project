@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('title', 'Inventories')
 @section('content')
+
 <div class="app-content content ">
     <div class="content-overlay"></div>
     <div class="header-navbar-shadow"></div>
@@ -66,6 +67,7 @@
                     
 			<form id="invenForm" name="invenForm"> 
                	<input type="hidden" name="inventory_id" id="inventory_id">
+                   @csrf
                 <div class="modal-body">
                    	<label for="inventory_name">Company Name </label>
                    	<div class="form-group">
@@ -127,6 +129,7 @@
         		<h5 class="modal-title" id="exampleModalLabel">Add Inventoeries</h5>
 			</div>
       		<form id="invenEditForm" name="invenEditForm"> 
+              @csrf
       			<div class="modal-body">
                     <label for="inventory_name">Comapany Name </label>
                     <div class="form-group">
@@ -199,7 +202,7 @@ $("#invenForm").submit(function(e){
 
     $.ajax({
         url:"{{url('addinven')}}",
-        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+       
 
         type:"post",
 
@@ -270,7 +273,7 @@ $("#invenForm").submit(function(e){
         
         $.ajax({
             url:"{{url('editinven')}}",
-            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+           
             type:"post",
             data:{
                 inventory_id:inventory_id,

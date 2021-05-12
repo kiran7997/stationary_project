@@ -1,11 +1,6 @@
 @extends('customer.layouts.app')
 @section('title', 'Shop')
 @section('content')
-<!-- BEGIN: Vendor CSS-->
-<link rel="stylesheet" type="text/css" href="../../../app-assets/vendors/css/vendors.min.css">
-<link rel="stylesheet" type="text/css" href="../../../app-assets/vendors/css/extensions/nouislider.min.css">
-<link rel="stylesheet" type="text/css" href="../../../app-assets/vendors/css/extensions/toastr.min.css">
-<!-- END: Vendor CSS-->
 
 
 <!-- BEGIN: Page CSS-->
@@ -142,8 +137,5 @@
     }
     
     </script>
-    </body>
-    <!-- END: Body-->
-
-    </html>
+   
     @endsection
