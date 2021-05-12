@@ -50,81 +50,9 @@
             data-feather="home"></i><span class="menu-title text-truncate" data-i18n="Dashboards">Dashboards</span><span
             class="badge badge-light-warning badge-pill ml-auto mr-1"></span></a>
       </li>
-      <li class=" nav-item"><a class="d-flex align-items-center" href="{{url('/shop')}}"><i data-feather='shopping-cart'></i><span
+      <li class=" nav-item"><a class="d-flex align-items-center" href="{{url('/checkout')}}"><i data-feather='shopping-cart'></i><span
             class="menu-title text-truncate" data-i18n="Form Layout">Cart</span></a>
       </li>
-      {{-- <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather="grid"></i><span
-            class="menu-title text-truncate" data-i18n="Invoice">Master</span></a>
-        <ul class="menu-content">
-          <li><a class="d-flex align-items-center" href="app-invoice-list.html"><i data-feather="circle"></i><span
-                class="menu-item text-truncate" data-i18n="List">Department</span></a>
-          </li>
-          <li><a class="d-flex align-items-center" href="app-invoice-preview.html"><i data-feather="circle"></i><span
-                class="menu-item text-truncate" data-i18n="Preview">Category</span></a>
-          </li>
-          <li><a class="d-flex align-items-center" href="app-invoice-edit.html"><i data-feather="circle"></i><span
-                class="menu-item text-truncate" data-i18n="Edit">Unit</span></a>
-          </li>
-          <li><a class="d-flex align-items-center" href="app-invoice-add.html"><i data-feather="circle"></i><span
-                class="menu-item text-truncate" data-i18n="Add">Product Variation</span></a>
-          </li>
-          <li><a class="d-flex align-items-center" href="app-invoice-add.html"><i data-feather="circle"></i><span
-                class="menu-item text-truncate" data-i18n="Add">Product</span></a>
-          </li>
-        </ul>
-      </li>
-      <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather="shopping-cart"></i><span
-            class="menu-title text-truncate" data-i18n="eCommerce">eCommerce</span></a>
-        <ul class="menu-content">
-          <li><a class="d-flex align-items-center" href="app-ecommerce-shop.html"><i data-feather="circle"></i><span
-                class="menu-item text-truncate" data-i18n="Shop">Shop</span></a>
-          </li>
-          <li><a class="d-flex align-items-center" href="app-ecommerce-details.html"><i data-feather="circle"></i><span
-                class="menu-item text-truncate" data-i18n="Details">Details</span></a>
-          </li>
-          <li><a class="d-flex align-items-center" href="app-ecommerce-wishlist.html"><i data-feather="circle"></i><span
-                class="menu-item text-truncate" data-i18n="Wish List">Wish List</span></a>
-          </li>
-          <li><a class="d-flex align-items-center" href="app-ecommerce-checkout.html"><i data-feather="circle"></i><span
-                class="menu-item text-truncate" data-i18n="Checkout">Checkout</span></a>
-          </li>
-        </ul>
-      </li>
-      <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather="user"></i><span
-            class="menu-title text-truncate" data-i18n="User">User</span></a>
-        <ul class="menu-content">
-          <li><a class="d-flex align-items-center" href="app-user-list.html"><i data-feather="circle"></i><span
-                class="menu-item text-truncate" data-i18n="List">List</span></a>
-          </li>
-          <li><a class="d-flex align-items-center" href="app-user-view.html"><i data-feather="circle"></i><span
-                class="menu-item text-truncate" data-i18n="View">View</span></a>
-          </li>
-          <li><a class="d-flex align-items-center" href="app-user-edit.html"><i data-feather="circle"></i><span
-                class="menu-item text-truncate" data-i18n="Edit">Edit</span></a>
-          </li>
-        </ul>
-      </li>
-      <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather="layout"></i><span
-            class="menu-title text-truncate" data-i18n="Page Layouts">Page Layouts</span></a>
-        <ul class="menu-content">
-          <li><a class="d-flex align-items-center" href="layout-collapsed-menu.html"><i data-feather="circle"></i><span
-                class="menu-item text-truncate" data-i18n="Collapsed Menu">Collapsed Menu</span></a>
-          </li>
-          <li><a class="d-flex align-items-center" href="layout-boxed.html"><i data-feather="circle"></i><span
-                class="menu-item text-truncate" data-i18n="Layout Boxed">Layout Boxed</span></a>
-          </li>
-          <li><a class="d-flex align-items-center" href="layout-without-menu.html"><i data-feather="circle"></i><span
-                class="menu-item text-truncate" data-i18n="Without Menu">Without Menu</span></a>
-          </li>
-          <li><a class="d-flex align-items-center" href="layout-empty.html"><i data-feather="circle"></i><span
-                class="menu-item text-truncate" data-i18n="Layout Empty">Layout Empty</span></a>
-          </li>
-          <li><a class="d-flex align-items-center" href="layout-blank.html"><i data-feather="circle"></i><span
-                class="menu-item text-truncate" data-i18n="Layout Blank">Layout Blank</span></a>
-          </li>
-        </ul>
-      </li> --}}
-
     </ul>
   </div>
 </div>

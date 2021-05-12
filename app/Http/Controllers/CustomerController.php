@@ -15,7 +15,7 @@ class CustomerController extends Controller
     {
         $product_data = Aproducts::select('product_id', 'product_name', 'description', 'base_price', 'image_url')
             ->where(['deleted' => 0])->get();
-        return view('customer_dash', compact('product_data'));
+        return view('customer/layouts/customer_dash', compact('product_data'));
     }
 
 

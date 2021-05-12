@@ -13,11 +13,16 @@ class ShopController extends Controller
         return view ('shop', ['product_data' => $product_data]);
        
     }
+
     public function details($product_id)
     {
         $product_data = array();
         $product_data = Aproducts::find($product_id);
-        return view ('details', ['product_data' => $product_data]);
+        return view ('customer/layouts/details', ['product_data' => $product_data]);
+    }
+
+    public function cart(){
+        return view('customer/layouts/checkout');
     }
     
 }
