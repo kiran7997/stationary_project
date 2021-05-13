@@ -47,7 +47,7 @@
 									<div class="carousel-inner">
 										<?php $i=0; for($i=0; $i<count($img_urls); $i++) { ?>
 										<div class="carousel-item <?php if($i== 0) { ?> active <?php } ?>">
-											<img class="d-block" src="{{url($img_urls[$i])}}" width='400' height='250'>
+											<img class="d-block" src="{{url($img_urls[$i])}}" style="border-radius: 15px; width:320px; height: 250px;">
 										</div>
 										<?php } ?>
 
@@ -76,20 +76,11 @@
                                                     </span></p>
 								<p class="card-text">
 									{{$product_data->description}}
-<<<<<<< HEAD:resources/views/customer/layouts/details.blade.php
-								</p>          
-          						<hr />
-        
-          						<div class="d-flex flex-column flex-sm-row pt-1">
-									<a href="/checkout" class="btn btn-primary btn-cart mr-0 mr-sm-1 mb-1 mb-sm-0">
-									<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart font-medium-3"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
-									<span class="add-to-cart">Add To Cart</span>
-=======
 								</p>
 								<hr />
 
 								<div class="d-flex flex-column flex-sm-row pt-1">
-									<a href="javascript:void(0)"
+									<a href="{{ url('/checkout') }}"
 										class="btn btn-primary btn-cart mr-0 mr-sm-1 mb-1 mb-sm-0">
 										<svg width="14" height="14" viewBox="0 0 24 24" fill="none"
 											stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -100,7 +91,6 @@
 											</path>
 										</svg>
 										<span class="add-to-cart">Add To Cart</span>
->>>>>>> 6c6102626ed055960b2fbbf5a9ac5809bd4221a0:resources/views/details.blade.php
 									</a>
 								</div>
 							</div>
@@ -121,9 +111,4 @@
         }
       })
 </script>
-
-</body>
-<!-- END: Body-->
-
-</html>
 @endsection
