@@ -49,7 +49,7 @@
                     @foreach($product_data as $data)
                     <?php $list_img=json_decode($data->image_url); ?>
 
-                    <div class="card ecommerce-card">
+                    <div class="card ecommerce-card line-content">
                         <div class="item-img text-center">
                             <a href="details/{{$data->product_id}}">
                                 <img class="img-fluid card-img-top" src="{{ $list_img[0] }}" alt="img-placeholder" />
@@ -66,7 +66,7 @@
                                 <span class="card-text item-company">By <a href="javascript:void(0)"
                                         class="company-name">Apple</a></span>
                             </h6>
-                            
+
                             <p class="card-text item-description">{{$data->description}}</p>
                         </div>
                     </div>
@@ -79,10 +79,10 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <nav aria-label="Page navigation example">
-                                <ul class="pagination justify-content-center mt-2">
-                                    <li class="page-item prev-item"><a class="page-link" href="javascript:void(0);"></a>
+                                <ul class="pagination justify-content-center mt-2 " id="pagin">
+                                    {{--<li class="page-item prev-item"><a class="page-link" href="javascript:void(0);"></a>
                                     </li>
-                                    <li class="page-item active"><a class="page-link" href="javascript:void(0);">1</a>
+                                      <li class="page-item active"><a class="page-link" href="javascript:void(0);">1</a>
                                     </li>
                                     <li class="page-item"><a class="page-link" href="javascript:void(0);">2</a></li>
                                     <li class="page-item"><a class="page-link" href="javascript:void(0);">3</a></li>
@@ -90,8 +90,8 @@
                                             href="javascript:void(0);">4</a></li>
                                     <li class="page-item"><a class="page-link" href="javascript:void(0);">5</a></li>
                                     <li class="page-item"><a class="page-link" href="javascript:void(0);">6</a></li>
-                                    <li class="page-item"><a class="page-link" href="javascript:void(0);">7</a></li>
-                                    <li class="page-item next-item"><a class="page-link" href="javascript:void(0);"></a>
+                                    <li class="page-item"><a class="page-link" href="javascript:void(0);">7</a></li> 
+                                    <li class="page-item next-item"><a class="page-link" href="javascript:void(0);"></a>--}}
                                     </li>
                                 </ul>
                             </nav>
@@ -105,20 +105,40 @@
 
     </div>
 </div>
-
-
 @endsection
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-    function getProduct(product_id)
-    {
-      $.get('/deatils/'+product_id,function(aproduct)
-      {
-      alert(product_id);
+    //Pagination
+var pageSize = 9;
 
-    
-        });
+$(function() {
 
+    var pageCount = ($('.line-content').length) / pageSize; //page count
+
+    for (var i = 0; i < pageCount; i++) {
+    if (i == 0)
+        $("#pagin").append('<li class="page-item active"><a class="current page-link" href="javascript:void(0);">' + (i + 1) + '</a></li>');
+    else
+        $("#pagin").append('<li class="page-item"><a class="page-link" href="javascript:void(0);">' + (i + 1) + '</a></li>');
     }
     
+    showPage(1);
+    //on click to pagination
+    $("#pagin li a").click(function() {
+    $("#pagin li a").removeClass("current");
+    $("#pagin li ").removeClass("active");
+    $(this).addClass("current");
+    $(this).closest('li').addClass("active");
+    showPage(parseInt($(this).text()))
+    });
+
+})
+
+showPage = function(page) {
+ $(".line-content").hide();
+ $(".line-content").each(function(n) {
+   if (n >= pageSize * (page - 1) && n < pageSize * page)
+     $(this).show();
+ });
+}
 </script>
