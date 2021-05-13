@@ -543,7 +543,7 @@
                                         <div class="col-md-6 col-sm-12">
                                             <div class="form-group mb-2">
                                                 <label for="checkout-number">Mobile Number:</label>
-                                                <input type="number" id="contact" max="10" class="form-control"
+                                                <input type="number" id="phone_no" max="10" class="form-control"
                                                     name="phone_no" placeholder="0123456789"
                                                     value="{{ Auth::guard('customer')->user()->customer_phone }}" />
                                             </div>
@@ -551,15 +551,15 @@
                                         <div class="col-md-6 col-sm-12">
                                             <div class="form-group mb-2">
                                                 <label for="checkout-apt-number">Flat, House No:</label>
-                                                <input type='text' id="checkout-apt-number" class="form-control"
+                                                <input type='text' id="house_number" class="form-control"
                                                     name="house_number" placeholder="9447 Glen Eagles Drive" />
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-sm-12">
                                             <div class="form-group mb-2">
                                                 <label for="checkout-landmark">Landmark </label>
-                                                <input type="text" id="checkout-landmark" class="form-control"
-                                                    name="landmark" placeholder="Near Apollo Hospital" />
+                                                <input type="text" id="landmark" class="form-control" name="landmark"
+                                                    placeholder="Near Apollo Hospital" />
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-sm-12">
@@ -605,13 +605,19 @@
                             <div class="customer-card">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h4 class="card-title">John Doe</h4>
+                                        <h4 class="card-title"><span
+                                                id='add_firstname'>{{ Auth::guard('customer')->user()->customer_firstname }}</span>&nbsp;
+                                            <span
+                                                id='add_lastname'>{{ Auth::guard('customer')->user()->customer_lastname }}</span>
+                                        </h4>
                                     </div>
                                     <div class="card-body actions">
-                                        <p class="card-text mb-0">9447 Glen Eagles Drive</p>
-                                        <p class="card-text">Lewis Center, OH 43035</p>
-                                        <p class="card-text">UTC-5: Eastern Standard Time (EST)</p>
-                                        <p class="card-text">202-555-0140</p>
+                                        <p class="card-text mb-0" id='add_house_number'></p>
+                                        <p class="card-text" id='add_landmark'></p>
+                                        <p class="card-text"><span id='add_state'></span><span id='add_city'></span>
+                                        </p>
+                                        <p class="card-text" id='add_phone_no'>
+                                            {{ Auth::guard('customer')->user()->customer_phone }}</p>
                                         <button type="button"
                                             class="btn btn-primary btn-block btn-next delivery-address mt-2">
                                             Deliver To This Address
@@ -746,6 +752,39 @@
     $(document).ready(function(){
         $('#firstname,#lastname,#city,#state').keypress(function(){
         return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122));
+    });
+
+    $('#firstname').keyup(function(){
+        $('#add_firstname').empty();
+        $('#add_firstname').text(this.value);
+    });
+
+    $('#lastname').keyup(function(){
+        $('#add_lastname').empty();
+        $('#add_lastname').text(this.value);
+    });
+
+    $('#phone_no').keyup(function(){
+        $('#add_phone_no').empty();
+        $('#add_phone_no').text(this.value);
+    });
+
+    $('#state').keyup(function(){
+        $('#add_state').empty();
+        $('#add_state').text(this.value+" : ");
+    });
+
+    $('#city').keyup(function(){
+        $('#add_city').empty();
+        $('#add_city').text(this.value);
+    });
+    $('#house_number').keyup(function(){
+        $('#add_house_number').empty();
+        $('#add_house_number').text(this.value);
+    });
+    $('#landmark').keyup(function(){
+        $('#add_landmark').empty();
+        $('#add_landmark').text(this.value);
     });
 
 });
