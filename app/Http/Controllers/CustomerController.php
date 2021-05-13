@@ -119,4 +119,14 @@ class CustomerController extends Controller
         $customers = customers::create($input);
         return redirect('/')->with('success', 'Your Registred Successfully Login Here');
     }
+
+    public function check_customer_email(Request $request)
+    {
+        $response = 0;
+        $cnt = customers::where('email', $request->email)->count();
+        if ($cnt > 0) {
+            $response = 1;
+        }
+        return $response;
+    }
 }

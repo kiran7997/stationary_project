@@ -112,3 +112,5 @@ Route::post('save_customer_profile/{id}', 'CustomerController@save_profile');
 //customer registration
 Route::post('customer-register', 'CustomerController@customer_reg');
 Route::get('checkout', 'ShopController@cart');
+
+Route::post('check_customer_email', 'CustomerController@check_customer_email');
