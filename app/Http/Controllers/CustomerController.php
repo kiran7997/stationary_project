@@ -13,6 +13,9 @@ class CustomerController extends Controller
 {
     public function dashboard()
     {
+        if (!Auth::guard('customer')->user()) {
+            return redirect('/');
+        }
         $product_data = Aproducts::select('product_id', 'product_name', 'description', 'base_price', 'image_url')
             ->where(['deleted' => 0])->paginate(10);
         return view('customer/layouts/customer_dash', compact('product_data'));
