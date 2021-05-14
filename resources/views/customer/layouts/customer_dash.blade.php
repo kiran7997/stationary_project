@@ -1,7 +1,12 @@
 @extends('customer.layouts.app')
-@section('title', 'Customer-dashboard')
+@section('title', 'Customer-Dashboard')
 @section('content')
-
+<link rel="stylesheet" type="text/css" href="../../../app-assets/css/components.min.css">
+<style>
+    .pagination {
+        justify-content: center !important;
+    }
+</style>
 <div class="app-content content ecommerce-application">
     <div class="content-overlay"></div>
     <div class="header-navbar-shadow"></div>
@@ -21,14 +26,10 @@
                 </div>
             </div>
         </div>
-        <div class="content-detached ">
-            <div class="content-body">
-                <!-- background Overlay when sidebar is shown  starts-->
-                <div class="body-content-overlay"></div>
-                <!-- background Overlay when sidebar is shown  ends-->
-                <!-- E-commerce Search Bar Starts -->
-                {{-- <section id="ecommerce-searchbar" class="ecommerce-searchbar">
-                    <div class="row mt-1">
+        <div class="content-body">
+            <div class="bs-stepper checkout-tab-steps">
+                <section id="ecommerce-searchbar" class="ecommerce-searchbar">
+                    <div class="row ">
                         <div class="col-sm-12">
                             <div class="input-group input-group-merge">
                                 <input type="text" class="form-control search-product" id="shop-search"
@@ -41,104 +42,52 @@
                             </div>
                         </div>
                     </div>
-                </section> --}}
-                <!-- E-commerce Search Bar Ends -->
-
-                <!-- E-commerce Products Starts -->
-                <section id="ecommerce-products" class="grid-view">
-                    @foreach($product_data as $data)
-                    <?php $list_img=json_decode($data->image_url); ?>
-
-                    <div class="card ecommerce-card line-content">
-                        <div class="item-img text-center">
-                            <a href="details/{{$data->product_id}}">
-                                <img class="img-fluid card-img-top" src="{{ $list_img[0] }}" alt="img-placeholder" />
-                            </a>
-                        </div>
-                        <div class="card-body">
-                            <div class="item-wrapper">
-                                <div>
-                                    <h6 class="item-price">RS. {{$data->base_price}}</h6>
+                </section>
+                <div class="bs-stepper-header">
+                    <div class="step" data-target="#step-cart">
+                        <button type="button" class="step-trigger">
+                        </button>
+                    </div>
+                </div>
+                <div class="bs-stepper-content">
+                    <div id="step-cart" class="content">
+                        <div id="place-order" class="list-view product-checkout1">
+                            <div class="checkout-items">
+                                @foreach($product_data as $data)
+                                <?php $list_img=json_decode($data->image_url); ?>
+                                <div class="card ecommerce-card ">
+                                    <div class="item-img">
+                                        <a href="details/{{$data->product_id}}">
+                                            <img src=" {{ $list_img[0] }}" class='m-2' alt="img-placeholder"
+                                                style='border-radius:10px' />
+                                        </a>
+                                    </div>
+                                    <div class="card-body" style='border:none'>
+                                        <div class="item-name">
+                                            <h6 class="mb-1" style="color:#6610F2"><a
+                                                    href="details/{{$data->product_id}}">{{ucwords($data->product_name)}}</a>
+                                            </h6>
+                                            <span class=" delivery-date mb-1 "><b>{{$data->description}}</b></span>
+                                            <div>
+                                                <h5 class="delivery-date mb-1" style="color:#d05a21e3"><b>
+                                                        RS.&nbsp;{{$data->base_price}}
+                                                    </b></h5>
+                                            </div>
+                                        </div>
+                                        <span class="text-success"><small><b>In Stock</b></small></span>
+                                    </div>
                                 </div>
+                                @endforeach
                             </div>
-                            <h6 class="item-name">
-                                <a class="text-body" href="app-ecommerce-details.html">{{$data->product_name}}</a>
-                                <span class="card-text item-company">By <a href="javascript:void(0)"
-                                        class="company-name">Apple</a></span>
-                            </h6>
-
-                            <p class="card-text item-description">{{$data->description}}</p>
                         </div>
                     </div>
-                    @endforeach
-                </section>
-                <!-- E-commerce Products Ends -->
-
-                <!-- E-commerce Pagination Starts -->
-                <section id="ecommerce-pagination">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <nav aria-label="Page navigation example">
-                                <ul class="pagination justify-content-center mt-2 " id="pagin">
-                                    {{--<li class="page-item prev-item"><a class="page-link" href="javascript:void(0);"></a>
-                                    </li>
-                                      <li class="page-item active"><a class="page-link" href="javascript:void(0);">1</a>
-                                    </li>
-                                    <li class="page-item"><a class="page-link" href="javascript:void(0);">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="javascript:void(0);">3</a></li>
-                                    <li class="page-item" aria-current="page"><a class="page-link"
-                                            href="javascript:void(0);">4</a></li>
-                                    <li class="page-item"><a class="page-link" href="javascript:void(0);">5</a></li>
-                                    <li class="page-item"><a class="page-link" href="javascript:void(0);">6</a></li>
-                                    <li class="page-item"><a class="page-link" href="javascript:void(0);">7</a></li> 
-                                    <li class="page-item next-item"><a class="page-link" href="javascript:void(0);"></a>--}}
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
-                    </div>
-                </section>
-                <!-- E-commerce Pagination Ends -->
-
+                </div>
             </div>
         </div>
-
+        {!! $product_data->render() !!}
     </div>
 </div>
+<!-- END: Content-->
+<div class="sidenav-overlay"></div>
+<div class="drag-target"></div>
 @endsection
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-    //Pagination
-var pageSize = 9;
-
-$(function() {
-
-    var pageCount = ($('.line-content').length) / pageSize; //page count
-
-    for (var i = 0; i < pageCount; i++) {
-    if (i == 0)
-        $("#pagin").append('<li class="page-item active"><a class="current page-link" href="javascript:void(0);">' + (i + 1) + '</a></li>');
-    else
-        $("#pagin").append('<li class="page-item"><a class="page-link" href="javascript:void(0);">' + (i + 1) + '</a></li>');
-    }
-    
-    showPage(1);
-    //on click to pagination
-    $("#pagin li a").click(function() {
-    $("#pagin li a").removeClass("current");
-    $("#pagin li ").removeClass("active");
-    $(this).addClass("current");
-    $(this).closest('li').addClass("active");
-    showPage(parseInt($(this).text()))
-    });
-
-})
-
-showPage = function(page) {
- $(".line-content").hide();
- $(".line-content").each(function(n) {
-   if (n >= pageSize * (page - 1) && n < pageSize * page)
-     $(this).show();
- });
-}
-</script>
