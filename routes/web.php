@@ -114,3 +114,4 @@ Route::post('customer-register', 'CustomerController@customer_reg');
 Route::get('checkout', 'ShopController@cart');
 
 Route::post('check_customer_email', 'CustomerController@check_customer_email');
+Route::post('check_user_email', 'UserController@check_user_email');
