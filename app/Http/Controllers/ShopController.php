@@ -20,7 +20,11 @@ class ShopController extends Controller
         return view ('details', ['product_data' => $product_data]);
        
      }
-
+     public function add_to_cart(Request $req)
+    {
+       return "hello";
+     }
+     
     // // public function getProductId($product_id)
     // // {
     //     $productId= Aproducts::find($product_id);

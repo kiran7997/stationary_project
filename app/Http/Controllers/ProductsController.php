@@ -72,7 +72,9 @@ class ProductsController extends Controller
         $products->code = $req->code;
         $products->taxable = $req->taxable;
         $products->save();
-        return response()->json($products);
+        
+        return redirect('product')->with('success', ' Product Inserted  successfully');
+        //return response()->json($products);
     }
     public function edit($product_id)
     {
@@ -138,12 +140,14 @@ class ProductsController extends Controller
         $products['updated_by'] = Auth::user()->id;
 
         $products->save();
-        return response()->json($products);
+        return redirect('product')->with('success', 'Product Updated successfully');
+        //return response()->json($products);
     }
     public function destroy($product_id)
     {
         $products = Aproducts::where('product_id', $product_id)
             ->update(['deleted' => 1]);
         return response()->json(['success' => 'Record has Been Deleted']);
+        //return redirect('product')->with('success', 'Product delete successfully');
     }
 }

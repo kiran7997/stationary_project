@@ -42,10 +42,9 @@
                   <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="index.html">Home</a>
                     </li>
-                    <li class="breadcrumb-item"><a href="#">Customer Dashboard</a>
+                    <li class="breadcrumb-item"><a href="customer-dashboard">Customer Dashboard</a>
                     </li>
-                    <li class="breadcrumb-item"><a href="{{url('shop')}}">Shop</a>
-                    </li>
+                    
                     <li class="breadcrumb-item active">Details
                     </li>
                   </ol>
@@ -74,15 +73,12 @@
     <div class="card-body">
    
       <div class="row my-2">
-      
+      <?php $list_img=json_decode($product_data->image_url); ?>
         <div class="col-12 col-md-5 d-flex align-items-center justify-content-center mb-2 mb-md-0">
           <div class="d-flex align-items-center justify-content-center">
         
-            <img
-            src="{{url('product_images/'.$product_data->image_url)}}" width='100' height="100"
-              class="img-fluid product-img"
-              alt="product image" 
-            />
+          <img class="img-fluid card-img-top" src="{{ @$list_img[0] }}" width='100' height="100"
+                                    alt="img-placeholder" />
           </div>
         </div>
         <div class="col-12 col-md-7">

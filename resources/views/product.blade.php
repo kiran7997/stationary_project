@@ -2,9 +2,18 @@
 @section('title', 'Product')
 @section('content')
 
-@section('content')
+
 <!-- Responsive Datatable -->
 <!-- BEGIN: Content-->
+<head>
+
+<style>
+     .required:after {
+    content:" *";
+    color: red;
+	 }
+</style>
+</head>
 <div class="app-content content ">
 	<div class="content-overlay"></div>
 	<div class="header-navbar-shadow"></div>
@@ -31,6 +40,18 @@
 				<div class="row">
 					<div class="col-12">
 						<div class="card">
+						<br>
+                    @if ($message = Session::get('success'))
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <div class="alert-body">
+                                        <p>{{ $message }}</p>
+                                    </div>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                @endif
+                                <br>
 							<div class="card-header border-bottom">
 								<h4 class="card-title"></h4>
 								<button type="button" class="btn btn-outline-primary" data-toggle="modal"
@@ -61,7 +82,7 @@
 											<td>{{$product->description}}</td>
 											<td>{{$product->base_price}}</td>
 											<td>{{$product->code}}</td>
-											<td>{{ $product->taxable == 1 ? "Yes" : "No"}}</td>
+											<td>{{ $product->taxable == 0 ? "Yes" : "No"}}</td>
 											<td>
 												<a href="javascript:void(0)"
 													onclick="editproduct({{$product->product_id}})" class="fa fa-edit"
@@ -94,19 +115,19 @@
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 				</button>
 			</div>
-			<form id="productForm" name="productForm" enctype="multipart/form-data">
+			<form id="productForm" name="productForm" enctype="multipart/form-data" method="post">
 				@csrf
 				<div class="modal-body">
 
 
-					<label for="product_name">Product Name </label>
+					<label class="required" for="product_name">Product Name </label>
 					<div class="form-group">
-						<input type="text" name="product_name" id="product_name" class="form-control">
+						<input type="text" name="product_name" id="product_name" class="form-control" required>
 					</div>
 
-					<label for="cat_id">Catagory </label>
+					<label class="required" for="cat_id">Catagory </label>
 					<div class="form-group">
-						<select class="form-control" name="cat_id" id="cat_id">
+						<select class="form-control" name="cat_id" id="cat_id" required>
 							<option value="">Select Catagory</option>
 							@foreach($categories as $categorie)
 							<option value="{{$categorie->cat_id}}">{{$categorie->cat_name}}
@@ -115,10 +136,10 @@
 						</select>
 					</div>
 
-					<label for="unit_id">Unit </label>
+					<label class="required" for="unit_id">Unit </label>
 
 					<div class="form-group">
-						<select class="form-control" name="unit_id" id="unit_id">
+						<select class="form-control" name="unit_id" id="unit_id" required>
 							<option value="">Select Unit</option>
 							@foreach($units as $unit)
 							<option value="{{$unit->unit_id}}">{{$unit->unit_name}}
@@ -127,10 +148,10 @@
 						</select>
 					</div>
 
-					<label for="variation_id">Variation </label>
+					<label class="required"  for="variation_id">Variation </label>
 					<div class="form-group">
 
-						<select class="form-control" name="variation_id" id="variation_id">
+						<select class="form-control" name="variation_id" id="variation_id" required>
 							<option value="">Select Variation</option>
 							@foreach($product_variation as $product_var)
 							<option value="{{$product_var->variation_id}}">{{$product_var->variation_name}}
@@ -139,11 +160,11 @@
 						</select>
 					</div>
 
-					<label for="description">Product Image </label>
+					<label  class="required" for="description">Product Image </label>
 					<div class="form-group">
 
 						<input type='file' class='form-control' name='image_url[]' id='image_url'
-							accept=".jpg,.jpeg,.png" multiple />
+							accept=".jpg,.jpeg,.png" multiple  required/>
 
 					</div>
 					<div class="alert alert-danger alert-dismissible fade show" role="alert" id='err_img_url'
@@ -158,31 +179,30 @@
 					</div>
 
 
-					<label for="description">Description </label>
+					<label class="required" for="description">Description </label>
 
 					<div class="form-group">
-						<input type="text" name="description" id="description" class="form-control">
+						<input type="text" name="description" id="description" class="form-control" required> 
 					</div>
 
-					<label for="base_price">Base_Price </label>
+					<label class="required" for="base_price">Base_Price </label>
 
 					<div class="form-group">
-						<input type="text" name="base_price" id="base_price" class="form-control">
-					</div>
-
-
-
-
-					<label for="code">Code </label>
-					<div class="form-group">
-						<input type="text" name="code" id="code" class="form-control">
+						<input type="text" name="base_price" id="base_price" class="form-control" required>
 					</div>
 
 
 
-					<label for="taxable">Taxable Type</label> &nbsp;&nbsp;
+
+					<label class="required" for="code">Code </label>
+					<div class="form-group">
+						<input type="text" name="code" id="code" class="form-control" required>					</div>
+
+
+
+					<label class="required" for="taxable">Taxable Type</label> &nbsp;&nbsp;
 					<select name="taxable" id="taxable" class="form-control" required>
-						<option>Select Option</option>
+						<option value="">Select Option</option>
 						<option value="0">Yes</option>
 						<option value="1">No</option>
 
@@ -209,22 +229,22 @@
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-			<form id="productEditForm" name="productEditForm" enctype="multipart/form-data">
+			<form id="productEditForm" name="productEditForm" enctype="multipart/form-data" method="post">
 
 				<div class="modal-body">
 
 					@csrf
 					<input type="hidden" name="product_id" id="product_id">
 
-					<label for="product_name">Product Name
+					<label  class="required" for="product_name">Product Name
 					</label>
 					<div class="form-group">
-						<input type="text" name="product_name" id="product_name2" class="form-control">
+						<input type="text" name="product_name" id="product_name2" class="form-control" required>
 					</div>
 
-					<label for="cat_id">Catagory </label>
+					<label class="required" for="cat_id">Catagory </label>
 					<div class="form-group">
-						<select class="form-control" name="cat_id" id="cat_id2">
+						<select class="form-control" name="cat_id" id="cat_id2" required>
 							<option value="">Select Catagory</option>
 							@foreach($categories as $categorie)
 							<option value="{{$categorie->cat_id}}">{{$categorie->cat_name}}
@@ -233,10 +253,10 @@
 						</select>
 					</div>
 
-					<label for="unit_id">Unit </label>
+					<label  class="required" for="unit_id">Unit </label>
 
 					<div class="form-group">
-						<select class="form-control" name="unit_id" id="unit_id2">
+						<select class="form-control" name="unit_id" id="unit_id2" required>
 							<option value="">Select Unit</option>
 							@foreach($units as $unit)
 							<option value="{{$unit->unit_id}}">{{$unit->unit_name}}
@@ -245,9 +265,9 @@
 						</select>
 					</div>
 
-					<label for="variation_id">Variation </label>
+					<label class="required"  for="variation_id">Variation </label>
 					<div class="form-group">
-						<select class="form-control" name="variation_id" id="variation_id2">
+						<select class="form-control" name="variation_id" id="variation_id2" required>
 							<option value="">Select Variation</option>
 							@foreach($product_variation as $product_var)
 							<option value="{{$product_var->variation_id}}">{{$product_var->variation_name}}
@@ -257,29 +277,29 @@
 					</div>
 					<br>
 
-					<label for="description">Description </label>
+					<label  class="required" for="description">Description </label>
 
 					<div class="form-group">
-						<input type="text" name="description" id="description2" class="form-control">
+						<input type="text" name="description" id="description2" class="form-control" required>
 					</div>
 
-					<label for="base_price">Base Price </label>
+					<label class="required" for="base_price">Base Price </label>
 
 					<div class="form-group">
-						<input type="text" name="base_price" id="base_price2" class="form-control">
+						<input type="text" name="base_price" id="base_price2" class="form-control" required>
 					</div>
 
 
 
-					<label for="code">Code </label>
+					<label  class="required" for="code">Code </label>
 					<div class="form-group">
-						<input type="text" name="code" id="code2" class="form-control">
+						<input type="text" name="code" id="code2" class="form-control" required>
 					</div>
 
-					<label for="taxable">taxable </label>
+					<label class="required"  for="taxable">taxable </label>
 					<div class="form-group">
-						<select name="taxable" id="taxable2" class="form-control">
-							<option>Select Option</option>
+						<select name="taxable" id="taxable2" class="form-control" required>
+							<option value="">Select Option</option>
 							<option value="0">Yes</option>
 							<option value="1">No</option>
 						</select>
@@ -287,9 +307,9 @@
 
 					<br>
 					<div class="form-group">
-						<label for="description">Product Image </label>
+						<label class="required"  for="description">Product Image </label>
 						<input type='file' class='form-control' accept=".jpg,.jpeg,.png" name='image_url[]'
-							id='image_url2' multiple>
+							id='image_url2' multiple > 
 						{{-- <input type='hidden' class='form-control' name='old_image' id='old_image'> --}}
 						<span class="text-danger" id="image-input-error"></span>
 					</div>
@@ -335,24 +355,44 @@
 });
 } );
 
-		$("#productForm").submit(function(e){
-            e.preventDefault();
-            $.ajax({
-                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-                url:"/addpro",
-                type:"post",
-                data:new FormData(this),
-                dataType:'JSON',
-                contentType: false,
-                cache: false,
-                processData: false,
-                success:function(response)
-                {     
-                    alert("Data Inserted Successfully");
-                    location.reload();
-                }
-            });
-        });
+		// $("#productForm").submit(function(e){
+        //     e.preventDefault();
+        //     $.ajax({
+        //         headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+        //         url:"/addpro",
+        //         type:"post",
+        //         data:new FormData(this),
+        //         dataType:'JSON',
+        //         contentType: false,
+        //         cache: false,
+        //         processData: false,
+        //         success:function(response)
+        //         {     
+        //             alert("Data Inserted Successfully");
+        //             location.reload();
+        //         }
+        //     });
+        // });
+
+		$(document).ready(function() {
+
+$('#productForm').validate({
+rules: {
+   "product_name": { required: true },
+   "cat_id": { required: true },
+   "unit_id": { required: true }
+    },
+    submitHandler: function(form) {
+       // var hidden_id = $('#inventory_id').val();
+        var action = "{{url('addpro')}}";
+        
+        $('form').attr('action',action);
+        form.submit();
+    }
+    
+
+});
+});
 
 	function editproduct(product_id)
     {   
@@ -411,29 +451,46 @@
                }
                });
 
-               
-
-    $("#productEditForm").submit(function(e){
-        e.preventDefault();
+          
+$('#productEditForm').validate({
+rules: {
+   "product_name": { required: true },
+   "cat_id": { required: true },
+   "unit_id": { required: true }
+    },
+    submitHandler: function(form) {
+       // var hidden_id = $('#inventory_id').val();
+        var action = "{{url('editpro')}}";
         
-        $.ajax({
-            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-            url:"/editpro",
-            type:"post",
-            data:new FormData(this),
-            dataType:'JSON',
-            contentType: false,
-            cache: false,
-            processData: false,
-            success:function(response)
-            {     
-              
-                alert("Data Updated Successfully");
-                location.reload();
-            }
-        });
+        $('form').attr('action',action);
+        form.submit();
+	}
 
-    });
+
+});
+
+    // $("#productEditForm").submit(function(e){
+    //     e.preventDefault();
+        
+    //     $.ajax({
+    //         headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+    //         url:"/editpro",
+    //         type:"post",
+    //         data:new FormData(this),
+    //         dataType:'JSON',
+    //         contentType: false,
+    //         cache: false,
+    //         processData: false,
+    //         success:function(response)
+    //         {     
+              
+    //             alert("Data Updated Successfully");
+    //             location.reload();
+    //         }
+    //     });
+
+    // });
+	
 
 	function deleteproduct(product_id)
 	{

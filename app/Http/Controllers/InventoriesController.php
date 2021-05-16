@@ -9,7 +9,7 @@ class InventoriesController extends Controller
 {
     public function index()
     {
-        $invens= Inventories::where(['deleted'=>0])->paginate(5);
+        $invens= Inventories::where(['deleted'=>0])->get();
        
         return view ('inventoeries',compact('invens'));
        
@@ -29,13 +29,16 @@ class InventoriesController extends Controller
         $invens['updated_by']=Auth::user()->id;
         
         $invens->save();
-        echo "<pre>"; print_r($invens); exit;      
-        return response()->json($invens);
+          
+        // return response()->json($invens);
+        return redirect('inventories')->with('success', 'Inventory Added successfully');
     }
      public function edit($inventory_id)
     {
         $invens= Inventories::find($inventory_id);
         return response()->json($invens);
+        //return redirect()->with('success', 'Inventory Updated successfully');
+        
     }
     public function update(Request $req)
     {
@@ -48,15 +51,19 @@ class InventoriesController extends Controller
         $invens->quantity = $req->quantity;
         $invens->invntory_status = $req->invntory_status;
         $invens['updated_by']=Auth::user()->id;
+       
         $invens->save();
-           return response()->json($invens);
+        echo "<pre>";print_r($invens);
+          // return response()->json($invens);
+          return redirect('inventories')->with('success', 'Inventory Updated successfully');
+         
     }
        public function destroy($inventory_id)
     {
         $invens=Inventories::where('inventory_id',$inventory_id)
                       ->update(['deleted'=>1]);
         
-        return response()->json(['success'=>'Record has Been Deleted']);
-
+       return response()->json(['success'=>'Record has Been Deleted']);
+        //return redirect('inventories')->with('success', 'Record has Been Deleted');
     }
 }

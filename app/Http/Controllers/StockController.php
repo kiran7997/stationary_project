@@ -17,11 +17,7 @@ class StockController extends Controller
      public function store(Request $req)
     {
         $stock=new Stocks();
-        $req->validate([
-            'product_id' => 'required',
-            'item_quantity' => 'required',
-            
-        ]);
+        
 
         $stock->product_id = $req->product_id;
         $stock->item_quantity = $req->item_quantity;
@@ -29,7 +25,8 @@ class StockController extends Controller
         $stock['updated_by']=Auth::user()->id;
         
         $stock->save();
-        return response()->json($stock);
+       // return response()->json($stock);
+       return redirect('stock')->with('success', 'Stock Inserted successfully');
     }
     public function edit($stock_id)
     {
@@ -43,14 +40,15 @@ class StockController extends Controller
         $stock->item_quantity=$req->item_quantity;
         $stock['updated_by']=Auth::user()->id;
         $stock->save();
-           return response()->json($stock);
+           //return response()->json($stock);
+           return redirect('stock')->with('success', 'Stock Updated successfully');
     }
        public function destroy($stock_id)
     {
         $stock=Stocks::where('stock_id',$stock_id)
                       ->update(['deleted'=>1]);
-        
-        return response()->json(['success'=>'Record has Been Deleted']);
+                      //return redirect('stock')->with('success', 'Record has Been Deleted');
+       return response()->json(['success'=>'Record has Been Deleted']);
 
     }
 

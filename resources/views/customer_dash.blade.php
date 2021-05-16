@@ -55,7 +55,7 @@
                     <div class="card ecommerce-card">
                         <div class="item-img text-center">
                             <a href="details/{{$data->product_id}}">
-                                <img class="img-fluid card-img-top" src="{{ $list_img[0] }}" width='100' height="100"
+                                <img class="img-fluid card-img-top" src="{{ @$list_img[0] }}" width='100' height="100"
                                     alt="img-placeholder" />
                             </a>
                         </div>

@@ -71,7 +71,7 @@ Route::delete('/delep/{product_id}', 'ProductsController@destroy');
 Route::get('/shop', 'ShopController@index');
 //Route::get('/getid/{product_id}','ShopController@getProductId');
 Route::get('/details/{product_id}', 'ShopController@details');
-Route::get('/details', 'ShopController@details');
+Route::post('/add_to_cart', 'ShopController@add_to_cart');
 //Add Customer
 Route::get('/customer', 'CustomerController@index');
 Route::post('/addcust', 'CustomerController@store');

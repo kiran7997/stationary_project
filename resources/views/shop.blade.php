@@ -101,11 +101,16 @@
             <p class="card-text shipping"><span class="badge badge-pill badge-light-success">Free Shipping</span></p>
           </div>
         </div>
-
-        <a href="javascript:void(0)" class="btn btn-primary btn-cart">
+        <form action="{{url('add_to_cart')}}" method="post">
+      <input type="hidden" name="product_id"  value="{{$data->product_id}}">
           <i data-feather="shopping-cart"></i>
           <span class="add-to-cart">Add to cart</span>
-        </a>
+        </form>
+        <!-- <a href="{{url('add_to_cart')}}" class="btn btn-primary btn-cart">
+          <i data-feather="shopping-cart"></i>
+            <input type="hidden" name="product_id" value="{{$data->product_id}}">
+          <span class="add-to-cart">Add to cart</span>
+        </a> -->
       </div>
     </div>
 
@@ -136,15 +141,9 @@
 
     }
     
-<<<<<<< HEAD
-    </script>
-   
-    @endsection
-=======
   </script>
   </body>
   <!-- END: Body-->
 
   </html>
   @endsection
->>>>>>> e7190d5633907d2c3095aba332139040c325c3e2
