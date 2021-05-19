@@ -2,6 +2,11 @@
 
 @section('content')
 <!-- BEGIN: Content-->
+<style>
+    .select2-selection__arrow {
+        display: none;
+    }
+</style>
 <div class="app-content content">
     <div class="content-overlay"></div>
     <div class="header-navbar-shadow"></div>
@@ -52,7 +57,7 @@
                                     </ul>
                                 </div>
                                 @endif
-                                <form class="needs-validation1" action="{{ route('users.store')}}"
+                                <form id='form' class="needs-validation1" action="{{ route('users.store')}}"
                                     enctype="multipart/form-data" method='POST' novalidate>
                                     @csrf
                                     <div class="row">
@@ -84,21 +89,32 @@
                                         <div class="col-md-4 col-12">
                                             <div class="form-group">
                                                 <label class="form-label" for="basic-default-email1">Email</label>
-                                                <input type="email" id="basic-default-email1" class="form-control"
+                                                <input type="email" id="email" class="form-control"
                                                     placeholder="john.doe@email.com" aria-label="john.doe@email.com"
                                                     name='email' required />
                                                 <div class="valid-feedback">Looks good!</div>
                                                 <div class="invalid-feedback">
                                                     Please enter a valid email
                                                 </div>
+                                                <div class="alert alert-danger alert-dismissible fade show mt-1"
+                                                    role="alert" id='err_email' style='display:none'>
+                                                    <div class="alert-body">
+                                                        <p>This Email is Already Taken!</p>
+                                                    </div>
+                                                    <button type="button" class="close" data-dismiss="alert"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="col-md-4 col-12">
                                             <div class="form-group">
                                                 <label class="form-label" for="phone_no">Phone Number</label>
-                                                <input type="text" id="phone_no" class="form-control"
+                                                <input type="number" id="phone_no" class="form-control"
                                                     placeholder="Phone Number" aria-label="Name"
-                                                    aria-describedby="phone_no" required name='phone_no' />
+                                                    aria-describedby="phone_no" required name='phone_no'
+                                                    onKeyPress="if(this.value.length==10) return false;" />
                                                 <div class="valid-feedback">Looks good!</div>
                                                 <div class="invalid-feedback">
                                                     Please enter your phone no.
@@ -122,9 +138,16 @@
                                                 <div class="invalid-feedback">
                                                     Please enter your username.
                                                 </div>
-                                                <div id='err_username' style='width: 100%;margin-top: .25rem;font-size: .857rem;
-                                                    color: #EA5455;'>
-                                                    Username is already taken.
+
+                                                <div class="alert alert-danger alert-dismissible fade show mt-1"
+                                                    role="alert" id='err_username' style='display:none'>
+                                                    <div class="alert-body">
+                                                        <p>This Username is Already Taken!</p>
+                                                    </div>
+                                                    <button type="button" class="close" data-dismiss="alert"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>
@@ -157,7 +180,8 @@
                                         <div class="col-md-4 col-12">
                                             <div class="form-group">
                                                 <label for="state">State</label>
-                                                <select class="form-control" name="state" id="state" required>
+                                                <select class="select2 form-control w-100" name="state" id="state"
+                                                    required>
                                                     <option value="">Select State</option>
                                                     @foreach($states as $state)
                                                     <option value="{{$state->state_id}}">{{$state->state_title}}
@@ -173,7 +197,8 @@
                                         <div class="col-md-4 col-12">
                                             <div class="form-group">
                                                 <label for="district">District</label>
-                                                <select class="form-control" name="district" id="district" required>
+                                                <select class="select2 form-control w-100" name="district" id="district"
+                                                    required>
                                                     <option value="">Select District</option>
                                                 </select>
                                                 <div class="valid-feedback">Looks good!</div>
@@ -197,7 +222,7 @@
                                             <div class="form-group">
                                                 <label for="department">Department</label>
                                                 {!! Form::select('roles[]', $roles,[], array('class' =>
-                                                'form-control','required' => 'required')) !!}
+                                                'form-control select2 w-100','required' => 'required')) !!}
                                                 <div class="valid-feedback">Looks good!</div>
                                                 <div class="invalid-feedback">
                                                     Please select your Department
@@ -257,6 +282,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
     $(document).ready(function(){
+        $("#form").validate(); //form validation
 
         $('#state').change(function(){
             var state_id = this.value;
@@ -300,7 +326,6 @@
             }
         });
 
-        $('#err_username').hide();
         $('#username').focusout(function(){
             var username = this.value;
                 $.ajax({
@@ -309,10 +334,30 @@
                 data: {_token:'{{ csrf_token() }}',username:username},
                 success:function(res){
                     if(res==1){
+                        $("#username").focus();
                         $('#err_username').show();
                         $('#btn_submit').attr('disabled','ture');
                     }else{
                         $('#err_username').hide();
+                        $('#btn_submit').attr('disabled',false);
+                    }
+                }
+            });
+        })
+
+        $('#email').focusout(function(){
+            var email = this.value;
+                $.ajax({
+                url: "{{url('check_user_email')}}",
+                type: "POST",
+                data: {_token:'{{ csrf_token() }}',email:email},
+                success:function(res){
+                    if(res==1){
+                        $("#email").focus();
+                        $('#err_email').show();
+                        $('#btn_submit').attr('disabled',true);
+                    }else{
+                        $('#err_email').hide();
                         $('#btn_submit').attr('disabled',false);
                     }
                 }

@@ -33,7 +33,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        $roles = Role::pluck('name', 'name')->all();
+        $roles = Role::where('name', '!=', 'Admin')->pluck('name', 'name')->all();
         $states = DB::table('state')->select('state_id', 'state_title')->get();
         $departments = Department::where('is_active', 0)->get();
         return view('users.create', compact('roles', 'states', 'departments'));
@@ -113,7 +113,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-        $roles = Role::pluck('name', 'name')->all();
+        $roles = Role::where('name', '!=', 'Admin')->pluck('name', 'name')->all();
         $userRole = $user->roles->pluck('name', 'name')->all();
         $states = DB::table('state')->select('state_id', 'state_title')->get();
         $districts = DB::table('district')->select('districtid', 'district_title')->where('state_id', $user->state)->get();
@@ -260,5 +260,22 @@ class UserController extends Controller
         $user = User::find($id);
         $user->update($input);
         return redirect('profile')->with('success', 'User updated successfully');
+    }
+
+    public function check_user_email(Request $request)
+    {
+        $response = 0;
+        //checking for email is present 
+        if (isset($request->id)) {
+            //check for update page condition
+            $cnt = User::where('email', $request->email)->where('id', '!=', $request->id)->count();
+        } else {
+            //check for create page condition
+            $cnt = User::where('email', $request->email)->count();
+        }
+        if ($cnt > 0) {
+            $response = 1;
+        }
+        return $response;
     }
 }
