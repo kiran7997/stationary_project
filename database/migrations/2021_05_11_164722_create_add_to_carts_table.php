@@ -17,9 +17,12 @@ class CreateAddToCartsTable extends Migration
             $table->id('cart_id');
             $table->integer('product_id');
             $table->integer('customer_id');
+            $table->integer('quantity');
+            $table->float('product_price', 5, 2);
+            $table->float('amount', 7, 2);
+            $table->integer('deleted')->default(0);
             $table->integer('created_by')->nullable();
             $table->integer('updated_by')->nullable();
-            
             $table->timestamps();
         });
     }

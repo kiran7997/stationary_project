@@ -67,9 +67,10 @@
 								</div>
 							</div>
 							<div class="col-12 col-md-7">
-								<h4>{{$product_data->product_name}}</h4>
+							<input type="hidden" id="product_id" name="product_id" value="{{ $product_data->product_id }}" />
+								<h4>{{ $product_data->product_name }}</h4>
 								<div class="ecommerce-details-price d-flex flex-wrap mt-1">
-									<h4 class="item-price mr-1">Rs. {{$product_data->base_price}}</h4>
+									<h4 class="item-price mr-1">Rs. {{ $product_data->base_price }}</h4>
 								</div>
 								<p class="card-text">Available - <span class="text-success">
                                                         <span class="badge badge-pill badge-light-success">In Stock</span>
@@ -80,7 +81,7 @@
 								<hr />
 
 								<div class="d-flex flex-column flex-sm-row pt-1">
-									<a href="{{ url('/checkout') }}"
+									<a id="add-to-cart"
 										class="btn btn-primary btn-cart mr-0 mr-sm-1 mb-1 mb-sm-0">
 										<svg width="14" height="14" viewBox="0 0 24 24" fill="none"
 											stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -90,7 +91,7 @@
 											<path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6">
 											</path>
 										</svg>
-										<span class="add-to-cart">Add To Cart</span>
+										<span class="add-to-cart" id="span_label_cart"><?php if(!empty($add_to_cart_data)) { ?>View In Cart<?php }else { ?>Add To Cart<?php } ?></span>
 									</a>
 								</div>
 							</div>
@@ -103,12 +104,40 @@
 </div>
 <!-- END: Content-->
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
 
-<script>
+	$(document).ready(function() {
+
+		$.ajaxSetup({
+			headers: {
+				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			}
+		});
+
+		$("#add-to-cart").on('click', function() {
+			product_id = $('#product_id').val();
+			var span_label_cart = $("#span_label_cart").html();
+			if(span_label_cart == "View In Cart"){
+				window.location = "/checkout";
+			}else{
+				$.ajax({
+					url: "/insert-into-cart",
+					data: { "_token": "{{ csrf_token() }}", "product_id": product_id },
+					type: "POST",
+					success: function(response) {
+						window.location = "/checkout";
+					}
+				});
+			}
+		});
+	});
+
 	$(window).on('load',  function(){
         if (feather) {
           feather.replace({ width: 14, height: 14 });
         }
-      })
+    });
+
 </script>
 @endsection

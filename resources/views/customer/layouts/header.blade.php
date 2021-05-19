@@ -1,16 +1,16 @@
 <!-- BEGIN: Header-->
 <nav class="header-navbar navbar navbar-expand-lg align-items-center floating-nav navbar-light navbar-shadow">
-  <div class="navbar-container d-flex content">
-    <div class="bookmark-wrapper d-flex align-items-center">
-      <ul class="nav navbar-nav d-xl-none">
-        <li class="nav-item"><a class="nav-link menu-toggle" href="javascript:void(0);"><i class="ficon"
+  	<div class="navbar-container d-flex content">
+    	<div class="bookmark-wrapper d-flex align-items-center">
+      	<ul class="nav navbar-nav d-xl-none">
+        	<li class="nav-item"><a class="nav-link menu-toggle" href="javascript:void(0);"><i class="ficon"
               data-feather="menu"></i></a></li>
-      </ul>
+      	</ul>
     </div>
     <ul class="nav navbar-nav align-items-center ml-auto">
-      <li class="nav-item d-none d-lg-block"><a class="nav-link nav-link-style"><i class="ficon"
+      	<li class="nav-item d-none d-lg-block"><a class="nav-link nav-link-style"><i class="ficon"
             data-feather="moon"></i></a></li>
-      <li class="nav-item nav-search"><a class="nav-link nav-link-search"><i class="ficon"
+      	<li class="nav-item nav-search"><a class="nav-link nav-link-search"><i class="ficon"
             data-feather="search"></i></a>
         <div class="search-input">
           <div class="search-input-icon"><i data-feather="search"></i></div>
@@ -22,7 +22,7 @@
       </li>
       <li class="nav-item dropdown dropdown-cart mr-25"><a class="nav-link" href="javascript:void(0);"
           data-toggle="dropdown"><i class="ficon" data-feather="shopping-cart"></i><span
-            class="badge badge-pill badge-primary badge-up cart-item-count">0</span></a>
+            class="badge badge-pill badge-primary badge-up cart-item-count">{{ App\AddToCart::where(['customer_id' => Auth::guard('customer')->user()->customer_id, 'deleted' => 0])->sum('quantity') }}</span></a>
         <ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">
           <li class="dropdown-menu-header">
             <div class="dropdown-header d-flex">
