@@ -11,6 +11,10 @@ use Illuminate\Http\Request;
 
 class ProductsController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:product');
+    }
     public function index()
     {
         // $products = Aproducts::where(['deleted' => 0])->get();
@@ -127,7 +131,7 @@ class ProductsController extends Controller
             }
         }
 
-        if(!empty($req->old_image)){
+        if (!empty($req->old_image)) {
             foreach ($req->old_image as $old_img) {
                 $product_img[] = $old_img;
             }
