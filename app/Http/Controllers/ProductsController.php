@@ -129,10 +129,11 @@ class ProductsController extends Controller
             }
         }
 
-        foreach ($req->old_image as $old_img) {
-            $product_img[] = $old_img;
+        if(!empty($req->old_image)){
+            foreach ($req->old_image as $old_img) {
+                $product_img[] = $old_img;
+            }
         }
-
 
         $pro_img = json_encode($product_img);
         $products->image_url = $pro_img;

@@ -13,25 +13,16 @@ class ShopController extends Controller
         return view ('shop', ['product_data' => $product_data]);
        
     }
+
     public function details($product_id)
     {
-        $product_data=   Aproducts::find($product_id);
-         //->where(['product_id'=>0])->get();
-        return view ('details', ['product_data' => $product_data]);
-       
-     }
-     public function add_to_cart(Request $req)
-    {
-       return "hello";
-     }
-     
-    // // public function getProductId($product_id)
-    // // {
-    //     $productId= Aproducts::find($product_id);
-    //     return view ('deatils', ['product_id' => $productId]);
-    //    // return response()->json($productId);
-    //   //  echo $productId;
-    // }
+        $product_data = array();
+        $product_data = Aproducts::find($product_id);
+        return view ('customer/layouts/details', ['product_data' => $product_data]);
+    }
 
+    public function cart(){
+        return view('customer/layouts/checkout');
+    }
     
 }

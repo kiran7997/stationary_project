@@ -58,12 +58,19 @@ class InventoriesController extends Controller
           return redirect('inventories')->with('success', 'Inventory Updated successfully');
          
     }
-       public function destroy($inventory_id)
-    {
-        $invens=Inventories::where('inventory_id',$inventory_id)
-                      ->update(['deleted'=>1]);
+    //    public function destroy($inventory_id)
+    // {
+    //     $invens=Inventories::where('inventory_id',$inventory_id)
+    //                   ->update(['deleted'=>1]);
         
-       return response()->json(['success'=>'Record has Been Deleted']);
-        //return redirect('inventories')->with('success', 'Record has Been Deleted');
+    // //    return response()->json(['success'=>'Record has Been Deleted']);
+    //    return redirect()->route('inventories')
+    //         ->with('success', 'Inventory deleted successfully');
+    //     //return redirect('inventories')->with('success', 'Record has Been Deleted');
+    // }
+    public function destroy($inventory_id)
+    {
+        Inventories::where('inventory_id', $inventory_id)->update(['deleted' => 1]);
+        return response()->json(['success'=>'Record has Been Deleted']);
     }
 }

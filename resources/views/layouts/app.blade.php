@@ -69,6 +69,7 @@ License: You must have a valid license purchased only from themeforest(the above
   <link rel="stylesheet" type="text/css"
     href="{{ asset('app-assets/vendors/css/tables/datatable/responsive.bootstrap4.min.css') }}">
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
+  <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/plugins/forms/form-validation.css') }}">
 
 </head>
 

@@ -3,15 +3,25 @@
 namespace App\Http\Controllers;
 use Auth;
 use App\Stocks;
+use App\Aproducts;
 use Illuminate\Http\Request;
 
 class StockController extends Controller
 {
     public function index()
     {
-        $stocks= stocks::where(['deleted'=>0])->get();
-       
-        return view ('stock',compact('stocks'));
+
+        $products_data=Aproducts::select('product_id','product_name')->where('deleted', 0)->get();
+        $stocks=Stocks::select('stocks.stock_id', 'stocks.product_id', 'stocks.item_quantity', 'aproducts.product_name')
+                ->leftjoin('aproducts', 'aproducts.product_id', 'stocks.product_id')
+                ->where(['stocks.deleted' => 0])->get();
+                // dd($products_data);
+       // $stocks= stocks::where(['deleted'=>0])->get();
+    //    echo '<pre>';
+    //    echo $stocks;
+    //    echo '</pre>';
+    //    exit;
+        return view ('stock', ['products_data' => $products_data, 'stocks' => $stocks]);
        
     }
      public function store(Request $req)

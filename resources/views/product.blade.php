@@ -8,12 +8,14 @@
 <head>
 
 <style>
-     .required:after {
+    .required:after {
     content:" *";
     color: red;
 	 }
 </style>
 </head>
+<meta name="csrf_token" content="{{ csrf_token() }}" />
+
 <div class="app-content content ">
 	<div class="content-overlay"></div>
 	<div class="header-navbar-shadow"></div>
@@ -231,9 +233,9 @@
 			</div>
 			<form id="productEditForm" name="productEditForm" enctype="multipart/form-data" method="post">
 
+			
+				@csrf
 				<div class="modal-body">
-
-					@csrf
 					<input type="hidden" name="product_id" id="product_id">
 
 					<label  class="required" for="product_name">Product Name
@@ -505,6 +507,7 @@ rules: {
             success:function(response)
             {
                 $('#sid'+product_id).remove();
+				alert("Product Deleted Successfully");
             }
         
         })

@@ -37,18 +37,20 @@
         					<table class="table">
         						<thead>
         							<tr>
-        								<th>Pdrouct ID</th>
+        								<th>Product Name</th>
               							<th>Item Quantity</th>
               							<th>Actions</th> 
                                 	</tr>                                        
                             	</thead>
                             	<tbody>
+								<?php //dd($stocks);?>
           							@foreach($stocks as $stock)
            								<tr id="sid{{$stock->stock_id}}">
-                							<td>{{$stock->product_id}}</td>
+										
+										   <td>{{$stock->product_name}}</td>							  
                 							<td>{{$stock->item_quantity}}</td>
                 							<td>
-                								<a href="javascript:void(0)" onclick="editStock({{$stock->stock_id}})"  class="fa fa-edit" style="font-size:24px"></a>
+                								<a href="javascript:void(0)" onclick="editStock(<?php echo $stock->stock_id; ?>)"  class="fa fa-edit" style="font-size:24px"></a>
         										<a href="javascript:void(0)" onclick="deletestock({{$stock->stock_id}})" class="fa fa-trash" style="font-size:24px;color:red"></a>
                 							</td>
                 						</tr>
@@ -77,15 +79,12 @@
 					@csrf
 					<div class="form-group">
 						<label class="required" for="product_id">Product Type</label> &nbsp;&nbsp;
-						<select name="product_id" id="product_id"  class="form-control" required>
+						<select name="product_id" id="product_id2"  class="form-control" required>
 							<option value="">Select Option</option>
-							<option value="1">Pen</option>
-							<option value="2">Text Book</option>
-							<option value="3">Pencil</option>
-							<option value="4">Colorbox</option>
-							<option value="5">Drawing Book</option>
-						</select>
-						
+	 						@foreach($products_data as $product_data)
+								<option value="{{ $product_data->product_id }}">{{ $product_data->product_name }}</option>
+							@endforeach
+						</select>  
 					</div>
 					<br>
 					<div class="form-group">
@@ -112,11 +111,9 @@
 						<label class="required" for="product_id">Product Type</label> &nbsp;&nbsp;
 						<select name="product_id" id="product_id2"  class="form-control" required>
 							<option value="">Select Option</option>
-							<option value="1">Pen</option>
-							<option value="2">Text Book</option>
-							<option value="3">Pencil</option>
-							<option value="4">Colorbox</option>
-							<option value="5">Drawing Book</option>
+	 						@foreach($products_data as $product_data)
+								<option value="{{ $product_data->product_id }}">{{ $product_data->product_name }}</option>
+							@endforeach
 						</select>  
 					</div>
 					<br>
@@ -214,9 +211,11 @@ rules: {
 
     function editStock(stock_id)
     {
+		alert(stock_id);
         $.get('/edit/'+stock_id,function(stock){
               $("#stock_id").val(stock.stock_id);
-               $("#product_id2").val(stock.product_id);
+            //   $('#product_id2').val(stock.product_id);
+			  $('#product_id2  option[value="'+stock.product_id+'"]').prop("selected", true);
                 $("#item_quantity2").val(stock.item_quantity);
                 $("#stockEditModal").modal('toggle');
 
@@ -299,6 +298,7 @@ function deletestock(stock_id)
             success:function(response)
             {
                 $('#sid'+stock_id).remove();
+				alert("Stock Deleted Successfully");
             }
         })
     }

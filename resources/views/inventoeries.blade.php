@@ -35,7 +35,7 @@
                                 @endif
                                 <br>
       					<div class="table-responsive">
-        					<table class="table">
+        					<table id="example" class="table">
         						<thead>
 									<tr>
 										<th>Company Name</th>
@@ -61,6 +61,7 @@
 											<td>
                                 				<a href="javascript:void(0)" onclick="editinven({{$inven->inventory_id}})" class="fa fa-edit" style="font-size:24px"></a>
         										<a href="javascript:void(0)" onclick="deleteinven({{$inven->inventory_id}})" class="fa fa-trash" style="font-size:24px;color:red"></a>
+                                               
                                         	</td>
                                     	</tr>
                                 	@endforeach
@@ -142,7 +143,7 @@
                             <div class="invalid-feedback">Please Enter Inventory Quantity.</div>
  
                     </div>
-           			<label  class="required" for="invntory_status">Invntory Status  </label>
+           			<label  class="required" for="invntory_status">Inventory Status  </label>
          			<select name="invntory_status" id="invntory_status"  class="form-control" required>
        					<option value="">Select Option</option>
 						<option value="Add">Add</option>
@@ -218,7 +219,7 @@
                         
                     </div>
 
-                    <label  class="required" for="invntory_status">Invntory Status  </label>
+                    <label  class="required" for="invntory_status">Inventory Status  </label>
                     <div class="form-group">
          				<select name="invntory_status" id="invntory_status2"  class="form-control" required>
             				<option value="">Select Option</option>
@@ -415,15 +416,30 @@ function deleteinven(inventory_id)
             },
             success:function(response)
             {
+               // alert(response);
                 $('#sid'+inventory_id).remove();
-              
+                alert("Inventory Deleted Successfully");
             }
      
         })
     }   
 }
-</script>
+ </script>
+<!-- <script>
+    $(document).ready(function() {
+    // $('#example').DataTable();
+    $('#example').DataTable( {
+        // "scrollY": 200,
+        "scrollX": true
+    } );
 
+    $(".delete").on("click", function () {
+    return confirm('Are you sure you want to Delete?');
+});
+} );
+
+
+</script> -->
 
 </html>
 @endsection

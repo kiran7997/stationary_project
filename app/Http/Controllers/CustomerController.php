@@ -13,9 +13,12 @@ class CustomerController extends Controller
 {
     public function dashboard()
     {
+        if (!Auth::guard('customer')->user()) {
+            return redirect('/');
+        }
         $product_data = Aproducts::select('product_id', 'product_name', 'description', 'base_price', 'image_url')
-            ->where(['deleted' => 0])->get();
-        return view('customer_dash', compact('product_data'));
+            ->where(['deleted' => 0])->paginate(10);
+        return view('customer/layouts/customer_dash', compact('product_data'));
     }
 
 
@@ -118,5 +121,15 @@ class CustomerController extends Controller
         $input['password'] = Hash::make($request->password);
         $customers = customers::create($input);
         return redirect('/')->with('success', 'Your Registred Successfully Login Here');
+    }
+
+    public function check_customer_email(Request $request)
+    {
+        $response = 0;
+        $cnt = customers::where('email', $request->email)->count();
+        if ($cnt > 0) {
+            $response = 1;
+        }
+        return $response;
     }
 }
