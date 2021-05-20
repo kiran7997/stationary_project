@@ -39,7 +39,8 @@
                                 href="app-email.html"><i class="mr-1" data-feather="mail"></i><span
                                     class="align-middle">Email</span></a><a class="dropdown-item"
                                 href="app-calendar.html"><i class="mr-1" data-feather="calendar"></i><span
-                                    class="align-middle">Calendar</span></a></div>
+                                    class="align-middle">Calendar</span></a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -99,8 +100,9 @@
                                 @foreach($cart_data as $carts)
                                     <div class="card ecommerce-card">
                                         <div class="item-img">
+                                            <?php $img_urls = json_decode($carts->image_url); ?>
                                             <a href="app-ecommerce-details.html">
-                                                <img src="../../../app-assets/images/pages/eCommerce/1.png"
+                                                <img src="{{ $img_urls[0] }}"
                                                     alt="img-placeholder" />
                                             </a>
                                         </div>
@@ -129,10 +131,10 @@
                                             <div class="item-quantity">
                                                 <span class="quantity-title">Qty:</span>
                                                 <div class="input-group quantity-counter-wrapper">
-                                                    <input type="text" class="quantity-counter" value="<?php if(!empty($carts->quantity)){ echo $carts->quantity; }else{ echo "1";} ?>" />
+                                                    <input type="text" class="quantity-counter qty-change" value="<?php if(!empty($carts->quantity)){ echo $carts->quantity; }else{ echo "1";} ?>" />
                                                 </div>
                                             </div>
-                                            <span class="delivery-date text-muted">Delivery by, Wed Apr 25</span>
+                                            <span class="delivery-date text-muted">Delivery by, {{ $days_7 }}</span>
                                             <!-- <span class="text-success">17% off 4 offers Available</span> -->
                                         </div>
                                         <div class="item-options text-center">
@@ -146,7 +148,7 @@
                                             </div>
                                             <div class="item-wrapper">
                                                 <div class="item">
-                                                    <h5 class="item-price">Rs. {{ $carts->product_price }}</h5>
+                                                    <h5 class="item-price total-item-price">Rs. <?php if(!empty($carts->quantity)){ echo ((float)($carts->quantity) * (float)($carts->product_price)); }else{ echo $carts->product_price;} ?></h5>
                                                     <p class="card-text shipping">
                                                         <!-- <span class="badge badge-pill badge-light-success">Free Shipping</span> -->
                                                     </p>
@@ -497,14 +499,20 @@
         $('#add_city').empty();
         $('#add_city').text(this.value);
     });
+
     $('#house_number').keyup(function(){
         $('#add_house_number').empty();
         $('#add_house_number').text(this.value);
     });
+
     $('#landmark').keyup(function(){
         $('#add_landmark').empty();
         $('#add_landmark').text(this.value);
     });
 
+    $('body').on('focusout', '.qty-change', function(){
+        alert(this.value);
+        $(this)).closest(".total-item-price").html("hiii");
+    });
 });
 </script>

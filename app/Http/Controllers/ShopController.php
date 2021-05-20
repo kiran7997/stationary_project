@@ -32,9 +32,7 @@ class ShopController extends Controller
                     ->where(["add_to_carts.deleted" => 0])
                     ->get();
 
-        $days_7 = Carbon::now();
-        $days_7 = Carbon::parse($days_7->addDays(7));
-                
+        $days_7 = date('D M d', strtotime(Carbon::parse(Carbon::now()->addDays(7))));
         return view('customer/layouts/checkout', ['cart_data' => $cart_data, 'days_7' => $days_7]);
     }
 
