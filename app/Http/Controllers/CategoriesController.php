@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Auth;
 use App\Categories;
 use Illuminate\Http\Request;
@@ -14,10 +15,7 @@ class CategoriesController extends Controller
      */
     function __construct()
     {
-        $this->middleware('permission:product-list|product-create|product-edit|product-delete', ['only' => ['index', 'show']]);
-        $this->middleware('permission:product-create', ['only' => ['create', 'store']]);
-        $this->middleware('permission:product-edit', ['only' => ['edit', 'update'],'updateCategory']);
-        $this->middleware('permission:product-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:catagories');
     }
     /**
      * Display a listing of the resource.
@@ -26,10 +24,10 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        $categories=Categories::where(['deleted'=>0])->paginate(5);
-        return view('categories',compact('categories'));
+        $categories = Categories::where(['deleted' => 0])->paginate(5);
+        return view('categories', compact('categories'));
     }
-    
+
     /**
      * Store a newly created resource in storage.
      *
@@ -39,19 +37,18 @@ class CategoriesController extends Controller
     public function store(Request $request)
     {
         request()->validate([
-            
+
             'cat_name' => 'required',
-            'cat_description'=>'required',
+            'cat_description' => 'required',
         ]);
-        $categories=new Categories();
-        $categories->cat_name=$request->cat_name;
-        $categories->cat_description=$request->cat_description;
-        $categories['created_by']=Auth::user()->id;
-        $categories['updated_by']=Auth::user()->id;
-        $categories->save();  
+        $categories = new Categories();
+        $categories->cat_name = $request->cat_name;
+        $categories->cat_description = $request->cat_description;
+        $categories['created_by'] = Auth::user()->id;
+        $categories['updated_by'] = Auth::user()->id;
+        $categories->save();
         //echo "<pre>".print_r($categories); exit;
         return response()->json($categories);
-           
     }
 
     /**
@@ -77,23 +74,21 @@ class CategoriesController extends Controller
     }
     public function getCatagoryrById($id)
     {
-       $categories=Categories::find($id);
-        
+        $categories = Categories::find($id);
+
         return response()->json($categories);
     }
     public function updateCategory(Request $request)
     {
-        
-        $categories=Categories::find($request->cat_id);
-        $categories->cat_name=$request->cat_name;
-        $categories->cat_description=$request->cat_description;
-        $categories['created_by']=Auth::user()->id;
-        $categories['updated_by']=Auth::user()->id;
-        // echo "<pre>".print_r($categories); exit;
-       $categories->save();  
-        return response()->json($categories);
 
-        
+        $categories = Categories::find($request->cat_id);
+        $categories->cat_name = $request->cat_name;
+        $categories->cat_description = $request->cat_description;
+        $categories['created_by'] = Auth::user()->id;
+        $categories['updated_by'] = Auth::user()->id;
+        // echo "<pre>".print_r($categories); exit;
+        $categories->save();
+        return response()->json($categories);
     }
 
 
@@ -104,7 +99,7 @@ class CategoriesController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    
+
 
     /**
      * Remove the specified resource from storage.
@@ -114,10 +109,9 @@ class CategoriesController extends Controller
      */
     public function deleteCategories($id)
     {
-        $categories=Categories::where('cat_id',$id)
-                      ->update(['deleted'=>1]);
-                      
-        return response()->json(['success'=>'Record has been deleted!']);
-    
+        $categories = Categories::where('cat_id', $id)
+            ->update(['deleted' => 1]);
+
+        return response()->json(['success' => 'Record has been deleted!']);
     }
 }

@@ -26,64 +26,30 @@
                 </div>
             </div>
         </div>
-        <div class="content-body">
-            <div class="bs-stepper checkout-tab-steps">
-                <section id="ecommerce-searchbar" class="ecommerce-searchbar">
-                    <div class="row ">
-                        <div class="col-sm-12">
-                            <div class="input-group input-group-merge">
-                                <input type="text" class="form-control search-product" id="shop-search"
-                                    placeholder="Search Product" aria-label="Search..."
-                                    aria-describedby="shop-search" />
-                                <div class="input-group-append">
-                                    <span class="input-group-text"><i data-feather="search"
-                                            class="text-muted"></i></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <div class="bs-stepper-header">
-                    <div class="step" data-target="#step-cart">
-                        <button type="button" class="step-trigger">
-                        </button>
-                    </div>
+        <!-- Wishlist Starts -->
+        <section id="wishlist" class="grid-view wishlist-items">
+            @foreach($product_data as $data)
+            <?php $list_img=json_decode($data->image_url); ?>
+            <div class="card ecommerce-card">
+                <div class="item-img text-center m-1" style=" margin: auto;display: block;">
+                    <a href="details/{{$data->product_id}}">
+                        <img src="{{ $list_img[0] }}" class="img-fluid" alt="img-placeholder" />
+                    </a>
                 </div>
-                <div class="bs-stepper-content">
-                    <div id="step-cart" class="content">
-                        <div id="place-order" class="list-view product-checkout1">
-                            <div class="checkout-items">
-                                @foreach($product_data as $data)
-                                <?php $list_img=json_decode($data->image_url); ?>
-                                <div class="card ecommerce-card ">
-                                    <div class="item-img">
-                                        <a href="details/{{$data->product_id}}">
-                                            <img src=" {{ $list_img[0] }}" class='m-2' alt="img-placeholder"
-                                                style='border-radius:10px' />
-                                        </a>
-                                    </div>
-                                    <div class="card-body" style='border:none'>
-                                        <div class="item-name">
-                                            <h6 class="mb-1" style="color:#6610F2"><a
-                                                    href="details/{{$data->product_id}}">{{ucwords($data->product_name)}}</a>
-                                            </h6>
-                                            <span class=" delivery-date mb-1 "><b>{{$data->description}}</b></span>
-                                            <div>
-                                                <h5 class="delivery-date mb-1" style="color:#d05a21e3"><b>
-                                                        RS.&nbsp;{{$data->base_price}}
-                                                    </b></h5>
-                                            </div>
-                                        </div>
-                                        <span class="text-success"><small><b>In Stock</b></small></span>
-                                    </div>
-                                </div>
-                                @endforeach
-                            </div>
-                        </div>
+                <div class="card-body">
+                    <div class="item-name">
+                        <h6 class="item-price" style="color:#d05a21e3">RS.&nbsp;{{$data->base_price}}</h6>
+                        <a href="details/{{$data->product_id}}">{{ucwords($data->product_name)}}</a>
                     </div>
+                    <p class="card-text" style='color:black !important;font-weight:500;line-height: 25px!important;'>
+                        {{ Str::limit($data->description, 140) }}
+                    </p>
+                    {{-- <span class="badge badge-pill badge-light-success">In Stock</span> --}}
                 </div>
             </div>
-        </div>
+            @endforeach
+        </section>
+        <!-- Wishlist Ends -->
         {!! $product_data->render() !!}
     </div>
 </div>

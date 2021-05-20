@@ -31,7 +31,7 @@
             <section class="bs-validation">
                 <div class="row">
                     <!-- Bootstrap Validation -->
-                    <div class="col-md-6 col-12">
+                    <div class="col-md-8 col-12">
                         <div class="card">
                             <div class="card-header">
                                 <h4 class="card-title">Department Edit</h4>
@@ -66,9 +66,10 @@
                                 <div class="form-group">
                                     <label class="form-label" for="basic-addon-lname">Permission</label><br>
                                     @foreach($permission as $value)
-                                    <label>{{ Form::checkbox('permission[]', $value->id, in_array($value->id, $rolePermissions) ? true : false, array('class' => 'name')) }}
+                                    <label
+                                        class='m-1'>{{ Form::checkbox('permission[]', $value->id, in_array($value->id, $rolePermissions) ? true : false, array('class' => 'name')) }}
                                         {{ $value->name }}</label>
-                                    <br />
+
                                     @endforeach
                                     <div class="valid-feedback">Looks good!</div>
                                     <div class="invalid-feedback">
@@ -80,7 +81,8 @@
                                         <button type="submit" class="btn btn-primary" id='btn_submit'>
                                             Submit
                                         </button>
-                                        <a href="{{route('roles.index')}}"><button type="button" class="btn btn-danger">
+                                        <a href="{{route('roles.index')}}"><button type="button"
+                                                class="btn btn-outline-danger">
                                                 Cancel
                                             </button></a>
                                     </div>
