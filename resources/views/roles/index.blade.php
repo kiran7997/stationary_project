@@ -56,9 +56,10 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <?php $i=1 ?>
                                         @foreach ($roles as $key => $role)
                                         <tr>
-                                            <td>{{ ++$i }}</td>
+                                            <td>{{ $i++ }}</td>
                                             <td>{{ $role->name }}</td>
                                             <td>
                                                 <a href="{{ route('roles.show',$role->id) }}"><i
