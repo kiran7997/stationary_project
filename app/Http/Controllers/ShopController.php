@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\AddToCart;
 use Auth;
 use Carbon\Carbon;
+use DB;
 
 class ShopController extends Controller
 {
@@ -32,9 +33,9 @@ class ShopController extends Controller
             ->select("add_to_carts.cart_id", "add_to_carts.product_id", "add_to_carts.customer_id", "add_to_carts.quantity", "add_to_carts.product_price", "add_to_carts.amount", "customers.customer_firstname", "customers.customer_lastname", "aproducts.product_name", "aproducts.image_url", "aproducts.description")
             ->where(["add_to_carts.deleted" => 0])
             ->get();
-
+        $states = DB::table('state')->select('state_id', 'state_title')->get();
         $days_7 = date('D M d', strtotime(Carbon::parse(Carbon::now()->addDays(7))));
-        return view('customer/layouts/checkout', ['cart_data' => $cart_data, 'days_7' => $days_7]);
+        return view('customer/layouts/checkout', ['cart_data' => $cart_data, 'days_7' => $days_7, 'states' => $states]);
     }
 
     public function InsertIntoCart(Request $request)
@@ -70,5 +71,10 @@ class ShopController extends Controller
         }
 
         return $msg;
+    }
+
+    public function get_district(Request $request)
+    {
+        return DB::table('district')->select('districtid as id', 'district_title as title')->where('state_id', $request->state_id)->get();
     }
 }
