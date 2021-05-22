@@ -7,6 +7,17 @@
 <!-- BEGIN: Content-->
 <meta name="csrf_token" content="{{ csrf_token() }}" />
 
+<style>
+table.dataTable.nowrap td {
+    white-space: inherit !important;
+}
+
+table.dataTable.nowrap td {
+    white-space: inherit !important;
+}
+
+</style>
+
 <div class="app-content content ">
 	<div class="content-overlay"></div>
 	<div class="header-navbar-shadow"></div>
@@ -118,7 +129,6 @@
 					</div>
 
 					<label for="unit_id">Unit </label>
-
 					<div class="form-group">
 						<select class="form-control" name="unit_id" id="unit_id">
 							<option value="">Select Unit</option>

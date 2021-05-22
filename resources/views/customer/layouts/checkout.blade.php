@@ -25,25 +25,6 @@
                     </div>
                 </div>
             </div>
-            <div class="content-header-right text-md-right col-md-3 col-12 d-md-block d-none">
-                <div class="form-group breadcrumb-right">
-                    <div class="dropdown">
-                        <button class="btn-icon btn btn-primary btn-round btn-sm dropdown-toggle" type="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
-                                data-feather="grid"></i></button>
-                        <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="app-todo.html"><i
-                                    class="mr-1" data-feather="check-square"></i><span
-                                    class="align-middle">Todo</span></a><a class="dropdown-item" href="app-chat.html"><i
-                                    class="mr-1" data-feather="message-square"></i><span
-                                    class="align-middle">Chat</span></a><a class="dropdown-item"
-                                href="app-email.html"><i class="mr-1" data-feather="mail"></i><span
-                                    class="align-middle">Email</span></a><a class="dropdown-item"
-                                href="app-calendar.html"><i class="mr-1" data-feather="calendar"></i><span
-                                    class="align-middle">Calendar</span></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
         <div class="content-body">
             <div class="bs-stepper checkout-tab-steps">
@@ -97,73 +78,77 @@
                         <div id="place-order" class="list-view product-checkout">
                             <!-- Checkout Place Order Left starts -->
                             <div class="checkout-items">
+                                <?php $i = 0; ?>
                                 @foreach($cart_data as $carts)
-                                    <div class="card ecommerce-card">
-                                        <div class="item-img">
-                                            <?php $img_urls = json_decode($carts->image_url); ?>
-                                            <a href="app-ecommerce-details.html">
-                                                <img src="{{ $img_urls[0] }}"
-                                                    alt="img-placeholder" />
-                                            </a>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="item-name">
-                                                <h6 class="mb-0"><a href="app-ecommerce-details.html"
-                                                        class="text-body">{{ $carts->product_name }}</a></h6>
-                                                <!-- <span class="item-company">By <a href="javascript:void(0)"
-                                                        class="company-name">Apple</a></span> -->
-                                                <!-- <div class="item-rating">
-                                                    <ul class="unstyled-list list-inline">
-                                                        <li class="ratings-list-item"><i data-feather="star"
-                                                                class="filled-star"></i></li>
-                                                        <li class="ratings-list-item"><i data-feather="star"
-                                                                class="filled-star"></i></li>
-                                                        <li class="ratings-list-item"><i data-feather="star"
-                                                                class="filled-star"></i></li>
-                                                        <li class="ratings-list-item"><i data-feather="star"
-                                                                class="filled-star"></i></li>
-                                                        <li class="ratings-list-item"><i data-feather="star"
-                                                                class="unfilled-star"></i></li>
-                                                    </ul>
-                                                </div> -->
+                                    <form id="form_card_{{ $i }}" method="post">
+                                        <input Type="text" id="product_id_{{ $i }}" name="product_id" value="{{ $carts->product_id }}" />
+                                        <div class="card ecommerce-card">
+                                            <div class="item-img">
+                                                <?php $img_urls = json_decode($carts->image_url); ?>
+                                                <a href="app-ecommerce-details.html">
+                                                    <img src="{{ $img_urls[0] }}" class="m-1"
+                                                        alt="img-placeholder" style="height: 110px;" />
+                                                </a>
                                             </div>
-                                            <span class="text-success mb-1">In Stock</span>
-                                            <div class="item-quantity">
-                                                <span class="quantity-title">Qty:</span>
-                                                <div class="input-group quantity-counter-wrapper">
-                                                    <input type="text" class="quantity-counter qty-change" value="<?php if(!empty($carts->quantity)){ echo $carts->quantity; }else{ echo "1";} ?>" />
+                                            <div class="card-body">
+                                                <div class="item-name">
+                                                    <h6 class="mb-0"><a href="app-ecommerce-details.html"
+                                                            class="text-body">{{ $carts->product_name }}</a></h6>
+                                                    <!-- <span class="item-company">By <a href="javascript:void(0)"
+                                                            class="company-name">Apple</a></span> -->
+                                                    <!-- <div class="item-rating">
+                                                        <ul class="unstyled-list list-inline">
+                                                            <li class="ratings-list-item"><i data-feather="star"
+                                                                    class="filled-star"></i></li>
+                                                            <li class="ratings-list-item"><i data-feather="star"
+                                                                    class="filled-star"></i></li>
+                                                            <li class="ratings-list-item"><i data-feather="star"
+                                                                    class="filled-star"></i></li>
+                                                            <li class="ratings-list-item"><i data-feather="star"
+                                                                    class="filled-star"></i></li>
+                                                            <li class="ratings-list-item"><i data-feather="star"
+                                                                    class="unfilled-star"></i></li>
+                                                        </ul>
+                                                    </div> -->
                                                 </div>
-                                            </div>
-                                            <span class="delivery-date text-muted">Delivery by, {{ $days_7 }}</span>
-                                            <!-- <span class="text-success">17% off 4 offers Available</span> -->
-                                        </div>
-                                        <div class="item-options text-center">
-                                            <div class="item-wrapper">
-                                                <div class="item-cost">
-                                                    <h4 class="item-price">Rs. {{ $carts->product_price }}</h4>
-                                                    <p class="card-text shipping">
-                                                        <!-- <span class="badge badge-pill badge-light-success">Free Shipping</span> -->
-                                                    </p>
+                                                <span class="text-success mb-1">In Stock</span>
+                                                <div class="item-quantity">
+                                                    <span class="quantity-title">Qty:</span>
+                                                    <div class="input-group quantity-counter-wrapper">
+                                                        <input type="text" id="quantity_{{ $i }}" class="quantity-counter qty-change" value="<?php if(!empty($carts->quantity)){ echo $carts->quantity; }else{ echo "1";} ?>" />
+                                                    </div>
                                                 </div>
+                                                <span class="delivery-date text-muted">Delivery by, {{ $days_7 }}</span>
+                                                <!-- <span class="text-success">17% off 4 offers Available</span> -->
                                             </div>
-                                            <div class="item-wrapper">
-                                                <div class="item">
-                                                    <h5 class="item-price total-item-price">Rs. <?php if(!empty($carts->quantity)){ echo ((float)($carts->quantity) * (float)($carts->product_price)); }else{ echo $carts->product_price;} ?></h5>
-                                                    <p class="card-text shipping">
-                                                        <!-- <span class="badge badge-pill badge-light-success">Free Shipping</span> -->
-                                                    </p>
+                                            <div class="item-options text-center">
+                                                <div class="item-wrapper">
+                                                    <div class="item-cost">
+                                                        <h4 class="item-price">Rs. {{ $carts->product_price }}</h4>
+                                                        <p class="card-text shipping">
+                                                            <!-- <span class="badge badge-pill badge-light-success">Free Shipping</span> -->
+                                                        </p>
+                                                    </div>
                                                 </div>
+                                                <div class="item-wrapper">
+                                                    <div class="item">
+                                                        <h5 class="item-price total-item-price" id="total_price_{{ $i }}">Rs. <?php if(!empty($carts->quantity)){ echo ((float)($carts->quantity) * (float)($carts->product_price)); }else{ echo $carts->product_price;} ?></h5>
+                                                        <p class="card-text shipping">
+                                                            <!-- <span class="badge badge-pill badge-light-success">Free Shipping</span> -->
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <button type="button" class="btn btn-light mt-1 remove-wishlist">
+                                                    <i data-feather="x" class="align-middle mr-25"></i>
+                                                    <span>Remove</span>
+                                                </button>
+                                                <!-- <button type="button" class="btn btn-primary btn-cart move-cart">
+                                                    <i data-feather="heart" class="align-middle mr-25"></i>
+                                                    <span class="text-truncate">Add to Wishlist</span>
+                                                </button> -->
                                             </div>
-                                            <button type="button" class="btn btn-light mt-1 remove-wishlist">
-                                                <i data-feather="x" class="align-middle mr-25"></i>
-                                                <span>Remove</span>
-                                            </button>
-                                            <!-- <button type="button" class="btn btn-primary btn-cart move-cart">
-                                                <i data-feather="heart" class="align-middle mr-25"></i>
-                                                <span class="text-truncate">Add to Wishlist</span>
-                                            </button> -->
                                         </div>
-                                    </div>
+                                    </form>
                                 @endforeach
                             </div>
                             <!-- Checkout Place Order Left ends -->
@@ -511,8 +496,11 @@
     });
 
     $('body').on('focusout', '.qty-change', function(){
-        alert(this.value);
-        $(this)).closest(".total-item-price").html("hiii");
+        var ids[] = split("_", this.id);
+        var id_ = ids[1];
+        // total_price_
+        // quantity_
+        alert(ids);
     });
 });
 </script>

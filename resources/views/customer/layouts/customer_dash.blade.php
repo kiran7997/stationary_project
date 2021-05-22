@@ -33,7 +33,7 @@
             <div class="card ecommerce-card">
                 <div class="item-img text-center m-1" style=" margin: auto;display: block;">
                     <a href="details/{{$data->product_id}}">
-                        <img src="{{ $list_img[0] }}" class="img-fluid" alt="img-placeholder" />
+                        <img src="{{ $list_img[0] }}" class="img-fluid" alt="img-placeholder" style="width: 250px; height: 200px;" />
                     </a>
                 </div>
                 <div class="card-body">
@@ -42,7 +42,7 @@
                         <a href="details/{{$data->product_id}}">{{ucwords($data->product_name)}}</a>
                     </div>
                     <p class="card-text" style='color:black !important;font-weight:500;line-height: 25px!important;'>
-                        {{ Str::limit($data->description, 140) }}
+                        {{ Str::limit($data->description, 50) }}
                     </p>
                     {{-- <span class="badge badge-pill badge-light-success">In Stock</span> --}}
                 </div>
