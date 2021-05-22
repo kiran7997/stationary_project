@@ -57,7 +57,7 @@
                                 <div class="form-group">
                                     <label class="form-label" for="basic-addon-name">Department</label>
                                     {!! Form::text('name', null, array('placeholder' => 'Name','class' =>
-                                    'form-control')) !!}
+                                    'form-control dept')) !!}
                                     <div class="valid-feedback">Looks good!</div>
                                     <div class="invalid-feedback">
                                         Please enter your first name.
@@ -98,6 +98,12 @@
         </div>
     </div>
 </div>
-
-
 @endsection
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $('.dept').keypress(function(){
+            return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || event.charCode==32);
+        });
+    });
+</script>
