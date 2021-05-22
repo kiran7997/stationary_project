@@ -1,7 +1,11 @@
 @extends('customer.layouts.app')
 @section('title', 'Checkout')
 @section('content')
-
+<style>
+    .select2-selection__arrow {
+        display: none;
+    }
+</style>
 <!-- BEGIN: Content-->
 <div class="app-content content ecommerce-application">
     <div class="content-overlay"></div>
@@ -80,6 +84,7 @@
                             <div class="checkout-items">
                                 <?php $i = 0; ?>
                                 @foreach($cart_data as $carts)
+<<<<<<< HEAD
                                     <form id="form_card_{{ $i }}" method="post">
                                         <input Type="text" id="product_id_{{ $i }}" name="product_id" value="{{ $carts->product_id }}" />
                                         <div class="card ecommerce-card">
@@ -149,6 +154,76 @@
                                             </div>
                                         </div>
                                     </form>
+=======
+                                <div class="card ecommerce-card">
+                                    <div class="item-img">
+                                        <?php $img_urls = json_decode($carts->image_url); ?>
+                                        <a href="app-ecommerce-details.html">
+                                            <img src="{{ $img_urls[0] }}" alt="img-placeholder" />
+                                        </a>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="item-name">
+                                            <h6 class="mb-0"><a href="app-ecommerce-details.html"
+                                                    class="text-body">{{ $carts->product_name }}</a></h6>
+                                            <!-- <span class="item-company">By <a href="javascript:void(0)"
+                                                        class="company-name">Apple</a></span> -->
+                                            <!-- <div class="item-rating">
+                                                    <ul class="unstyled-list list-inline">
+                                                        <li class="ratings-list-item"><i data-feather="star"
+                                                                class="filled-star"></i></li>
+                                                        <li class="ratings-list-item"><i data-feather="star"
+                                                                class="filled-star"></i></li>
+                                                        <li class="ratings-list-item"><i data-feather="star"
+                                                                class="filled-star"></i></li>
+                                                        <li class="ratings-list-item"><i data-feather="star"
+                                                                class="filled-star"></i></li>
+                                                        <li class="ratings-list-item"><i data-feather="star"
+                                                                class="unfilled-star"></i></li>
+                                                    </ul>
+                                                </div> -->
+                                        </div>
+                                        <span class="text-success mb-1">In Stock</span>
+                                        <div class="item-quantity">
+                                            <span class="quantity-title">Qty:</span>
+                                            <div class="input-group quantity-counter-wrapper">
+                                                <input type="text" class="quantity-counter qty-change"
+                                                    value="<?php if(!empty($carts->quantity)){ echo $carts->quantity; }else{ echo "1";} ?>" />
+                                            </div>
+                                        </div>
+                                        <span class="delivery-date text-muted">Delivery by, {{ $days_7 }}</span>
+                                        <!-- <span class="text-success">17% off 4 offers Available</span> -->
+                                    </div>
+                                    <div class="item-options text-center">
+                                        <div class="item-wrapper">
+                                            <div class="item-cost">
+                                                <h4 class="item-price">Rs. {{ $carts->product_price }}</h4>
+                                                <p class="card-text shipping">
+                                                    <!-- <span class="badge badge-pill badge-light-success">Free Shipping</span> -->
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="item-wrapper">
+                                            <div class="item">
+                                                <h5 class="item-price total-item-price">Rs.
+                                                    <?php if(!empty($carts->quantity)){ echo ((float)($carts->quantity) * (float)($carts->product_price)); }else{ echo $carts->product_price;} ?>
+                                                </h5>
+                                                <p class="card-text shipping">
+                                                    <!-- <span class="badge badge-pill badge-light-success">Free Shipping</span> -->
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <button type="button" class="btn btn-light mt-1 remove-wishlist">
+                                            <i data-feather="x" class="align-middle mr-25"></i>
+                                            <span>Remove</span>
+                                        </button>
+                                        <!-- <button type="button" class="btn btn-primary btn-cart move-cart">
+                                                <i data-feather="heart" class="align-middle mr-25"></i>
+                                                <span class="text-truncate">Add to Wishlist</span>
+                                            </button> -->
+                                    </div>
+                                </div>
+>>>>>>> fccbb8d42c3efff72fd9b24449716a30e7c0a8ca
                                 @endforeach
                             </div>
                             <!-- Checkout Place Order Left ends -->
@@ -271,8 +346,27 @@
                                         <div class="col-md-6 col-sm-12">
                                             <div class="form-group mb-2">
                                                 <label for="checkout-state">State:</label>
-                                                <input type="text" id="state" class="form-control" name="state"
-                                                    placeholder="Maharashtra" />
+                                                {{-- <input type="text" id="state" class="form-control" name="state"
+                                                    placeholder="Maharashtra" /> --}}
+                                                <select class="select2 form-control w-100" name="state" id="state"
+                                                    required>
+                                                    <option value="">Select State</option>
+                                                    @foreach($states as $state)
+                                                    <option value="{{$state->state_id}}">{{$state->state_title}}
+                                                    </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 col-sm-12">
+                                            <div class="form-group mb-2">
+                                                <label for="checkout-state">District:</label>
+                                                {{-- <input type="text" id="state" class="form-control" name="state"
+                                                    placeholder="Maharashtra" /> --}}
+                                                <select class="select2 form-control w-100" name="district" id="district"
+                                                    required>
+                                                    <option value="">Select District</option>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-sm-12">
@@ -456,6 +550,23 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
     $(document).ready(function(){
+        //state wise district
+        $('#state').change(function(){
+            var state_id = this.value;
+            $('#district').empty();
+                $.ajax({
+                url: "{{url('get-district-list')}}",
+                type: "POST",
+                data: {_token:'{{ csrf_token() }}',state_id:state_id},
+                success:function(res){
+                    $('#district').append('<option value="">Select District</option>');
+                    $.each(res, function(key,val) {
+                        $('#district').append('<option value='+val.id+'>'+val.title+'</option>');
+                    });
+                }
+            });
+        })
+
         $('#firstname,#lastname,#city,#state').keypress(function(){
         return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122));
     });

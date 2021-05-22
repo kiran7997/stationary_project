@@ -52,6 +52,14 @@ Route::get('/edit/{stock_id}', 'StockController@edit');
 Route::post('/editstock', 'StockController@update');
 Route::delete('/dele/{stock_id}', 'StockController@destroy');
 
+//Add Suppliers //
+Route::get('/supplier', 'SupplierController@index');
+Route::post('/addsupplier', 'SupplierController@store');
+Route::get('/editsu/{supplier_id}', 'SupplierController@edit');
+Route::post('/editsupplier', 'SupplierController@update');
+Route::delete('/deles/{supplier_id}', 'SupplierController@destroy');
+
+
 //Add Inventories
 
 Route::get('/inventories', 'InventoriesController@index');
@@ -71,7 +79,7 @@ Route::delete('/delep/{product_id}', 'ProductsController@destroy');
 Route::get('/shop', 'ShopController@index');
 //Route::get('/getid/{product_id}','ShopController@getProductId');
 Route::get('/details/{product_id}', 'ShopController@details');
-Route::get('/details', 'ShopController@details');
+Route::post('/add_to_cart', 'ShopController@add_to_cart');
 //Add Customer
 Route::get('/customer', 'CustomerController@index');
 Route::post('/addcust', 'CustomerController@store');
@@ -118,3 +126,6 @@ Route::post('check_customer_email', 'CustomerController@check_customer_email');
 Route::post('check_user_email', 'UserController@check_user_email');
 
 Route::get('save_order', 'OrderController@save_order');
+
+
+Route::post('get-district-list', 'ShopController@get_district');

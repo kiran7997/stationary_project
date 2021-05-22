@@ -24,6 +24,17 @@
         align-items-center" href="{{url('/checkout')}}"><i data-feather='shopping-cart'></i><span
             class="menu-title text-truncate" data-i18n="Form Layout">Cart</span></a>
       </li>
+      <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather="file-text"></i><span
+            class="menu-title text-truncate" data-i18n="Invoice">Reports</span></a>
+        <ul class="menu-content">
+          <li><a class="d-flex align-items-center" href="{{url('order-history')}}"><i data-feather="circle"></i><span
+                class="menu-item text-truncate" data-i18n="List">Order History</span></a>
+          </li>
+          {{-- <li><a class="d-flex align-items-center" href="app-invoice-preview.html"><i data-feather="circle"></i><span
+                class="menu-item text-truncate" data-i18n="Preview">District Wise Order</span></a>
+          </li> --}}
+        </ul>
+      </li>
     </ul>
   </div>
 </div>

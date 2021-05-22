@@ -554,3 +554,6 @@
 </script>
 
 @endsection
+<script src="jss/jquery.min.js"></script>
+<script src="jss/jquery.validate.min.js"></script>
+<script src="jss/custForm.js"></script>
