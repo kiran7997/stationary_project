@@ -187,7 +187,7 @@
               <i data-feather="shopping-bag" class="font-medium-5"></i>
             </div>
           </div>
-          <h2 class="font-weight-bolder">{{ $totals['inventories'] }}</h2>
+          <h2 class="font-weight-bolder">{{ $totals['Inventeries'] }}</h2>
           <p class="card-text">Inventories</p>
         </div>
       </div>

@@ -66,7 +66,7 @@
 
   	<hr />
 
-	<!-- Edit Stock Model -->
+	<!-- Add Stock Model -->
 
 	<div class="modal fade text-left " id="stockModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true" >
     	<div class="modal-dialog modal-dialog-centered" role="document">
@@ -306,8 +306,8 @@ function deletestock(stock_id)
 </script>
 @endsection
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
+<!-- <script>
     $(document).ready(function() {
    $("#stockForm").validate();
 	});
-	</script>
+	</script> -->

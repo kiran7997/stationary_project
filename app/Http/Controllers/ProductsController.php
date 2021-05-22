@@ -11,10 +11,10 @@ use Illuminate\Http\Request;
 
 class ProductsController extends Controller
 {
-    function __construct()
-    {
-        $this->middleware('permission:product');
-    }
+    // function __construct()
+    // {
+    //     $this->middleware('permission:product');
+    // }
     public function index()
     {
         // $products = Aproducts::where(['deleted' => 0])->get();

@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 use App\customers;
 use App\Aproducts;
-use App\Inventories;
+use App\Inventeries;
+
 use App\Productvariation;
 use App\Stocks;
 use App\Units;
@@ -31,13 +32,21 @@ class HomeController extends Controller
     {
         $totals = [
             'catagories' => Categories::where(['deleted'=>0])->count(),
-            'inventories' => Inventories::where(['deleted'=>0])->count(),
+            'Inventeries' => Inventeries::where(['deleted'=>0])->count(),
             'customers' => customers::where(['deleted'=>0])->count(),
             'Productvariation' => Productvariation::where(['deleted'=>0])->count(),
             'units' => Units::where(['deleted'=>0])->count(),
             'stocks' => Stocks::where(['deleted'=>0])->count(),
             'aproducts' => Aproducts::where(['deleted'=>0])->count(),
             ];
+            // $stocks = stocks::where(['deleted' => 0])->get();
+
+            //     $products_data=Aproducts::select('product_id','product_name')->where('deleted', 0)->get();
+            //      $stocks=Stocks::select('stocks.stock_id', 'stocks.product_id', 'stocks.item_quantity', 'aproducts.product_name')
+            //     ->leftjoin('aproducts', 'aproducts.product_id', 'stocks.product_id')
+            //     ->where(['stocks.deleted' => 0])->get();
+
+
             $stock=stocks::select('stocks.product_id','stocks.item_quantity','aproducts.product_id','aproducts.product_name')
                 ->leftjoin('aproducts', 'aproducts.product_id', '=', 'stocks.product_id')
                 ->where(['stocks.deleted' => 0])->get();

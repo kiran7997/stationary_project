@@ -339,11 +339,11 @@
 	</div>
 </div>
 
+<!-- <script src="jss/jquery.validate.min.js"></script> -->
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
-<script src="jss/jquery.validate.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+
 <script>
 	$(document).ready(function() {
     // $('#example').DataTable();
@@ -453,25 +453,27 @@ rules: {
                }
                });
 
-          
+ 
+
+
+
 $('#productEditForm').validate({
 rules: {
-   "product_name": { required: true },
-   "cat_id": { required: true },
-   "unit_id": { required: true }
+   "product_name2": { required: true },
+   "cat_id2": { required: true },
+   "unit_id2": { required: true }
     },
     submitHandler: function(form) {
-       // var hidden_id = $('#inventory_id').val();
         var action = "{{url('editpro')}}";
-        
         $('form').attr('action',action);
         form.submit();
-	}
+    }
 
 
 });
 
-    // $("#productEditForm").submit(function(e){
+
+ 	   // $("#productEditForm").submit(function(e){
     //     e.preventDefault();
         
     //     $.ajax({
@@ -515,3 +517,7 @@ rules: {
 }
 </script>
 @endsection
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">

@@ -52,6 +52,14 @@ Route::get('/edit/{stock_id}', 'StockController@edit');
 Route::post('/editstock', 'StockController@update');
 Route::delete('/dele/{stock_id}', 'StockController@destroy');
 
+//Add Suppliers //
+Route::get('/supplier', 'SupplierController@index');
+Route::post('/addsupplier', 'SupplierController@store');
+Route::get('/editsu/{supplier_id}', 'SupplierController@edit');
+Route::post('/editsupplier', 'SupplierController@update');
+Route::delete('/deles/{supplier_id}', 'SupplierController@destroy');
+
+
 //Add Inventories
 
 Route::get('/inventories', 'InventoriesController@index');
