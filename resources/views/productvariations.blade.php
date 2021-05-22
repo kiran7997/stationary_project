@@ -2,10 +2,6 @@
 @section('title', 'Product Variation')
 @section('content')
 
-
-
-@section('content')
-<!-- Responsive Datatable -->
 <!-- BEGIN: Content-->
 <div class="app-content content ">
     <div class="content-overlay"></div>
@@ -43,7 +39,7 @@
                                 <table id="example" class="display nowrap stripe" style="width:100%;">
                                     <thead>
           								<tr>
-            								<th>Variation ID</th>
+            								<th>#</th>
             								<th>Variation Name</th>
 											<th>Abbrevation</th>
             								<th>Add on Price</th>
@@ -74,30 +70,29 @@
         </div>
     </div>
 </div>
-
 <!-- Add Categories Modal -->
 <div class="modal fade" id="AddProductv" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   	<div class="modal-dialog">
     	<div class="modal-content">
       		<div class="modal-header">
-        		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        		
       		</div>
         	<div class="modal-body">
-            	<form  id="ProductvForm" name="ProductvForm">
+            	<form  id="ProductvForm" name="ProductvForm" method="post">
            			@csrf
 					<div class="form-group">
-						<label for="location">Variation Name</label>
+						<label for="location">Variation Name<span style="color:red">*</span></label>
 						<input type="text" class="form-control" id="variation_name" name="variation_name"/>
 					</div>
                        
 					<div class="form-group">
-						<label for="Transport">Abbrivation</label>
+						<label for="Transport">Abbrivation<span style="color:red">*</span></label>
 						<input type="text" class="form-control" id="variation_abbrevation" name="variation_abbrevation">
 					</div>
 
 					<div class="form-group">
-						<label for="Transport">Add on Price</label>
-						<input type="text" class="form-control" id="variation_add_on_price" name="variation_add_on_price">
+						<label for="Transport">Add on Price<span style="color:red">*</span></label>
+						<input type="number" class="form-control" id="add_on_price" name="add_on_price">
 					</div>
                 	<button type="submit" class="btn btn-primary">Submit</button>
             	</form>
@@ -113,23 +108,23 @@
                       
 			</div>
                     
-			<form id="EditProductvForm" name="EditProductvForm">
+			<form id="EditProductvForm" name="EditProductvForm" method="post">
 				@csrf
                 <input type="hidden" id="variation_id" name="variation_id" >
             	<div class="modal-body">
                   	<div class="form-group">
                 		<label for="location">Variation Name</label>
-                		<input type="text" class="form-control" id="variation_name1" name="variation_name1"/>
+                		<input type="text" class="form-control" id="variation_name1" name="variation_name"/>
             		</div>
 
 					<div class="form-group">
 						<label for="phone">Abbrivation</label>
-						<input type="text" class="form-control" id="variation_abbrevation1" name="variation_abbrevation1"/>
+						<input type="text" class="form-control" id="variation_abbrevation1" name="variation_abbrevation"/>
 					</div>
 						
 					<div class="form-group">
 						<label for="Transport">Add on Price</label>
-						<input type="text" class="form-control" id="variation_add_on_price1" name="variation_add_on_price1">					
+						<input type="number" class="form-control" id="add_on_price1" name="add_on_price">					
 					</div>
                 </div>
                 <div class="modal-footer">
@@ -157,84 +152,62 @@
 });
 } );
   
-$("#ProductvForm").submit(function(e){
-  e.preventDefault();
-    let variation_name=$("#variation_name").val();
-    let variation_abbrevation=$("#variation_abbrevation").val();
-    let add_on_price=$("#variation_add_on_price").val();
-    let _token=$("input[name=_token]").val();
+$(document).ready(function() {
 
-    $.ajax({
-        url:"{{url('storproductsv')}}",
-        type:"post",
-        data:{
-            variation_name:variation_name,
-            variation_abbrevation:variation_abbrevation,
-            add_on_price:add_on_price,
-            _token:_token
-        },
-        success:function(response)
-        {   
+$('#ProductvForm').validate({
+rules: {
+   "variation_name": { required: true },
+   "variation_abbrevation": { required: true },
+   "add_on_price": { required: true }
+    },
+    submitHandler: function(form) {
+        var hidden_id = $('#variation_id').val();
+        var action = "{{url('storproductsv')}}";
+        
+        $('form').attr('action',action);
+        form.submit();
+    }
+    
 
-            if(response)
-            {
-               
-               $("#studentTable tbody").append('<tr><td>'+response.variation_name+'</td><td>'+ response.variation_abbrevation +'</td><td>'+response.add_on_price+'</td></tr>');
-                $('#ProductvForm')[0].reset();
-                alert("inserted");
-                $('#AddProductv').modal('toggle');
-                location.reload()
-
-
-            }
-        }
-    });
+});
+$('#variation_name,#variation_abbrevation').keypress(function(){
+            return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122));
+            
+        }); 
 });
 
-    function editProductv(variation_id)
+function editProductv(variation_id)
     {
-        $.get('/productsv/'+variation_id,function(categories){
+        $(document).ready(function() {
+            $.get('/productsv/'+variation_id,function(categories){
                $("#variation_id").val(categories.variation_id);
                $("#variation_name1").val(categories.variation_name);
                 $("#variation_abbrevation1").val(categories.variation_abbrevation);
-                $("#variation_add_on_price1").val(categories.add_on_price);
+                $("#add_on_price1").val(categories.add_on_price);
                 $("#EditProductv").modal('toggle');
         });
-    }
-    $("#EditProductvForm").submit(function(e){
-        e.preventDefault();
-        let variation_id=$("#variation_id").val();
-        let variation_name=$("#variation_name1").val();
-        let variation_abbrevation=$("#variation_abbrevation1").val();
-        let add_on_price=$("#variation_add_on_price1").val();
-        let _token=$("input[name=_token]").val();
-        
-        $.ajax({
-            url:"{{url('productsv')}}",
-            type:"post",
-            data:{
-               variation_id:variation_id,
-               variation_name:variation_name,
-               variation_abbrevation:variation_abbrevation,
-               add_on_price:add_on_price,
-                _token:_token
-            },
-            success:function(response){
-                // $('#sid' +response.id+' td:nth-child(1)').text(response.vendor_name);
-                // $('#sid' +response.id+' td:nth-child(2)').text(response.location);
-                // $('#sid' +response.id+' td:nth-child(3)').text(response.phone);
-                // $('#sid' +response.id+' td:nth-child(4)').text(response.email);
-                // $('#sid' +response.id+' td:nth-child(5)').text(response.INV_No);
-                // $('#sid' +response.id+' td:nth-child(6)').text(response.Transport);
-
-                $("#EditProductv").modal('toggle');
-                $('#EditProductvForm')[0].reset();
-                location.reload();
-            }
-        });
+        $('#variation_name1,#variation_abbrevation1').keypress(function(){
+            return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122));
+            
+        }); 
 
     });
+   
+$('#EditProductvForm').validate({
+    rules: {
+   "variation_name": { required: true },
+   "variation_abbrevation": { required: true },
+   "add_on_price": { required: true }
+    },
+    
+    submitHandler: function(form) { 
+        var action = "{{url('productsv')}}";
+        $('form').attr('action',action);
+        form.submit();
+    }
+});
 
+}
     function deleteProductv(id)
     {
         if(confirm("Do You Really want to delete this record?"))
@@ -257,4 +230,5 @@ $("#ProductvForm").submit(function(e){
         }
     }
 </script>
+
 @endsection

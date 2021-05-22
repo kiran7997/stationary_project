@@ -70,6 +70,11 @@
           </li>
         </ul>
       </li>
+      <li class=" nav-item @if(Request::is('home')) active @endif"><a class="d-flex align-items-center active"
+          href="{{ url('/listinvoice') }}"><i data-feather="user"></i><span class="menu-title text-truncate"
+            data-i18n="Dashboards">Invoice</span><span
+            class="badge badge-light-warning badge-pill ml-auto mr-1"></span></a>
+      </li>
 
       <li class=" navigation-header"><span data-i18n="Forms &amp; Tables">Reports</span><i
           data-feather="more-horizontal"></i>

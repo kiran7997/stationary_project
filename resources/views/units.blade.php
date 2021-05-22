@@ -3,7 +3,6 @@
 @section('content')
 
 
-@section('content')
 <!-- Responsive Datatable -->
 <!-- BEGIN: Content-->
 <div class="app-content content ">
@@ -32,6 +31,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
+                        
                             <div class="card-header border-bottom">
                                 <h4 class="card-title"></h4>
                                 <button type="button" class="btn btn-outline-primary float-right" data-toggle="modal" data-target="#AddUnit">
@@ -42,7 +42,7 @@
                                 <table id="example" class="display nowrap stripe" style="width:100%;">
                                     <thead>
                                         <tr>
-                                            <th>Unit ID</th>
+                                            <th>#</th>
                                             <th>Unit Name</th>
                                             <th>Unit Description</th>
                                             <th>Actions</th>
@@ -51,7 +51,7 @@
                                     <tbody>
                                         @foreach($units as $vendor)
                                             <tr id="sid{{$vendor->id}}">
-                                                <td>{{$vendor->unit_id}}</td>
+                                            <td>{{ $no++ }}</td>
                                                 <td>{{$vendor->unit_name}}</td>
                                                 <td>{{$vendor->unit_description}}</td>
                                                 <td>
@@ -86,25 +86,31 @@
     $(".delete").on("click", function () {
     return confirm('Are you sure you want to Delete?');
 });
+
 } );
 
 
 </script>
-  	<div class="modal fade text-left" id="AddUnit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true" >
-        <div class="modal-dialog modal-dialog-centered" role="document">
-        	<div class="modal-content">
-                <div class="modal-header">
-                </div>
+  	                    
+<div class="modal fade text-left" id="AddUnit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true" >
+    <div class="modal-dialog modal-dialog-centered" role="document">
+   	    <div class="modal-content">
+		    <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel33">Add Inventories</h4>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+            </div>
 
-                <form id="UnitForm" name="UnitForm">
+                <form id="UnitForm" name="UnitForm" method="post">
                     @csrf
                     <div class="modal-body">
                     	<div class="form-group">
-                          	<label for="location">Unit Name</label>
+                          	<label for="location">Unit Name<span style="color:red">*</span></label>
                           	<input type="text" class="form-control" id="unit_name" name="unit_name"/>
                       	</div>
 						<div class="form-group">
-							<label for="phone">Unit Description</label>
+							<label for="phone">Unit Description<span style="color:red">*</span></label>
 							<input type="text" class="form-control" id="unit_description" name="unit_description"/>
 						</div>
                 	</div>
@@ -122,85 +128,87 @@
                 <div class="modal-header">
                 </div>
                 
-				<form id="EditUnitForm" name="EditUnitForm">
+				<form id="EditUnitForm" name="EditUnitForm" method="post">
 					@csrf
                     <input type="hidden" id="unit_id" name="unit_id" >                    
                     <div class="modal-body">
                     	<div class="form-group">
-                			<label for="location">Unit Name</label>
-                			<input type="text" class="form-control" id="unit_name1" name="unit_name1"/>
+                			<label for="location">Unit Name<span style="color:red">*</label>
+                			<input type="text" class="form-control" id="unit_name1" name="unit_name"/>
             			</div>
 						<div class="form-group">
-							<label for="phone">Unit Description</label>
-							<input type="text" class="form-control" id="unit_description1" name="unit_description1"/>
+							<label for="phone">Unit Description<span style="color:red">*</label>
+							<input type="text" class="form-control" id="unit_description1" name="unit_description" />
 						</div><br>
                 	</div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary" >Submit</button>
+                        <button type="submit" class="btn btn-primary" >Update</button>
                     </div>
                 </form>
         	</div>
         </div>
     </div>
 	<!-- Add Categories Modal -->
-
+    
 <script>  
-$("#UnitForm").submit(function(e){
-  e.preventDefault();
-  var registerForm = $("#UnitForm");
-  var formData = registerForm.serialize();
-    $.ajax({
-        url:"{{url('storeunit')}}",
-        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-        type:"post",
-        data:formData,
-        success:function(response)
-        {   
-            if(response)
-            {
-               $("#studentTable tbody").append('<tr><td>'+response.cat_name+'</td><td>'+ response.cat_description +'</td><td>'+response.cat_image+'</td></tr>');
-                $('#UnitForm')[0].reset();
-                $('#AddUnit').modal('toggle');
-                location.reload();
-            }
-        }
-    });
+
+$(document).ready(function() {
+
+$('#UnitForm').validate({
+rules: {
+   "unit_name": { required: true },
+   "unit_description": { required: true }
+    },
+    submitHandler: function(form) {
+        var hidden_id = $('#unit_id').val();
+        var action = "{{url('storeunit')}}";
+        
+        $('form').attr('action',action);
+        form.submit();
+    }
+    
+
 });
 
-    function editUnits(id)
+$('#unit_name,#unit_description').keypress(function(){
+            return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122));
+            
+        });
+
+});
+    
+function editUnits(id)
     {
-        $.get('/units/'+id,function(categories){
+        $(document).ready(function() {
+            $.get('/units/'+id,function(categories){
                $("#unit_id").val(categories.unit_id);
                $("#unit_name1").val(categories.unit_name);
                 $("#unit_description1").val(categories.unit_description);
                 $("#EditUnits").modal('toggle');
-        });
-    }
-    $("#EditUnitForm").submit(function(e){
-        e.preventDefault();
-        let unit_id=$("#unit_id").val();
-        let unit_name=$("#unit_name1").val();
-        let unit_description=$("#unit_description1").val();
-        let _token=$("input[name=_token]").val();
-        $.ajax({
-            url:"{{url('units')}}",
-            type:"post",
-            data:{
-                unit_id:unit_id,
-                unit_name:unit_name,
-                unit_description:unit_description,
-                _token:_token
-            },
-            success:function(response){
-                $('#sid' +response.id+' td:nth-child(1)').text(response.unit_name);
-                $('#sid' +response.id+' td:nth-child(2)').text(response.unit_description);
-                $("#EditUnits").modal('toggle');
-                $('#EditUnitForm')[0].reset();
-                location.reload()
-            }
+     });
+     $('#unit_name1,#unit_description1').keypress(function(){
+            return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122));
+            
         });
     });
 
+$('#EditUnitForm').validate({
+    rules: {
+   "unit_name": { required: true },
+   "unit_description": { required: true }
+    },
+    
+    submitHandler: function(form) {
+        var action = "{{url('units')}}";
+        
+        $('form').attr('action',action);
+        
+        form.submit();
+    }
+});
+}
+
+   
     function deleteUnits(id)
     {
         if(confirm("Do You Really want to delete this record?"))
@@ -220,4 +228,5 @@ $("#UnitForm").submit(function(e){
         }
     }
 </script>   
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 @endsection

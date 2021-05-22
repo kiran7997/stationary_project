@@ -30,6 +30,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
+                        
                             <div class="card-header border-bottom">
                                 <h4 class="card-title"></h4>
                                 <button type="button" class="btn btn-outline-primary float-right" data-toggle="modal" data-target="#AddCategory">
@@ -50,8 +51,8 @@
                 
                                 <table id="example" class="display nowrap stripe" style="width:100%;">
                                     <thead>
-                                        <tr>
-            								<th>Category ID</th>
+                                           <tr>
+            								<th>#</th>
                  							<th>Category Name</th>
 								    		<th>Category Description</th>
                                     		<th>Actions</th>
@@ -61,7 +62,7 @@
 
                                     @foreach($categories as $vendor)
 										<tr id="sid{{$vendor->id}}">
-										    <td>{{$vendor->cat_id}}</td>
+                                        <td>{{ $no++ }}</td>
 											<td>{{$vendor->cat_name}}</td>
 											<td>{{$vendor->cat_description}}</td>
 											<td>
@@ -85,26 +86,29 @@
     </div>
 </div>
 
-
-<!-- Modal -->
 <div class="modal fade text-left" id="AddCategory" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true" >
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-      
-                </div>
+    <div class="modal-dialog modal-dialog-centered" role="document">
+   	    <div class="modal-content">
+		    <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel33">Add Inventories</h4>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+            </div>
                     
-				<form id="CategoryForm" name="CategoryForm">
+<!-- Modal -->
+
+				<form id="CategoryForm" name="CategoryForm" method="post">
                     @csrf
                     
 					<div class="modal-body">
                     	<div class="form-group">
-                    		<label for="location">Category Name</label>
+                    		<label for="location">Category Name <span style="color:red">*</span></label>
                     		<input type="text" class="form-control" id="cat_name" name="cat_name"/>
                     	</div>
 
                     	<div class="form-group">
-                    		<label for="phone">Category Description</label>
+                    		<label for="phone">Category Description<span style="color:red">*</span></label>
                     		<input type="text" class="form-control" id="cat_description" name="cat_description"/>
                     	</div>
                 	</div>
@@ -125,19 +129,19 @@
                 
 				</div>
                 
-				<form id="EditCategoryForm" name="EditCategoryForm">
+				<form id="EditCategoryForm" name="EditCategoryForm" method="post">
 					@csrf
 
                     <input type="hidden" id="cat_id" name="cat_id" >
                       <div class="modal-body">
                       <div class="form-group">
-                    <label for="location">Category Name</label>
-                    <input type="text" class="form-control" id="cat_name1" name="cat_name1"/>
+                    <label for="location">Category Name<span style="color:red">*</label>
+                    <input type="text" class="form-control" id="cat_name1" name="cat_name"/>
                     </div>
 
                     <div class="form-group">
-                    <label for="phone">Category Description</label>
-                    <input type="text" class="form-control" id="cat_description1" name="cat_description1"/>
+                    <label for="phone">Category Description<span style="color:red">*</label>
+                    <input type="text" class="form-control" id="cat_description1" name="cat_description"/>
                     </div>
                    
                 </div>
@@ -153,6 +157,7 @@
 <!-- Add Categories Modal -->
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/formvalidation/0.6.2-dev/js/formValidation.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
 <script>
@@ -168,68 +173,66 @@
 });
 } );
 
-$("#CategoryForm").submit(function(e){
-  e.preventDefault();
-  var registerForm = $("#CategoryForm");
-  var formData = registerForm.serialize();
-    $.ajax({
-        url:"{{url('store')}}",
-        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-        type:"post",
-        data:formData,
-        success:function(response)
-        {   
-            if(response)
-            {
-               
-               $("#studentTable tbody").append('<tr><td>'+response.cat_name+'</td><td>'+ response.cat_description +'</td><td>'+response.cat_image+'</td></tr>');
-                $('#CategoryForm')[0].reset();
-               
-                $('#AddCategory').modal('toggle');
-                location.reload();
+$(document).ready(function() {
 
-            }
-        }
-    });
+$('#CategoryForm').validate({
+rules: {
+   "cat_name": { required: true },
+   "cat_description": { required: true }
+    },
+    submitHandler: function(form) {
+        var hidden_id = $('#cat_id').val();
+        var action = "{{url('store')}}";
+        
+        $('form').attr('action',action);
+        form.submit();
+    }
+    
+
+});
+$('#cat_name,#cat_description').keypress(function(){
+            return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122));
+        });
+
 });
 
-    function editCategory(cat_id)
+function editCategory(cat_id)
     {
-        $.get('/categories/'+cat_id,function(categories){
+        $(document).ready(function() {
+            $.get('/categories/'+cat_id,function(categories){
                $("#cat_id").val(categories.cat_id);
                $("#cat_name1").val(categories.cat_name);
                 $("#cat_description1").val(categories.cat_description);
                 $("#EditCategory").modal('toggle');
         });
-    }
-    $("#EditCategoryForm").submit(function(e){
-        e.preventDefault();
-        let cat_id=$("#cat_id").val();
-        let cat_name=$("#cat_name1").val();
-        let cat_description=$("#cat_description1").val();
-        let _token=$("input[name=_token]").val();
-        
-        $.ajax({
-            url:"{{url('categories')}}",
-            type:"post",
-            data:{
-               cat_id:cat_id,
-               cat_name:cat_name,
-            cat_description:cat_description,
-                _token:_token
-            },
-            success:function(response){
-                $('#sid' +response.cat_id+' td:nth-child(1)').text(response.cat_name);
-                $('#sid' +response.cat_id+' td:nth-child(2)').text(response.cat_description);
-               
-                $("#EditCategory").modal('toggle');
-                $('#EditCategoryForm')[0].reset();
-                location.reload();
-            }
+        $('#cat_name1,#cat_description1').keypress(function(){
+            return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122));
+
         });
 
     });
 
+$('#EditCategoryForm').validate({
+    rules: {
+   "cat_name": { required: true },
+   "cat_description": { required: true }
+    },
+    
+    submitHandler: function(form) {
+        
+       
+        var action = "{{url('categoriesup')}}";
+        
+        $('form').attr('action',action);
+        
+        form.submit();
+    }
+
+
+});
+}
+
+    
     function deleteCategory(id)
     {
         if(confirm("Do You Really want to delete this record?"))
@@ -253,4 +256,6 @@ $("#CategoryForm").submit(function(e){
     }
 
 </script>
+
+
 @endsection
