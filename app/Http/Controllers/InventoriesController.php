@@ -16,18 +16,14 @@ class InventoriesController extends Controller
     // }
     public function index()
     {
-        $invens = Inventeries::where(['deleted' => 0])->get();
-        $suppliers= Suppliers::where(['deleted'=>0])->get();
+        $suppliers= Suppliers::select('supplier_id', 'supplier_companyName')->where(['deleted'=>0])->get();
         $products_data=Aproducts::select('product_id','product_name')->where('deleted', 0)->get();
-        $invens=Inventeries::select('inventeries.inventory_id', 'inventeries.product_id', 'inventory_name',
-        'quantity','invntory_status', 'aproducts.product_name', 'inventeries.supplier_id'
-        'suppliers.supplier_companyName')
-                ->leftjoin('aproducts', 'aproducts.product_id', 'inventeries.product_id')
-                ->leftjoin('suppliers', 'suppliers.supplier_id', 'inventeries.supplier_id')
-                ->where(['inventeries.deleted' => 0])->get();
+        $invens=Inventeries::leftjoin('aproducts', 'aproducts.product_id', 'inventeries.product_id')
+                            ->leftjoin('suppliers', 'suppliers.supplier_id', 'inventeries.supplier_id')
+                            ->select('inventeries.supplier_id', 'inventeries.inventory_id', 'inventeries.product_id', 'inventeries.quantity','inventeries.invntory_status', 'aproducts.product_name', 'inventeries.supplier_id', 'suppliers.supplier_companyName')
+                            ->where(['inventeries.deleted' => 0])->get();
        
-        
-       
+        // dd($invens);
         return view ('inventoeries',['products_data' => $products_data, 'invens' => $invens,'suppliers' => $suppliers]);
        
         // $invens = Inventories::where(['deleted' => 0])->paginate(5);
@@ -36,26 +32,15 @@ class InventoriesController extends Controller
     }
     public function store(Request $req)
     {
-
-        $invens = new Inventories();
-        $invens->inventory_name = $req->inventory_name;
-        // $invens->inventory_address = $req->inventory_address;
-        // $invens->inventory_contact = $req->inventory_contact;
-        // $invens->inventory_email = $req->inventory_email;
+        $invens = new Inventeries();
+        $invens->supplier_id = $req->inventory_name;
         $invens->product_id = $req->product_id;
         $invens->quantity = $req->quantity;
         $invens->invntory_status = $req->invntory_status;
         $invens['created_by'] = Auth::user()->id;
         $invens['updated_by'] = Auth::user()->id;
-
         $invens->save();
-          
-        // return response()->json($invens);
         return redirect('inventories')->with('success', 'Inventory Added successfully');
-        // echo "<pre>";
-        // print_r($invens);
-        // exit;
-        // return response()->json($invens);
     }
     public function edit($inventory_id)
     {
