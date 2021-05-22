@@ -16,6 +16,17 @@
 </head>
 <meta name="csrf_token" content="{{ csrf_token() }}" />
 
+<style>
+table.dataTable.nowrap td {
+    white-space: inherit !important;
+}
+
+table.dataTable.nowrap td {
+    white-space: inherit !important;
+}
+
+</style>
+
 <div class="app-content content ">
 	<div class="content-overlay"></div>
 	<div class="header-navbar-shadow"></div>
