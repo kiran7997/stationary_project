@@ -57,7 +57,7 @@
                                 <div class="form-group">
                                     <label class="form-label" for="basic-addon-name">Department</label>
                                     {!! Form::text('name', null, array('placeholder' => 'Department','class' =>
-                                    'form-control')) !!}
+                                    'form-control dept')) !!}
                                     <div class="valid-feedback">Looks good!</div>
                                     <div class="invalid-feedback">
                                         Please enter your first name.
@@ -97,18 +97,12 @@
         </div>
     </div>
 </div>
-
-<div class="row">
-    <div class="col-lg-12 margin-tb">
-        <div class="pull-left">
-            <h2>Create New Role</h2>
-        </div>
-        <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route('roles.index') }}"> Back</a>
-        </div>
-    </div>
-</div>
-
-
-
 @endsection
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $('.dept').keypress(function(){
+            return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) || event.charCode==32);
+        });
+    });
+</script>

@@ -159,12 +159,12 @@ class UserController extends Controller
             $file = $request->file('profile_image');
             $filename = rand(0, 999) . $file->getClientOriginalName();
             $destinationPath = public_path('user_images/');
-            if (!file_exists($destinationPath)) {
-                mkdir($destinationPath, 777, true);
-                exec('chmod -R 777 ' . $destinationPath);
-            } else {
-                exec('chmod -R 777 ' . $destinationPath);
-            }
+            // if (!file_exists($destinationPath)) {
+            //     mkdir($destinationPath, 777, true);
+            //     exec('chmod -R 777 ' . $destinationPath);
+            // } else {
+            //     exec('chmod -R 777 ' . $destinationPath);
+            // }
             $file->move($destinationPath, $filename);
             $input['profile_image'] = $filename;
         } else {
@@ -247,12 +247,12 @@ class UserController extends Controller
             $file = $request->file('profile_image');
             $filename = rand(0, 999) . $file->getClientOriginalName();
             $destinationPath = public_path('user_images/');
-            if (!file_exists($destinationPath)) {
-                mkdir($destinationPath, 777, true);
-                exec('chmod -R 777 ' . $destinationPath);
-            } else {
-                exec('chmod -R 777 ' . $destinationPath);
-            }
+            // if (!file_exists($destinationPath)) {
+            //     mkdir($destinationPath, 777, true);
+            //     exec('chmod -R 777 ' . $destinationPath);
+            // } else {
+            //     exec('chmod -R 777 ' . $destinationPath);
+            // }
             $file->move($destinationPath, $filename);
             $input['profile_image'] = $filename;
         } else {
