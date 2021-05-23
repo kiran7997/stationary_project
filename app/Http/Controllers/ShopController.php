@@ -77,4 +77,10 @@ class ShopController extends Controller
     {
         return DB::table('district')->select('districtid as id', 'district_title as title')->where('state_id', $request->state_id)->get();
     }
+
+    public function updateQuantityInCart(Request $request){
+        // $update_quantity_in_cart = AddToCart::where('cart_id', $request->cart_id)->update('quantity', $request->item_quantity);
+        // return $update_quantity_in_cart;
+        return "hiiiii";
+    }
 }

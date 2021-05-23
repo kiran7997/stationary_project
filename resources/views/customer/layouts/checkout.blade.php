@@ -84,9 +84,9 @@
                             <div class="checkout-items">
                                 <?php $i = 0; ?>
                                 @foreach($cart_data as $carts)
-<<<<<<< HEAD
                                     <form id="form_card_{{ $i }}" method="post">
-                                        <input Type="text" id="product_id_{{ $i }}" name="product_id" value="{{ $carts->product_id }}" />
+                                        <input type="text" id="cart_id_{{ $i }}" name="cart_id" value="{{ $carts->cart_id }}" />
+                                        <input type="hidden" id="product_id_{{ $i }}" name="product_id" value="{{ $carts->product_id }}" />
                                         <div class="card ecommerce-card">
                                             <div class="item-img">
                                                 <?php $img_urls = json_decode($carts->image_url); ?>
@@ -119,7 +119,7 @@
                                                 <span class="text-success mb-1">In Stock</span>
                                                 <div class="item-quantity">
                                                     <span class="quantity-title">Qty:</span>
-                                                    <div class="input-group quantity-counter-wrapper">
+                                                    <div class="input-group quantity-counter-wrapper qty-div" id="qty-div-{{ $i }}">
                                                         <input type="text" id="quantity_{{ $i }}" class="quantity-counter qty-change" value="<?php if(!empty($carts->quantity)){ echo $carts->quantity; }else{ echo "1";} ?>" />
                                                     </div>
                                                 </div>
@@ -129,7 +129,7 @@
                                             <div class="item-options text-center">
                                                 <div class="item-wrapper">
                                                     <div class="item-cost">
-                                                        <h4 class="item-price">Rs. {{ $carts->product_price }}</h4>
+                                                        <h4 class="item-price" id="item-price-{{ $i }}">Rs. {{ $carts->product_price }}</h4>
                                                         <p class="card-text shipping">
                                                             <!-- <span class="badge badge-pill badge-light-success">Free Shipping</span> -->
                                                         </p>
@@ -154,76 +154,7 @@
                                             </div>
                                         </div>
                                     </form>
-=======
-                                <div class="card ecommerce-card">
-                                    <div class="item-img">
-                                        <?php $img_urls = json_decode($carts->image_url); ?>
-                                        <a href="app-ecommerce-details.html">
-                                            <img src="{{ $img_urls[0] }}" alt="img-placeholder" />
-                                        </a>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="item-name">
-                                            <h6 class="mb-0"><a href="app-ecommerce-details.html"
-                                                    class="text-body">{{ $carts->product_name }}</a></h6>
-                                            <!-- <span class="item-company">By <a href="javascript:void(0)"
-                                                        class="company-name">Apple</a></span> -->
-                                            <!-- <div class="item-rating">
-                                                    <ul class="unstyled-list list-inline">
-                                                        <li class="ratings-list-item"><i data-feather="star"
-                                                                class="filled-star"></i></li>
-                                                        <li class="ratings-list-item"><i data-feather="star"
-                                                                class="filled-star"></i></li>
-                                                        <li class="ratings-list-item"><i data-feather="star"
-                                                                class="filled-star"></i></li>
-                                                        <li class="ratings-list-item"><i data-feather="star"
-                                                                class="filled-star"></i></li>
-                                                        <li class="ratings-list-item"><i data-feather="star"
-                                                                class="unfilled-star"></i></li>
-                                                    </ul>
-                                                </div> -->
-                                        </div>
-                                        <span class="text-success mb-1">In Stock</span>
-                                        <div class="item-quantity">
-                                            <span class="quantity-title">Qty:</span>
-                                            <div class="input-group quantity-counter-wrapper">
-                                                <input type="text" class="quantity-counter qty-change"
-                                                    value="<?php if(!empty($carts->quantity)){ echo $carts->quantity; }else{ echo "1";} ?>" />
-                                            </div>
-                                        </div>
-                                        <span class="delivery-date text-muted">Delivery by, {{ $days_7 }}</span>
-                                        <!-- <span class="text-success">17% off 4 offers Available</span> -->
-                                    </div>
-                                    <div class="item-options text-center">
-                                        <div class="item-wrapper">
-                                            <div class="item-cost">
-                                                <h4 class="item-price">Rs. {{ $carts->product_price }}</h4>
-                                                <p class="card-text shipping">
-                                                    <!-- <span class="badge badge-pill badge-light-success">Free Shipping</span> -->
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="item-wrapper">
-                                            <div class="item">
-                                                <h5 class="item-price total-item-price">Rs.
-                                                    <?php if(!empty($carts->quantity)){ echo ((float)($carts->quantity) * (float)($carts->product_price)); }else{ echo $carts->product_price;} ?>
-                                                </h5>
-                                                <p class="card-text shipping">
-                                                    <!-- <span class="badge badge-pill badge-light-success">Free Shipping</span> -->
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <button type="button" class="btn btn-light mt-1 remove-wishlist">
-                                            <i data-feather="x" class="align-middle mr-25"></i>
-                                            <span>Remove</span>
-                                        </button>
-                                        <!-- <button type="button" class="btn btn-primary btn-cart move-cart">
-                                                <i data-feather="heart" class="align-middle mr-25"></i>
-                                                <span class="text-truncate">Add to Wishlist</span>
-                                            </button> -->
-                                    </div>
-                                </div>
->>>>>>> fccbb8d42c3efff72fd9b24449716a30e7c0a8ca
+                                    <?php $i++; ?>
                                 @endforeach
                             </div>
                             <!-- Checkout Place Order Left ends -->
@@ -472,7 +403,7 @@
                                             <li class="py-50">
                                                 <div class="custom-control custom-radio">
                                                     <input type="radio" id="customColorRadio3" name="paymentOptions"
-                                                        class="custom-control-input" />
+                                                        class="custom-control-inpparseFloatut" />
                                                     <label class="custom-control-label" for="customColorRadio3"> Net
                                                         Banking </label>
                                                 </div>
@@ -607,11 +538,44 @@
     });
 
     $('body').on('focusout', '.qty-change', function(){
-        var ids[] = split("_", this.id);
-        var id_ = ids[1];
-        // total_price_
-        // quantity_
-        alert(ids);
+        var id = this.id;
+        var id_new = id.split("_", 2);
+        var current_id = id_new[1];
+        var item_price = parseFloat($('#item-price-'+current_id).text().replace("Rs. ", ""));
+        var item_quantity = parseInt($("#quantity_"+current_id).val());
+        var total_amount = item_quantity * item_price;
+        $('#total_price_'+current_id).html("Rs. " + total_amount);
+        var cart_id = $("#cart_id_"+current_id).val();
+        
+        $.ajax({
+            url: "update-quantity-in-cart",
+            type: "post",
+            data: {cart_id: cart_id, item_quantity: item_quantity},
+            success:function(response){
+                alert(response);
+            });
+        }
+
+    });
+
+    $('body').on('click', '.qty-div', function(){
+        var id = this.id;
+        var id_new = id.split("-", 3);
+        var current_id = id_new[2];
+        var item_price = parseFloat($('#item-price-'+current_id).text().replace("Rs. ", ""));
+        var item_quantity = parseInt($("#quantity_"+current_id).val());
+        var total_amount = item_quantity * item_price;
+        $('#total_price_'+current_id).html("Rs. " + total_amount);
+        var cart_id = $("#cart_id_"+current_id).val();
+        
+        $.ajax({
+            url: "update-quantity-in-cart",
+            type: "post",
+            data: {cart_id: cart_id, item_quantity: item_quantity},
+            success:function(response){
+                console.log(response);
+            });
+        }
     });
 });
 </script>
