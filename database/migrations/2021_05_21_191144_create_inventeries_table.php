@@ -15,8 +15,7 @@ class CreateInventeriesTable extends Migration
     {
         Schema::create('inventeries', function (Blueprint $table) {
             $table->id('inventory_id');
-            $table->string('inventory_name')->nullable(false);
-            
+            $table->integer('supplier_id')->nullable();
             $table->integer('product_id')->nullable();
             $table->string('quantity')->nullable();
             $table->string('invntory_status')->nullable();
