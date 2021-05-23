@@ -30,6 +30,7 @@ class InventoriesController extends Controller
 
         // return view('inventoeries', compact('invens'));
     }
+
     public function store(Request $req)
     {
         $invens = new Inventeries();
@@ -42,6 +43,7 @@ class InventoriesController extends Controller
         $invens->save();
         return redirect('inventories')->with('success', 'Inventory Added successfully');
     }
+
     public function edit($inventory_id)
     {
         $invens = Inventories::find($inventory_id);
@@ -49,6 +51,7 @@ class InventoriesController extends Controller
         //return redirect()->with('success', 'Inventory Updated successfully');
         
     }
+
     public function update(Request $req)
     {
         $invens = Inventories::find($req->inventory_id);
@@ -64,6 +67,7 @@ class InventoriesController extends Controller
         return redirect('inventories')->with('success', 'Inventory Updated successfully');
         //return response()->json($invens);
     }
+    
     public function destroy($inventory_id)
     {
         $invens = Inventories::where('inventory_id', $inventory_id)
