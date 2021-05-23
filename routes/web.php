@@ -55,8 +55,11 @@ Route::delete('/dele/{stock_id}', 'StockController@destroy');
 //Add Suppliers //
 Route::get('/supplier', 'SupplierController@index');
 Route::post('/addsupplier', 'SupplierController@store');
-Route::get('/editsu/{supplier_id}', 'SupplierController@edit');
-Route::post('/editsupplier', 'SupplierController@update');
+//Route::get('/editsupplier/{supplier_id}', 'SupplierController@editsupplier');
+
+ Route::get('/editsu/{supplier_id}', 'SupplierController@edit');
+ Route::post('/editsupplier', 'SupplierController@update');
+ //Route::post('/editsupplier/{supplier_id}', 'SupplierController@update');
 Route::delete('/deles/{supplier_id}', 'SupplierController@destroy');
 
 

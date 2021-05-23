@@ -8,10 +8,10 @@ use App\Aproducts;
 use Illuminate\Http\Request;
 class StockController extends Controller
 {
-    // function __construct()
-    // {
-    //     $this->middleware('permission:stock');
-    // }
+    function __construct()
+    {
+        $this->middleware('permission:stock');
+    }
    public function index()
     {
         $stocks = stocks::where(['deleted' => 0])->get();

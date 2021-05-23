@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use Auth;
 use App\Suppliers;
-use DB; 
+
 use Illuminate\Http\Request;
 
 class SupplierController extends Controller
@@ -29,14 +29,15 @@ class SupplierController extends Controller
     public function store(Request $request)
     {
 
-        $suppliers = new Suppliers();
-        $suppliers->supplier_companyName = $request->supplier_companyName;
-        $suppliers->supplier_address = $request->supplier_address;
-        $suppliers->supplier_contact = $request->supplier_contact;
-        $suppliers->supplier_email = $request->supplier_email;
-        $suppliers['created_by'] = Auth::user()->id;
-        $suppliers['updated_by'] = Auth::user()->id;
-        $suppliers->save();
+        $supplier = new Suppliers();
+        $supplier->supplier_companyName = $request->supplier_companyName;
+        $supplier->supplier_address = $request->supplier_address;
+        $supplier->supplier_contact = $request->supplier_contact;
+        $supplier->supplier_email = $request->supplier_email;
+        $supplier['created_by'] = Auth::user()->id;
+        $supplier['updated_by'] = Auth::user()->id;
+        $supplier->save();
+        
         return redirect('supplier')->with('success', 'Suppliers Inserted successfully');
        
        
@@ -44,7 +45,8 @@ class SupplierController extends Controller
 
     public function edit($id)
     {
-        $supplier = DB::table('suppliers')->where('supplier_id', $id)->first();
+        $supplier = Suppliers::find($id);
+        //return view('editSupplier',['supplier' => $supplier]);
 
         return response()->json($supplier);
     }
@@ -58,7 +60,7 @@ class SupplierController extends Controller
         $supplier->supplier_email = $request->supplier_email;
         $supplier['updated_by'] = Auth::user()->id;
         $supplier->save();
-        return redirect('suppliers')->with('success', 'Suppliers Updated successfully');
+        return redirect('supplier')->with('success', 'Suppliers Updated successfully');
        // return response()->json($suppliers);
     }
     /**
@@ -69,7 +71,7 @@ class SupplierController extends Controller
      */
     public function destroy($id)
     {
-        $suppliers = Suppliers::where('supplier_id', $id)
+        $supplier = Suppliers::where('supplier_id', $id)
             ->update(['deleted' => 1]);
 
         return response()->json(['success' => 'Record has been deleted!']);

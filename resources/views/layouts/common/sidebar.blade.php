@@ -41,6 +41,9 @@
           <li><a class="d-flex align-items-center" href="{{url('/product')}}"><i data-feather="circle"></i><span
                 class="menu-item text-truncate" data-i18n="Add">Product</span></a>
           </li>
+          <li><a class="d-flex align-items-center" href="{{url('/supplier')}}"><i data-feather="circle"></i><span
+                class="menu-item text-truncate" data-i18n="Add">Supplier</span></a>
+          </li>
           <li><a class="d-flex align-items-center" href="{{url('/inventories')}}"><i data-feather="circle"></i><span
                 class="menu-item text-truncate" data-i18n="Add">Inventory</span></a>
           </li>

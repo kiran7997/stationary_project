@@ -10,10 +10,10 @@ use Illuminate\Http\Request;
 
 class InventoriesController extends Controller
 {
-    // function __construct()
-    // {
-    //     $this->middleware('permission:inventories');
-    // }
+    function __construct()
+    {
+        $this->middleware('permission:inventories');
+    }
     public function index()
     {
         $invens = Inventeries::where(['deleted' => 0])->get();

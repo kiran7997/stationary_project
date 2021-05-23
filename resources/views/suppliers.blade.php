@@ -16,7 +16,7 @@
     <div class="header-navbar-shadow"></div>
     <div class="content-wrapper">
     	<div class="content-body"><!-- Basic Tables start -->
-    		<button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#supplierModal">
+    		<button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#supplierPModal">
             	Add New Suppliers
         	</button><br>
 			<div class="row" id="basic-table">
@@ -74,7 +74,7 @@
 
 <!-- Add Stock Model -->
 
-<div class="modal fade text-left " id="supplierModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true" >
+<div class="modal fade text-left " id="supplierPModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true" >
     	<div class="modal-dialog modal-dialog-centered" role="document">
         	<div class="modal-content">
 				<div class="modal-header">
@@ -117,62 +117,20 @@
     	</div>
 	</div>
 
-<!-- Edit Suppiler Model -->
 
-<div class="modal fade text-left " id="supplierEditModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true" >
+    </div>
+</div>
+
+    <div class="modal fade text-left " id="supplierEditModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true" >
     	<div class="modal-dialog modal-dialog-centered" role="document">
         	<div class="modal-content">
 				<div class="modal-header">
 					Add Suppliers
 				</div>
             
-				<form id="supplierForm" name="supplierForm"  method="post">
+				<form id="supplierEditForm" name="supplierEditForm"  method="post">
                 @csrf
-                 <!-- <input type="hidden" name="inventory_id" id="inventory_id"> -->
-                <div class="modal-body">
-                   	<label class="required"  for="supplier_companyName">Company Name </label>
-                   	<div class="form-group">
-                   		<input type="text" name="supplier_companyName" id="supplier_companyName" class="form-control" required>
-                          
-                    </div>
-
-                    <label class="required" for="supplier_address">Supplier Address</label>
-                    <div class="form-group">
-                    	<input type="textarea" name="supplier_address" id="supplier_address" class="form-control" required>
-                       
-                    </div>
-                          
-                    <label  class="required" for="supplier_contact">Supplier Contact </label>
-                    <div class="form-group">
-                       	<input type="number" name="supplier_contact" id="supplier_contact" class="form-control" required minlength="10" maxlength="10">
-                           
-                    </div>
-                    
-					<label class="required"  for="supplier_email"> Supplier Email</label>
-                    <div class="form-group">
-                        <input type="email" name="supplier_email" id="supplier_email" class="form-control" required>
-
-                    </div>
-
-					<div class="modal-footer">
-						<button type="submit" id="form" class="btn btn-primary" >Submit</button>
-					</div>
-				</form>
-        	</div>
-    	</div>
-	</div>
-
-<!-- end -->
-<!-- <div class="modal fade text-left " id="supplierEditModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true" >
-    	<div class="modal-dialog modal-dialog-centered" role="document">
-        	<div class="modal-content">
-				<div class="modal-header">
-					Edit Suppliers
-				</div>
-            
-				<form id="supplierEditForm" name="supplierEditForm"   method="post">
-                @csrf
-                 <input type="hidden" name="supplier_id" id="supplier_id">
+                <input type="hidden" name="supplier_id" id="supplier_id">
                 <div class="modal-body">
                    	<label class="required"  for="supplier_companyName">Company Name </label>
                    	<div class="form-group">
@@ -199,14 +157,14 @@
                     </div>
 
 					<div class="modal-footer">
-						<button type="submit" id="form" class="btn btn-primary" >Submit</button>
+						<button type="submit" id="form" class="btn btn-primary" >Update</button>
 					</div>
 				</form>
         	</div>
     	</div>
-	</div> -->
+	</div>
 
-
+    
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 
@@ -233,19 +191,17 @@ rules: {
 
 function editsup(supplier_id)
     {
-		// alert(supplier_id);
-        // $.get('/editsu/'+supplier_id,function(supplier){
-        //       $("#supplier_id").val(supplier.supplier_id);
-        //     $("#supplier_companyName2").val(supplier.supplier_companyName);
-        //         $("#supplier_address2").val(supplier.supplier_address);
-        //         $("#supplier_contact2").val(supplier.supplier_contact);
-        //         $("#supplier_email2").val(supplier.supplier_email);
+	
+        $.get('/editsu/'+supplier_id,function(supplier){
+            alert(supplier_id);
+              $("#supplier_id").val(supplier.supplier_id);
+            $("#supplier_companyName2").val(supplier.supplier_companyName);
+                $("#supplier_address2").val(supplier.supplier_address);
+                $("#supplier_contact2").val(supplier.supplier_contact);
+                $("#supplier_email2").val(supplier.supplier_email);
                 $("#supplierEditModal").modal('toggle');
-     //   $('#product_id2').val(stock.product_id);
-			//   $('#supplier_companyname2  option[value="'+supplier.supplier_companyname+'"]').prop("selected", true);
-       
-
-        // });
+  
+         });
     }
 
 
@@ -288,5 +244,5 @@ function deletesup(supplier_id)
 }
 </script>
 @endsection
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
- 
+
+
