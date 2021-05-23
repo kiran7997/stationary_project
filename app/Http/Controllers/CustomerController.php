@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\customers;
 use App\Aproducts;
+use App\Orders;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Arr;
@@ -131,5 +132,15 @@ class CustomerController extends Controller
             $response = 1;
         }
         return $response;
+    }
+
+    public function order_history()
+    {
+        $customer_id = Auth::guard('customer')->user()->customer_id;
+        $data = Orders::where('customer_id', $customer_id)->orderBy('customer_id', 'DESC')->get();
+        // echo "<pre>";
+        // print_r($data);
+        // exit;
+        return view('customer.order_history', compact('data'));
     }
 }
