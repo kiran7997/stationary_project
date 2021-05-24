@@ -57,9 +57,9 @@ Route::get('/supplier', 'SupplierController@index');
 Route::post('/addsupplier', 'SupplierController@store');
 //Route::get('/editsupplier/{supplier_id}', 'SupplierController@editsupplier');
 
- Route::get('/editsu/{supplier_id}', 'SupplierController@edit');
- Route::post('/editsupplier', 'SupplierController@update');
- //Route::post('/editsupplier/{supplier_id}', 'SupplierController@update');
+Route::get('/editsu/{supplier_id}', 'SupplierController@edit');
+Route::post('/editsupplier', 'SupplierController@update');
+//Route::post('/editsupplier/{supplier_id}', 'SupplierController@update');
 Route::delete('/deles/{supplier_id}', 'SupplierController@destroy');
 
 
@@ -134,7 +134,9 @@ Route::get('save_order', 'OrderController@save_order');
 Route::post('get-district-list', 'ShopController@get_district');
 
 //Invoice controller
-Route::get('/listinvoice','InvoiceController@index');
-Route::get('/invoicepreview/{order_id}','InvoiceController@previewinvoice');
-Route::get('/invoiceprint/{id}','InvoiceController@printinvoice');
-Route::post('/update-quantity-in-cart', 'ShopController@updateQuantityInCart');
+Route::get('/listinvoice', 'InvoiceController@index');
+Route::get('/invoicepreview/{order_id}', 'InvoiceController@previewinvoice');
+Route::get('/invoiceprint/{id}', 'InvoiceController@printinvoice');
+Route::get('update-quantity-in-cart', 'ShopController@updateQuantityInCart');
+
+Route::get('order-history', 'CustomerController@order_history');
