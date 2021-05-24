@@ -137,4 +137,4 @@ Route::post('get-district-list', 'ShopController@get_district');
 Route::get('/listinvoice','InvoiceController@index');
 Route::get('/invoicepreview/{order_id}','InvoiceController@previewinvoice');
 Route::get('/invoiceprint/{id}','InvoiceController@printinvoice');
-Route::get('update-quantity-in-cart', 'ShopController@updateQuantityInCart');
+Route::post('/update-quantity-in-cart', 'ShopController@updateQuantityInCart');

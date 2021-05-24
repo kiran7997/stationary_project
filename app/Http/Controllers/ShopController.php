@@ -31,11 +31,12 @@ class ShopController extends Controller
         $cart_data = AddToCart::join('aproducts', 'aproducts.product_id', 'add_to_carts.product_id')
             ->join('customers', 'customers.customer_id', 'add_to_carts.customer_id')
             ->select("add_to_carts.cart_id", "add_to_carts.product_id", "add_to_carts.customer_id", "add_to_carts.quantity", "add_to_carts.product_price", "add_to_carts.amount", "customers.customer_firstname", "customers.customer_lastname", "aproducts.product_name", "aproducts.image_url", "aproducts.description")
-            ->where(["add_to_carts.deleted" => 0])
+            ->where(["add_to_carts.deleted" => 0, 'add_to_carts.customer_id' => Auth::guard('customer')->user()->customer_id])
             ->get();
+        $price_details = AddToCart::where(["deleted" => 0, 'customer_id' => Auth::guard('customer')->user()])->sum('amount');
         $states = DB::table('state')->select('state_id', 'state_title')->get();
         $days_7 = date('D M d', strtotime(Carbon::parse(Carbon::now()->addDays(7))));
-        return view('customer/layouts/checkout', ['cart_data' => $cart_data, 'days_7' => $days_7, 'states' => $states]);
+        return view('customer/layouts/checkout', ['cart_data' => $cart_data, 'days_7' => $days_7, 'states' => $states, 'price_details' => $price_details]);
     }
 
     public function InsertIntoCart(Request $request)
@@ -79,8 +80,13 @@ class ShopController extends Controller
     }
 
     public function updateQuantityInCart(Request $request){
-        // $update_quantity_in_cart = AddToCart::where('cart_id', $request->cart_id)->update('quantity', $request->item_quantity);
-        // return $update_quantity_in_cart;
-        return "hiiiii";
+        $get_product_price = AddToCart::select('product_price')->where('cart_id', $request->cart_id)->first();
+        $product_price = $total_amount = 0.00;
+        if(!empty($get_product_price)){
+            $product_price = $get_product_price->product_price;
+        }
+        $total_amount = $product_price * $request->item_quantity;
+        $update_quantity_in_cart = AddToCart::where('cart_id', $request->cart_id)->update(array('quantity' => $request->item_quantity, 'amount' => $total_amount));
+        return "success";
     }
 }

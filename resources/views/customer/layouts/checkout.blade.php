@@ -85,7 +85,7 @@
                                 <?php $i = 0; ?>
                                 @foreach($cart_data as $carts)
                                     <form id="form_card_{{ $i }}" method="post">
-                                        <input type="text" id="cart_id_{{ $i }}" name="cart_id" value="{{ $carts->cart_id }}" />
+                                        <input type="hidden" id="cart_id_{{ $i }}" name="cart_id" value="{{ $carts->cart_id }}" />
                                         <input type="hidden" id="product_id_{{ $i }}" name="product_id" value="{{ $carts->product_id }}" />
                                         <div class="card ecommerce-card">
                                             <div class="item-img">
@@ -178,7 +178,7 @@
                                             <ul class="list-unstyled">
                                                 <li class="price-detail">
                                                     <div class="detail-title">Total MRP</div>
-                                                    <div class="detail-amt">$598</div>
+                                                    <div class="detail-amt">Rs. {{ $price_details }}</div>
                                                 </li>
                                                 <li class="price-detail">
                                                     <div class="detail-title">Bag Discount</div>
@@ -499,83 +499,97 @@
         })
 
         $('#firstname,#lastname,#city,#state').keypress(function(){
-        return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122));
-    });
+            return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122));
+        });
 
-    $('#firstname').keyup(function(){
-        $('#add_firstname').empty();
-        $('#add_firstname').text(this.value);
-    });
+        $('#firstname').keyup(function(){
+            $('#add_firstname').empty();
+            $('#add_firstname').text(this.value);
+        });
 
-    $('#lastname').keyup(function(){
-        $('#add_lastname').empty();
-        $('#add_lastname').text(this.value);
-    });
+        $('#lastname').keyup(function(){
+            $('#add_lastname').empty();
+            $('#add_lastname').text(this.value);
+        });
 
-    $('#phone_no').keyup(function(){
-        $('#add_phone_no').empty();
-        $('#add_phone_no').text(this.value);
-    });
+        $('#phone_no').keyup(function(){
+            $('#add_phone_no').empty();
+            $('#add_phone_no').text(this.value);
+        });
 
-    $('#state').keyup(function(){
-        $('#add_state').empty();
-        $('#add_state').text(this.value+" : ");
-    });
+        $('#state').keyup(function(){
+            $('#add_state').empty();
+            $('#add_state').text(this.value+" : ");
+        });
 
-    $('#city').keyup(function(){
-        $('#add_city').empty();
-        $('#add_city').text(this.value);
-    });
+        $('#city').keyup(function(){
+            $('#add_city').empty();
+            $('#add_city').text(this.value);
+        });
 
-    $('#house_number').keyup(function(){
-        $('#add_house_number').empty();
-        $('#add_house_number').text(this.value);
-    });
+        $('#house_number').keyup(function(){
+            $('#add_house_number').empty();
+            $('#add_house_number').text(this.value);
+        });
 
-    $('#landmark').keyup(function(){
-        $('#add_landmark').empty();
-        $('#add_landmark').text(this.value);
-    });
+        $('#landmark').keyup(function(){
+            $('#add_landmark').empty();
+            $('#add_landmark').text(this.value);
+        });
 
-    $('body').on('focusout', '.qty-change', function(){
-        var id = this.id;
-        var id_new = id.split("_", 2);
-        var current_id = id_new[1];
-        var item_price = parseFloat($('#item-price-'+current_id).text().replace("Rs. ", ""));
-        var item_quantity = parseInt($("#quantity_"+current_id).val());
-        var total_amount = item_quantity * item_price;
-        $('#total_price_'+current_id).html("Rs. " + total_amount);
-        var cart_id = $("#cart_id_"+current_id).val();
-        
-        $.ajax({
-            url: "update-quantity-in-cart",
-            type: "post",
-            data: {cart_id: cart_id, item_quantity: item_quantity},
-            success:function(response){
-                alert(response);
+        $('body').on('focusout', '.qty-change', function(){
+            var id = this.id;
+            var id_new = id.split("_", 2);
+            var current_id = id_new[1];
+            var item_price = parseFloat($('#item-price-'+current_id).text().replace("Rs. ", ""));
+            var item_quantity = parseInt($("#quantity_"+current_id).val());
+            var total_amount = item_quantity * item_price;
+            $('#total_price_'+current_id).html("Rs. " + total_amount);
+            var cart_id = $("#cart_id_"+current_id).val();
+
+            $.ajax({
+                url:"/update-quantity-in-cart",
+                method:"POST", //First change type to method here
+                data:{
+                    _token:'{{ csrf_token() }}', cart_id: cart_id, item_quantity: item_quantity
+                },
+                success:function(response) {
+                    console.log(response);
+                    location.reload();
+                },
+                error:function(){
+                    console.log("error");
+                }
             });
-        }
 
-    });
+        });
 
-    $('body').on('click', '.qty-div', function(){
-        var id = this.id;
-        var id_new = id.split("-", 3);
-        var current_id = id_new[2];
-        var item_price = parseFloat($('#item-price-'+current_id).text().replace("Rs. ", ""));
-        var item_quantity = parseInt($("#quantity_"+current_id).val());
-        var total_amount = item_quantity * item_price;
-        $('#total_price_'+current_id).html("Rs. " + total_amount);
-        var cart_id = $("#cart_id_"+current_id).val();
-        
-        $.ajax({
-            url: "update-quantity-in-cart",
-            type: "post",
-            data: {cart_id: cart_id, item_quantity: item_quantity},
-            success:function(response){
-                console.log(response);
+        $('body').on('click', '.qty-div', function(){
+            
+            var id = this.id;
+            var id_new = id.split("-", 3);
+            var current_id = id_new[2];
+            var item_price = parseFloat($('#item-price-'+current_id).text().replace("Rs. ", ""));
+            var item_quantity = parseInt($("#quantity_"+current_id).val());
+            var total_amount = item_quantity * item_price;
+            $('#total_price_'+current_id).html("Rs. " + total_amount);
+            var cart_id = $("#cart_id_"+current_id).val();
+
+            $.ajax({
+                url:"/update-quantity-in-cart",
+                method:"POST", //First change type to method here
+                data:{
+                    _token:'{{ csrf_token() }}', cart_id: cart_id, item_quantity: item_quantity
+                },
+                success:function(response) {
+                    console.log(response);
+                    location.reload();
+                },
+                error:function(){
+                    console.log("error");
+                }
             });
-        }
+
+        });
     });
-});
 </script>
