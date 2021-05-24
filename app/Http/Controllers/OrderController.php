@@ -14,10 +14,11 @@ class OrderController extends Controller
             $order = new orders();
             $order['customer_id'] = Auth::guard('customer')->user()->customer_id;
             $order['order_status'] = "order";
-            $order['order_date'] = date('d-m-Y H:i:s');
-            $order['arrival_date'] = date('d-m-Y H:i:s');
+            $order['order_date'] = date('Y-m-d');
+            $order['arrival_date'] = date('Y-m-d');
             $order['created_by'] = Auth::guard('customer')->user()->customer_id;
             $order['updated_by'] = Auth::guard('customer')->user()->customer_id;
+            $order['pincode'] = "12344";
             $order->save();
             
             // $i = 0;
