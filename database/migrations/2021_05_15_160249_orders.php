@@ -16,12 +16,12 @@ class Orders extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id('order_id');
             $table->integer('customer_id')->nullable(false);
-            $table->integer('order_status');
+            $table->string('order_status', 100);
             $table->date('order_date')->nullable();
             $table->date('arrival_date')->nullable();
-            $table->string('firstname')->nullable();
-            $table->string('lastname')->nullable();
-            $table->string('email')->nullable();
+            $table->string('firstname', 100)->nullable();
+            $table->string('lastname', 100)->nullable();
+            $table->string('email', 100)->nullable();
             $table->string('phone_no', 50)->nullable();
             $table->string('address_type')->nullable();
             $table->text('house_no')->nullable();
@@ -32,7 +32,7 @@ class Orders extends Migration
             $table->string('zip', 20)->nullable();
             $table->date('payment_date')->nullable();
             $table->float('amount', 15, 2)->default(0);
-            $table->text('payment_note')->nullable();
+            $table->text('payment_status')->nullable();
             $table->boolean('deleted')->default(0);
             $table->integer('created_by')->nullable();
             $table->integer('updated_by')->nullable();
