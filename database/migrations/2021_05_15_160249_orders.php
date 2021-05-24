@@ -15,23 +15,10 @@ class Orders extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id('order_id');
-            $table->integer('product_id')->nullable(false);
             $table->integer('customer_id')->nullable(false);
-            $table->integer('variation_id');
-            $table->string('product_name')->nullable();
-            $table->string('product_color')->nullable();
-            $table->string('product_type')->nullable();
-            $table->float('price', 15, 2)->default(0);
-            $table->integer('quantity')->default(0);
-            $table->float('subtotal', 15, 2)->default(0);
+            $table->integer('order_status');
             $table->date('order_date')->nullable();
             $table->date('arrival_date')->nullable();
-            $table->boolean('taxable')->default(0);
-            $table->float('tax_rate', 5, 2)->default(0);
-            $table->float('tax_amount', 15, 2)->default(0);
-            $table->float('total', 15, 2)->default(0);
-            $table->string('shipping_po')->nullable();
-            $table->text('note')->nullable();
             $table->string('firstname')->nullable();
             $table->string('lastname')->nullable();
             $table->string('email')->nullable();
@@ -43,14 +30,9 @@ class Orders extends Migration
             $table->string('city', 100)->nullable();
             $table->string('state', 100)->nullable();
             $table->string('zip', 20)->nullable();
-            $table->integer('vendor');
             $table->date('payment_date')->nullable();
-            $table->float('amount', 5, 2)->default(0);
-            $table->string('source')->nullable();
-            $table->string('reference_number')->nullable();
-            $table->string('entered_by')->nullable();
+            $table->float('amount', 15, 2)->default(0);
             $table->text('payment_note')->nullable();
-            $table->integer('order_status');
             $table->boolean('deleted')->default(0);
             $table->integer('created_by')->nullable();
             $table->integer('updated_by')->nullable();

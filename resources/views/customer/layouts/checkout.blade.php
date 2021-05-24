@@ -83,10 +83,11 @@
                             <!-- Checkout Place Order Left starts -->
                             <div class="checkout-items">
                                 <?php $i = 0; ?>
-                                @foreach($cart_data as $carts)
-                                    <form id="form_card_{{ $i }}" method="post">
-                                        <input type="hidden" id="cart_id_{{ $i }}" name="cart_id" value="{{ $carts->cart_id }}" />
-                                        <input type="hidden" id="product_id_{{ $i }}" name="product_id" value="{{ $carts->product_id }}" />
+                                <form id="form_card" method="post">
+                                    @csrf
+                                    @foreach($cart_data as $carts)
+                                        <input type="hidden" id="cart_id_{{ $i }}" name="cart_id[]" value="{{ $carts->cart_id }}" />
+                                        <input type="hidden" id="product_id_{{ $i }}" name="product_id[]" value="{{ $carts->product_id }}" />
                                         <div class="card ecommerce-card">
                                             <div class="item-img">
                                                 <?php $img_urls = json_decode($carts->image_url); ?>
@@ -120,7 +121,7 @@
                                                 <div class="item-quantity">
                                                     <span class="quantity-title">Qty:</span>
                                                     <div class="input-group quantity-counter-wrapper qty-div" id="qty-div-{{ $i }}">
-                                                        <input type="text" id="quantity_{{ $i }}" class="quantity-counter qty-change" value="<?php if(!empty($carts->quantity)){ echo $carts->quantity; }else{ echo "1";} ?>" />
+                                                        <input type="text" id="quantity_{{ $i }}" name="qyantity[]"  class="quantity-counter qty-change" value="<?php if(!empty($carts->quantity)){ echo $carts->quantity; }else{ echo "1";} ?>" />
                                                     </div>
                                                 </div>
                                                 <span class="delivery-date text-muted">Delivery by, {{ $days_7 }}</span>
@@ -153,9 +154,9 @@
                                                 </button> -->
                                             </div>
                                         </div>
-                                    </form>
-                                    <?php $i++; ?>
-                                @endforeach
+                                        <?php $i++; ?>
+                                    @endforeach
+                                </form>
                             </div>
                             <!-- Checkout Place Order Left ends -->
 
@@ -180,7 +181,7 @@
                                                     <div class="detail-title">Total MRP</div>
                                                     <div class="detail-amt">Rs. {{ $price_details }}</div>
                                                 </li>
-                                                <li class="price-detail">
+                                                <!-- <li class="price-detail">
                                                     <div class="detail-title">Bag Discount</div>
                                                     <div class="detail-amt discount-amt text-success">-25$</div>
                                                 </li>
@@ -192,7 +193,7 @@
                                                     <div class="detail-title">EMI Eligibility</div>
                                                     <a href="javascript:void(0)"
                                                         class="detail-amt text-primary">Details</a>
-                                                </li>
+                                                </li> -->
                                                 <li class="price-detail">
                                                     <div class="detail-title">Delivery Charges</div>
                                                     <div class="detail-amt discount-amt text-success">Free</div>
@@ -202,12 +203,11 @@
                                             <ul class="list-unstyled">
                                                 <li class="price-detail">
                                                     <div class="detail-title detail-total">Total</div>
-                                                    <div class="detail-amt font-weight-bolder">$574</div>
+                                                    <div class="detail-amt font-weight-bolder">Rs. {{ $price_details }}</div>
                                                 </li>
                                             </ul>
                                             <button type="button"
-                                                class="btn btn-primary btn-block btn-next place-order mt-2">Place
-                                                Order</button>
+                                                class="btn btn-primary btn-block btn-next place-order mt-2" id="save-cart-details">Place Order</button>
                                         </div>
                                     </div>
                                 </div>
@@ -574,7 +574,7 @@
             var total_amount = item_quantity * item_price;
             $('#total_price_'+current_id).html("Rs. " + total_amount);
             var cart_id = $("#cart_id_"+current_id).val();
-
+            
             $.ajax({
                 url:"/update-quantity-in-cart",
                 method:"POST", //First change type to method here
@@ -589,7 +589,20 @@
                     console.log("error");
                 }
             });
+        });
 
+        $("#save-cart-details").click(function() {
+            $.ajax({
+                url:"/save_order",
+                method:"POST", //First change type to method here
+                data: $("#form_card").serialize(),
+                success:function(response) {
+                    console.log(response);
+                },
+                error:function(){
+                    console.log("error");
+                }
+            });
         });
     });
 </script>

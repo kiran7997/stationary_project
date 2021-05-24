@@ -33,7 +33,7 @@ class ShopController extends Controller
             ->select("add_to_carts.cart_id", "add_to_carts.product_id", "add_to_carts.customer_id", "add_to_carts.quantity", "add_to_carts.product_price", "add_to_carts.amount", "customers.customer_firstname", "customers.customer_lastname", "aproducts.product_name", "aproducts.image_url", "aproducts.description")
             ->where(["add_to_carts.deleted" => 0, 'add_to_carts.customer_id' => Auth::guard('customer')->user()->customer_id])
             ->get();
-        $price_details = AddToCart::where(["deleted" => 0, 'customer_id' => Auth::guard('customer')->user()])->sum('amount');
+        $price_details = AddToCart::where(['deleted' => 0, 'customer_id' => Auth::guard('customer')->user()->customer_id])->sum('amount');
         $states = DB::table('state')->select('state_id', 'state_title')->get();
         $days_7 = date('D M d', strtotime(Carbon::parse(Carbon::now()->addDays(7))));
         return view('customer/layouts/checkout', ['cart_data' => $cart_data, 'days_7' => $days_7, 'states' => $states, 'price_details' => $price_details]);

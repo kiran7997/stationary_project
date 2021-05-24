@@ -110,9 +110,6 @@ Route::get('/units/{unit_id}', 'UnitsController@getUnitsById');
 Route::post('/units', 'UnitsController@updateUnits');
 Route::delete('/units/{unit_id}', 'UnitsController@deleteunits');
 
-
-
-
 Route::get('employee-dashboard', 'UserController@dashboard');
 
 Route::get('profile', 'UserController@profile');
@@ -127,10 +124,7 @@ Route::post('insert-into-cart', 'ShopController@InsertIntoCart');
 
 Route::post('check_customer_email', 'CustomerController@check_customer_email');
 Route::post('check_user_email', 'UserController@check_user_email');
-
-Route::get('save_order', 'OrderController@save_order');
-
-
+Route::post('save_order', 'OrderController@save_order');
 Route::post('get-district-list', 'ShopController@get_district');
 
 //Invoice controller
