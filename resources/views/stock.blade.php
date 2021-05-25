@@ -1,133 +1,151 @@
 @extends('layouts.app')
 @section('title', 'Stock')
-@section('content')   
+@section('content')
 
 <head>
-<style>
-     .required:after {
-    content:" *";
-    color: red;
-	 }
-</style>
-<meta name="csrf-token" content="{{ csrf_token() }}">
+	<style>
+		.required:after {
+			content: " *";
+			color: red;
+		}
+	</style>
+	<meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
-    <div class="app-content content ">
-      	<div class="content-overlay"></div>
-      	<div class="header-navbar-shadow"></div>
-        <div class="content-body"><!-- Basic Tables start -->
-        	<!-- <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#stockModal">
-                Add New Stock
-            </button><br> -->
-			<div class="row" id="basic-table">
-  				<div class="col-12">
-				    <div class="card">
-					<br>
-                    @if ($message = Session::get('success'))
-                                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                    <div class="alert-body">
-                                        <p>{{ $message }}</p>
-                                    </div>
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                @endif
-                                <br>
-				      	<div class="table-responsive">
-        					<table class="table">
-        						<thead>
-        							<tr>
-        								<th>Product Name</th>
-              							<th>Item Quantity</th>
-              							<!-- <th>Actions</th>  -->
-                                	</tr>                                        
-                            	</thead>
-                            	<tbody>
-								<?php //dd($stocks);?>
-          							@foreach($stocks as $stock)
-           								<tr id="sid{{$stock->stock_id}}">
-										
-										   <td>{{$stock->product_name}}</td>							  
-                							<td>{{$stock->item_quantity}}</td>
-                							<!-- <td>
-                								<a href="javascript:void(0)" onclick="editStock(<?php echo $stock->stock_id; ?>)"  class="fa fa-edit" style="font-size:24px"></a>
-        										<a href="javascript:void(0)" onclick="deletestock({{$stock->stock_id}})" class="fa fa-trash" style="font-size:24px;color:red"></a>
-                							</td> -->
-                						</tr>
-               						@endforeach
-             					</tbody>
-        					</table>
-      					</div>
-    				</div>
-  				</div>
-			</div>
-   		</div>
-    </div>
-
-  	<hr />
-
-	<!-- Add Stock Model -->
-
-	<div class="modal fade text-left " id="stockModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true" >
-    	<div class="modal-dialog modal-dialog-centered" role="document">
-        	<div class="modal-content">
-				<div class="modal-header">
-					Add Stock
+<div class="app-content content ">
+	<div class="content-overlay"></div>
+	<div class="header-navbar-shadow"></div>
+	<div class="content-header row">
+		<div class="content-header-left col-md-9 col-12 mb-2">
+			<div class="row breadcrumbs-top">
+				<div class="col-12">
+					<h2 class="content-header-title float-left mb-0">Inventory</h2>
+					<div class="breadcrumb-wrapper">
+						<ol class="breadcrumb">
+							<li class="breadcrumb-item"><a href="{{ url('home') }}">Home</a>
+							</li>
+							<li class="breadcrumb-item"><a href="{{ url('inventories') }}">Inventory</a>
+							</li>
+							<li class="breadcrumb-item active">Inventory
+							</li>
+						</ol>
+					</div>
 				</div>
-            
-				<form id="stockForm" name="stockForm" style="margin: 25px;"  method="post">
-					@csrf
-					<div class="form-group">
-						<label class="required" for="product_id">Product Type</label> &nbsp;&nbsp;
-						<select name="product_id" id="product_id2"  class="form-control" required>
-							<option value="">Select Option</option>
-	 						@foreach($products_data as $product_data)
-								<option value="{{ $product_data->product_id }}">{{ $product_data->product_name }}</option>
-							@endforeach
-						</select>  
-					</div>
-					<br>
-					<div class="form-group">
-						<label  class="required" for="item_quantity">Item Quantity </label>
-						<input type="number" name="item_quantity" id="item_quantity" class="form-control" required>
-						
-					</div><br>
-					<div class="modal-footer">
-						<button type="submit" id="form" class="btn btn-primary" >Submit</button>
-					</div>
-				</form>
-        	</div>
-    	</div>
-	</div>
-
-	<div class="modal fade text-left bs-validation" id="stockEditModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true" >
-		<div class="modal-dialog modal-dialog-centered" role="document">
-			<div class="modal-content">
-				<div class="modal-header">Edit Stock</div>
-				<form id="stockEditForm" name="stockEditForm" style="margin: 25px;"  method="post"> 
-					@csrf
-					<input type="hidden" id="stock_id" name="stock_id" >
-					<div class="form-group">
-						<label class="required" for="product_id">Product Type</label> &nbsp;&nbsp;
-						<select name="product_id" id="product_id2"  class="form-control" required>
-							<option value="">Select Option</option>
-	 						@foreach($products_data as $product_data)
-								<option value="{{ $product_data->product_id }}">{{ $product_data->product_name }}</option>
-							@endforeach
-						</select>  
-					</div>
-					<br>
-					<div class="form-group">
-						<label class="required" for="item_quantity">Item Quantity </label>
-						<input type="number" name="item_quantity" id="item_quantity2" class="form-control" placeholder="Quantity" required>
-					</div><br>
-					<div class="modal-footer">
-						<button type="submit" class="btn btn-primary" >Submit</button>
-					</div>
-				</form>
 			</div>
 		</div>
 	</div>
+	<div class="content-body">
+
+		<div class="row" id="basic-table">
+			<div class="col-12">
+				<div class="card">
+					<div style="margin:20px;">
+						@if ($message = Session::get('success'))
+						<div class="alert alert-success alert-dismissible fade show" role="alert">
+							<div class="alert-body">
+								<p>{{ $message }}</p>
+							</div>
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						@endif
+						<table id="example" class="display nowrap stripe" style="width:100%;">
+							<thead>
+								<tr>
+									<th>Product Name</th>
+									<th>Item Quantity</th>
+									<!-- <th>Actions</th>  -->
+								</tr>
+							</thead>
+							<tbody>
+								<?php //dd($stocks);?>
+								@foreach($stocks as $stock)
+								<tr id="sid{{$stock->stock_id}}">
+
+									<td>{{$stock->product_name}}</td>
+									<td>{{$stock->item_quantity}}</td>
+									<!-- <td>
+                								<a href="javascript:void(0)" onclick="editStock(<?php echo $stock->stock_id; ?>)"  class="fa fa-edit" style="font-size:24px"></a>
+        										<a href="javascript:void(0)" onclick="deletestock({{$stock->stock_id}})" class="fa fa-trash" style="font-size:24px;color:red"></a>
+                							</td> -->
+								</tr>
+								@endforeach
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<hr />
+
+<!-- Add Stock Model -->
+
+<div class="modal fade text-left " id="stockModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33"
+	aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				Add Stock
+			</div>
+
+			<form id="stockForm" name="stockForm" style="margin: 25px;" method="post">
+				@csrf
+				<div class="form-group">
+					<label class="required" for="product_id">Product Type</label> &nbsp;&nbsp;
+					<select name="product_id" id="product_id2" class="form-control" required>
+						<option value="">Select Option</option>
+						@foreach($products_data as $product_data)
+						<option value="{{ $product_data->product_id }}">{{ $product_data->product_name }}</option>
+						@endforeach
+					</select>
+				</div>
+				<br>
+				<div class="form-group">
+					<label class="required" for="item_quantity">Item Quantity </label>
+					<input type="number" name="item_quantity" id="item_quantity" class="form-control" required>
+
+				</div><br>
+				<div class="modal-footer">
+					<button type="submit" id="form" class="btn btn-primary">Submit</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade text-left bs-validation" id="stockEditModal" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel33" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-header">Edit Stock</div>
+			<form id="stockEditForm" name="stockEditForm" style="margin: 25px;" method="post">
+				@csrf
+				<input type="hidden" id="stock_id" name="stock_id">
+				<div class="form-group">
+					<label class="required" for="product_id">Product Type</label> &nbsp;&nbsp;
+					<select name="product_id" id="product_id2" class="form-control" required>
+						<option value="">Select Option</option>
+						@foreach($products_data as $product_data)
+						<option value="{{ $product_data->product_id }}">{{ $product_data->product_name }}</option>
+						@endforeach
+					</select>
+				</div>
+				<br>
+				<div class="form-group">
+					<label class="required" for="item_quantity">Item Quantity </label>
+					<input type="number" name="item_quantity" id="item_quantity2" class="form-control"
+						placeholder="Quantity" required>
+				</div><br>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-primary">Submit</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
 
 <!-- AJAX insert Stock model -->
 
@@ -136,8 +154,8 @@
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
- <script>
-// <!--
+<script>
+	// <!--
 // // $("#stockForm").submit(function(e){
 // //   e.preventDefault();
 // //   var $stockForm = $(this);
@@ -306,8 +324,20 @@ function deletestock(stock_id)
 </script>
 @endsection
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<!-- <script>
-    $(document).ready(function() {
-   $("#stockForm").validate();
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+<script>
+	$(document).ready(function() {
+    // $('#example').DataTable();
+    $('#example').DataTable( {
+        // "scrollY": 200,
+        "scrollX": true
+    } );
+
+    $(".delete").on("click", function () {
+    return confirm('Are you sure you want to Delete?');
 	});
-	</script> -->
+});
+
+
+</script>

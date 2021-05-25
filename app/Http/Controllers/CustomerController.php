@@ -120,6 +120,21 @@ class CustomerController extends Controller
     {
         $input = $request->all();
         $input['password'] = Hash::make($request->password);
+        // $input['otp'] = '1234';
+        // $api_key = '260A8BC52A8EAA';
+        // $contacts = '9021121916';
+        // $from = 'MPSMOT';
+        // $template_id= '';
+        // $sms_text = urlencode('Hello People, have a great day');
+
+        // $api_url = "http://sms.textmysms.com/app/smsapi/index.php?key=".$api_key."&campaign=0&routeid=26&type=text&contacts=".$contacts."&senderid=".$from."&msg=".$sms_text;
+
+        // //Submit to server
+
+        // $response = file_get_contents( $api_url);
+        // // echo $response;
+        // $input['otp'] = $sms_text;
+
         $customers = customers::create($input);
         return redirect('/')->with('success', 'Your Registred Successfully Login Here');
     }

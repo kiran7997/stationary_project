@@ -231,7 +231,30 @@ class UserController extends Controller
     public function dashboard()
     {
         //employee dashboard
-        return view('employee_dash');
+        $order_count = \App\Orders::where(['order_status'=>'order'])->count();
+        return view('employee_dash',compact('order_count'));
+    }
+
+    public function orderList(){
+        $order_list = \App\Orders::where(['order_status'=>'order'])->get();
+        // $order_list = DB::table('orders')
+        //             ->select('orders.*','customers.customer_firstname','customers.customer_lastname')
+        //             ->leftjoin('customers','customers.customer_id','=','orders.customer_id')
+        //             // ->leftjoin('')
+        //             ->where(['order_status'=>'order'])
+        //             ->get();
+        return view('employee-dashboard-list.order-list',compact('order_list'));
+    }
+
+    public function assignSalesTeam($id){
+        $order_list = \App\Orders::where(['order_id'=>$id])->first();
+        $order_item_data = DB::table('order_items')
+                        ->select('order_items.*','aproducts.image_url')
+                        ->leftjoin('aproducts','aproducts.product_id','order_items.product_id')
+                        ->where(['order_id'=>$id])->get();
+        $users = \App\User::where(['role'=>4])->get();
+        $states = DB::table('state')->select('state_id', 'state_title')->get();
+        return view('employee-dashboard-list.assign_to_sales_team',compact('order_list','users','states','order_item_data','id'));
     }
 
     public function profile()
@@ -285,5 +308,17 @@ class UserController extends Controller
             $response = 1;
         }
         return $response;
+    }
+
+    //Get sales users
+    public function getSalesUser(Request $request){
+        return DB::table('users')->select('id', 'name')->where('district', $request->district_id)->where(['role'=>2])->get();
+    }
+
+    public function saveAssignSalesData(Request $request){
+        $requestData = $request->all();
+        $data_customer = DB::table('orders')->where(['order_id'=>$requestData['order_id']])->update(['sales_person' => $requestData['sales_person']]);
+        // dd($requestData);
+        return redirect('employee-order-list');
     }
 }
