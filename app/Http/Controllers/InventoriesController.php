@@ -48,8 +48,10 @@ class InventoriesController extends Controller
         if($req->invntory_status == 'add')
         {
             //echo "hello";exit;
-        $stock = Stocks::where('product_id','=', $req->product_id)->first();
-        $count=Stocks::where('product_id','=', $req->product_id)->value('item_quantity');
+        $stock = Stocks::select('product_id')->where('product_id','=', $req->product_id)->first();
+      
+        $count=Stocks::select('item_quantity')->where('product_id','=', $req->product_id)->value('item_quantity');
+        //echo $count;exit;
         $co=$count+$req->quantity;
         //  $count=DB::table('stocks')->select('item_quantity')->where('product_id','=', $req->product_id)->first();
         //  echo $count;exit;
@@ -62,7 +64,8 @@ class InventoriesController extends Controller
         if($stock)
         {
             DB::table('stocks')->where('product_id',$req->product_id)
-            ->update(array('item_quantity' => intval($co))); 
+            ->update(array('item_quantity' => intval($co),'updated_by' => Auth::user()->id,
+           'created_by'=> Auth::user()->id));
             
             //echo "hello";exit;
             //$count=$req->quantity;
@@ -81,9 +84,10 @@ class InventoriesController extends Controller
         {
            
            
-            $data = array("product_id"=>$req->product_id,"item_quantity"=>$co);
-            Stocks::insert($data);
-            $invens['updated_by'] = Auth::user()->id;
+            $data = array("product_id"=>$req->product_id,"item_quantity"=>$co,'updated_by' => Auth::user()->id,
+            'created_by'=> Auth::user()->id);
+            Stocks::create($data);
+            
         }
              
 
@@ -99,18 +103,18 @@ class InventoriesController extends Controller
          else
          {
         //  echo $quantity;exit;
-        Stocks::where('product_id', $req->product_id)->decrement('item_quantity',  $req->quantity);
+        Stocks::select('item_quantity')->where('product_id', $req->product_id)->decrement('item_quantity',  $req->quantity);
          }
         //  $minus=DB::table('inventory')
         // Select value1 - (select value2 from AnyTable1) from AnyTable2
      }
      elseif($req->invntory_status == 'set')
      {
-        $stock = Inventeries::where('product_id','=', $req->product_id)->get();
+        $stock = Inventeries::select('quantity')->where('product_id','=', $req->product_id)->get();
         if($stock)
         {
-            $total=DB::table('inventeries')->where('product_id','=',$req->product_id)->sum('quantity');
-            DB::table('stocks')->where('product_id',$req->product_id)
+            //$total=DB::table('inventeries')select('')->where('product_id','=',$req->product_id)->sum('quantity');
+            DB::table('stocks')->select('item_quantity')->where('product_id',$req->product_id)
                 ->update(array('item_quantity' => intval($req->quantity))); 
         }      
      }
@@ -119,7 +123,8 @@ class InventoriesController extends Controller
 
     public function edit($inventory_id)
     {
-        $invens = Inventeries::find($inventory_id);
+        $invens = Inventeries::select('inventory_id','supplier_id','product_id','quantity','invntory_status')->where('inventory_id','=',$inventory_id)->first();
+        
         return response()->json($invens);
         //return redirect()->with('success', 'Inventory Updated successfully');
         
@@ -127,7 +132,8 @@ class InventoriesController extends Controller
 
     public function update(Request $req)
     {
-        $invens = Inventeries::find($req->inventory_id);
+        $invens = Inventeries::select('inventory_id','supplier_id','product_id','quantity','invntory_status')->first();
+
         $invens->supplier_id = $req->inventory_name;
 
         $invens->product_id = $req->product_id;
@@ -138,8 +144,10 @@ class InventoriesController extends Controller
         if($req->invntory_status == 'add')
         {
             //echo "hello";exit;
-        $stock = Stocks::where('product_id','=', $req->product_id)->first();
-        $count=Stocks::where('product_id','=', $req->product_id)->value('item_quantity');
+        $stock = Stocks::select('product_id')->where('product_id','=', $req->product_id)->first();
+      
+        $count=Stocks::select('item_quantity')->where('product_id','=', $req->product_id)->value('item_quantity');
+        //echo $count;exit;
         $co=$count+$req->quantity;
         //  $count=DB::table('stocks')->select('item_quantity')->where('product_id','=', $req->product_id)->first();
         //  echo $count;exit;
@@ -152,7 +160,8 @@ class InventoriesController extends Controller
         if($stock)
         {
             DB::table('stocks')->where('product_id',$req->product_id)
-            ->update(array('item_quantity' => intval($co))); 
+            ->update(array('item_quantity' => intval($co),'updated_by' => Auth::user()->id,
+           'created_by'=> Auth::user()->id));
             
             //echo "hello";exit;
             //$count=$req->quantity;
@@ -171,9 +180,10 @@ class InventoriesController extends Controller
         {
            
            
-            $data = array("product_id"=>$req->product_id,"item_quantity"=>$co);
-            Stocks::insert($data);
-            $invens['updated_by'] = Auth::user()->id;
+            $data = array("product_id"=>$req->product_id,"item_quantity"=>$co,'updated_by' => Auth::user()->id,
+            'created_by'=> Auth::user()->id);
+            Stocks::create($data);
+            
         }
              
 
@@ -189,18 +199,18 @@ class InventoriesController extends Controller
          else
          {
         //  echo $quantity;exit;
-        Stocks::where('product_id', $req->product_id)->decrement('item_quantity',  $req->quantity);
+        Stocks::select('item_quantity')->where('product_id', $req->product_id)->decrement('item_quantity',  $req->quantity);
          }
         //  $minus=DB::table('inventory')
         // Select value1 - (select value2 from AnyTable1) from AnyTable2
      }
      elseif($req->invntory_status == 'set')
      {
-        $stock = Inventeries::where('product_id','=', $req->product_id)->get();
+        $stock = Inventeries::select('quantity')->where('product_id','=', $req->product_id)->get();
         if($stock)
         {
-            $total=DB::table('inventeries')->where('product_id','=',$req->product_id)->sum('quantity');
-            DB::table('stocks')->where('product_id',$req->product_id)
+            //$total=DB::table('inventeries')select('')->where('product_id','=',$req->product_id)->sum('quantity');
+            DB::table('stocks')->select('item_quantity')->where('product_id',$req->product_id)
                 ->update(array('item_quantity' => intval($req->quantity))); 
         }      
      }
@@ -213,30 +223,32 @@ class InventoriesController extends Controller
         // $get=Inventeries::select('quantity','invntory_status')
         //                     ->where('inventory_id',$inventory_id)->get();
         // echo $get;exit;
+        
         $invens = Inventeries::where('inventory_id', $inventory_id)
              ->update(['deleted' => 1]);
         
-    //     $check=Inventeries::where([['inventory_id', '=', $inventory_id],['invntory_status', '=', 'add']])->first();
-    // echo $check;exit;
-    //         //$stock = Stocks::where('product_id','=', $inventory_id)->firstz();
-    //         $count=Inventeries::select('quantity')->where('inventory_id','=',$inventory_id)->value('quantity');
-    //         $quantity=Stocks::select('item_quantity')->where('product_id','=', $inventory_id)->value('item_quantity');
-    //         if($check)
-    //         {
-    //             //echo 'hii';exit;
-    //             Stocks::where('product_id','=', $inventory_id)->decrement('item_quantity', $count);
-    //             $invens = Inventeries::where('inventory_id', $inventory_id)
-    //             ->update(['deleted' => 1]);
+        // $check=Inventeries::select('inventory_id', 'invntory_status')
+        //         ->where([['inventory_id', '=', $inventory_id],['invntory_status', '=', 'add']])->first();
+        // dd($check) ;exit;
+        //     //$stock = Stocks::where('product_id','=', $inventory_id)->firstz();
+        //     $count=Inventeries::select('quantity')->where('inventory_id','=',$inventory_id)->value('quantity');
+        //     $quantity=Stocks::select('item_quantity')->where('product_id','=', $inventory_id)->value('item_quantity');
+        //     if($check)
+        //     {
+        //         //echo 'hii';exit;
+        //         Stocks::where('product_id','=', $inventory_id)->decrement('item_quantity', $count);
+        //         $invens = Inventeries::where('inventory_id', $inventory_id)
+        //         ->update(['deleted' => 1]);
            
-    //         }
+        //     }
             
-    //         else
-    //         {
-    //             $co=$count+$quantity;   
-    //             DB::table('stocks')->where('product_id',$inventory_id)
-    //             ->update(array('item_quantity' => intval($co)));
+        //     else
+        //     {
+        //         $co=$count+$quantity;   
+        //         DB::table('stocks')->where('product_id',$inventory_id)
+        //         ->update(array('item_quantity' => intval($co)));
                 
-                
+        //     }
             
         return response()->json(['success' => 'Record has Been Deleted']);
     }   
