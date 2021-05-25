@@ -53,7 +53,9 @@ class SupplierController extends Controller
 
     public function edit($id)
     {
-        $supplier = Suppliers::find($id);
+        $supplier = Suppliers::select('supplier_companyName','supplier_address','supplier_contact','supplier_email')
+        ->where('supplier_id','=',$id)->first();
+       // $supplier = Suppliers::find($id);
         //return view('editSupplier',['supplier' => $supplier]);
 
         return response()->json($supplier);
@@ -61,7 +63,7 @@ class SupplierController extends Controller
     public function update(Request $request)
     {
 
-        $supplier = Suppliers::find($request->supplier_id);
+        $supplier = Suppliers::select('supplier_companyName','supplier_address','supplier_contact','supplier_email')->first();
         $supplier->supplier_companyName = $request->supplier_companyName;
         $supplier->supplier_address = $request->supplier_address;
         $supplier->supplier_contact = $request->supplier_contact;

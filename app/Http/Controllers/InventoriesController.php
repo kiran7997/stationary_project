@@ -63,7 +63,7 @@ class InventoriesController extends Controller
        
         if($stock)
         {
-            DB::table('stocks')->select('item_quantity')->where('product_id',$req->product_id)
+          $stock=Stocks::where('product_id',$req->product_id)
             ->update(array('item_quantity' => intval($co)));
             
             //echo "hello";exit;
@@ -83,7 +83,8 @@ class InventoriesController extends Controller
         {
            
            
-            $data = array("product_id"=>$req->product_id,"item_quantity"=>$co);
+            $data = array("product_id"=>$req->product_id,"item_quantity"=>$co,'updated_by'=>Auth::user()->id,
+        'created_by'=>Auth::user()->id);
             Stocks::create($data);
             
         }
@@ -112,7 +113,7 @@ class InventoriesController extends Controller
         if($stock)
         {
             //$total=DB::table('inventeries')select('')->where('product_id','=',$req->product_id)->sum('quantity');
-            DB::table('stocks')->select('item_quantity')->where('product_id',$req->product_id)
+            Stocks::where('product_id',$req->product_id)
                 ->update(array('item_quantity' => intval($req->quantity))); 
         }      
      }
@@ -157,7 +158,7 @@ class InventoriesController extends Controller
        
           if($stock)
           {
-              DB::table('stocks')->select('item_quantity')->where('product_id',$req->product_id)
+            Stocks::where('product_id',$req->product_id)
               ->update(array('item_quantity' => intval($co)));
               
               //echo "hello";exit;
@@ -177,7 +178,8 @@ class InventoriesController extends Controller
           {
              
              
-              $data = array("product_id"=>$req->product_id,"item_quantity"=>$co);
+              $data = array("product_id"=>$req->product_id,"item_quantity"=>$co,'updated_by'=>Auth::user()->id,
+              'created_by'=>Auth::user()->id);
               Stocks::create($data);
               
           }
@@ -206,7 +208,7 @@ class InventoriesController extends Controller
           if($stock)
           {
               //$total=DB::table('inventeries')select('')->where('product_id','=',$req->product_id)->sum('quantity');
-              DB::table('stocks')->select('item_quantity')->where('product_id',$req->product_id)
+              Stocks::where('product_id',$req->product_id)
                   ->update(array('item_quantity' => intval($req->quantity))); 
           }      
        }
