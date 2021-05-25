@@ -85,14 +85,14 @@ class ProductsController extends Controller
     }
     public function edit($product_id)
     {
-        $products = Aproducts::select('product_name','cat_id','unit_id','variation_id','description','base_price','code','taxable')
+        $products = Aproducts::select('product_id','product_name','cat_id','unit_id','variation_id','image_url','description','base_price','code','taxable')
         ->where('product_id','=',$product_id)->first();
         //$products = Aproducts::find($product_id);
         return response()->json($products);
     }
     public function update(Request $req)
     {
-        $products = Aproducts::select('product_id')->first();
+        $products = Aproducts::find($req->product_id);
         $products->product_name = $req->product_name;
         $products->cat_id = $req->cat_id;
         $products->unit_id = $req->unit_id;
