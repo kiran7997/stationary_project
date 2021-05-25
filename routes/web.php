@@ -28,6 +28,8 @@ Route::get('employee-logout', 'Auth\EmployeeController@logout');
 //Customer Login Route
 Route::get('/', 'Auth\CustomerLoginController@showLoginForm');
 Route::post('customers-login', 'Auth\CustomerLoginController@login')->name('customers-login');
+Route::get('verify-otp','Auth\CustomerLoginController@otpValidation');
+Route::post('otp-validation','Auth\CustomerLoginController@verifyOTP')->name('otp-validation');
 Route::get('customers-logout', 'Auth\CustomerLoginController@logout');
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -39,6 +41,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('departments', 'DepartmentController');
     Route::post('get-district', 'UserController@get_district');
     Route::post('check_username', 'UserController@check_username');
+
+    Route::post('get-sales-user', 'UserController@getSalesUser');
 });
 //customer routes
 Route::get('customer-dashboard', 'CustomerController@dashboard');
@@ -118,3 +122,8 @@ Route::post('check_customer_email', 'CustomerController@check_customer_email');
 Route::post('check_user_email', 'UserController@check_user_email');
 
 Route::get('save_order', 'OrderController@save_order');
+
+//employee-dashboard
+Route::get('employee-order-list','UserController@orderList');
+Route::get('assign-to-sales-team/{id}','UserController@assignSalesTeam');
+Route::post('assign-to-sales-team','UserController@saveAssignSalesData');
