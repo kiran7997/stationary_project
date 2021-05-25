@@ -27,15 +27,38 @@
           <li class="dropdown-menu-header">
             <div class="dropdown-header d-flex">
               <h4 class="notification-title mb-0 mr-auto">My Cart</h4>
-              <div class="badge badge-pill badge-light-primary">4 Items</div>
+              <div class="badge badge-pill badge-light-primary">{{ App\AddToCart::where(['customer_id' => Auth::guard('customer')->user()->customer_id, 'deleted' => 0])->sum('quantity') }}</div>
             </div>
           </li>
-          <li class="dropdown-menu-footer">
-            <div class="d-flex justify-content-between mb-1">
-              <h6 class="font-weight-bolder mb-0">Total:</h6>
-              <h6 class="text-primary font-weight-bolder mb-0">$0.00</h6>
-            </div><a class="btn btn-primary btn-block" href="app-ecommerce-checkout.html">Checkout</a>
-          </li>
+          <?php
+          $total = 0; 
+          $my_card = DB::table('add_to_carts')
+                   ->select('add_to_carts.product_price','aproducts.product_name','aproducts.image_url')
+                   ->leftjoin('aproducts','aproducts.product_id','add_to_carts.product_id')
+                   ->where(['add_to_carts.deleted'=>0,'add_to_carts.customer_id'=>Auth::guard('customer')->user()->customer_id])
+                   ->get();
+          // dd($my_card);
+          //App\AddToCart::where(['customer_id' => Auth::guard('customer')->user()->customer_id, 'deleted' => 0])->get(); ?>
+          <li class="scrollable-container media-list">
+            @foreach($my_card as $row)
+            <?php $total = $total + $row->product_price; ?>
+            <div class="media align-items-center"><img class="d-block rounded mr-1" src="{{$row->image_url}}" alt="donuts" width="62">
+                <div class="media-body"><i class="ficon cart-item-remove" data-feather="x"></i>
+                    <div class="media-heading">
+                        <h6 class="cart-item-title"><a class="text-body" href="{{url('checkout')}}"> {{$row->product_name}}</a></h6><small class="cart-item-by">By Apple</small>
+                    </div>
+                    
+                    <h5 class="cart-item-price">Rs. {{$row->product_price}}</h5>
+                </div>
+            </div>
+            @endforeach
+        </li>
+            <li class="dropdown-menu-footer">
+              <div class="d-flex justify-content-between mb-1">
+                <h6 class="font-weight-bolder mb-0">Total:</h6>
+                <h6 class="text-primary font-weight-bolder mb-0">Rs. {{$total}}</h6>
+              </div><a class="btn btn-primary btn-block" href="{{url('checkout')}}">Checkout</a>
+            </li>
         </ul>
       </li>
       <li class="nav-item dropdown dropdown-notification mr-25"><a class="nav-link" href="javascript:void(0);"
