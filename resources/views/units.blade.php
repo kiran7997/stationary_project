@@ -31,8 +31,18 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
-                        <br>
-                    @if ($message = Session::get('success'))
+
+
+
+                            <div class="card-header border-bottom">
+                                <h4 class="card-title"></h4>
+                                <button type="button" class="btn btn-outline-primary float-right" data-toggle="modal"
+                                    data-target="#AddUnit">
+                                    Add New Units
+                                </button>
+                            </div>
+                            <div style="margin:20px;">
+                                @if ($message = Session::get('success'))
                                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                                     <div class="alert-body">
                                         <p>{{ $message }}</p>
@@ -42,14 +52,6 @@
                                     </button>
                                 </div>
                                 @endif
-                                <br>
-                            <div class="card-header border-bottom">
-                                <h4 class="card-title"></h4>
-                                <button type="button" class="btn btn-outline-primary float-right" data-toggle="modal" data-target="#AddUnit">
-                                    Add New Units
-                                </button>                            
-                            </div>
-                            <div style="margin:20px;">
                                 <table id="example" class="display nowrap stripe" style="width:100%;">
                                     <thead>
                                         <tr>
@@ -61,15 +63,18 @@
                                     </thead>
                                     <tbody>
                                         @foreach($units as $vendor)
-                                            <tr id="sid{{$vendor->id}}">
+                                        <tr id="sid{{$vendor->id}}">
                                             <td>{{ $no++ }}</td>
-                                                <td>{{$vendor->unit_name}}</td>
-                                                <td>{{$vendor->unit_description}}</td>
-                                                <td>
-                                                    <a href="javascript:void(0)" onclick="editUnits({{$vendor->unit_id}})" class="fa fa-secondary" style="font-size:24px"><i class="fa fa-pencil"></i></a> &nbsp;
-                                                    <a 	href="javascript:void(0)"  onclick="deleteUnits({{$vendor->unit_id}})"  class="fa fa-trash" style="font-size:24px;color:red"></a>
-                                                </td>
-                                            </tr>
+                                            <td>{{$vendor->unit_name}}</td>
+                                            <td>{{$vendor->unit_description}}</td>
+                                            <td>
+                                                <a href="javascript:void(0)" onclick="editUnits({{$vendor->unit_id}})"
+                                                    class="fa fa-secondary" style="font-size:24px"><i
+                                                        class="fa fa-pencil"></i></a> &nbsp;
+                                                <a href="javascript:void(0)" onclick="deleteUnits({{$vendor->unit_id}})"
+                                                    class="fa fa-trash" style="font-size:24px;color:red"></a>
+                                            </td>
+                                        </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -102,68 +107,69 @@
 
 
 </script>
-  	                    
-<div class="modal fade text-left" id="AddUnit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true" >
+
+<div class="modal fade text-left" id="AddUnit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33"
+    aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
-   	    <div class="modal-content">
-		    <div class="modal-header">
+        <div class="modal-content">
+            <div class="modal-header">
                 <h4 class="modal-title" id="myModalLabel33">Add Inventories</h4>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
 
-                <form id="UnitForm" name="UnitForm" method="post">
-                    @csrf
-                    <div class="modal-body">
-                    	<div class="form-group">
-                          	<label for="location">Unit Name<span style="color:red">*</span></label>
-                          	<input type="text" class="form-control" id="unit_name" name="unit_name"/>
-                      	</div>
-						<div class="form-group">
-							<label for="phone">Unit Description<span style="color:red">*</span></label>
-							<input type="text" class="form-control" id="unit_description" name="unit_description"/>
-						</div>
-                	</div>
-                    
-					<div class="modal-footer">
-                        <button type="submit" class="btn btn-primary" >Submit</button>
+            <form id="UnitForm" name="UnitForm" method="post">
+                @csrf
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="location">Unit Name<span style="color:red">*</span></label>
+                        <input type="text" class="form-control" id="unit_name" name="unit_name" />
                     </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade text-left" id="EditUnits" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true" >
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
+                    <div class="form-group">
+                        <label for="phone">Unit Description<span style="color:red">*</span></label>
+                        <input type="text" class="form-control" id="unit_description" name="unit_description" />
+                    </div>
                 </div>
-                
-				<form id="EditUnitForm" name="EditUnitForm" method="post">
-					@csrf
-                    <input type="hidden" id="unit_id" name="unit_id" >                    
-                    <div class="modal-body">
-                    	<div class="form-group">
-                			<label for="location">Unit Name<span style="color:red">*</label>
-                			<input type="text" class="form-control" id="unit_name1" name="unit_name"/>
-            			</div>
-						<div class="form-group">
-							<label for="phone">Unit Description<span style="color:red">*</label>
-							<input type="text" class="form-control" id="unit_description1" name="unit_description" />
-						</div><br>
-                	</div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary" >Update</button>
-                    </div>
-                </form>
-        	</div>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
         </div>
     </div>
-	<!-- Add Categories Modal -->
-    
-<script>  
+</div>
+<div class="modal fade text-left" id="EditUnits" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            </div>
 
-$(document).ready(function() {
+            <form id="EditUnitForm" name="EditUnitForm" method="post">
+                @csrf
+                <input type="hidden" id="unit_id" name="unit_id">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="location">Unit Name<span style="color:red">*</label>
+                        <input type="text" class="form-control" id="unit_name1" name="unit_name" />
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Unit Description<span style="color:red">*</label>
+                        <input type="text" class="form-control" id="unit_description1" name="unit_description" />
+                    </div><br>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Add Categories Modal -->
+
+<script>
+    $(document).ready(function() {
 
 $('#UnitForm').validate({
 rules: {
@@ -238,6 +244,6 @@ $('#EditUnitForm').validate({
             })
         }
     }
-</script>   
+</script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 @endsection
