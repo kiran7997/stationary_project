@@ -89,7 +89,7 @@ class InventoriesController extends Controller
             
         }
              
-
+//------//
      }
      elseif($req->invntory_status == 'minus')
      {
