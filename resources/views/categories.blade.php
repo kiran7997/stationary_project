@@ -48,7 +48,8 @@
                                     </button>
                                 </div>
                                 @endif
-                
+                                
+                        
                                 <table id="example" class="display nowrap stripe" style="width:100%;">
                                     <thead>
                                            <tr>
@@ -102,10 +103,11 @@
                     @csrf
                     
 					<div class="modal-body">
-                    	<div class="form-group">
+                    	<div class="form-group ">
                     		<label for="location">Category Name <span style="color:red">*</span></label>
                     		<input type="text" class="form-control" id="cat_name" name="cat_name"/>
-                    	</div>
+                           
+                    	</div>  
 
                     	<div class="form-group">
                     		<label for="phone">Category Description<span style="color:red">*</span></label>
@@ -191,7 +193,7 @@ rules: {
 
 });
 $('#cat_name,#cat_description').keypress(function(){
-            return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122));
+            return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122)||event.charCode==32);
         });
 
 });
@@ -206,7 +208,7 @@ function editCategory(cat_id)
                 $("#EditCategory").modal('toggle');
         });
         $('#cat_name1,#cat_description1').keypress(function(){
-            return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122));
+            return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122)||event.charCode==32);
 
         });
 
@@ -221,7 +223,7 @@ $('#EditCategoryForm').validate({
     submitHandler: function(form) {
         
        
-        var action = "{{url('categoriesup')}}";
+        var action = "{{url('categories')}}";
         
         $('form').attr('action',action);
         

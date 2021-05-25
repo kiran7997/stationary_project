@@ -105,7 +105,7 @@
                     
 					<label class="required"  for="supplier_email"> Supplier Email</label>
                     <div class="form-group">
-                        <input type="email" name="supplier_email" id="supplier_email" class="form-control" required>
+                        <input type="email" name="supplier_email" id="supplier_email" onfocusout='IsEmail(this.value)' class="form-control" required>
 
                     </div>
 
@@ -152,7 +152,7 @@
                     
 					<label class="required"  for="supplier_email"> Supplier Email</label>
                     <div class="form-group">
-                        <input type="email" name="supplier_email" id="supplier_email2" class="form-control" required>
+                        <input type="email" name="supplier_email" id="supplier_email2" onfocusout='IsEmail(this.value)' class="form-control" required>
 
                     </div>
 
@@ -187,7 +187,18 @@ rules: {
 });
 
 });
-
+function IsEmail(email) {
+  var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+  if(!regex.test(email)) {
+    // return false;
+    $("#email_err").html("Invalid Email ");
+    $("#supplier_email").val('');
+   // $("#supplier_email").focus();
+  }else{
+    // return true;
+    $("#email_err").empty();
+  }
+}
 
 function editsup(supplier_id)
     {

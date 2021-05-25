@@ -413,10 +413,11 @@ rules: {
         $.get('/editp/'+product_id,function(product){
           $("#product_id").val(product.product_id);
           $("#product_name2").val(product.product_name);
-		  $('#cat_id2 option[value='+product.cat_id+']').attr("selected", "selected");
-		  $('#unit_id2 option[value='+product.unit_id+']').attr("selected", "selected");
-		  $('#variation_id2 option[value='+product.variation_id+']').attr("selected", "selected");
-		  $('#taxable2 option[value='+product.taxable+']').attr("selected", "selected");
+		  //$('#product_id2  option[value="'+inventories.product_id+'"]').prop("selected", true);
+		  $('#cat_id2 option[value='+product.cat_id+']').attr("selected",true);
+		  $('#unit_id2 option[value='+product.unit_id+']').attr("selected", "selected",true);
+		  $('#variation_id2 option[value='+product.variation_id+']').attr("selected", "selected",true);
+		  $('#taxable2 option[value='+product.taxable+']').attr("selected", "selected",true);
           var pro_image = JSON.parse(product.image_url);
           var html="<div>";
           $.each(pro_image, function(key,val) {  

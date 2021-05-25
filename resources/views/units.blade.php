@@ -31,7 +31,18 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
-                        
+                        <br>
+                    @if ($message = Session::get('success'))
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <div class="alert-body">
+                                        <p>{{ $message }}</p>
+                                    </div>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                @endif
+                                <br>
                             <div class="card-header border-bottom">
                                 <h4 class="card-title"></h4>
                                 <button type="button" class="btn btn-outline-primary float-right" data-toggle="modal" data-target="#AddUnit">
@@ -171,7 +182,7 @@ rules: {
 });
 
 $('#unit_name,#unit_description').keypress(function(){
-            return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122));
+            return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122)||event.charCode==32);
             
         });
 
@@ -187,7 +198,7 @@ function editUnits(id)
                 $("#EditUnits").modal('toggle');
      });
      $('#unit_name1,#unit_description1').keypress(function(){
-            return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122));
+            return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122)||event.charCode==32);
             
         });
     });

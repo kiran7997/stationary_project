@@ -75,6 +75,9 @@ class ProductsController extends Controller
         $products->base_price = $req->base_price;
         $products->code = $req->code;
         $products->taxable = $req->taxable;
+        $products['created_by'] = Auth::user()->id;
+        $products['updated_by'] = Auth::user()->id;
+
         $products->save();
         
         return redirect('product')->with('success', ' Product Inserted  successfully');

@@ -114,9 +114,9 @@
            			<label  class="required" for="invntory_status">Inventory Status  </label>
          			<select name="invntory_status" id="invntory_status"  class="form-control" required>
        					<option value="">Select Option</option>
-						<option value="Add">Add</option>
-             			<option value="Minus">Minus</option>
-             			<option value="Set">Set</option>
+						<option value="add">Add</option>
+             			<option value="minus">Minus</option>
+             			<option value="set">Set</option>
                          
         			</select>
                     
@@ -144,15 +144,15 @@
               <input type="hidden" name="inventory_id" id="inventory_id">
       			<div class="modal-body">
                   <div class="form-group">
-						<label class="required" for="inventory_name">Company Name</label>
+						<label class="required" for="label_inventory_name">Company Name</label>
                      
-						<select name="edit_inventory_name" id="inventory_name2"  class="form-control" required>
+						<select name="inventory_name" id="inventory_name2"  class="form-control" required>
 							<option value="">Select Option</option>
 	 						@foreach($suppliers as $sup)
-								<option value="{{ $sup->inventory_name }}">{{ $sup->supplier_companyName }}</option>
+								<option value="{{ $sup->supplier_id }}">{{ $sup->supplier_companyName }}</option>
 							@endforeach
 						</select>  
-					</div> 
+					</div>            
 
                     <div class="form-group">
 						<label class="required" for="product_id">Product Type</label> &nbsp;&nbsp;
@@ -173,9 +173,9 @@
                     <div class="form-group">
          				<select name="invntory_status" id="invntory_status2"  class="form-control" required>
             				<option value="">Select Option</option>
-             				<option value="Add">Add</option>
-             				<option value="Minus">Minus</option>
-             				<option value="Set">Set</option>   
+             				<option value="add">Add</option>
+             				<option value="minus">Minus</option>
+             				<option value="set">Set</option>   
                              
         				</select>
                         
@@ -224,8 +224,9 @@ function editinven(inventory_id)
        
         $.get('/editi/'+inventory_id,function(inventories){
            
+			alert(JSON.stringify(inventories));
                $("#inventory_id").val(inventories.inventory_id);
-               $('#inventory_name2  option[value="'+inventories.inventory_name+'"]').prop("selected", true);
+               $('#inventory_name2  option[value="'+inventories.supplier_id+'"]').prop("selected", true);
             //   $("#inventory_name2").val(inventories.inventory_name);
             //    $("#inventory_address2").val(inventories.inventory_address);
             //    $("#inventory_contact2").val(inventories.inventory_contact);
@@ -233,7 +234,8 @@ function editinven(inventory_id)
                $('#product_id2  option[value="'+inventories.product_id+'"]').prop("selected", true);
               //  $("#product_id2").val(inventories.product_id);
                 $("#quantity2").val(inventories.quantity);
-                $("#invntory_status2").val(inventories.invntory_status);
+          //$("#invntory_status2").val(inventories.invntory_status);
+				$('#invntory_status2  option[value="'+inventories.invntory_status+'"]').prop("selected", true);
                 //alert(JSON.stringify(invntory_status));
                 $("#invenEditModal").modal('toggle');
 

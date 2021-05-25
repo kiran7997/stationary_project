@@ -15,9 +15,9 @@
       	<div class="content-overlay"></div>
       	<div class="header-navbar-shadow"></div>
         <div class="content-body"><!-- Basic Tables start -->
-        	<button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#stockModal">
+        	<!-- <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#stockModal">
                 Add New Stock
-            </button><br>
+            </button><br> -->
 			<div class="row" id="basic-table">
   				<div class="col-12">
 				    <div class="card">
@@ -39,7 +39,7 @@
         							<tr>
         								<th>Product Name</th>
               							<th>Item Quantity</th>
-              							<th>Actions</th> 
+              							<!-- <th>Actions</th>  -->
                                 	</tr>                                        
                             	</thead>
                             	<tbody>
@@ -49,10 +49,10 @@
 										
 										   <td>{{$stock->product_name}}</td>							  
                 							<td>{{$stock->item_quantity}}</td>
-                							<td>
+                							<!-- <td>
                 								<a href="javascript:void(0)" onclick="editStock(<?php echo $stock->stock_id; ?>)"  class="fa fa-edit" style="font-size:24px"></a>
         										<a href="javascript:void(0)" onclick="deletestock({{$stock->stock_id}})" class="fa fa-trash" style="font-size:24px;color:red"></a>
-                							</td>
+                							</td> -->
                 						</tr>
                						@endforeach
              					</tbody>

@@ -14,10 +14,11 @@ class ProductsVariationController extends Controller
      */
     function __construct()
     {
-        $this->middleware('permission:product-list|product-create|product-edit|product-delete', ['only' => ['index', 'show']]);
-        $this->middleware('permission:product-create', ['only' => ['create', 'store']]);
-        $this->middleware('permission:product-edit', ['only' => ['edit', 'update'],'updateCategory']);
-        $this->middleware('permission:product-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:product_variation');
+        // $this->middleware('permission:product-list|product-create|product-edit|product-delete', ['only' => ['index', 'show']]);
+        // $this->middleware('permission:product-create', ['only' => ['create', 'store']]);
+        // $this->middleware('permission:product-edit', ['only' => ['edit', 'update'],'updateCategory']);
+        // $this->middleware('permission:product-delete', ['only' => ['destroy']]);
     }
     /**
      * Display a listing of the resource.
@@ -46,7 +47,7 @@ class ProductsVariationController extends Controller
         $products['created_by']=Auth::user()->id;
         $products['updated_by']=Auth::user()->id;
         $products->save();  
-        return redirect('product_variation');     
+        return redirect('product_variation')->with('success', ' Record Inserted Successfully');   
            
     }
 
@@ -65,7 +66,7 @@ class ProductsVariationController extends Controller
         $products->variation_abbrevation=$request->variation_abbrevation;
         $products->add_on_price=$request->add_on_price;
        $products->save();  
-       return redirect('product_variation');   
+       return redirect('product_variation')->with('success', ' Record Updated Successfully'); 
         
     }
 

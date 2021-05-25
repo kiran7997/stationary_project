@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use Auth;
+use DB;
 use App\Suppliers;
 
 use Illuminate\Http\Request;
@@ -30,16 +31,23 @@ class SupplierController extends Controller
     {
 
         $supplier = new Suppliers();
+       
         $supplier->supplier_companyName = $request->supplier_companyName;
         $supplier->supplier_address = $request->supplier_address;
         $supplier->supplier_contact = $request->supplier_contact;
         $supplier->supplier_email = $request->supplier_email;
         $supplier['created_by'] = Auth::user()->id;
         $supplier['updated_by'] = Auth::user()->id;
-        $supplier->save();
+        $duplicate_companyName=DB::table('suppliers')->select('supplier_companyName')->where('supplier_companyName','=',$request->supplier_companyName)->first();
+        if($duplicate_companyName){
+             return redirect('supplier')->with('success', ' Comapany Already Exist');   
+         }
+        else
+        {
+        $supplier->save();  
         
-        return redirect('supplier')->with('success', 'Suppliers Inserted successfully');
-       
+       return redirect('supplier')->with('success', 'Suppliers Inserted successfully');
+        }
        
     }
 

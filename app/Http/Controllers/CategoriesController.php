@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use Auth;
+use DB;
 use App\Categories;
 use Illuminate\Http\Request;
 
@@ -14,10 +15,13 @@ class CategoriesController extends Controller
      */
     function __construct()
     {
-        $this->middleware('permission:product-list|product-create|product-edit|product-delete', ['only' => ['index', 'show']]);
-        $this->middleware('permission:product-create', ['only' => ['create', 'store']]);
-        $this->middleware('permission:product-edit', ['only' => ['edit', 'update'],'updateCategory']);
-        $this->middleware('permission:product-delete', ['only' => ['destroy']]);
+       
+        $this->middleware('permission:catagories');
+        
+        // $this->middleware('permission:product-list|product-create|product-edit|product-delete', ['only' => ['index', 'show']]);
+        // $this->middleware('permission:product-create', ['only' => ['create', 'store']]);
+        // $this->middleware('permission:product-edit', ['only' => ['edit', 'update'],'updateCategory']);
+        // $this->middleware('permission:product-delete', ['only' => ['destroy']]);
     }
     /**
      * Display a listing of the resource.
@@ -39,40 +43,26 @@ class CategoriesController extends Controller
     public function store(Request $request)
     {
         $validator = \Validator::make($request->all(), [
-            'cat_name' => 'required',
+            'cat_name' => 'required|unique:cat_name',
             'cat_description'=>'required',
         ]);
         $categories=new Categories();
-        $categories->cat_name=$request->cat_name;
+        $name=$categories->cat_name=$request->cat_name;
         $categories->cat_description=$request->cat_description;
         $categories['created_by']=Auth::user()->id;
         $categories['updated_by']=Auth::user()->id;
+        $duplicate_category=DB::table('categories')->select('cat_name')->where('cat_name','=',$name)->first();
+        
+        if($duplicate_category){
+             return redirect('catagories')->with('success', ' Item Already Exist');   
+         }
+        else{
         $categories->save();  
-        return redirect('catagories');     
+        return redirect('catagories')->with('success', ' Record Inserted Successfully');     
+        }
            
     }
-        // $categories=new Categories();
-        // $categories->cat_name=$request->cat_name;
-        // $categories->cat_description=$request->cat_description;
-        // $categories['created_by']=Auth::user()->id;
-        // $categories['updated_by']=Auth::user()->id;
-        // $categories->save();  
-        // //echo "<pre>".print_r($categories); exit;
-        // return response()->json($categories);
-           
     
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Product $product)
-    {
-        return view('products.show', compact('product'));
-    }
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -97,10 +87,8 @@ class CategoriesController extends Controller
         $categories->cat_description=$request->cat_description;
         $categories['created_by']=Auth::user()->id;
         $categories['updated_by']=Auth::user()->id;
-    
        $categories->save();  
-    //    echo "<pre>";print_r($categories); exit;
-       return redirect('catagories'); 
+       return redirect('catagories')->with('success', ' Record Updated Successfully'); 
 
         
     }

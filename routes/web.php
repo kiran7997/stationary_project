@@ -69,7 +69,7 @@ Route::get('/inventories', 'InventoriesController@index');
 Route::post('/addinven', 'InventoriesController@store');
 Route::get('/editi/{inventory_id}', 'InventoriesController@edit');
 Route::post('/editinven', 'InventoriesController@update');
-Route::delete('/delei/{inventory_id}', 'InventoriesController@destroy');
+Route::delete('/delei/{inventory_id}', 'InventoriesController@deleteInventory');
 
 //Add Product
 Route::get('/product', 'ProductsController@index');
