@@ -90,10 +90,11 @@ class InventoriesController extends Controller
      }
      elseif($req->invntory_status == 'minus')
      {
-         $quantity=Stocks::select('item_quantity')->where('product_id',$req->product_id)->get();
+         $quantity=Stocks::select('item_quantity')->where('product_id',$req->product_id)->value('item_quantity');
+         // echo $quantity;exit;
          if($quantity==0)
          {
-             echo "Stock Not Avialeble";
+            return redirect('inventories')->with('success', 'Insufficient Stock ');
          }
          else
          {
@@ -128,14 +129,81 @@ class InventoriesController extends Controller
     {
         $invens = Inventeries::find($req->inventory_id);
         $invens->supplier_id = $req->inventory_name;
-        // $invens->inventory_address = $req->inventory_address;
-        // $invens->inventory_contact = $req->inventory_contact;
-        // $invens->inventory_email = $req->inventory_email;
+
         $invens->product_id = $req->product_id;
         $invens->quantity = $req->quantity;
         $invens->invntory_status = $req->invntory_status;
         $invens['updated_by'] = Auth::user()->id;
         $invens->save();
+        if($req->invntory_status == 'add')
+        {
+            //echo "hello";exit;
+        $stock = Stocks::where('product_id','=', $req->product_id)->first();
+        $count=Stocks::where('product_id','=', $req->product_id)->value('item_quantity');
+        $co=$count+$req->quantity;
+        //  $count=DB::table('stocks')->select('item_quantity')->where('product_id','=', $req->product_id)->first();
+        //  echo $count;exit;
+        
+      //  $count=DB::table('stocks')->select('item_quantity')->where('product_id','=', $req->product_id)->first();
+        //  echo $count;exit;
+         
+          //echo $co;exit;
+       
+        if($stock)
+        {
+            DB::table('stocks')->where('product_id',$req->product_id)
+            ->update(array('item_quantity' => intval($co))); 
+            
+            //echo "hello";exit;
+            //$count=$req->quantity;
+            //echo $count;exit;
+            // $total=DB::table('inventeries')->where([['product_id', '=', $req->product_id],['deleted', '=', 0]])
+            // ->increment('quantity',$req->quantity);
+            // $total=DB::table('stocks')->where('product_id', '=', $req->product_id)
+            // ->increment('item_quantity',$co);
+
+           //    echo $total;exit;
+           
+        }
+        
+       
+        else
+        {
+           
+           
+            $data = array("product_id"=>$req->product_id,"item_quantity"=>$co);
+            Stocks::insert($data);
+            $invens['updated_by'] = Auth::user()->id;
+        }
+             
+
+     }
+     elseif($req->invntory_status == 'minus')
+     {
+         $quantity=Stocks::select('item_quantity')->where('product_id',$req->product_id)->value('item_quantity');
+         // echo $quantity;exit;
+         if($quantity==0)
+         {
+            return redirect('inventories')->with('success', 'Insufficient Stock ');
+         }
+         else
+         {
+        //  echo $quantity;exit;
+        Stocks::where('product_id', $req->product_id)->decrement('item_quantity',  $req->quantity);
+         }
+        //  $minus=DB::table('inventory')
+        // Select value1 - (select value2 from AnyTable1) from AnyTable2
+     }
+     elseif($req->invntory_status == 'set')
+     {
+        $stock = Inventeries::where('product_id','=', $req->product_id)->get();
+        if($stock)
+        {
+            $total=DB::table('inventeries')->where('product_id','=',$req->product_id)->sum('quantity');
+            DB::table('stocks')->where('product_id',$req->product_id)
+                ->update(array('item_quantity' => intval($req->quantity))); 
+        }      
+     }
         return redirect('inventories')->with('success', 'Inventory Updated successfully');
         //return response()->json($invens);
     }
