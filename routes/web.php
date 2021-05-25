@@ -43,8 +43,6 @@ Route::group(['middleware' => ['auth']], function () {
 //customer routes
 Route::get('customer-dashboard', 'CustomerController@dashboard');
 
-
-
 //Add Stocks //
 Route::get('/stock', 'StockController@index');
 Route::post('/addstock', 'StockController@store');
@@ -57,11 +55,10 @@ Route::get('/supplier', 'SupplierController@index');
 Route::post('/addsupplier', 'SupplierController@store');
 //Route::get('/editsupplier/{supplier_id}', 'SupplierController@editsupplier');
 
- Route::get('/editsu/{supplier_id}', 'SupplierController@edit');
- Route::post('/editsupplier', 'SupplierController@update');
- //Route::post('/editsupplier/{supplier_id}', 'SupplierController@update');
+Route::get('/editsu/{supplier_id}', 'SupplierController@edit');
+Route::post('/editsupplier', 'SupplierController@update');
+//Route::post('/editsupplier/{supplier_id}', 'SupplierController@update');
 Route::delete('/deles/{supplier_id}', 'SupplierController@destroy');
-
 
 //Add Inventories
 
@@ -69,7 +66,7 @@ Route::get('/inventories', 'InventoriesController@index');
 Route::post('/addinven', 'InventoriesController@store');
 Route::get('/editi/{inventory_id}', 'InventoriesController@edit');
 Route::post('/editinven', 'InventoriesController@update');
-Route::delete('/delei/{inventory_id}', 'InventoriesController@deleteInventory');
+Route::delete('/delei/{inventory_id}', 'InventoriesController@destroy');
 
 //Add Product
 Route::get('/product', 'ProductsController@index');
@@ -110,9 +107,6 @@ Route::get('/units/{unit_id}', 'UnitsController@getUnitsById');
 Route::post('/units', 'UnitsController@updateUnits');
 Route::delete('/units/{unit_id}', 'UnitsController@deleteunits');
 
-
-
-
 Route::get('employee-dashboard', 'UserController@dashboard');
 
 Route::get('profile', 'UserController@profile');
@@ -127,13 +121,12 @@ Route::post('insert-into-cart', 'ShopController@InsertIntoCart');
 
 Route::post('check_customer_email', 'CustomerController@check_customer_email');
 Route::post('check_user_email', 'UserController@check_user_email');
-
-Route::get('save_order', 'OrderController@save_order');
-
-
+Route::post('save_order', 'OrderController@save_order');
 Route::post('get-district-list', 'ShopController@get_district');
 
 //Invoice controller
-Route::get('/listinvoice','InvoiceController@index');
-Route::get('/invoicepreview/{order_id}','InvoiceController@previewinvoice');
-Route::get('/invoiceprint/{id}','InvoiceController@printinvoice');
+Route::get('/listinvoice', 'InvoiceController@index');
+Route::get('/invoicepreview/{order_id}', 'InvoiceController@previewinvoice');
+Route::get('/invoiceprint/{id}', 'InvoiceController@printinvoice');
+Route::post('update-quantity-in-cart', 'ShopController@updateQuantityInCart');
+Route::get('order-history', 'CustomerController@order_history');
