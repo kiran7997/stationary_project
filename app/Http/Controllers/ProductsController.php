@@ -92,7 +92,7 @@ class ProductsController extends Controller
     }
     public function update(Request $req)
     {
-        $products = Aproducts::select('product_name','cat_id','unit_id','variation_id','description','base_price','code','taxable')->first();
+        $products = Aproducts::select('product_id')->first();
         $products->product_name = $req->product_name;
         $products->cat_id = $req->cat_id;
         $products->unit_id = $req->unit_id;

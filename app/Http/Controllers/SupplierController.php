@@ -63,7 +63,7 @@ class SupplierController extends Controller
     public function update(Request $request)
     {
 
-        $supplier = Suppliers::select('supplier_companyName','supplier_address','supplier_contact','supplier_email')->first();
+        $supplier = Suppliers::select('supplier_id')->first();
         $supplier->supplier_companyName = $request->supplier_companyName;
         $supplier->supplier_address = $request->supplier_address;
         $supplier->supplier_contact = $request->supplier_contact;

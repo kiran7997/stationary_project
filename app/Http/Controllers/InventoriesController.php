@@ -66,7 +66,7 @@ class InventoriesController extends Controller
           $stock=Stocks::where('product_id',$req->product_id)
             ->update(array('item_quantity' => intval($co)));
             
-            //echo "hello";exit;
+        //echo "hello";exit;
             //$count=$req->quantity;
             //echo $count;exit;
             // $total=DB::table('inventeries')->where([['product_id', '=', $req->product_id],['deleted', '=', 0]])
