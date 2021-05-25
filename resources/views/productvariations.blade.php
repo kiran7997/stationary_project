@@ -16,7 +16,8 @@
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{ url('/home') }}">Home</a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="{{ url('/product_variation') }}">Product Variation</a>
+                                <li class="breadcrumb-item"><a href="{{ url('/product_variation') }}">Product
+                                        Variation</a>
                                 </li>
                             </ol>
                         </div>
@@ -29,8 +30,15 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
-                        <br>
-                    @if ($message = Session::get('success'))
+                            <div class="card-header border-bottom">
+                                <h4 class="card-title"></h4>
+                                <button type="button" class="btn btn-outline-primary" data-toggle="modal"
+                                    data-target="#AddProductv">
+                                    Add New Product Variation
+                                </button>
+                            </div>
+                            <div style="margin:20px;">
+                                @if ($message = Session::get('success'))
                                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                                     <div class="alert-body">
                                         <p>{{ $message }}</p>
@@ -40,38 +48,35 @@
                                     </button>
                                 </div>
                                 @endif
-                                <br>
-                            <div class="card-header border-bottom">
-                                <h4 class="card-title"></h4>
-                                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#AddProductv">
-                                    Add New Product Variation
-                                </button>
-                            </div>
-                            <div style="margin:20px;">
                                 <table id="example" class="display nowrap stripe" style="width:100%;">
                                     <thead>
-          								<tr>
-            								<th>#</th>
-            								<th>Variation Name</th>
-											<th>Abbrevation</th>
-            								<th>Add on Price</th>
-            								<th>Actions</th>
-          								</tr>                                
-          							</thead>
-            						<tbody>
-										@foreach($products as $vendor)
-											<tr id="sid{{$vendor->id}}">
-												<td>{{$vendor->variation_id	}}</td>
-												<td>{{$vendor->variation_name}}</td>
-												<td>{{$vendor->variation_abbrevation}}</td>
-												<td>{{$vendor->add_on_price}}</td>
-												<td>
-												<a href="javascript:void(0)" onclick="editProductv({{$vendor->variation_id}})"class="fa fa-secondary" style="font-size:24px"><i class="fa fa-pencil"></i></a> &nbsp;
-												<a href="javascript:void(0)"  onclick="deleteProductv({{$vendor->variation_id}})"  class="fa fa-trash" style="font-size:24px;color:red"></a>
-												</td>
-											</tr>
-										@endforeach
-									</tbody>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Variation Name</th>
+                                            <th>Abbrevation</th>
+                                            <th>Add on Price</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($products as $vendor)
+                                        <tr id="sid{{$vendor->id}}">
+                                            <td>{{$vendor->variation_id	}}</td>
+                                            <td>{{$vendor->variation_name}}</td>
+                                            <td>{{$vendor->variation_abbrevation}}</td>
+                                            <td>{{$vendor->add_on_price}}</td>
+                                            <td>
+                                                <a href="javascript:void(0)"
+                                                    onclick="editProductv({{$vendor->variation_id}})"
+                                                    class="fa fa-secondary" style="font-size:24px"><i
+                                                        class="fa fa-pencil"></i></a> &nbsp;
+                                                <a href="javascript:void(0)"
+                                                    onclick="deleteProductv({{$vendor->variation_id}})"
+                                                    class="fa fa-trash" style="font-size:24px;color:red"></a>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
                                 </table>
 
                             </div>
@@ -84,63 +89,65 @@
 </div>
 <!-- Add Categories Modal -->
 <div class="modal fade" id="AddProductv" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  	<div class="modal-dialog">
-    	<div class="modal-content">
-      		<div class="modal-header">
-        		
-      		</div>
-        	<div class="modal-body">
-            	<form  id="ProductvForm" name="ProductvForm" method="post">
-           			@csrf
-					<div class="form-group">
-						<label for="location">Variation Name<span style="color:red">*</span></label>
-						<input type="text" class="form-control" id="variation_name" name="variation_name"/>
-					</div>
-                       
-					<div class="form-group">
-						<label for="Transport">Abbrivation<span style="color:red">*</span></label>
-						<input type="text" class="form-control" id="variation_abbrevation" name="variation_abbrevation">
-					</div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
 
-					<div class="form-group">
-						<label for="Transport">Add on Price<span style="color:red">*</span></label>
-						<input type="number" class="form-control" id="add_on_price" name="add_on_price">
-					</div>
-                	<button type="submit" class="btn btn-primary">Submit</button>
-            	</form>
-      		</div>
-    	</div>
-  	</div>
+            </div>
+            <div class="modal-body">
+                <form id="ProductvForm" name="ProductvForm" method="post">
+                    @csrf
+                    <div class="form-group">
+                        <label for="location">Variation Name<span style="color:red">*</span></label>
+                        <input type="text" class="form-control" id="variation_name" name="variation_name" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Transport">Abbrivation<span style="color:red">*</span></label>
+                        <input type="text" class="form-control" id="variation_abbrevation" name="variation_abbrevation">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Transport">Add on Price<span style="color:red">*</span></label>
+                        <input type="number" class="form-control" id="add_on_price" name="add_on_price">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 
-<div class="modal fade text-left" id="EditProductv" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true" >
+<div class="modal fade text-left" id="EditProductv" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33"
+    aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
-    	<div class="modal-content">
+        <div class="modal-content">
             <div class="modal-header">
-                      
-			</div>
-                    
-			<form id="EditProductvForm" name="EditProductvForm" method="post">
-				@csrf
-                <input type="hidden" id="variation_id" name="variation_id" >
-            	<div class="modal-body">
-                  	<div class="form-group">
-                		<label for="location">Variation Name</label>
-                		<input type="text" class="form-control" id="variation_name1" name="variation_name"/>
-            		</div>
 
-					<div class="form-group">
-						<label for="phone">Abbrivation</label>
-						<input type="text" class="form-control" id="variation_abbrevation1" name="variation_abbrevation"/>
-					</div>
-						
-					<div class="form-group">
-						<label for="Transport">Add on Price</label>
-						<input type="number" class="form-control" id="add_on_price1" name="add_on_price">					
-					</div>
+            </div>
+
+            <form id="EditProductvForm" name="EditProductvForm" method="post">
+                @csrf
+                <input type="hidden" id="variation_id" name="variation_id">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="location">Variation Name</label>
+                        <input type="text" class="form-control" id="variation_name1" name="variation_name" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Abbrivation</label>
+                        <input type="text" class="form-control" id="variation_abbrevation1"
+                            name="variation_abbrevation" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Transport">Add on Price</label>
+                        <input type="number" class="form-control" id="add_on_price1" name="add_on_price">
+                    </div>
                 </div>
                 <div class="modal-footer">
-                   	<button type="submit" class="btn btn-primary" >Update</button>
+                    <button type="submit" class="btn btn-primary">Update</button>
                 </div>
             </form>
         </div>

@@ -1,193 +1,217 @@
 @extends('layouts.app')
 @section('title', 'Inventories')
 @section('content')
+
 <head>
 
-<style>
-     .required:after {
-    content:" *";
-    color: red;
-	 }
-</style>
+	<style>
+		.required:after {
+			content: " *";
+			color: red;
+		}
+	</style>
 </head>
 
 <div class="app-content content ">
-    <div class="content-overlay"></div>
-    <div class="header-navbar-shadow"></div>
-    <div class="content-wrapper">
-    	<div class="content-body"><!-- Basic Tables start -->
-    		<button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#invenModal">
-            	Add New Inventory
-        	</button><br>
+	<div class="content-overlay"></div>
+	<div class="header-navbar-shadow"></div>
+	<div class="content-wrapper">
+		<div class="content-header row">
+			<div class="content-header-left col-md-9 col-12 mb-2">
+				<div class="row breadcrumbs-top">
+					<div class="col-12">
+						<h2 class="content-header-title float-left mb-0">Inventory</h2>
+						<div class="breadcrumb-wrapper">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item"><a href="{{ url('home') }}">Home</a>
+								</li>
+								<li class="breadcrumb-item"><a href="{{ url('inventories') }}">Inventory</a>
+								</li>
+								<li class="breadcrumb-item active">Inventory
+								</li>
+							</ol>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="content-body">
+
 			<div class="row" id="basic-table">
-  				<div class="col-12">
-    				<div class="card">
-                    <br>
-                    @if ($message = Session::get('success'))
-                                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                    <div class="alert-body">
-                                        <p>{{ $message }}</p>
-                                    </div>
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                @endif
-                                <br>
-      					<div class="table-responsive">
-        					<table id="example" class="table">
-        						<thead>
+				<div class="col-12">
+					<div class="card">
+						<div class="card-header border-bottom">
+							<button class="btn btn-outline-primary pull-right" data-toggle="modal"
+								data-target="#invenModal">New Inventory</button>
+						</div>
+						<div style="margin:20px;">
+							@if ($message = Session::get('success'))
+							<div class="alert alert-success alert-dismissible fade show" role="alert">
+								<div class="alert-body">
+									<p>{{ $message }}</p>
+								</div>
+								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							@endif
+							<table id="example" class="display nowrap stripe" style="width:100%;">
+								<thead>
 									<tr>
 										<th>Company Name</th>
 										<th>Product Id</th>
 										<th>Quantity</th>
 										<th>Invntory Status</th>
 										<th>Actions</th>
-									</tr>                                        
+									</tr>
 								</thead>
 								<tbody>
 									@foreach($invens as $inven)
-										<tr id="sid{{$inven->inventory_id}}">
-											<td>{{$inven->supplier_companyName}}</td>
-											<td>{{$inven->product_name}}</td>
-											<td>{{$inven->quantity}}</td>
-                             				<td>{{$inven->invntory_status}}</td>
-											<td>
-                                				<a href="javascript:void(0)" onclick="editinven({{$inven->inventory_id}})" class="fa fa-edit" style="font-size:24px"></a>
-        										<a href="javascript:void(0)" onclick="deleteinven({{$inven->inventory_id}})" class="fa fa-trash" style="font-size:24px;color:red"></a>
-                                               
-                                        	</td>
-                                    	</tr>
-                                	@endforeach
-                            	</tbody>
-        					</table>
-      					</div>
-    				</div>
-  				</div>
+									<tr id="sid{{$inven->inventory_id}}">
+										<td>{{$inven->supplier_companyName}}</td>
+										<td>{{$inven->product_name}}</td>
+										<td>{{$inven->quantity}}</td>
+										<td>{{$inven->invntory_status}}</td>
+										<td>
+											<a href="javascript:void(0)" onclick="editinven({{$inven->inventory_id}})"
+												class="fa fa-edit" style="font-size:24px"></a>
+											<a href="javascript:void(0)" onclick="deleteinven({{$inven->inventory_id}})"
+												class="fa fa-trash" style="font-size:24px;color:red"></a>
+
+										</td>
+									</tr>
+									@endforeach
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
 			</div>
-   		</div>
-    </div>
+		</div>
+	</div>
 </div>
 
 <hr />
 
-<div class="modal fade text-left " id="invenModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true" >
-    <div class="modal-dialog modal-dialog-centered" role="document">
-   	    <div class="modal-content">
-		    <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel33">Add Inventories</h4>
+<div class="modal fade text-left " id="invenModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33"
+	aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title" id="myModalLabel33">Add Inventories</h4>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
-            </div>
-                    
-			<form id="invenForm" name="invenForm"  method='post'> 
-               
-                   @csrf
-                 <!-- <input type="hidden" name="inventory_id" id="inventory_id"> -->
-                <div class="modal-body">
-                <div class="form-group">
-						<label class="required" for="label_inventory_name">Company Name</label>
-                     
-						<select name="inventory_name" id="inventory_name"  class="form-control" required>
-							<option value="">Select Option</option>
-	 						@foreach($suppliers as $sup)
-								<option value="{{ $sup->supplier_id }}">{{ $sup->supplier_companyName }}</option>
-							@endforeach
-						</select>  
-					</div>             
+			</div>
 
-                    <div class="form-group">
-						<label class="required" for="product_id">Product Type</label> &nbsp;&nbsp;
-						<select name="product_id" id="product_id"  class="form-control" required>
+			<form id="invenForm" name="invenForm" method='post'>
+
+				@csrf
+				<!-- <input type="hidden" name="inventory_id" id="inventory_id"> -->
+				<div class="modal-body">
+					<div class="form-group">
+						<label class="required" for="label_inventory_name">Company Name</label>
+
+						<select name="inventory_name" id="inventory_name" class="form-control" required>
 							<option value="">Select Option</option>
-	 						@foreach($products_data as $product_data)
-								<option value="{{ $product_data->product_id }}">{{ $product_data->product_name }}</option>
+							@foreach($suppliers as $sup)
+							<option value="{{ $sup->supplier_id }}">{{ $sup->supplier_companyName }}</option>
 							@endforeach
-						</select>  
+						</select>
 					</div>
-                    <label  class="required" for="quantity">Item Quantity </label>
-                    <div class="form-group">
-                    	<input type="number" name="quantity" id="quantity" class="form-control" required>
-                       
-                    </div>
-           			<label  class="required" for="invntory_status">Inventory Status  </label>
-         			<select name="invntory_status" id="invntory_status"  class="form-control" required>
-       					<option value="">Select Option</option>
+
+					<div class="form-group">
+						<label class="required" for="product_id">Product Type</label> &nbsp;&nbsp;
+						<select name="product_id" id="product_id" class="form-control" required>
+							<option value="">Select Option</option>
+							@foreach($products_data as $product_data)
+							<option value="{{ $product_data->product_id }}">{{ $product_data->product_name }}</option>
+							@endforeach
+						</select>
+					</div>
+					<label class="required" for="quantity">Item Quantity </label>
+					<div class="form-group">
+						<input type="number" name="quantity" id="quantity" class="form-control" required>
+
+					</div>
+					<label class="required" for="invntory_status">Inventory Status </label>
+					<select name="invntory_status" id="invntory_status" class="form-control" required>
+						<option value="">Select Option</option>
 						<option value="add">Add</option>
-             			<option value="minus">Minus</option>
-             			<option value="set">Set</option>
-                         
-        			</select>
-                    
-               	</div>
-                      	
+						<option value="minus">Minus</option>
+						<option value="set">Set</option>
+
+					</select>
+
+				</div>
+
 				<div class="modal-footer">
-                
-                    <button type="submit" class="btn btn-primary" >Submit</button>
-                </div>
-            </form>
-        </div>
-    </div>
+
+					<button type="submit" class="btn btn-primary">Submit</button>
+				</div>
+			</form>
+		</div>
+	</div>
 </div>
 
 <!-- Student model -->
-<div class="modal fade text-left " id="invenEditModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  	<div class="modal-dialog">
-    	<div class="modal-content">
-      		<div class="modal-header">
-        		<h5 class="modal-title" id="exampleModalLabel">Edit  Inventoeries</h5>
+<div class="modal fade text-left " id="invenEditModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Edit Inventoeries</h5>
 			</div>
-      		<form id="invenEditForm" name="invenEditForm" method='post' > 
-              
-              @csrf
-              <input type="hidden" name="inventory_id" id="inventory_id">
-      			<div class="modal-body">
-                  <div class="form-group">
+			<form id="invenEditForm" name="invenEditForm" method='post'>
+
+				@csrf
+				<input type="hidden" name="inventory_id" id="inventory_id">
+				<div class="modal-body">
+					<div class="form-group">
 						<label class="required" for="label_inventory_name">Company Name</label>
-                     
-						<select name="inventory_name" id="inventory_name2"  class="form-control" required>
-							<option value="">Select Option</option>
-	 						@foreach($suppliers as $sup)
-								<option value="{{ $sup->supplier_id }}">{{ $sup->supplier_companyName }}</option>
-							@endforeach
-						</select>  
-					</div>            
 
-                    <div class="form-group">
-						<label class="required" for="product_id">Product Type</label> &nbsp;&nbsp;
-						<select name="product_id" id="product_id2"  class="form-control" required>
+						<select name="inventory_name" id="inventory_name2" class="form-control" required>
 							<option value="">Select Option</option>
-	 						@foreach($products_data as $product_data)
-								<option value="{{ $product_data->product_id }}">{{ $product_data->product_name }}</option>
+							@foreach($suppliers as $sup)
+							<option value="{{ $sup->supplier_id }}">{{ $sup->supplier_companyName }}</option>
 							@endforeach
-						</select>  
+						</select>
 					</div>
-                    <label  class="required" for="quantity">Item Quantity </label>
-                    <div class="form-group">
-                        <input type="number" name="quantity" id="quantity2" class="form-control" required>
-                        
-                    </div>
 
-                    <label  class="required" for="invntory_status">Inventory Status  </label>
-                    <div class="form-group">
-         				<select name="invntory_status" id="invntory_status2"  class="form-control" required>
-            				<option value="">Select Option</option>
-             				<option value="add">Add</option>
-             				<option value="minus">Minus</option>
-             				<option value="set">Set</option>   
-                             
-        				</select>
-                        
-                    </div>
+					<div class="form-group">
+						<label class="required" for="product_id">Product Type</label> &nbsp;&nbsp;
+						<select name="product_id" id="product_id2" class="form-control" required>
+							<option value="">Select Option</option>
+							@foreach($products_data as $product_data)
+							<option value="{{ $product_data->product_id }}">{{ $product_data->product_name }}</option>
+							@endforeach
+						</select>
+					</div>
+					<label class="required" for="quantity">Item Quantity </label>
+					<div class="form-group">
+						<input type="number" name="quantity" id="quantity2" class="form-control" required>
+
+					</div>
+
+					<label class="required" for="invntory_status">Inventory Status </label>
+					<div class="form-group">
+						<select name="invntory_status" id="invntory_status2" class="form-control" required>
+							<option value="">Select Option</option>
+							<option value="add">Add</option>
+							<option value="minus">Minus</option>
+							<option value="set">Set</option>
+
+						</select>
+
+					</div>
 
 					<div class="modal-footer">
-						<button type="submit" class="btn btn-primary" >Submit</button>
+						<button type="submit" class="btn btn-primary">Submit</button>
 					</div>
-                </form>
-            </div>
-        </div>
-    </div>
+			</form>
+		</div>
+	</div>
+</div>
 </div>
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
@@ -195,9 +219,8 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 
-<script>  
-
-$(document).ready(function() {
+<script>
+	$(document).ready(function() {
 
 $('#invenForm').validate({
 // rules: {
@@ -224,7 +247,7 @@ function editinven(inventory_id)
        
         $.get('/editi/'+inventory_id,function(inventories){
            
-			alert(JSON.stringify(inventories));
+			// alert(JSON.stringify(inventories));
                $("#inventory_id").val(inventories.inventory_id);
                $('#inventory_name2  option[value="'+inventories.supplier_id+'"]').prop("selected", true);
             //   $("#inventory_name2").val(inventories.inventory_name);
@@ -286,8 +309,23 @@ function deleteinven(inventory_id)
     }  
 }
 </script>
- 
-
 
 @endsection
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+<script>
+	$(document).ready(function() {
+    // $('#example').DataTable();
+    $('#example').DataTable( {
+        // "scrollY": 200,
+        "scrollX": true
+    } );
 
+    $(".delete").on("click", function () {
+    return confirm('Are you sure you want to Delete?');
+	});
+});
+
+
+</script>
