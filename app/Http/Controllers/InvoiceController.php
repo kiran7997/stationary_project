@@ -18,27 +18,21 @@ class InvoiceController extends Controller
     public function previewinvoice($order_id)
     {
         
-       // echo "<pre>";print_r($print);exit();
- $print=Orders::find($order_id);
-       $subtotal=$print['price'] * $print['quantity'];
-       DB::table('orders')->where('order_id',$order_id)->update(array(
+        $print=Orders::select('firstname','lastname','phone_no','email','house_no','landmark','city','state','pincode','product_name','tax_rate','order_id','price','quantity','subtotal','total')->where('order_id','=',$order_id)->first();
+        $subtotal=$print['price'] * $print['quantity'];
+        Orders::where('order_id',$order_id)->update(array(
         'subtotal'=>$subtotal,
 ));
-$total=$print['subtotal'] + $print['tax_rate'];
-       DB::table('orders')->where('order_id',$order_id)->update(array(
+        $total=$print['subtotal'] + $print['tax_rate'];
+        Orders::where('order_id',$order_id)->update(array(
         'total'=>$total,
 ));
-       
-      
-        // $print = DB::table('orders')->update(array('subtotal'=>$s));
         return view('invoice.invoice-preview')->with('print',$print);
    
     }
     public function printinvoice($id)
     {
-        $print=Orders::find($id);
-
-        
+        $print=Orders::select('firstname','lastname','phone_no','email','house_no','landmark','city','state','pincode','product_name','tax_rate','order_id','price','quantity','subtotal','total')->where('order_id','=',$id)->first();
         return view('invoice.invoice-print',compact('print'));
     }
 }

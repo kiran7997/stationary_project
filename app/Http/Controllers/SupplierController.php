@@ -38,7 +38,7 @@ class SupplierController extends Controller
         $supplier->supplier_email = $request->supplier_email;
         $supplier['created_by'] = Auth::user()->id;
         $supplier['updated_by'] = Auth::user()->id;
-        $duplicate_companyName=DB::table('suppliers')->select('supplier_companyName')->where('supplier_companyName','=',$request->supplier_companyName)->first();
+        $duplicate_companyName=Suppliers::select('supplier_companyName')->where('supplier_companyName','=',$request->supplier_companyName)->first();
         if($duplicate_companyName){
              return redirect('supplier')->with('success', ' Comapany Already Exist');   
          }
@@ -53,17 +53,15 @@ class SupplierController extends Controller
 
     public function edit($id)
     {
-        $supplier = Suppliers::select('supplier_companyName','supplier_address','supplier_contact','supplier_email')
+        $supplier = Suppliers::select('supplier_id','supplier_companyName','supplier_address','supplier_contact','supplier_email')
         ->where('supplier_id','=',$id)->first();
-       // $supplier = Suppliers::find($id);
-        //return view('editSupplier',['supplier' => $supplier]);
-
+      
         return response()->json($supplier);
     }
     public function update(Request $request)
     {
 
-        $supplier = Suppliers::select('supplier_id')->first();
+        $supplier = Suppliers::find($request->supplier_id);
         $supplier->supplier_companyName = $request->supplier_companyName;
         $supplier->supplier_address = $request->supplier_address;
         $supplier->supplier_contact = $request->supplier_contact;
@@ -71,7 +69,7 @@ class SupplierController extends Controller
         $supplier['updated_by'] = Auth::user()->id;
         $supplier->save();
         return redirect('supplier')->with('success', 'Suppliers Updated successfully');
-       // return response()->json($suppliers);
+       
     }
     /**
      * Remove the specified resource from storage.

@@ -15,7 +15,11 @@ class ProductsVariationController extends Controller
     function __construct()
     {
         $this->middleware('permission:product_variation');
-         }
+        // $this->middleware('permission:product-list|product-create|product-edit|product-delete', ['only' => ['index', 'show']]);
+        // $this->middleware('permission:product-create', ['only' => ['create', 'store']]);
+        // $this->middleware('permission:product-edit', ['only' => ['edit', 'update'],'updateCategory']);
+        // $this->middleware('permission:product-delete', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -49,15 +53,14 @@ class ProductsVariationController extends Controller
 
     public function getProductvById($id)
     {
-       $products=Productvariation::find($id);
-        
+       $products=Productvariation::select('variation_id','variation_name','variation_abbrevation','add_on_price')
+        ->where('variation_id','=',$id)->first();
         return response()->json($products);
     }
     public function updateProductv(Request $request)
     {
         
         $products=Productvariation::find($request->variation_id);
-       
         $products->variation_name=$request->variation_name;
         $products->variation_abbrevation=$request->variation_abbrevation;
         $products->add_on_price=$request->add_on_price;

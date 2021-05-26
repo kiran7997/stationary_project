@@ -10,7 +10,11 @@ class UnitsController extends Controller
     function __construct()
     {
         $this->middleware('permission:units');
-         }
+        // $this->middleware('permission:product-list|product-create|product-edit|product-delete', ['only' => ['index', 'show']]);
+        // $this->middleware('permission:product-create', ['only' => ['create', 'store']]);
+        // $this->middleware('permission:product-edit', ['only' => ['edit', 'update'],'updateCategory']);
+        // $this->middleware('permission:product-delete', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -44,7 +48,8 @@ class UnitsController extends Controller
 
     public function getUnitsById($id)
     {
-       $units=Units::find($id);
+        $units=Units::select('unit_id','unit_name','unit_description')
+        ->where('unit_id','=',$id)->first();
         return response()->json($units);
     }
     public function updateUnits(Request $request)
