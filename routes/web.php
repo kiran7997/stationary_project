@@ -28,8 +28,8 @@ Route::get('employee-logout', 'Auth\EmployeeController@logout');
 //Customer Login Route
 Route::get('/', 'Auth\CustomerLoginController@showLoginForm');
 Route::post('customers-login', 'Auth\CustomerLoginController@login')->name('customers-login');
-Route::get('verify-otp','Auth\CustomerLoginController@otpValidation');
-Route::post('otp-validation','Auth\CustomerLoginController@verifyOTP')->name('otp-validation');
+Route::get('verify-otp', 'Auth\CustomerLoginController@otpValidation');
+Route::post('otp-validation', 'Auth\CustomerLoginController@verifyOTP')->name('otp-validation');
 Route::get('customers-logout', 'Auth\CustomerLoginController@logout');
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -70,7 +70,7 @@ Route::get('/inventories', 'InventoriesController@index');
 Route::post('/addinven', 'InventoriesController@store');
 Route::get('/editi/{inventory_id}', 'InventoriesController@edit');
 Route::post('/editinven', 'InventoriesController@update');
-Route::delete('/delei/{inventory_id}', 'InventoriesController@destroy');
+Route::post('/delei/{inventory_id}', 'InventoriesController@destroy');
 
 //Add Product
 Route::get('/product', 'ProductsController@index');
@@ -138,6 +138,6 @@ Route::get('order-history', 'CustomerController@order_history');
 // Route::get('save_order', 'OrderController@save_order');
 
 //employee-dashboard
-Route::get('employee-order-list','UserController@orderList');
-Route::get('assign-to-sales-team/{id}','UserController@assignSalesTeam');
-Route::post('assign-to-sales-team','UserController@saveAssignSalesData');
+Route::get('employee-order-list', 'UserController@orderList');
+Route::get('assign-to-sales-team/{id}', 'UserController@assignSalesTeam');
+Route::post('assign-to-sales-team', 'UserController@saveAssignSalesData');
