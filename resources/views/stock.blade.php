@@ -18,14 +18,14 @@
 		<div class="content-header-left col-md-9 col-12 mb-2">
 			<div class="row breadcrumbs-top">
 				<div class="col-12">
-					<h2 class="content-header-title float-left mb-0">Inventory</h2>
+					<h2 class="content-header-title float-left mb-0">Stock</h2>
 					<div class="breadcrumb-wrapper">
 						<ol class="breadcrumb">
 							<li class="breadcrumb-item"><a href="{{ url('home') }}">Home</a>
 							</li>
-							<li class="breadcrumb-item"><a href="{{ url('inventories') }}">Inventory</a>
+							<li class="breadcrumb-item"><a href="{{ url('stock') }}">Stock</a>
 							</li>
-							<li class="breadcrumb-item active">Inventory
+							<li class="breadcrumb-item active">Stock
 							</li>
 						</ol>
 					</div>
@@ -49,7 +49,8 @@
 							</button>
 						</div>
 						@endif
-						<table id="example" class="display nowrap stripe" style="width:100%;">
+						<table id="example" class="display nowrap table-bordered stripe text-center"
+							style="width:100%;">
 							<thead>
 								<tr>
 									<th>Product Name</th>
