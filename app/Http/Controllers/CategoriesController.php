@@ -18,7 +18,10 @@ class CategoriesController extends Controller
        
         $this->middleware('permission:catagories');
         
-        
+        // $this->middleware('permission:product-list|product-create|product-edit|product-delete', ['only' => ['index', 'show']]);
+        // $this->middleware('permission:product-create', ['only' => ['create', 'store']]);
+        // $this->middleware('permission:product-edit', ['only' => ['edit', 'update'],'updateCategory']);
+        // $this->middleware('permission:product-delete', ['only' => ['destroy']]);
     }
     /**
      * Display a listing of the resource.
@@ -48,7 +51,7 @@ class CategoriesController extends Controller
         $categories->cat_description=$request->cat_description;
         $categories['created_by']=Auth::user()->id;
         $categories['updated_by']=Auth::user()->id;
-        $duplicate_category=DB::table('categories')->select('cat_name')->where('cat_name','=',$name)->first();
+        $duplicate_category=Categories::select('cat_name')->where('cat_name','=',$name)->first();
         
         if($duplicate_category){
              return redirect('catagories')->with('success', ' Item Already Exist');   
@@ -66,14 +69,12 @@ class CategoriesController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
-    {
-        return view('products.edit', compact('product'));
-    }
+    
     public function getCatagoryrById($id)
     {
-       $categories=Categories::find($id);
-        
+        $categories = Categories::select('cat_id','cat_name','cat_description')
+        ->where('cat_id','=',$id)->first();
+       
         return response()->json($categories);
     }
     public function updateCategory(Request $request)
@@ -84,8 +85,8 @@ class CategoriesController extends Controller
         $categories->cat_description=$request->cat_description;
         $categories['created_by']=Auth::user()->id;
         $categories['updated_by']=Auth::user()->id;
-       $categories->save();  
-       return redirect('catagories')->with('success', ' Record Updated Successfully'); 
+        $categories->save();  
+        return redirect('catagories')->with('success', ' Record Updated Successfully'); 
 
         
     }

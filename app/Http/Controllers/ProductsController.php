@@ -17,7 +17,7 @@ class ProductsController extends Controller
     }
     public function index()
     {
-        // $products = Aproducts::where(['deleted' => 0])->get();
+        
         $products = Aproducts::select('aproducts.*', 'categories.cat_name', 'units.unit_name', 'productvariations.variation_name')
             ->leftjoin('categories', 'categories.cat_id', '=', 'aproducts.product_id')
             ->leftjoin('units', 'units.unit_id', '=', 'aproducts.unit_id')
@@ -30,28 +30,14 @@ class ProductsController extends Controller
     }
     public function store(Request $req)
     {
-        // $req->validate([
-        //     'file' => 'required|image_url|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        //   ]);
+       
         $products = new Aproducts();
         $products->product_name = $req->product_name;
         $products->cat_id = $req->cat_id;
         $products->unit_id = $req->unit_id;
         $products->variation_id = $req->variation_id;
 
-        // if ($req->file('image_url')) {
-        //     $file = $req->file('image_url');
-        //     $filename = rand(0, 999) . $file->getClientOriginalName();
-        //     $destinationPath = public_path('product_images/');
-        //     if (!file_exists($destinationPath)) {
-        //         mkdir($destinationPath, 777, true);
-        //         exec('chmod -R 777 ' . $destinationPath);
-        //     } else {
-        //         exec('chmod -R 777 ' . $destinationPath);
-        //     }
-        //     $file->move($destinationPath, $filename);
-        //     $products->image_url = $filename;
-        // }
+       
         $product_img = array();
         $images = $req->file('image_url');
 
@@ -59,12 +45,7 @@ class ProductsController extends Controller
 
             $filename = rand(0, 999) . $image->getClientOriginalName();
             $destinationPath = public_path('product_images/');
-            // if (!file_exists($destinationPath)) {
-            //     mkdir($destinationPath, 777, true);
-            //     exec('chmod -R 777 ' . $destinationPath);
-            // } else {
-            //     exec('chmod -R 777 ' . $destinationPath);
-            // }
+            
             $image->move($destinationPath, $filename);
             $product_img[] = 'product_images/' . $filename;
         }
@@ -81,11 +62,13 @@ class ProductsController extends Controller
         $products->save();
         
         return redirect('product')->with('success', ' Product Inserted  successfully');
-        //return response()->json($products);
+       
     }
     public function edit($product_id)
     {
-        $products = Aproducts::find($product_id);
+        $products = Aproducts::select('product_id','product_name','cat_id','unit_id','variation_id','image_url','description','base_price','code','taxable')
+        ->where('product_id','=',$product_id)->first();
+       
         return response()->json($products);
     }
     public function update(Request $req)
@@ -95,27 +78,13 @@ class ProductsController extends Controller
         $products->cat_id = $req->cat_id;
         $products->unit_id = $req->unit_id;
         $products->variation_id = $req->variation_id;
-        // $products->image_url = $req->image_url;
+       
         $products->description = $req->description;
         $products->base_price = $req->base_price;
         $products->code = $req->code;
         $products->taxable = $req->taxable;
 
-        // if ($req->file('image_url')) {
-        //     $file = $req->file('image_url');
-        //     $filename = rand(0, 999) . $file->getClientOriginalName();
-        //     $destinationPath = public_path('product_images/');
-        //     if (!file_exists($destinationPath)) {
-        //         mkdir($destinationPath, 777, true);
-        //         exec('chmod -R 777 ' . $destinationPath);
-        //     } else {
-        //         exec('chmod -R 777 ' . $destinationPath);
-        //     }
-        //     $file->move($destinationPath, $filename);
-        //     $products->image_url = $filename;
-        // } else {
-        //     $products->image_url = $req->old_image;
-        // }
+        
 
         $product_img = array();
         if ($req->file('image_url')) {
@@ -125,12 +94,7 @@ class ProductsController extends Controller
 
                 $filename = rand(0, 999) . $image->getClientOriginalName();
                 $destinationPath = public_path('product_images/');
-                // if (!file_exists($destinationPath)) {
-                //     mkdir($destinationPath, 777, true);
-                //     exec('chmod -R 777 ' . $destinationPath);
-                // } else {
-                //     exec('chmod -R 777 ' . $destinationPath);
-                // }
+                
                 $image->move($destinationPath, $filename);
                 $product_img[] = 'product_images/' . $filename;
             }
@@ -149,13 +113,13 @@ class ProductsController extends Controller
 
         $products->save();
         return redirect('product')->with('success', 'Product Updated successfully');
-        //return response()->json($products);
+      
     }
     public function destroy($product_id)
     {
         $products = Aproducts::where('product_id', $product_id)
             ->update(['deleted' => 1]);
         return response()->json(['success' => 'Record has Been Deleted']);
-        //return redirect('product')->with('success', 'Product delete successfully');
+       
     }
 }
