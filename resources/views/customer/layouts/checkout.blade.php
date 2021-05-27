@@ -482,6 +482,13 @@
 <script>
     $(document).ready(function(){
         //state wise district
+
+        $.ajaxSetup({
+			headers: {
+				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			}
+		});
+        
         $('#state').change(function(){
             var state_id = this.value;
             $('#district').empty();
@@ -551,7 +558,7 @@
                 url:"/update-quantity-in-cart",
                 method:"POST", //First change type to method here
                 data:{
-                    _token:'{{ csrf_token() }}', cart_id: cart_id, item_quantity: item_quantity
+                    cart_id: cart_id, item_quantity: item_quantity
                 },
                 success:function(response) {
                     console.log(response);
@@ -579,7 +586,7 @@
                 url:"/update-quantity-in-cart",
                 method:"POST", //First change type to method here
                 data:{
-                    _token:'{{ csrf_token() }}', cart_id: cart_id, item_quantity: item_quantity
+                    cart_id: cart_id, item_quantity: item_quantity
                 },
                 success:function(response) {
                     console.log(response);

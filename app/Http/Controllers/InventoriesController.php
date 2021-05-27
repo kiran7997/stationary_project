@@ -75,17 +75,13 @@ class InventoriesController extends Controller
            //    echo $total;exit;
            
         }
-        
        
         else
         {
-           
-           
             $data = array("product_id"=>$req->product_id,"item_quantity"=>$co);
             Stocks::insert($data);
             $invens['updated_by'] = Auth::user()->id;
-        }
-             
+        }    
 
      }
      elseif($req->invntory_status == 'minus')
@@ -165,8 +161,6 @@ class InventoriesController extends Controller
            //    echo $total;exit;
            
         }
-        
-       
         else
         {
            
@@ -175,8 +169,6 @@ class InventoriesController extends Controller
             Stocks::insert($data);
             $invens['updated_by'] = Auth::user()->id;
         }
-             
-
      }
      elseif($req->invntory_status == 'minus')
      {
@@ -234,9 +226,7 @@ class InventoriesController extends Controller
     //         {
     //             $co=$count+$quantity;   
     //             DB::table('stocks')->where('product_id',$inventory_id)
-    //             ->update(array('item_quantity' => intval($co)));
-                
-                
+    //             ->update(array('item_quantity' => intval($co)));       
             
         return response()->json(['success' => 'Record has Been Deleted']);
     }   
