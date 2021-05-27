@@ -11,6 +11,7 @@ use Spatie\Permission\Models\Role;
 use Auth;
 use DB;
 use Hash;
+use \PDF;
 
 class UserController extends Controller
 {
@@ -318,7 +319,43 @@ class UserController extends Controller
     public function saveAssignSalesData(Request $request){
         $requestData = $request->all();
         $data_customer = DB::table('orders')->where(['order_id'=>$requestData['order_id']])->update(['sales_person' => $requestData['sales_person']]);
+        $notification['order_id'] = $requestData['order_id'];
+        $notification['user_id'] = $requestData['sales_person'];
+        $notification['role_id'] = 2;
+        $notification['notification_type'] = 'sales';
+        $notification['notification_date'] = date('Y-m-d');
+        \App\Notification::create($notification);
         // dd($requestData);
         return redirect('employee-order-list');
     }
+
+    public function getSalesAssignData(){
+        // $order_list = \App\Orders::where(['order_status'=>'order'])->get();
+        $user_id = Auth::user()->id;
+        $order_list = DB::table('notifications')
+                    ->select('notifications.order_id','orders.*')
+                    ->leftjoin('orders','orders.order_id','notifications.order_id')
+                    ->where(['notifications.user_id'=>$user_id,'is_read'=>0])
+                    ->get();
+        return view('employee-dashboard-list.sales-order-list',compact('order_list'));   
+    }
+
+    public function GeneratePOData($id,$id1){
+        // $order_list = \App\Orders::where(['order_id'=>$id])->first();
+        $order_list = DB::table('orders')
+                            ->select('orders.*','orders.phone_no','users.name')
+                            ->leftjoin('users','users.id','orders.sales_person')
+                            ->where(['order_id'=>$id])->first();
+        $order_item_data = DB::table('order_items')
+                            ->select('order_items.*','aproducts.image_url')
+                            ->leftjoin('aproducts','aproducts.product_id','order_items.product_id')
+                            ->where(['order_id'=>$id])->get();
+        if($id1 == "view"){            
+            return view('employee-dashboard-list.po_data',compact('order_list','order_item_data','id'));
+        }else{
+            $pdf = PDF::loadView("employee-dashboard-list.download_po",compact('order_list','order_item_data'));  
+            return $pdf->stream('PO.pdf',array("Attachment" => false)); 
+        }
+    }
+    
 }
