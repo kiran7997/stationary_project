@@ -141,3 +141,7 @@ Route::get('order-history', 'CustomerController@order_history');
 Route::get('employee-order-list','UserController@orderList');
 Route::get('assign-to-sales-team/{id}','UserController@assignSalesTeam');
 Route::post('assign-to-sales-team','UserController@saveAssignSalesData');
+
+
+//Razorpay payment
+Route::post('razorpaypayment', 'ShopController@payment')->name('payment');
