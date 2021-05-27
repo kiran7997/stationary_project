@@ -363,7 +363,7 @@
 
                     <!-- Checkout Payment Starts -->
                     <div id="step-payment" class="content">
-                        <form id="checkout-payment" class="list-view product-checkout" onsubmit="return false;">
+                        <!-- <form id="checkout-payment" class="list-view product-checkout" onsubmit="return false;"> -->
                             <div class="payment-type">
                                 <div class="card">
                                     <div class="card-header flex-column align-items-start">
@@ -373,7 +373,22 @@
                                     </div>
                                     <div class="card-body">
                                         <h6 class="card-holder-name my-75">John Doe</h6>
-                                        <div class="custom-control custom-radio">
+                                        <h2>Pay With Razorpay</h2>
+                                        <form action="{!!route('payment')!!}" method="POST" >                        
+                                            <script src="https://checkout.razorpay.com/v1/checkout.js"
+                                                    data-key="{{ env('RAZOR_KEY') }}"
+                                                    data-amount="100"
+                                                    data-buttontext="Pay 1 INR"
+                                                    data-name="MSB"
+                                                    data-description="Payment"
+                                                    data-image="http://127.0.0.1:8000/logo/msb.png"
+                                                    data-prefill.name="name"
+                                                    data-prefill.email="email"
+                                                    data-theme.color="#3c9b61">
+                                            </script>
+                                            <input type="hidden" name="_token" value="{!!csrf_token()!!}">
+                                        </form>
+                                        <!-- <div class="custom-control custom-radio">
                                             <input type="radio" id="customColorRadio1" name="paymentOptions"
                                                 class="custom-control-input" checked />
                                             <label class="custom-control-label" for="customColorRadio1">
@@ -389,7 +404,7 @@
                                                 <button type="button"
                                                     class="btn btn-primary btn-cvv ml-0 ml-sm-1 mb-50">Continue</button>
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <hr class="my-2" />
                                         <ul class="other-payment-options list-unstyled">
                                             <li class="py-50">
@@ -463,7 +478,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </form>
+                        <!-- </form> -->
                     </div>
                     <!-- Checkout Payment Ends -->
                     <!-- </div> -->
