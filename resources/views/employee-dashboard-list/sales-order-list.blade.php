@@ -68,8 +68,11 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <a href="{{ url('generate-po/'.$order->order_id.'/view') }}" class="btn btn-primary " >Generate PO </a>
-                                                <a href="{{ url('generate-po/'.$order->order_id.'/download') }}" target="_blank" class="btn btn-primary " >Download PO</a>
+                                                <a href="{{ url('generate-po/'.$order->order_id.'/view') }}" class="btn btn-primary " >PO </a>
+                                                <a href="{{ url('generate-po/'.$order->order_id.'/download') }}" target="_blank" class="btn btn-primary " ><i data-feather='download'></i></a>
+                                                <?php if($order->manufacturing_notification == 0){  ?>
+                                                <a href="{{ url('send-manufacturing-notification/'.$order->order_id) }}" class="btn btn-primary " ><i data-feather='navigation'></i></a>
+                                                <?php } ?>
                                             </td>
                                         </tr>
                                         @endforeach

@@ -22,13 +22,13 @@
                 <div class="col-xl-3 col-md-4 col-sm-6">
                     <div class="card text-center">
                         <div class="card-body">
-                            <div class="avatar bg-light-info p-50 mb-1">
+                            <div class="avatar bg-light-danger p-50 mb-1">
                                 <div class="avatar-content">
-                                    <i data-feather="eye" class="font-medium-5"></i>
+                                    <i data-feather="shopping-bag" class="font-medium-5"></i>
                                 </div>
                             </div>
-                            <h2 class="font-weight-bolder">36.9k</h2>
-                            <p class="card-text">Views</p>
+                            <a href="{{ url('process-order-list') }}"><h2 class="font-weight-bolder">{{$process_order_count}}</h2></a>
+                            <p class="card-text">Process Orders</p>
                         </div>
                     </div>
                 </div>

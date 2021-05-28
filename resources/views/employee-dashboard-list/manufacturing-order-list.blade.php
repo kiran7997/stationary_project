@@ -10,7 +10,7 @@
             <div class="content-header-left col-md-9 col-12 mb-2">
                 <div class="row breadcrumbs-top">
                     <div class="col-12">
-                        <h2 class="content-header-title float-left mb-0">Order List</h2>
+                        <h2 class="content-header-title float-left mb-0">Manufacturing Assign Order List</h2>
                         
                     </div>
                 </div>
@@ -48,7 +48,6 @@
                                             <th>Order Date</th>
                                             <th>Total Amount</th>
                                             <th>Payment Status</th>
-                                            <th>Assign To</th>
                                             <th width="280px">Action</th>
                                         </tr>
                                     </thead> 
@@ -68,16 +67,10 @@
                                                     <div class="badge badge-pill badge-light-success">Yes</div>
                                                 </div>
                                             </td>
-                                            <td>{{ $order->name}}</td>
-                                            <?php if($order->sales_person == "" ){ ?>
                                             <td>
-                                                <a href="{{ url('assign-to-sales-team/'.$order->order_id) }}" class="btn btn-primary " >Assign To Sales Team</a>
+                                                <a href="{{ url('change-order-status/'.$order->order_id) }}" class="btn btn-primary " ><i class="fa fa-edit " aria-hidden="true"></i></a>
+                                                <!-- <a href="{{ url('send-manufacturing-notification/'.$order->order_id) }}" class="btn btn-primary " ><i data-feather='navigation'></i></a> -->
                                             </td>
-                                            <?php } else { ?>
-                                            <td>
-                                                <a href="{{ url('assign-to-sales-team/'.$order->order_id) }}" class="btn btn-primary " ><i class="fa fa-edit " aria-hidden="true"></i></a>
-                                            </td>
-                                            <?php } ?>
                                         </tr>
                                         @endforeach
                                     </tbody>
