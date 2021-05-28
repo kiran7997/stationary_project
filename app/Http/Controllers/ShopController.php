@@ -8,6 +8,8 @@ use App\AddToCart;
 use Auth;
 use Carbon\Carbon;
 use DB;
+use Razorpay\Api\Api;
+use Redirect;
 
 class ShopController extends Controller
 {
@@ -88,5 +90,30 @@ class ShopController extends Controller
         $total_amount = $product_price * $request->item_quantity;
         $update_quantity_in_cart = AddToCart::where('cart_id', $request->cart_id)->update(array('quantity' => $request->item_quantity, 'amount' => $total_amount));
         return "success";
+    }
+
+    public function payment(Request $request)
+    {        
+        $input = $request->all();        
+        $api = new Api(env('RAZOR_KEY'), env('RAZOR_SECRET'));
+        $payment = $api->payment->fetch($input['razorpay_payment_id']);
+
+        if(count($input)  && !empty($input['razorpay_payment_id'])) 
+        {
+            try 
+            {
+                $response = $api->payment->fetch($input['razorpay_payment_id'])->capture(array('amount'=>$payment['amount'])); 
+
+            } 
+            catch (\Exception $e) 
+            {
+                return  $e->getMessage();
+                \Session::put('error',$e->getMessage());
+                return redirect()->back();
+            }            
+        }
+        
+        \Session::put('success', 'Payment successful, your order will be despatched in the next 48 hours.');
+        return redirect()->back();
     }
 }

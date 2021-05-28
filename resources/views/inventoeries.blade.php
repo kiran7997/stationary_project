@@ -58,27 +58,33 @@
 								</button>
 							</div>
 							@endif
-							<table id="example" class="display nowrap stripe" style="width:100%;">
+							<table id="example" class="display nowrap table-bordered stripe text-center"
+								style="width:100%;">
 								<thead>
 									<tr>
 										<th>Company Name</th>
 										<th>Product Id</th>
 										<th>Quantity</th>
 										<th>Invntory Status</th>
+										<th>Created Date</th>
 										<th>Actions</th>
 									</tr>
 								</thead>
 								<tbody>
 									@foreach($invens as $inven)
 									<tr id="sid{{$inven->inventory_id}}">
-										<td>{{$inven->supplier_companyName}}</td>
+										<td>{{ucwords($inven->supplier_companyName)}}</td>
 										<td>{{$inven->product_name}}</td>
 										<td>{{$inven->quantity}}</td>
-										<td>{{$inven->invntory_status}}</td>
+										<td><label
+												class="badge badge-success">{{ucwords($inven->invntory_status)}}</label>
+										</td>
+										<td>{{ date('Y-m-d',strtotime($inven->created_at))}}</td>
 										<td>
 											<a href="javascript:void(0)" onclick="editinven({{$inven->inventory_id}})"
 												class="fa fa-edit" style="font-size:24px"></a>
-											<a href="javascript:void(0)" onclick="deleteinven({{$inven->inventory_id}})"
+											<a href="javascript:void(0)"
+												onclick="deleteinven({{$inven->inventory_id}},{{$inven->product_id}},'{{$inven->invntory_status}}',{{$inven->quantity}})"
 												class="fa fa-trash" style="font-size:24px;color:red"></a>
 
 										</td>
@@ -198,14 +204,13 @@
 
 					<label class="required" for="invntory_status">Inventory Status </label>
 					<div class="form-group">
-						<select name="invntory_status" id="invntory_status2" class="form-control" required>
+						{{-- <select name="invntory_status" id="invntory_status2" class="form-control" required>
 							<option value="">Select Option</option>
 							<option value="add">Add</option>
 							<option value="minus">Minus</option>
 							<option value="set">Set</option>
-
-						</select>
-
+						</select> --}}
+						<input type="text" readonly name="invntory_status" id="invntory_status2" class="form-control">
 					</div>
 
 					<div class="modal-footer">
@@ -260,12 +265,10 @@ function editinven(inventory_id)
                $('#product_id2  option[value="'+inventories.product_id+'"]').prop("selected", true);
               //  $("#product_id2").val(inventories.product_id);
                 $("#quantity2").val(inventories.quantity);
-          //$("#invntory_status2").val(inventories.invntory_status);
-				$('#invntory_status2  option[value="'+inventories.invntory_status+'"]').prop("selected", true);
+          $("#invntory_status2").val(inventories.invntory_status);
+				// $('#invntory_status2  option[value="'+inventories.invntory_status+'"]').prop("selected", true);
                 //alert(JSON.stringify(invntory_status));
                 $("#invenEditModal").modal('toggle');
-
-
         });
     }
     
@@ -289,25 +292,29 @@ rules: {
 
 
 
-function deleteinven(inventory_id)
+function deleteinven(inventory_id,product_id,status,quantity)
 {
-    if(confirm("Do You Really want to delete this record?"))
+	// alert(quantity);
+	if(status == 'add'){
+		var res = confirm("Do You Really want to delete this record ?, Decrease stock quantity!");
+	}else if(status == 'minus'){
+		var res = confirm("Do You Really want to delete this record ?, Increase stock quantity!");
+	}else{
+		var res = confirm("Do You Really want to delete this record?");
+	}
+
+    if(res==true)
         {
         $.ajax({
             url:'/delei/'+inventory_id,
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-            type:'DELETE',
-            data:{
-                _token:$("input[name=_token]").val()
-                
-            },
+            type:'POST',
+            data:{_token:$("input[name=_token]").val(),inventory_id:inventory_id,product_id:product_id,status:status,quantity:quantity},
             success:function(response)
             {
-               // alert(response);
                 $('#sid'+inventory_id).remove();
                 alert("Inventory Deleted Successfully");
             }
-     
         });
     }  
 }

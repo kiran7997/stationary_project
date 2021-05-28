@@ -19,6 +19,7 @@ class PermissionTableSeeder extends Seeder
             'role-create',
             'role-edit',
             'role-delete',
+            'admin-dashboard',
             'user-list',
             'user-create',
             'user-edit',
@@ -32,7 +33,10 @@ class PermissionTableSeeder extends Seeder
             'customer',
             'profile',
             'customer-profile',
-            'checkout'
+            'checkout',
+            'supplier',
+            'listinvoice',
+            'employee-dashboard'
         ];
 
         foreach ($permissions as $permission) {
