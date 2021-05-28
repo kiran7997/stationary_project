@@ -57,17 +57,7 @@
       <div class="content-header-left col-md-9 col-12 mb-2">
         <div class="row breadcrumbs-top">
           <div class="col-12">
-            <h2 class="content-header-title float-left mb-0">Form Validation</h2>
-            <div class="breadcrumb-wrapper">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">Home</a>
-                </li>
-                <li class="breadcrumb-item"><a href="#">Forms</a>
-                </li>
-                <li class="breadcrumb-item active">Form Validation
-                </li>
-              </ol>
-            </div>
+            <h2 class="content-header-title mb-0">Dashboard</h2>
           </div>
         </div>
       </div>
@@ -171,7 +161,7 @@
               </div>
             </div>
           </div>
-          <div class="col-12">
+          {{-- <div class="col-12">
             <figure class="highcharts-figure">
               <div id="container1"></div>
               <p class="highcharts-description">
@@ -213,20 +203,137 @@
                 },
                 series: [{
                   name: 'Stocks',
-                  data: [
-                    ['PENS', 311],
-                    ['TEXT BOOKS',300],
-                    ['COLOR', 500],
-                    ['PENCILS', 900],
-                    ['DRAWING B', 899],
-                   
-                  ],
+                  data: <?php  if(!empty($stock)) { echo json_encode($stock['data']); }?>
+                    // ['PENS', 311],
+                    // ['TEXT BOOKS',300],
+                    // ['COLOR', 500],
+                    // ['PENCILS', 900],
+                    // ['DRAWING B', 899],
+                  ,
                   dataLabels: {
                     enabled: true,
                     rotation: -90,
                     color: '#FFFFFF',
                     align: 'right',
                     format: '{point.y:.1f}', // one decimal
+                    y: 10, // 10 pixels down from the top
+                    style: {
+                      fontSize: '13px',
+                      fontFamily: 'Verdana, sans-serif'
+                    }
+                  }
+                }]
+              });
+            </script>
+          </div> --}}
+          <div class="col-12">
+            <figure class="highcharts-figure">
+              <div id="container2"></div>
+              <p class="highcharts-description text-center mb-1">
+                <b> Sales Person Wise Order in This Month.</b>
+              </p>
+            </figure>
+            <script>
+              Highcharts.chart('container2', {
+                chart: {
+                  type: 'column'
+                },
+                title: {
+                  text: 'Sales Person Wise Order in This Month'
+                },
+                // subtitle: {
+                //   text: 'Source: <a href="http://en.wikipedia.org/wiki/List_of_cities_proper_by_population">Wikipedia</a>'
+                // },
+                xAxis: {
+                  type: 'category',
+                  labels: {
+                    rotation: -45,
+                    style: {
+                      fontSize: '13px',
+                      fontFamily: 'Verdana, sans-serif'
+                    }
+                  }
+                },
+                yAxis: {
+                  min: 0,
+                  title: {
+                    text: 'Orders (Counts)'
+                  }
+                },
+                legend: {
+                  enabled: false
+                },
+                tooltip: {
+                  pointFormat: 'Orders: <b>{point.y}</b>'
+                },
+                series: [{
+                  name: 'Orders',
+                  data: <?php  if(!empty($saleswiseorder)) { echo json_encode($saleswiseorder['data']); }?>,
+                  dataLabels: {
+                    enabled: true,
+                    rotation: -90,
+                    color: '#FFFFFF',
+                    align: 'right',
+                    format: '{point.y}', // one decimal
+                    y: 10, // 10 pixels down from the top
+                    style: {
+                      fontSize: '13px',
+                      fontFamily: 'Verdana, sans-serif'
+                    }
+                  }
+                }]
+              });
+            </script>
+          </div>
+          <div class="col-12">
+            <figure class="highcharts-figure">
+              <div id="container3"></div>
+              <p class="highcharts-description text-center mb-1">
+                <b>Distinct Wise Order in This Month.</b>
+              </p>
+            </figure>
+            <script>
+              Highcharts.chart('container3', {
+                chart: {
+                  type: 'column'
+                },
+                title: {
+                  text: 'Distinct Wise Order in This Month'
+                },
+                // subtitle: {
+                //   text: 'Source: <a href="http://en.wikipedia.org/wiki/List_of_cities_proper_by_population">Wikipedia</a>'
+                // },
+                xAxis: {
+                  type: 'category',
+                  labels: {
+                    rotation: -45,
+                    style: {
+                      fontSize: '13px',
+                      fontFamily: 'Verdana, sans-serif'
+                    }
+                  }
+                },
+                yAxis: {
+                  min: 0,
+                  title: {
+                    text: 'Orders (Counts)'
+                  }
+                },
+                legend: {
+                  enabled: false
+                },
+                tooltip: {
+                  pointFormat: 'Orders : <b>{point.y}</b>'
+                },
+                series: [{
+                  name: 'Orders',
+                  data: <?php  if(!empty($distwiseorder)) { echo json_encode($distwiseorder['data']); }?>,
+                  dataLabels: {
+                    enabled: true,
+                    rotation: -90,
+                    color: '#FFFFFF',
+                    align: 'right',
+                    format: '{point.y}', // one decimal
                     y: 10, // 10 pixels down from the top
                     style: {
                       fontSize: '13px',
@@ -247,7 +354,7 @@
 </div>
 <!-- END: Content-->
 @endsection
-<script src="../../../app-assets/vendors/js/vendors.min.js"></script>
+
 
 <!-- BEGIN: Page Vendor JS-->
 <script src="../../../app-assets/vendors/js/charts/apexcharts.min.js"></script>
