@@ -138,11 +138,11 @@ Route::get('order-history', 'CustomerController@order_history');
 // Route::get('save_order', 'OrderController@save_order');
 
 //employee-dashboard
-Route::get('employee-order-list','UserController@orderList');
-Route::get('assign-to-sales-team/{id}','UserController@assignSalesTeam');
-Route::post('assign-to-sales-team','UserController@saveAssignSalesData');
-Route::get('sales-assign-data','UserController@getSalesAssignData');
-Route::get('generate-po/{id}/{id1}','UserController@GeneratePOData');
+Route::get('employee-order-list', 'UserController@orderList');
+Route::get('assign-to-sales-team/{id}', 'UserController@assignSalesTeam');
+Route::post('assign-to-sales-team', 'UserController@saveAssignSalesData');
+Route::get('sales-assign-data', 'UserController@getSalesAssignData');
+Route::get('generate-po/{id}/{id1}', 'UserController@GeneratePOData');
 
 
 //Razorpay payment
