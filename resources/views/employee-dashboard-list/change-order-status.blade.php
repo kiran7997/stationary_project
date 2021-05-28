@@ -83,20 +83,18 @@
                                     </div>
                                     @endforeach
                                 </div>
-                               <form class="needs-validation1" method="post" action="{{ url('assign-to-sales-team') }}" style="margin-top:30px;">
+                                <?php if($order_list->order_status != "process"){ ?>
+                               <form class="needs-validation1" method="post" action="{{ url('update-order-status') }}" style="margin-top:30px;">
                                @csrf
                                     <div class="row">
                                         <input type="hidden" name="order_id" value="{{$id}}" />
                                         <div class="col-md-12 col-12">
                                             <div class="form-group">
-                                                    <label for="state">State</label>
-                                                    <select class="select2 form-control w-100" name="state" id="state"
+                                                    <label for="state">Order Status</label>
+                                                    <select class="select2 form-control w-100" name="order_status" id="order_status"
                                                         required>
                                                         <option value="">Select State</option>
-                                                        @foreach($states as $state)
-                                                        <option value="{{$state->state_id}}">{{$state->state_title}}
-                                                        </option>
-                                                        @endforeach
+                                                        <option value="process">process</option>
                                                     </select>
                                                     <div class="valid-feedback">Looks good!</div>
                                                     <div class="invalid-feedback">
@@ -104,43 +102,19 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-12 col-12">
-                                                <div class="form-group">
-                                                    <label for="district">District</label>
-                                                    <select class="select2 form-control w-100" name="district" id="district"
-                                                        required>
-                                                        <option value="">Select District</option>
-                                                    </select>
-                                                    <div class="valid-feedback">Looks good!</div>
-                                                    <div class="invalid-feedback">
-                                                        Please select your District
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12 col-12">
-                                                <div class="form-group">
-                                                    <label for="district">Sales User</label>
-                                                    <select class="select2 form-control w-100" name="sales_person" id="sales_person"
-                                                        required>
-                                                        <option value="">Select District</option>
-                                                    </select>
-                                                    <div class="valid-feedback">Looks good!</div>
-                                                    <div class="invalid-feedback">
-                                                        Please select your District
-                                                    </div>
-                                                </div>
-                                            </div>
+
                                         </div>
                                         <div class="col-12">
                                             <button type="submit" class="btn btn-primary mr-1" id='btn_submit'>
-                                                Submit
+                                                Update
                                             </button>
-                                            <a href="{{url('employee-order-list')}}"><button type="button"
+                                            <a href="{{url('manufacturing-order-list')}}"><button type="button"
                                                     class="btn btn-outline-danger">
                                                     Cancel
                                                 </button></a>
                                         </div>
                                 </form> 
+                                <?php } ?>
                             </div>
                             <!-- Checkout Place order Ends -->
                         <!--</div>-->
@@ -169,38 +143,6 @@
     $(document).ready(function(){
         $("#form").validate(); //form validation
 
-        $('#state').change(function(){
-            var state_id = this.value;
-            $('#district').empty();
-                $.ajax({
-                url: "{{url('get-district')}}",
-                type: "POST",
-                data: {_token:'{{ csrf_token() }}',state_id:state_id},
-                success:function(res){
-                    $('#district').append('<option value="">Select District</option>');
-                    $.each(res, function(key,val) {
-                        $('#district').append('<option value='+val.id+'>'+val.title+'</option>');
-                    });
-                }
-            });
-        })
-
-        $('#district').change(function(){
-            var district_id = this.value;
-            $('#sales_person').empty();
-                $.ajax({
-                url: "{{url('get-sales-user')}}",
-                type: "POST",
-                data: {_token:'{{ csrf_token() }}',district_id:district_id},
-                success:function(res){
-                    $('#sales_person').append('<option value="">Select Sales User</option>');
-                    $.each(res, function(key,val) {
-                        $('#sales_person').append('<option value='+val.id+'>'+val.name+'</option>');
-                    });
-                }
-            });
-        })
-      
     });
 
    
