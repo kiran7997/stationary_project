@@ -40,10 +40,13 @@
 			<div class="row" id="basic-table">
 				<div class="col-12">
 					<div class="card">
-						<div class="card-header border-bottom">
-							<button class="btn btn-outline-primary pull-right" data-toggle="modal"
-								data-target="#invenModal">New Inventory</button>
-						</div>
+					<div class="card-header border-bottom">
+                                <h4 class="card-title"></h4>
+                                <button type="button" class="btn btn-outline-primary float-right" data-toggle="modal" data-target="#invenModal">
+                                    Add New Inventory
+                                </button>
+                            </div>
+						
 						<div style="margin:20px;">
 							@if ($message = Session::get('success'))
 							<div class="alert alert-success alert-dismissible fade show" role="alert">

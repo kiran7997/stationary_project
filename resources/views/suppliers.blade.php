@@ -41,10 +41,13 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-header border-bottom">
-                            <button class="btn btn-outline-primary pull-right" data-toggle="modal"
-                                data-target="#supplierPModal">New Suppliers</button>
-                        </div>
+                    <div class="card-header border-bottom">
+                                <h4 class="card-title"></h4>
+                                <button type="button" class="btn btn-outline-primary float-right" data-toggle="modal" data-target="#supplierPModal">
+                                    Add New Suppliers
+                                </button>
+                            </div>
+                       
                         <div style="margin:20px;">
                             @if ($message = Session::get('success'))
                             <div class="alert alert-success alert-dismissible fade show" role="alert">
