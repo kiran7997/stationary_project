@@ -239,7 +239,8 @@ class UserController extends Controller
         if ($user_role == 'Account') { //Account dashboard
 
             $order_count = \App\Orders::where(['order_status' => 'order'])->count();
-            return view('account_dash', compact('order_count'));
+            $process_order_count = \App\Orders::where(['order_status' => 'process'])->count();
+            return view('account_dash', compact('order_count','process_order_count'));
         } elseif ($user_role == 'Sales') { //Sales dashboard
 
             $order_count = \App\Orders::where(['order_status' => 'order'])->count();
@@ -260,13 +261,12 @@ class UserController extends Controller
 
     public function orderList()
     {
-        $order_list = \App\Orders::where(['order_status' => 'order'])->get();
-        // $order_list = DB::table('orders')
-        //             ->select('orders.*','customers.customer_firstname','customers.customer_lastname')
-        //             ->leftjoin('customers','customers.customer_id','=','orders.customer_id')
-        //             // ->leftjoin('')
-        //             ->where(['order_status'=>'order'])
-        //             ->get();
+        // $order_list = \App\Orders::where(['order_status' => 'order'])->get();
+        $order_list = DB::table('orders')
+                    ->select('orders.*','users.name')
+                    ->leftjoin('users','users.id','=','orders.sales_person')
+                    ->where(['order_status'=>'order'])
+                    ->get();
         return view('employee-dashboard-list.order-list', compact('order_list'));
     }
 
@@ -348,7 +348,7 @@ class UserController extends Controller
         $notification['order_id'] = $requestData['order_id'];
         $notification['user_id'] = $requestData['sales_person'];
         $notification['role_id'] = 2;
-        $notification['notification_type'] = 'sales';
+        $notification['notification_type'] = 'Sales';
         $notification['notification_date'] = date('Y-m-d');
         \App\Notification::create($notification);
         // dd($requestData);
@@ -380,6 +380,80 @@ class UserController extends Controller
             return view('employee-dashboard-list.po_data',compact('order_list','order_item_data','id'));
         }else{
             $pdf = PDF::loadView("employee-dashboard-list.download_po",compact('order_list','order_item_data'));  
+            return $pdf->stream('PO.pdf',array("Attachment" => false)); 
+        }
+    }
+
+    public function sendNotification($id){
+        $users = \App\User::select('id')->where(['role'=>4])->get();
+        foreach($users as $row){
+            $notification['order_id'] = $id;
+            $notification['user_id'] = $row['id'];
+            $notification['role_id'] = 4;
+            $notification['notification_type'] = 'Manufacturing';
+            $notification['notification_date'] = date('Y-m-d');
+            \App\Notification::create($notification);
+        }
+
+        $data_customer = DB::table('orders')->where(['order_id'=>$id])->update(['manufacturing_notification' => 1]);
+        return redirect('sales-assign-data');
+        
+    }
+
+    public function getManufacturingOrder(){
+        $user_id = Auth::user()->id;
+        $order_list = DB::table('notifications')
+                    ->select('notifications.order_id','orders.*')
+                    ->leftjoin('orders','orders.order_id','notifications.order_id')
+                    ->where(['notifications.user_id'=>$user_id,'is_read'=>0])
+                    ->get();
+        return view('employee-dashboard-list.manufacturing-order-list',compact('order_list'));
+    }
+
+    public function changeOrderStatus($id){
+        $order_list = \App\Orders::where(['order_id' => $id])->first();
+        $order_item_data = DB::table('order_items')
+            ->select('order_items.*', 'aproducts.image_url')
+            ->leftjoin('aproducts', 'aproducts.product_id', 'order_items.product_id')
+            ->where(['order_id' => $id])->get();
+        return view('employee-dashboard-list.change-order-status', compact('order_list', 'order_item_data', 'id'));
+    }
+
+    public function updateOrderStatus(Request $request){
+        $requestData = $request->all();
+        $order_data = \App\Orders::select('sales_person')->where(['order_id'=>$requestData['order_id']])->first();
+        $data_customer = DB::table('orders')->where(['order_id'=>$requestData['order_id']])->update(['order_status' => $requestData['order_status']]);
+        $notification['order_id'] = $requestData['order_id'];
+        $notification['user_id'] = $order_data->sales_person;
+        $notification['role_id'] = 2;
+        $notification['notification_type'] = 'Manufacturing-Revert';
+        $notification['notification_date'] = date('Y-m-d');
+        \App\Notification::create($notification);
+        return redirect('manufacturing-order-list');
+    }
+
+    public function orderProcessList(){
+        $order_list = DB::table('orders')
+                    ->select('orders.*','users.name')
+                    ->leftjoin('users','users.id','=','orders.sales_person')
+                    ->where(['order_status'=>'process'])
+                    ->get();
+        return view('employee-dashboard-list.process-order-list', compact('order_list'));
+    }
+
+    public function GenerateInvoiceData($id,$id1){
+        $order_list = DB::table('orders')
+                            ->select('orders.*','orders.phone_no','users.name')
+                            ->leftjoin('users','users.id','orders.sales_person')
+                            ->where(['order_id'=>$id])->first();
+        $order_item_data = DB::table('order_items')
+                            ->select('order_items.*','aproducts.image_url')
+                            ->leftjoin('aproducts','aproducts.product_id','order_items.product_id')
+                            ->where(['order_id'=>$id])->get();
+        if($id1 == "view"){            
+            return view('employee-dashboard-list.invoice_data',compact('order_list','order_item_data','id'));
+        }else{
+            $pdf = PDF::loadView("employee-dashboard-list.download_invoice_data",compact('order_list','order_item_data'));  
             return $pdf->stream('PO.pdf',array("Attachment" => false)); 
         }
     }

@@ -14,8 +14,8 @@
                                     <i data-feather="shopping-bag" class="font-medium-5"></i>
                                 </div>
                             </div>
-                            <a href="{{ url('employee-order-list') }}"><h2 class="font-weight-bolder">{{$order_count}}</h2></a>
-                            <p class="card-text">Orders</p>
+                            <a href="{{ url('sales-assign-data') }}"><h2 class="font-weight-bolder">{{$order_count}}</h2></a>
+                            <p class="card-text">Assign Orders</p>
                         </div>
                     </div>
                 </div>

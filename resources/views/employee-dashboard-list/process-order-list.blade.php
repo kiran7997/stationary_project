@@ -10,8 +10,7 @@
             <div class="content-header-left col-md-9 col-12 mb-2">
                 <div class="row breadcrumbs-top">
                     <div class="col-12">
-                        <h2 class="content-header-title float-left mb-0">Order List</h2>
-                        
+                        <h2 class="content-header-title float-left mb-0"> Order Process List</h2>
                     </div>
                 </div>
             </div>
@@ -69,15 +68,12 @@
                                                 </div>
                                             </td>
                                             <td>{{ $order->name}}</td>
-                                            <?php if($order->sales_person == "" ){ ?>
                                             <td>
-                                                <a href="{{ url('assign-to-sales-team/'.$order->order_id) }}" class="btn btn-primary " >Assign To Sales Team</a>
+                                                <?php if($order->order_status == "process"){ ?>
+                                                    <a href="{{ url('generate-invoice/'.$order->order_id.'/view') }}" class="btn btn-primary " >Invoice</a>
+                                                    <a href="{{ url('generate-invoice/'.$order->order_id.'/download') }}" class="btn btn-primary " ><i data-feather='download'></i> Invoice</a>
+                                               <?php } ?>
                                             </td>
-                                            <?php } else { ?>
-                                            <td>
-                                                <a href="{{ url('assign-to-sales-team/'.$order->order_id) }}" class="btn btn-primary " ><i class="fa fa-edit " aria-hidden="true"></i></a>
-                                            </td>
-                                            <?php } ?>
                                         </tr>
                                         @endforeach
                                     </tbody>

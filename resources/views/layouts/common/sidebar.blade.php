@@ -146,7 +146,7 @@
                                     Order</span></a>
                   </li>
                   @endcan
-                  @can('employee-dashboard')
+                  <!-- @can('employee-dashboard')
                   <li class=" nav-item"><a class="d-flex align-items-center" href="form-layout.html"><i
                                     data-feather="box"></i><span class="menu-title text-truncate"
                                     data-i18n="Form Layout">Orders</span></a>
@@ -155,7 +155,7 @@
                                     data-feather="package"></i><span class="menu-title text-truncate"
                                     data-i18n="Form Wizard">Reports</span></a>
                   </li>
-                  @endcan
+                  @endcan -->
             </ul>
       </div>
 </div>

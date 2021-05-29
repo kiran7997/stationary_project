@@ -28,6 +28,8 @@ class CreateCustomersTable extends Migration
             $table->boolean('deleted')->default(0);
             $table->integer('created_by')->nullable();
             $table->integer('updated_by')->nullable();
+            $table->string('otp', 50)->nullable();
+            $table->boolean('sms_verification')->default(0);
             $table->timestamps();
 
         });
