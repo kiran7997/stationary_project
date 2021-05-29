@@ -42,7 +42,7 @@
           <li class="scrollable-container media-list">
             @foreach($my_card as $row)
             <?php $total = $total + $row->product_price; ?>
-            <div class="media align-items-center"><img class="d-block rounded mr-1" src="{{$row->image_url}}" alt="donuts" width="62">
+            <div class="media align-items-center"><img class="d-block rounded mr-1" src="{{ json_decode($row->image_url)[0] }}" alt="donuts" width="62">
                 <div class="media-body"><i class="ficon cart-item-remove" data-feather="x"></i>
                     <div class="media-heading">
                         <h6 class="cart-item-title"><a class="text-body" href="{{url('checkout')}}"> {{$row->product_name}}</a></h6><small class="cart-item-by">By Apple</small>

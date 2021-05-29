@@ -14,6 +14,7 @@ class OrderController extends Controller
 {
     public function save_order(Request $request)
     {
+
         $order = new orders();
         $order['customer_id'] = Auth::guard('customer')->user()->customer_id;
         $order['order_status'] = "order";
@@ -22,20 +23,24 @@ class OrderController extends Controller
         $order['created_by'] = Auth::guard('customer')->user()->customer_id;
         $order['updated_by'] = Auth::guard('customer')->user()->customer_id;
         $order['pincode'] = "12344";
-        $order->save();
-
-        if (!$order->save()) {
+        if(!isset($request->order_id) || empty($request->order_id[0])){
+            $order->save();
+        }else{
+            $order->update();
+        }
+        
+        if (!$order->save() || $order->update()) {
             App::abort(500, 'Error');
         } else {
             $i = 0;
             for($i = 0; $i < sizeof($request->cart_id); $i++){
                 $order_item_data = new order_items();
                 $order_item_data['product_id'] = $request->product_id[$i];
-                $order_item_data['order_id'] = $order->order_id;
                 $order_item_data['product_color'] = "";
                 $order_item_data['product_type'] = "";
 
                 $product_details = Aproducts::select('product_name', 'base_price', 'taxable')->where('product_id', $request->product_id[$i])->first();
+
                 if(!empty($product_details)){
                     $order_item_data['product_name'] = $product_details->product_name;
                     $order_item_data['price'] = $product_details->base_price;
@@ -55,9 +60,15 @@ class OrderController extends Controller
                 $order_item_data['deleted'] = 0;
                 $order_item_data['created_by'] = Auth::guard('customer')->user()->customer_id;
                 $order_item_data['updated_by'] = Auth::guard('customer')->user()->customer_id;
-                $order_item_data->save();
+                if(!empty($request->order_item_id[$i])){
+                    $order_item_data['order_id'] = $request->order_id[$i];
+                    $order_item_data->update();
+                }else{
+                    $order_item_data['order_id'] = $order->order_id;
+                    $order_item_data->save();
+                }
                 
-                $update_order_id_in_addToCart = AddToCart::where(array('cart_id' => $request->cart_id[$i]))->update('order_id', $order->order_id);
+                $update_order_id_in_addToCart = AddToCart::where('cart_id', $request->cart_id[$i])->update(array('order_id'=> $order->order_id));
             }
         }
         // return redirect('customer_dash')->with('success', 'User updated successfully');   

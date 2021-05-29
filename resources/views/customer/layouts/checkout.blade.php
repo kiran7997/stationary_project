@@ -87,6 +87,8 @@
                                     @csrf
                                     @foreach($cart_data as $carts)
                                         <input type="hidden" id="cart_id_{{ $i }}" name="cart_id[]" value="{{ $carts->cart_id }}" />
+                                        <input type="hidden" id="order_id_{{ $i }}" name="order_id[]" value="{{ $carts->order_id }}" />
+                                        <input type="hidden" id="order_item_id_{{ $i }}" name="order_item_id_[]" value="" />
                                         <input type="hidden" id="product_id_{{ $i }}" name="product_id[]" value="{{ $carts->product_id }}" />
                                         <div class="card ecommerce-card">
                                             <div class="item-img">
@@ -601,7 +603,7 @@
                 url:"/update-quantity-in-cart",
                 method:"POST", //First change type to method here
                 data:{
-                    cart_id: cart_id, item_quantity: item_quantity
+                    "_token": "{{ csrf_token() }}", cart_id: cart_id, item_quantity: item_quantity
                 },
                 success:function(response) {
                     console.log(response);
