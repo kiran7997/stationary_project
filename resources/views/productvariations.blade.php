@@ -99,17 +99,17 @@
                     @csrf
                     <div class="form-group">
                         <label for="location">Variation Name<span style="color:red">*</span></label>
-                        <input type="text" class="form-control" id="variation_name" name="variation_name" />
+                        <input oninput="this.value = this.value.replace(/[^A-Za-z0-9-,.;'&/.() ]|^ /g,'')" class="form-control" id="variation_name" name="variation_name" />
                     </div>
 
                     <div class="form-group">
                         <label for="Transport">Abbrivation<span style="color:red">*</span></label>
-                        <input type="text" class="form-control" id="variation_abbrevation" name="variation_abbrevation">
+                        <input oninput="this.value = this.value.replace(/[^A-Za-z0-9-,.;'&/.() ]|^ /g,'')" class="form-control" id="variation_abbrevation" name="variation_abbrevation">
                     </div>
 
                     <div class="form-group">
                         <label for="Transport">Add on Price<span style="color:red">*</span></label>
-                        <input type="number" class="form-control" id="add_on_price" name="add_on_price">
+                        <input type="number" class="form-control" id="add_on_price" name="add_on_price" onchange="roundIt(this);">
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
@@ -132,12 +132,12 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="location">Variation Name</label>
-                        <input type="text" class="form-control" id="variation_name1" name="variation_name" />
+                        <input oninput="this.value = this.value.replace(/[^A-Za-z0-9-,.;'&/.() ]|^ /g,'')" class="form-control" id="variation_name1" name="variation_name" />
                     </div>
 
                     <div class="form-group">
                         <label for="phone">Abbrivation</label>
-                        <input type="text" class="form-control" id="variation_abbrevation1"
+                        <input oninput="this.value = this.value.replace(/[^A-Za-z0-9-,.;'&/.() ]|^ /g,'')" class="form-control" id="variation_abbrevation1"
                             name="variation_abbrevation" />
                     </div>
 
@@ -171,6 +171,8 @@
 });
 } );
   
+
+
 $(document).ready(function() {
 
 $('#ProductvForm').validate({
@@ -189,12 +191,13 @@ rules: {
     
 
 });
-$('#variation_name,#variation_abbrevation').keypress(function(){
-            return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122) ||event.charCode==32);
-            
-        }); 
-});
 
+});
+function roundIt(ctrl) {
+		var num = parseFloat(ctrl.value);
+		ctrl.value = num.toFixed(2);
+	}
+   
 function editProductv(variation_id)
     {
         $(document).ready(function() {
@@ -205,10 +208,7 @@ function editProductv(variation_id)
                 $("#add_on_price1").val(categories.add_on_price);
                 $("#EditProductv").modal('toggle');
         });
-        $('#variation_name1,#variation_abbrevation1').keypress(function(){
-            return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122)||event.charCode==32);
-            
-        }); 
+        
 
     });
    

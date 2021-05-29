@@ -114,14 +114,14 @@
                 <div class="modal-body">
                     <label class="required" for="supplier_companyName">Company Name </label>
                     <div class="form-group">
-                        <input type="text" name="supplier_companyName" id="supplier_companyName" class="form-control"
+                        <input oninput="this.value = this.value.replace(/[^A-Za-z0-9-,.;'&/.() ]|^ /g,'')" name="supplier_companyName" id="supplier_companyName" class="form-control"
                             required>
 
                     </div>
 
                     <label class="required" for="supplier_address">Supplier Address</label>
                     <div class="form-group">
-                        <input type="textarea" name="supplier_address" id="supplier_address" class="form-control"
+                        <input oninput="this.value = this.value.replace(/[^A-Za-z0-9-,.;'&/.() ]|^ /g,'')" name="supplier_address" id="supplier_address" class="form-control"
                             required>
 
                     </div>
@@ -166,14 +166,14 @@
                 <div class="modal-body">
                     <label class="required" for="supplier_companyName">Company Name </label>
                     <div class="form-group">
-                        <input type="text" name="supplier_companyName" id="supplier_companyName2" class="form-control"
+                        <input oninput="this.value = this.value.replace(/[^A-Za-z0-9-,.;'&/.() ]|^ /g,'')" name="supplier_companyName" id="supplier_companyName2" class="form-control"
                             required>
 
                     </div>
 
                     <label class="required" for="supplier_address">Supplier Address</label>
                     <div class="form-group">
-                        <input type="textarea" name="supplier_address" id="supplier_address2" class="form-control"
+                        <input oninput="this.value = this.value.replace(/[^A-Za-z0-9-,.;'&/.() ]|^ /g,'')" name="supplier_address" id="supplier_address2" class="form-control"
                             required>
 
                     </div>

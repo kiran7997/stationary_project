@@ -124,11 +124,11 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="location">Unit Name<span style="color:red">*</span></label>
-                        <input type="text" class="form-control" id="unit_name" name="unit_name" />
+                        <input oninput="this.value = this.value.replace(/[^A-Za-z0-9-,.;'&/.() ]|^ /g,'')" class="form-control" id="unit_name" name="unit_name" />
                     </div>
                     <div class="form-group">
                         <label for="phone">Unit Description<span style="color:red">*</span></label>
-                        <input type="text" class="form-control" id="unit_description" name="unit_description" />
+                        <input oninput="this.value = this.value.replace(/[^A-Za-z0-9-,.;'&/.() ]|^ /g,'')" class="form-control" id="unit_description" name="unit_description" />
                     </div>
                 </div>
 
@@ -152,11 +152,11 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="location">Unit Name<span style="color:red">*</label>
-                        <input type="text" class="form-control" id="unit_name1" name="unit_name" />
+                        <input oninput="this.value = this.value.replace(/[^A-Za-z0-9-,.;'&/.() ]|^ /g,'')" class="form-control" id="unit_name1" name="unit_name" />
                     </div>
                     <div class="form-group">
                         <label for="phone">Unit Description<span style="color:red">*</label>
-                        <input type="text" class="form-control" id="unit_description1" name="unit_description" />
+                        <input oninput="this.value = this.value.replace(/[^A-Za-z0-9-,.;'&/.() ]|^ /g,'')" class="form-control" id="unit_description1" name="unit_description" />
                     </div><br>
                 </div>
                 <div class="modal-footer">
@@ -187,10 +187,7 @@ rules: {
 
 });
 
-$('#unit_name,#unit_description').keypress(function(){
-            return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122)||event.charCode==32);
-            
-        });
+
 
 });
     
@@ -203,10 +200,7 @@ function editUnits(id)
                 $("#unit_description1").val(categories.unit_description);
                 $("#EditUnits").modal('toggle');
      });
-     $('#unit_name1,#unit_description1').keypress(function(){
-            return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122)||event.charCode==32);
-            
-        });
+     
     });
 
 $('#EditUnitForm').validate({

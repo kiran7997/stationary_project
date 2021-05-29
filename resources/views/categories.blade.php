@@ -105,13 +105,13 @@
 					<div class="modal-body">
                     	<div class="form-group ">
                     		<label for="location">Category Name <span style="color:red">*</span></label>
-                    		<input type="text" class="form-control" id="cat_name" name="cat_name"/>
+                    		<input oninput="this.value = this.value.replace(/[^A-Za-z0-9-,.;'&/.() ]|^ /g,'')" class="form-control" id="cat_name" name="cat_name"/>
                            
                     	</div>  
 
                     	<div class="form-group">
                     		<label for="phone">Category Description<span style="color:red">*</span></label>
-                    		<input type="text" class="form-control" id="cat_description" name="cat_description"/>
+                    		<input oninput="this.value = this.value.replace(/[^A-Za-z0-9-,.;'&/.() ]|^ /g,'')" class="form-control" id="cat_description" name="cat_description"/>
                     	</div>
                 	</div>
                     
@@ -138,12 +138,12 @@
                       <div class="modal-body">
                       <div class="form-group">
                     <label for="location">Category Name<span style="color:red">*</label>
-                    <input type="text" class="form-control" id="cat_name1" name="cat_name"/>
+                    <input oninput="this.value = this.value.replace(/[^A-Za-z0-9-,.;'&/.() ]|^ /g,'')" class="form-control" id="cat_name1" name="cat_name"/>
                     </div>
 
                     <div class="form-group">
                     <label for="phone">Category Description<span style="color:red">*</label>
-                    <input type="text" class="form-control" id="cat_description1" name="cat_description"/>
+                    <input oninput="this.value = this.value.replace(/[^A-Za-z0-9-,.;'&/.() ]|^ /g,'')" class="form-control" id="cat_description1" name="cat_description"/>
                     </div>
                    
                 </div>
@@ -192,9 +192,6 @@ rules: {
     
 
 });
-$('#cat_name,#cat_description').keypress(function(){
-            return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122)||event.charCode==32);
-        });
 
 });
 
@@ -207,10 +204,7 @@ function editCategory(cat_id)
                 $("#cat_description1").val(categories.cat_description);
                 $("#EditCategory").modal('toggle');
         });
-        $('#cat_name1,#cat_description1').keypress(function(){
-            return ((event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122)||event.charCode==32);
-
-        });
+        
 
     });
 

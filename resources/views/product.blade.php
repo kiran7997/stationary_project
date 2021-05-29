@@ -133,7 +133,7 @@
 
 					<label class="required" for="product_name">Product Name </label>
 					<div class="form-group">
-						<input type="text" name="product_name" id="product_name" class="form-control" required>
+						<input oninput="this.value = this.value.replace(/[^A-Za-z0-9-,.;'&/.() ]|^ /g,'')" name="product_name" id="product_name" class="form-control" required>
 					</div>
 
 					<label class="required" for="cat_id">Catagory </label>
@@ -193,13 +193,14 @@
 					<label class="required" for="description">Description </label>
 
 					<div class="form-group">
-						<input type="text" name="description" id="description" class="form-control" required>
+						<input oninput="this.value = this.value.replace(/[^A-Za-z0-9-,.;'&/.() ]|^ /g,'')" name="description" id="description" class="form-control" required>
 					</div>
 
 					<label class="required" for="base_price">Base_Price </label>
 
 					<div class="form-group">
-						<input type="number" name="base_price" id="base_price" class="form-control" required>
+						<input type="number" name="base_price" id="base_price" class="form-control" onchange="roundIt(this);" required >
+						
 					</div>
 
 
@@ -207,7 +208,7 @@
 
 					<label class="required" for="code">Code </label>
 					<div class="form-group">
-						<input type="text" name="code" id="code" class="form-control" required> </div>
+						<input oninput="this.value = this.value.replace(/[^A-Za-z0-9-,.;'&/.() ]|^ /g,'')" name="code" id="code" class="form-control" required> </div>
 
 
 
@@ -250,7 +251,7 @@
 					<label class="required" for="product_name">Product Name
 					</label>
 					<div class="form-group">
-						<input type="text" name="product_name" id="product_name2" class="form-control" required>
+						<input oninput="this.value = this.value.replace(/[^A-Za-z0-9-,.;'&/.() ]|^ /g,'')" name="product_name" id="product_name2" class="form-control" required>
 					</div>
 
 					<label class="required" for="cat_id">Catagory </label>
@@ -291,20 +292,20 @@
 					<label class="required" for="description">Description </label>
 
 					<div class="form-group">
-						<input type="text" name="description" id="description2" class="form-control" required>
+						<input oninput="this.value = this.value.replace(/[^A-Za-z0-9-,.;'&/.() ]|^ /g,'')" name="description" id="description2" class="form-control" required>
 					</div>
 
 					<label class="required" for="base_price">Base Price </label>
 
 					<div class="form-group">
-						<input type="number" name="base_price" id="base_price2" class="form-control" required>
+						<input type="number" name="base_price" id="base_price2" class="form-control" onchange="roundIt(this);" required>
 					</div>
 
 
 
 					<label class="required" for="code">Code </label>
 					<div class="form-group">
-						<input type="text" name="code" id="code2" class="form-control" required>
+						<input oninput="this.value = this.value.replace(/[^A-Za-z0-9-,.;'&/.() ]|^ /g,'')"  name="code" id="code2" class="form-control" required>
 					</div>
 
 					<label class="required" for="taxable">taxable </label>
@@ -341,7 +342,7 @@
 
 				</div>
 				<div class="modal-footer">
-					<button type="submit" class="btn btn-primary">Submit</button>
+					<button type="submit" class="btn btn-primary">Update</button>
 				</div>
 			</form>
 		</div>
@@ -365,7 +366,15 @@
     return confirm('Are you sure you want to Delete?');
 });
 } );
-
+// $('#description,#description2').on('input', function () {
+//         this.value = this.value.match(/^\s+.*|.*\s+$/g);
+//     });
+function roundIt(ctrl) {
+		var num = parseFloat(ctrl.value);
+		ctrl.value = num.toFixed(2);
+	}
+	
+	
 		// $("#productForm").submit(function(e){
         //     e.preventDefault();
         //     $.ajax({
@@ -384,7 +393,7 @@
         //         }
         //     });
         // });
-
+	
 		$(document).ready(function() {
 
 $('#productForm').validate({

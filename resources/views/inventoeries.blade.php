@@ -140,7 +140,7 @@
 					</div>
 					<label class="required" for="quantity">Item Quantity </label>
 					<div class="form-group">
-						<input type="number" name="quantity" id="quantity" class="form-control" required>
+						<input type="number" name="quantity" id="quantity"  class="form-control" required>
 
 					</div>
 					<label class="required" for="invntory_status">Inventory Status </label>
@@ -198,7 +198,7 @@
 					</div>
 					<label class="required" for="quantity">Item Quantity </label>
 					<div class="form-group">
-						<input type="number" name="quantity" id="quantity2" class="form-control" required>
+						<input type="number" name="quantity" id="quantity2"  class="form-control" required>
 
 					</div>
 
@@ -214,7 +214,7 @@
 					</div>
 
 					<div class="modal-footer">
-						<button type="submit" class="btn btn-primary">Submit</button>
+						<button type="submit" class="btn btn-primary">Update</button>
 					</div>
 			</form>
 		</div>
@@ -228,6 +228,8 @@
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 
 <script>
+
+	
 	$(document).ready(function() {
 
 $('#invenForm').validate({
