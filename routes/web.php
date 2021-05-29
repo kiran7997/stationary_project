@@ -139,9 +139,15 @@ Route::get('order-history', 'CustomerController@order_history');
 
 //employee-dashboard
 Route::get('employee-order-list','UserController@orderList');
+Route::get('process-order-list','UserController@orderProcessList');
 Route::get('assign-to-sales-team/{id}','UserController@assignSalesTeam');
 Route::post('assign-to-sales-team','UserController@saveAssignSalesData');
-
-
+Route::get('sales-assign-data','UserController@getSalesAssignData');
+Route::get('generate-po/{id}/{id1}','UserController@GeneratePOData');
+Route::get('send-manufacturing-notification/{id}','UserController@sendNotification');
+Route::get('manufacturing-order-list','UserController@getManufacturingOrder');
+Route::get('change-order-status/{id}','UserController@changeOrderStatus');
+Route::post('update-order-status','UserController@updateOrderStatus');
+Route::get('generate-invoice/{id}/{id1}','UserController@GenerateInvoiceData');
 //Razorpay payment
 Route::post('razorpaypayment', 'ShopController@payment')->name('payment');

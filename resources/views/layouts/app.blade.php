@@ -48,26 +48,20 @@ License: You must have a valid license purchased only from themeforest(the above
   <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/themes/semi-dark-layout.min.css') }}">
 
   <!-- BEGIN: Page CSS-->
-  <link rel="stylesheet" type="text/css"
-    href="{{ asset('app-assets/css/core/menu/menu-types/vertical-menu.min.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/core/menu/menu-types/vertical-menu.min.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/pages/dashboard-ecommerce.min.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/plugins/charts/chart-apex.min.css') }}">
-  <link rel="stylesheet" type="text/css"
-    href="{{ asset('app-assets/css/plugins/extensions/ext-component-toastr.min.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/plugins/extensions/ext-component-toastr.min.css') }}">
   <!-- END: Page CSS-->
 
   <!-- BEGIN: Custom CSS-->
   <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
   <!-- END: Custom CSS-->
   <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/forms/select/select2.min.css') }}" />
-  <link rel="stylesheet" type="text/css"
-    href="{{ asset('app-assets/vendors/css/pickers/flatpickr/flatpickr.min.css') }}" />
-  <link rel="stylesheet" type="text/css"
-    href="{{ asset('app-assets/css/plugins/forms/pickers/form-flat-pickr.min.css') }}" />
-  <link rel="stylesheet" type="text/css"
-    href="{{ asset('app-assets/vendors/css/tables/datatable/dataTables.bootstrap4.min.css') }}">
-  <link rel="stylesheet" type="text/css"
-    href="{{ asset('app-assets/vendors/css/tables/datatable/responsive.bootstrap4.min.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/pickers/flatpickr/flatpickr.min.css') }}" />
+  <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/plugins/forms/pickers/form-flat-pickr.min.css') }}" />
+  <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/tables/datatable/dataTables.bootstrap4.min.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/tables/datatable/responsive.bootstrap4.min.css') }}">
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
   <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/plugins/forms/form-validation.css') }}">
 

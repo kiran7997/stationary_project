@@ -38,15 +38,71 @@
           </li>
         </ul>
       </li>
+      <?php 
+      $user_id = Auth::user()->id;
+      $notification_count = \App\Notification::where(['user_id'=>$user_id,'is_read'=>0])->count(); 
+      $notification_data = DB::table('notifications')
+                         ->select('notifications.*','orders.order_id')
+                         ->leftjoin('orders','orders.order_id','notifications.order_id')
+                         ->where(['user_id'=>$user_id,'is_read'=>0])->get() ?>
       <li class="nav-item dropdown dropdown-notification mr-25"><a class="nav-link" href="javascript:void(0);"
           data-toggle="dropdown"><i class="ficon" data-feather="bell"></i><span
-            class="badge badge-pill badge-danger badge-up">0</span></a>
+            class="badge badge-pill badge-danger badge-up">{{$notification_count}}</span></a>
         <ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">
           <li class="dropdown-menu-header">
             <div class="dropdown-header d-flex">
               <h4 class="notification-title mb-0 mr-auto">Notifications</h4>
-              <div class="badge badge-pill badge-light-primary">0 New</div>
+              <div class="badge badge-pill badge-light-primary">{{$notification_count}} New</div>
             </div>
+          </li>
+          <li class="scrollable-container media-list"><a class="d-flex" href="javascript:void(0)">
+          @foreach($notification_data as $data)
+          <?php if($data->notification_type == "Sales") { ?>
+            <a class="media d-flex align-items-start" href="{{ url('sales-assign-data') }}">
+              <!-- <a > -->
+                <div class="media-left">
+                    <div class="avatar bg-light-success">
+                        <div class="avatar-content"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check avatar-icon"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+                    </div>
+                </div>
+                <div class="media-body">
+                    <p class="media-heading"><span class="font-weight-bolder">
+                    
+                    You have assign new order with Order id </span>{{$data->order_id}}</p><small class="notification-text"> Won the monthly best seller badge.</small>
+
+                </div>
+              <!-- </a> -->
+            </a>
+            <?php } else if($data->notification_type == "Manufacturing") { ?>
+              <a class="media d-flex align-items-start" href="{{ url('manufacturing-order-list') }}">
+              <!-- <a > -->
+                <div class="media-left">
+                    <div class="avatar bg-light-success">
+                        <div class="avatar-content"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check avatar-icon"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+                    </div>
+                </div>
+                <div class="media-body">
+                    <p class="media-heading"><span class="font-weight-bolder">                    
+                    New PO generated for Order id </span>{{$data->order_id}}</p><small class="notification-text"> Won the monthly best seller badge.</small>
+                </div>
+            </a>
+            <?php } else if($data->notification_type == "Manufacturing-Revert") { ?>
+              <a class="media d-flex align-items-start" href="#">
+              <!-- <a > -->
+                <div class="media-left">
+                    <div class="avatar bg-light-success">
+                        <div class="avatar-content"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check avatar-icon"><polyline points="20 6 9 17 4 12"></polyline></svg></div>
+                    </div>
+                </div>
+                <div class="media-body">
+                    <p class="media-heading"><span class="font-weight-bolder">                    
+                    PO Received for Order id </span>{{$data->order_id}}</p><small class="notification-text"> Won the monthly best seller badge.</small>
+                </div>
+            </a>
+                      
+                    <?php } ?>
+            </a><a class="d-flex" href="javascript:void(0)">   
+            @endforeach             
           </li>
           <li class="dropdown-menu-footer"><a class="btn btn-primary btn-block" href="javascript:void(0)">Read all
               notifications</a></li>

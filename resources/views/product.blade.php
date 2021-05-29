@@ -199,7 +199,7 @@
 					<label class="required" for="base_price">Base_Price </label>
 
 					<div class="form-group">
-						<input type="text" name="base_price" id="base_price" class="form-control" required>
+						<input type="number" name="base_price" id="base_price" class="form-control" required>
 					</div>
 
 
@@ -297,7 +297,7 @@
 					<label class="required" for="base_price">Base Price </label>
 
 					<div class="form-group">
-						<input type="text" name="base_price" id="base_price2" class="form-control" required>
+						<input type="number" name="base_price" id="base_price2" class="form-control" required>
 					</div>
 
 
