@@ -326,7 +326,7 @@
                                             </div>
                                         </div>
                                         <div class="col-12">
-                                            <button type="button" class="btn btn-primary btn-next delivery-address">Save
+                                            <button type="button" class="btn btn-primary btn-next delivery-address" id="save-order-address">Save
                                                 And Deliver Here</button>
                                         </div>
                                     </div>
@@ -620,10 +620,12 @@
                 url:"/save_order",
                 method:"POST", //First change type to method here
                 data: $("#form_card").serialize(),
+                async: false,
                 success:function(response) {
                     if(response == "success"){
                         Swal.fire('Success!', 'Order Saved Successfully', 'success').then(function() {
                             window.location = "/checkout";
+                            
                         });
                     }
                 },
@@ -631,6 +633,10 @@
                     console.log("error");
                 }
             });
+        });
+
+        $("#save-order-address").click(function() {
+            alert("hiiii");
         });
     });
 </script>

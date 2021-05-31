@@ -24,6 +24,14 @@
         align-items-center" href="{{url('/checkout')}}"><i data-feather='shopping-cart'></i><span
             class="menu-title text-truncate" data-i18n="Form Layout">Cart</span></a>
       </li>
+      <li class=" nav-item @if(Request::is('my-order')) active @endif "><a class=" d-flex
+        align-items-center" href="{{url('/my-order')}}"><i data-feather='shopping-bag'></i></i><span
+            class="menu-title text-truncate" data-i18n="Form Layout">My Order</span></a>
+      </li>
+      <li class=" nav-item @if(Request::is('return-order-list')) active @endif "><a class=" d-flex
+        align-items-center" href="{{url('/return-order-list')}}"><i data-feather='truck'></i><span
+            class="menu-title text-truncate" data-i18n="Form Layout">Return Order</span></a>
+      </li>
       <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather="file-text"></i><span
             class="menu-title text-truncate" data-i18n="Invoice">Reports</span></a>
         <ul class="menu-content">
