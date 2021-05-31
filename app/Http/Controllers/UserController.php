@@ -361,7 +361,7 @@ class UserController extends Controller
         $order_list = DB::table('notifications')
                     ->select('notifications.order_id','orders.*')
                     ->leftjoin('orders','orders.order_id','notifications.order_id')
-                    ->where(['notifications.user_id'=>$user_id,'is_read'=>0])
+                    ->where(['notifications.user_id'=>$user_id,'is_read'=>0,'order_status' => 'order'])
                     ->get();
         return view('employee-dashboard-list.sales-order-list',compact('order_list'));   
     }
