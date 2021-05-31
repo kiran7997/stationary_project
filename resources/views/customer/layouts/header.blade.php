@@ -22,7 +22,7 @@
       </li>
       <li class="nav-item dropdown dropdown-cart mr-25"><a class="nav-link" href="javascript:void(0);"
           data-toggle="dropdown"><i class="ficon" data-feather="shopping-cart"></i><span
-            class="badge badge-pill badge-primary badge-up cart-item-count">{{ App\AddToCart::where(['customer_id' => Auth::guard('customer')->user()->customer_id, 'deleted' => 0])->sum('quantity') }}</span></a>
+            class="badge badge-pill badge-primary badge-up cart-item-count"> {{ App\AddToCart::where(['customer_id' => Auth::guard('customer')->user()->customer_id, 'deleted' => 0])->sum('quantity') }} </span></a>
         <ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">
           <li class="dropdown-menu-header">
             <div class="dropdown-header d-flex">
