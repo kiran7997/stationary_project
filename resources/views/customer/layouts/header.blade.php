@@ -20,35 +20,40 @@
           <ul class="search-list search-list-main"></ul>
         </div>
       </li>
-      <li class="nav-item dropdown dropdown-cart mr-25"><a class="nav-link" href="javascript:void(0);"
-          data-toggle="dropdown"><i class="ficon" data-feather="shopping-cart"></i><span
-            class="badge badge-pill badge-primary badge-up cart-item-count">{{ App\AddToCart::where(['customer_id' => Auth::guard('customer')->user()->customer_id, 'deleted' => 0])->sum('quantity') }}</span></a>
-        <ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">
-          <li class="dropdown-menu-header">
-            <div class="dropdown-header d-flex">
-              <h4 class="notification-title mb-0 mr-auto">My Cart</h4>
-              <div class="badge badge-pill badge-light-primary">{{ App\AddToCart::where(['customer_id' => Auth::guard('customer')->user()->customer_id, 'deleted' => 0])->sum('quantity') }}</div>
-            </div>
-          </li>
-          <?php
+      <?php
           $total = 0; 
           $my_card = DB::table('add_to_carts')
-                   ->select('add_to_carts.product_price','aproducts.product_name','aproducts.image_url')
+                   ->select('add_to_carts.product_price','add_to_carts.amount','add_to_carts.quantity','aproducts.product_name','aproducts.image_url')
                    ->leftjoin('aproducts','aproducts.product_id','add_to_carts.product_id')
                    ->where(['add_to_carts.deleted'=>0,'add_to_carts.customer_id'=>Auth::guard('customer')->user()->customer_id])
                    ->get();
+                   $count = count($my_card);
           // dd($my_card);
           //App\AddToCart::where(['customer_id' => Auth::guard('customer')->user()->customer_id, 'deleted' => 0])->get(); ?>
+      <li class="nav-item dropdown dropdown-cart mr-25"><a class="nav-link" href="javascript:void(0);"
+          data-toggle="dropdown"><i class="ficon" data-feather="shopping-cart"></i><span
+            class="badge badge-pill badge-primary badge-up cart-item-count">{{ $count }}</span></a>
+        <ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">
+        
+          <li class="dropdown-menu-header">
+            <div class="dropdown-header d-flex">
+              <h4 class="notification-title mb-0 mr-auto">My Cart</h4>
+              <div class="badge badge-pill badge-light-primary">{{ $count }}</div>
+            </div>
+          </li>
+         
           <li class="scrollable-container media-list">
             @foreach($my_card as $row)
-            <?php $total = $total + $row->product_price; ?>
+            <?php $total = $total + $row->amount; ?>
             <div class="media align-items-center"><img class="d-block rounded mr-1" src="{{ json_decode($row->image_url)[0] }}" alt="donuts" width="62">
                 <div class="media-body"><i class="ficon cart-item-remove" data-feather="x"></i>
                     <div class="media-heading">
-                        <h6 class="cart-item-title"><a class="text-body" href="{{url('checkout')}}"> {{$row->product_name}}</a></h6><small class="cart-item-by">By Apple</small>
+                        <h6 class="cart-item-title"><a class="text-body" href="{{url('checkout')}}"> {{$row->product_name}}</a></h6><small class="cart-item-by">Rs. {{$row->product_price}}</small>
                     </div>
-                    
-                    <h5 class="cart-item-price">Rs. {{$row->product_price}}</h5>
+                    <div class="media-heading">
+                        <h6 class="cart-item-title">Qty - {{$row->quantity}}
+                    </div>
+                    <h5 class="cart-item-price">Rs. {{$row->amount}}</h5>
                 </div>
             </div>
             @endforeach

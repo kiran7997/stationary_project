@@ -70,8 +70,8 @@
                                             <td>{{ $order->name}}</td>
                                             <td>
                                                 <?php if($order->order_status == "process"){ ?>
-                                                    <a href="{{ url('generate-invoice/'.$order->order_id.'/view') }}" class="btn btn-primary " >Invoice</a>
-                                                    <a href="{{ url('generate-invoice/'.$order->order_id.'/download') }}" class="btn btn-primary " ><i data-feather='download'></i> Invoice</a>
+                                                    <a href="{{ url('generate-invoice/'.$order->order_id.'/view') }}" target="_blank" class="btn btn-primary " >Invoice</a>
+                                                    <a href="{{ url('generate-invoice/'.$order->order_id.'/download') }}" target="_blank" class="btn btn-primary " ><i data-feather='download'></i> Invoice</a>
                                                <?php } ?>
                                             </td>
                                         </tr>

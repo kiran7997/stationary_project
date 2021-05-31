@@ -128,6 +128,9 @@ Route::post('check_user_email', 'UserController@check_user_email');
 Route::post('save_order', 'OrderController@save_order');
 Route::post('get-district-list', 'ShopController@get_district');
 
+Route::get('my-order','ShopController@myOrder');
+Route::get('return-order/{id}','ShopController@returnOrder');
+Route::get('return-order-list','ShopController@returnOrderList');
 //Invoice controller
 Route::get('/listinvoice', 'InvoiceController@index');
 Route::get('/invoicepreview/{order_id}', 'InvoiceController@previewinvoice');
