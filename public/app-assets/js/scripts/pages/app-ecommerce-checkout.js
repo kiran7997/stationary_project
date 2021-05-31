@@ -12,7 +12,7 @@ $(function () {
 
   var quantityCounter = $('.quantity-counter'),
     CounterMin = 1,
-    CounterMax = 10,
+    CounterMax = 10000,
     bsStepper = document.querySelectorAll('.bs-stepper'),
     checkoutWizard = document.querySelector('.checkout-tab-steps'),
     removeItem = $('.remove-wishlist'),
@@ -77,19 +77,19 @@ $(function () {
       linear: false
     });
 
-    $(checkoutWizard)
-      .find('.btn-next')
-      .each(function () {
-        $(this).on('click', function (e) {
-          wizard.next();
-        });
-      });
+    // $(checkoutWizard)
+    //   .find('.btn-next')
+    //   .each(function () {
+    //     $(this).on('click', function (e) {
+    //       wizard.next();
+    //     });
+    //   });
 
-    $(checkoutWizard)
-      .find('.btn-prev')
-      .on('click', function () {
-        wizard.previous();
-      });
+    // $(checkoutWizard)
+    //   .find('.btn-prev')
+    //   .on('click', function () {
+    //     wizard.previous();
+    //   });
   }
 
   // checkout quantity counter
@@ -109,7 +109,7 @@ $(function () {
       .on('touchspin.on.startupspin', function () {
         var $this = $(this);
         $('.bootstrap-touchspin-down').removeClass('disabled-max-min');
-        if ($this.val() == 10) {
+        if ($this.val() == 10000) {
           $(this).siblings().find('.bootstrap-touchspin-up').addClass('disabled-max-min');
         }
       });

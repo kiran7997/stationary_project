@@ -32,7 +32,7 @@ class OrderController extends Controller
             $update_order = Orders::where('order_id', $request->order_id[0])->update($order);
             $this->store_order_items($request->order_id[0], $request);
         }
-        return redirect('customer_dash')->with('success', 'User updated successfully');
+        return 'success';
     }
 
     public function store_order_items($order_id, $request){

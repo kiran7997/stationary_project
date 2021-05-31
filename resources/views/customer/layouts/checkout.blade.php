@@ -588,7 +588,7 @@
 
         });
 
-        $('body').on('click', '.qty-div', function(){
+        $('body').on('focusout', '.qty-div', function(){
             
             var id = this.id;
             var id_new = id.split("-", 3);
@@ -621,7 +621,11 @@
                 method:"POST", //First change type to method here
                 data: $("#form_card").serialize(),
                 success:function(response) {
-                    console.log(response);
+                    if(response == "success"){
+                        Swal.fire('Success!', 'Order Saved Successfully', 'success').then(function() {
+                            window.location = "/checkout";
+                        });
+                    }
                 },
                 error:function(){
                     console.log("error");
