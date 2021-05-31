@@ -106,8 +106,11 @@
         <div class="modal-content">
             <div class="modal-header">
                 Add Suppliers
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
             </div>
-
+            
             <form id="supplierForm" name="supplierForm" method="post">
                 @csrf
                 <!-- <input type="hidden" name="inventory_id" id="inventory_id"> -->
@@ -158,6 +161,9 @@
         <div class="modal-content">
             <div class="modal-header">
                 Add Suppliers
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
             </div>
 
             <form id="supplierEditForm" name="supplierEditForm" method="post">
