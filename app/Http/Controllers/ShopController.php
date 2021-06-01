@@ -122,32 +122,35 @@ class ShopController extends Controller
 
     public function myOrder(){
         $customer_id = Auth::guard('customer')->user()->customer_id;
-        $order = DB::table('orders')
-               ->select('order_id','order_date','order_status')
-               ->where('order_status','!=','return')
-               ->where(['customer_id'=>$customer_id])
-               ->get();
-        // $order_item_data = DB::table('order_items')
-        //                 ->select('order_items.*','aproducts.image_url','orders.order_date','orders.order_id','orders.order_status')
-        //                 ->leftjoin('aproducts','aproducts.product_id','order_items.product_id')
-        //                 ->leftjoin('orders','orders.order_id','order_items.order_id')
-        //                 // ->where(['order_id'=>$id])
-        //                 ->get();
-        return view('customer.my_order',compact('order'));
+        // $order = DB::table('orders')
+        //        ->select('order_id','order_date','order_status')
+        //        ->where('order_status','!=','return')
+        //        ->where(['customer_id'=>$customer_id])
+        //        ->get();
+        $order_item_data = DB::table('order_items')
+                        ->select('order_items.*','aproducts.image_url','orders.order_date','orders.order_id','orders.arrival_date')
+                        ->leftjoin('aproducts','aproducts.product_id','order_items.product_id')
+                        ->leftjoin('orders','orders.order_id','order_items.order_id')
+                        ->where(['customer_id'=>$customer_id])
+                        ->whereNull('order_items.order_status')
+                        ->get();
+        return view('customer.my_order',compact('order_item_data'));
     }
 
     public function returnOrder($id){
-        $data_customer = DB::table('orders')->where(['order_id'=>$id])->update(['order_status' => 'return','return_date'=>date('Y-m-d')]);
+        $data_customer = DB::table('order_items')->where(['order_item_id'=>$id])->update(['order_status' => 'return','return_date'=>date('Y-m-d')]);
         return redirect('my-order');
     }
 
     public function returnOrderList(){
         $customer_id = Auth::guard('customer')->user()->customer_id;
-        $order = DB::table('orders')
-               ->select('order_id','order_date','order_status')
-               ->where(['order_status'=>'return'])
-               ->where(['customer_id'=>$customer_id])
-               ->get();
-               return view('customer.return_order',compact('order'));
+        $order_item_data = DB::table('order_items')
+                        ->select('order_items.*','aproducts.image_url','orders.order_date','orders.order_id','orders.order_status')
+                        ->leftjoin('aproducts','aproducts.product_id','order_items.product_id')
+                        ->leftjoin('orders','orders.order_id','order_items.order_id')
+                        ->where(['customer_id'=>$customer_id,'order_items.order_status'=>'return'])
+                        // ->whereNull('order_items.order_status')
+                        ->get();
+               return view('customer.return_order',compact('order_item_data'));
     }
 }
