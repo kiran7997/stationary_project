@@ -105,7 +105,11 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                Add Suppliers
+               
+                <h4 class="modal-title" id="myModalLabel33"> Add Suppliers</h4>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
             </div>
 
             <form id="supplierForm" name="supplierForm" method="post">
@@ -157,7 +161,10 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                Add Suppliers
+            <h4 class="modal-title" id="myModalLabel33"> Edit Suppliers</h4>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
             </div>
 
             <form id="supplierEditForm" name="supplierEditForm" method="post">
