@@ -44,7 +44,7 @@
                     <div class="card-header border-bottom">
                                 <h4 class="card-title"></h4>
                                 <button type="button" class="btn btn-outline-primary float-right" data-toggle="modal" data-target="#supplierPModal">
-                                    Add New Suppliers
+                                    Add New Supplier
                                 </button>
                             </div>
                        
@@ -105,8 +105,9 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                Add Suppliers
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               
+                <h4 class="modal-title" id="myModalLabel33"> Add Supplier</h4>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
             </div>
@@ -160,8 +161,8 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                Add Suppliers
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <h4 class="modal-title" id="myModalLabel33"> Edit Supplier</h4>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
             </div>
