@@ -65,6 +65,9 @@ License: You must have a valid license purchased only from themeforest(the above
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
   <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/plugins/forms/form-validation.css') }}">
 
+  <!-- Sweet Alert -->
+  <link rel="stylesheet" href="{{ asset('app-assets/vendors/css/extensions/sweetalert2.min.css') }}">
+
 </head>
 
 <body class="vertical-layout vertical-menu-modern  navbar-floating footer-static  " data-open="click"

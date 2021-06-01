@@ -33,23 +33,14 @@ class ShopController extends Controller
     {
         $cart_data = AddToCart::join('aproducts', 'aproducts.product_id', 'add_to_carts.product_id')
             ->join('customers', 'customers.customer_id', 'add_to_carts.customer_id')
-            ->select("add_to_carts.cart_id", "add_to_carts.order_id", "add_to_carts.product_id", "add_to_carts.customer_id", "add_to_carts.quantity", "add_to_carts.product_price", "add_to_carts.amount", "customers.customer_firstname", "customers.customer_lastname", "aproducts.product_name", "aproducts.image_url", "aproducts.description")
+            ->select("add_to_carts.cart_id", "add_to_carts.order_id", "add_to_carts.order_item_id", "add_to_carts.product_id", "add_to_carts.customer_id", "add_to_carts.quantity", "add_to_carts.product_price", "add_to_carts.amount", "customers.customer_firstname", "customers.customer_lastname", "aproducts.product_name", "aproducts.image_url", "aproducts.description")
             ->where(["add_to_carts.deleted" => 0, 'add_to_carts.customer_id' => Auth::guard('customer')->user()->customer_id])
             ->get();
+
         $price_details = AddToCart::where(['deleted' => 0, 'customer_id' => Auth::guard('customer')->user()->customer_id])->sum('amount');
         $states = DB::table('state')->select('state_id', 'state_title')->get();
         $days_7 = date('D M d', strtotime(Carbon::parse(Carbon::now()->addDays(7))));
 
-        //finding order item id
-        // $cart_order_item_details = DB::table('order_items')
-        //                         ->select("order_items.order_item_id", "add_to_carts.cart_id")
-        //                         ->rightjoin("add_to_carts", "add_to_carts.order_id", "order_items.order_id")
-        //                         ->get();
-        
-        // OrderItems::LeftJoin("add_to_carts", "order_items.order_id", "add_to_carts.order_id")
-        //                                     ->select("order_items.order_item_id", "add_to_carts.cart_id")
-        //                                     ->get()->toArray();
-                                            // dd($cart_order_item_details);
         return view('customer/layouts/checkout', ['cart_data' => $cart_data, 'days_7' => $days_7, 'states' => $states, 'price_details' => $price_details]);
     }
 
@@ -127,5 +118,39 @@ class ShopController extends Controller
         
         \Session::put('success', 'Payment successful, your order will be despatched in the next 48 hours.');
         return redirect()->back();
+    }
+
+    public function myOrder(){
+        $customer_id = Auth::guard('customer')->user()->customer_id;
+        // $order = DB::table('orders')
+        //        ->select('order_id','order_date','order_status')
+        //        ->where('order_status','!=','return')
+        //        ->where(['customer_id'=>$customer_id])
+        //        ->get();
+        $order_item_data = DB::table('order_items')
+                        ->select('order_items.*','aproducts.image_url','orders.order_date','orders.order_id','orders.arrival_date')
+                        ->leftjoin('aproducts','aproducts.product_id','order_items.product_id')
+                        ->leftjoin('orders','orders.order_id','order_items.order_id')
+                        ->where(['customer_id'=>$customer_id])
+                        ->whereNull('order_items.order_status')
+                        ->get();
+        return view('customer.my_order',compact('order_item_data'));
+    }
+
+    public function returnOrder($id){
+        $data_customer = DB::table('order_items')->where(['order_item_id'=>$id])->update(['order_status' => 'return','return_date'=>date('Y-m-d')]);
+        return redirect('my-order');
+    }
+
+    public function returnOrderList(){
+        $customer_id = Auth::guard('customer')->user()->customer_id;
+        $order_item_data = DB::table('order_items')
+                        ->select('order_items.*','aproducts.image_url','orders.order_date','orders.order_id','orders.order_status')
+                        ->leftjoin('aproducts','aproducts.product_id','order_items.product_id')
+                        ->leftjoin('orders','orders.order_id','order_items.order_id')
+                        ->where(['customer_id'=>$customer_id,'order_items.order_status'=>'return'])
+                        // ->whereNull('order_items.order_status')
+                        ->get();
+               return view('customer.return_order',compact('order_item_data'));
     }
 }

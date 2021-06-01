@@ -88,7 +88,7 @@
                                     @foreach($cart_data as $carts)
                                         <input type="hidden" id="cart_id_{{ $i }}" name="cart_id[]" value="{{ $carts->cart_id }}" />
                                         <input type="hidden" id="order_id_{{ $i }}" name="order_id[]" value="{{ $carts->order_id }}" />
-                                        <input type="hidden" id="order_item_id_{{ $i }}" name="order_item_id_[]" value="" />
+                                        <input type="hidden" id="order_item_id_{{ $i }}" name="order_item_id[]" value="{{ $carts->order_item_id }}" />
                                         <input type="hidden" id="product_id_{{ $i }}" name="product_id[]" value="{{ $carts->product_id }}" />
                                         <div class="card ecommerce-card">
                                             <div class="item-img">
@@ -326,7 +326,7 @@
                                             </div>
                                         </div>
                                         <div class="col-12">
-                                            <button type="button" class="btn btn-primary btn-next delivery-address">Save
+                                            <button type="button" class="btn btn-primary btn-next delivery-address" id="save-order-address">Save
                                                 And Deliver Here</button>
                                         </div>
                                     </div>
@@ -588,7 +588,7 @@
 
         });
 
-        $('body').on('click', '.qty-div', function(){
+        $('body').on('focusout', '.qty-div', function(){
             
             var id = this.id;
             var id_new = id.split("-", 3);
@@ -620,13 +620,23 @@
                 url:"/save_order",
                 method:"POST", //First change type to method here
                 data: $("#form_card").serialize(),
+                async: false,
                 success:function(response) {
-                    console.log(response);
+                    if(response == "success"){
+                        Swal.fire('Success!', 'Order Saved Successfully', 'success').then(function() {
+                            window.location = "/checkout";
+                            
+                        });
+                    }
                 },
                 error:function(){
                     console.log("error");
                 }
             });
+        });
+
+        $("#save-order-address").click(function() {
+            alert("hiiii");
         });
     });
 </script>
