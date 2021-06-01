@@ -39,22 +39,10 @@
                         <!--<div id="step-cart" class="content">-->
                             <div id="place-order" class="list-view product-checkout">
                                 <!-- Checkout Place Order Left starts -->
-                                <div class="checkout-items">
-                                    @foreach($order as $row)
-                                    <div class="card ecommerce-card">
-                                    <?php $i = 0; $order_item_data = DB::table('order_items')
-                                                    ->select('order_items.*','aproducts.image_url','orders.order_date','orders.order_id','orders.order_status')
-                                                    ->leftjoin('aproducts','aproducts.product_id','order_items.product_id')
-                                                    ->leftjoin('orders','orders.order_id','order_items.order_id')
-                                                    ->where(['order_items.order_id'=>$row->order_id])
-                                                    ->get();
-                                                    
-                                        $order_count = count($order_item_data);
-                                        // dd($order_item_data);
-                                        if(count($order_item_data)>0){
-                                    foreach($order_item_data as $data){ 
-                                        $i++;
-                                        ?>                                    
+                                <div class="checkout-items">  
+                                <?php if(count($order_item_data)>0){
+                                    foreach($order_item_data as $data){  ?>  
+                                    <div class="card ecommerce-card">          
                                         <div class="item-img">
                                             <a href="app-ecommerce-details.html">
                                                 <img src="{{$data->image_url}}" alt="img-placeholder" style="height: 110px;" />
@@ -74,6 +62,7 @@
                                                 </div>
                                             </div>
                                             <span class="delivery-date text-muted">Order Date, {{ $data->order_date }}</span>
+                                            <span class="delivery-date text-muted">Return Date, {{ $data->return_date }}</span>
                                             <!-- <span class="delivery-date text-muted">Delivery by, Wed Apr 25</span>
                                             <span class="text-success">17% off 4 offers Available</span> -->
                                         </div>
@@ -94,31 +83,12 @@
                                                     </p>
                                                 </div>
                                             </div>
-                                            <?php 
-                                            if($order_count == $i){
-                                                $expiry_date = $data->order_date;
-                                                $expiry_date = new DateTime($expiry_date);
-                                                $today = new DateTime();
-                                                $interval = $today->diff($expiry_date);
-                                                $day = $interval->format('%r%a');
-                                                // dd($day);
-                                                //if($day < 7) {
-                                                if( strtotime($data->order_date) > strtotime('-7 day') && $data->order_status != "return") {                                                        
-                                                    ?>
-                                                <a href="{{ url('return-order/'.$data->order_id)}}" class="btn btn-primary mt-1  return_order">
-                                                    <!-- <i data-feather="x" class="align-middle mr-25"></i> -->
-                                                    <span>Return</span>
-                                                </a>        
-                                            <?php         
-                                                } } 
-                                            ?>
                                             
                                         </div>
-                                    
-                                    <?php } }?>
                                     </div>
-                                    @endforeach
                                 </div>
+                                    <?php } }?>
+                                    
                                
                             </div>
                             <!-- Checkout Place order Ends -->

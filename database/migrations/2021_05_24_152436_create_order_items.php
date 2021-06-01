@@ -29,6 +29,8 @@ class CreateOrderItems extends Migration
             $table->float('total', 15, 2)->default(0);
             $table->float('amount', 5, 2)->default(0);
             $table->boolean('deleted')->default(0);
+            $table->string('order_status',50)->nullable();
+            $table->date('return_date')->nullable();
             $table->integer('created_by')->nullable();
             $table->integer('updated_by')->nullable();
             $table->timestamps();
