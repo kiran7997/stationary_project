@@ -27,8 +27,7 @@
                                 </li>
                                 <li class="breadcrumb-item"><a href="{{ url('supplier') }}">Suppliers</a>
                                 </li>
-                                <li class="breadcrumb-item active">Supplier
-                                </li>
+                                
                             </ol>
                         </div>
                     </div>
@@ -107,7 +106,7 @@
             <div class="modal-header">
                
                 <h4 class="modal-title" id="myModalLabel33"> Add Supplier</h4>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<button type="button" class="close"  onclick="myFunction()" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
             </div>
@@ -212,6 +211,10 @@
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 
 <script>
+function myFunction() {
+    
+	document.getElementById("supplierForm").reset();
+}
     $(document).ready(function() {
 
 $('#supplierForm').validate({

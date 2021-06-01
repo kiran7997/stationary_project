@@ -123,7 +123,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<h4 class="modal-title" id="myModalLabel33">Add Product</h4>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<button type="button" class="close" onclick="myFunction()" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
@@ -236,7 +236,7 @@
 	<div class="modal-dialog modal-dialog-centered" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h4 class="modal-title" id="myModalLabel33">Update Products</h4>
+				<h4 class="modal-title" id="myModalLabel33">Edit Product</h4>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
@@ -355,6 +355,10 @@
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 
 <script>
+function myFunction() {
+    
+	document.getElementById("productForm").reset();
+}
 	$(document).ready(function() {
     // $('#example').DataTable();
     $('#example').DataTable( {

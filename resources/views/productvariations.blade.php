@@ -93,7 +93,7 @@
         <div class="modal-content">
             <div class="modal-header">
             <h4 class="modal-title" id="myModalLabel33"> Add Product Variation</h4>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<button type="button" class="close" onclick="myFunction()" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
             </div>
@@ -165,6 +165,10 @@
 <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
 <script>
+function myFunction() {
+    
+    document.getElementById("ProductvForm").reset();
+}
     $(document).ready(function() {
     // $('#example').DataTable();
     $('#example').DataTable( {

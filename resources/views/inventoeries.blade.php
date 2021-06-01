@@ -27,8 +27,7 @@
 								</li>
 								<li class="breadcrumb-item"><a href="{{ url('inventories') }}">Inventory</a>
 								</li>
-								<li class="breadcrumb-item active">Inventory
-								</li>
+								
 							</ol>
 						</div>
 					</div>
@@ -109,7 +108,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<h4 class="modal-title" id="myModalLabel33">Add Inventory</h4>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<button type="button" class="close" onclick="myFunction()" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
@@ -170,7 +169,7 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Edit Inventory</h5>
+			<h4 class="modal-title" id="myModalLabel33">Edit Inventory</h4>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
@@ -232,7 +231,10 @@
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 
 <script>
-
+function myFunction() {
+    
+	document.getElementById("invenForm").reset();
+}
 	
 	$(document).ready(function() {
 

@@ -91,13 +91,10 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
    	    <div class="modal-content">
 		    <div class="modal-header">
-<<<<<<< HEAD
-                <h4 class="modal-title" id="myModalLabel33">Add Categories</h4>
-=======
                 <h4 class="modal-title" id="myModalLabel33">Add Catagory</h4>
->>>>>>> vaishnaviBranch
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<button type="button" class="close" onclick="myFunction()" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
+                    
 				</button>
             </div>
                     
@@ -182,7 +179,10 @@
     return confirm('Are you sure you want to Delete?');
 });
 } );
-
+function myFunction() {
+    
+            document.getElementById("CategoryForm").reset();
+        }
 $(document).ready(function() {
 
 $('#CategoryForm').validate({

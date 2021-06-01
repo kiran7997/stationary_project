@@ -25,8 +25,7 @@
 							</li>
 							<li class="breadcrumb-item"><a href="{{ url('stock') }}">Stock</a>
 							</li>
-							<li class="breadcrumb-item active">Stock
-							</li>
+							
 						</ol>
 					</div>
 				</div>
