@@ -221,6 +221,7 @@
                     <!-- Checkout Customer Address Starts -->
                     <div id="step-address" class="content">
                         <form id="checkout-address" class="list-view product-checkout">
+                        @csrf
                             <!-- Checkout Customer Address Left starts -->
                             <div class="card">
                                 <div class="card-header flex-column align-items-start">
@@ -235,7 +236,7 @@
                                                 <label for="checkout-name">First Name:</label>
                                                 <input type="text" id="firstname" class="form-control" name="firstname"
                                                     placeholder="John Doe"
-                                                    value="{{ Auth::guard('customer')->user()->customer_firstname }}" />
+                                                    value="{{ !empty(@$order_details->customer_firstname) ? @$order_details->customer_firstname : Auth::guard('customer')->user()->customer_firstname }}" />
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-sm-12">
@@ -266,14 +267,14 @@
                                             <div class="form-group mb-2">
                                                 <label for="checkout-apt-number">Flat, House No:</label>
                                                 <input type='text' id="house_number" class="form-control"
-                                                    name="house_number" placeholder="9447 Glen Eagles Drive" />
+                                                    name="house_number" placeholder="9447 Glen Eagles Drive" value="{{ @$order_details['house_no'] }}"/>
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-sm-12">
                                             <div class="form-group mb-2">
                                                 <label for="checkout-landmark">Landmark </label>
                                                 <input type="text" id="landmark" class="form-control" name="landmark"
-                                                    placeholder="Near Apollo Hospital" />
+                                                    placeholder="Near Apollo Hospital" value="{{ @$order_details['landmark'] }}" />
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-sm-12">
@@ -285,7 +286,7 @@
                                                     required>
                                                     <option value="">Select State</option>
                                                     @foreach($states as $state)
-                                                    <option value="{{$state->state_id}}">{{$state->state_title}}
+                                                    <option value="{{ $state->state_id }}" {{ @$order_details['state'] == $state->state_id ? "selected" : "" }}>{{$state->state_title}}
                                                     </option>
                                                     @endforeach
                                                 </select>
@@ -296,9 +297,13 @@
                                                 <label for="checkout-state">District:</label>
                                                 {{-- <input type="text" id="state" class="form-control" name="state"
                                                     placeholder="Maharashtra" /> --}}
-                                                <select class="select2 form-control w-100" name="district" id="district"
-                                                    required>
+                                                <select class="select2 form-control w-100" name="district" id="district" required>
                                                     <option value="">Select District</option>
+
+                                                    @foreach($districts as $district)
+                                                    <option value="{{ $district->districtid }}" {{ @$order_details['district'] == $district->districtid ? "selected" : "" }}>{{$district->district_title}}
+                                                    </option>
+                                                    @endforeach
                                                 </select>
                                             </div>
                                         </div>
@@ -306,22 +311,22 @@
                                             <div class="form-group mb-2">
                                                 <label for="checkout-city">Town/City:</label>
                                                 <input type="text" id="city" class="form-control" name="city"
-                                                    placeholder="Solapur" />
+                                                    placeholder="Solapur" value="{{ @$order_details['city'] }}" />
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-sm-12">
                                             <div class="form-group mb-2">
                                                 <label for="checkout-pincode">Pincode:</label>
                                                 <input type="number" id="checkout-pincode" class="form-control"
-                                                    name="pincode" placeholder="201301" />
+                                                    name="pincode" placeholder="201301" value="{{ @$order_details['pincode'] }}"/>
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-sm-12">
                                             <div class="form-group mb-2">
                                                 <label for="add-type">Address Type:</label>
                                                 <select class="form-control" id="add-type" name='address_type'>
-                                                    <option>Home</option>
-                                                    <option>Work</option>
+                                                    <option value="Home" {{ @$order_details['address_type'] == $state->state_id ? "selected" : "" }}>Home</option>
+                                                    <option value="Work" {{ @$order_details['address_type'] == $state->state_id ? "selected" : "" }}>Work</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -512,7 +517,7 @@
                 $.ajax({
                 url: "{{url('get-district-list')}}",
                 type: "POST",
-                data: {_token:'{{ csrf_token() }}',state_id:state_id},
+                data: {_token:'{{ csrf_token() }}', state_id:state_id},
                 success:function(res){
                     $('#district').append('<option value="">Select District</option>');
                     $.each(res, function(key,val) {
@@ -623,7 +628,7 @@
                 async: false,
                 success:function(response) {
                     if(response == "success"){
-                        Swal.fire('Success!', 'Order Saved Successfully', 'success').then(function() {
+                        Swal.fire('Success!', 'Information Saved Successfully', 'success').then(function() {
                             window.location = "/checkout";
                             
                         });
@@ -636,7 +641,24 @@
         });
 
         $("#save-order-address").click(function() {
-            alert("hiiii");
+            var dataString = $("#form_card, #checkout-address").serialize();
+            $.ajax({
+                url:"/save_order_address",
+                method:"POST",
+                data: dataString,
+                async: false,
+                success:function(response) {
+                    if(response == "success"){
+                        Swal.fire('Success!', 'Information Saved Successfully', 'success').then(function() {
+                            window.location = "/checkout";
+                            
+                        });
+                    }
+                },
+                error:function(){
+                    console.log("error");
+                }
+            });
         });
     });
 </script>

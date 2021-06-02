@@ -13,6 +13,7 @@ use App\AddToCart;
 class OrderController extends Controller
 {
     public function save_order(Request $request){
+        // dd($request->all());
         $order = array();
         $order['customer_id'] = Auth::guard('customer')->user()->customer_id;
         $order['order_status'] = "order";
@@ -77,5 +78,23 @@ class OrderController extends Controller
                 
             $update_order_id_in_addToCart = AddToCart::where('cart_id', $request->cart_id[$i])->update(array('order_id' => $order_id, 'order_item_id' => $order_item_id));
         }
+    }
+
+    public function save_order_address(Request $request){
+        $formdata = $request->all();
+        $address_details = array();
+        $address_details['firstname'] = $formdata['firstname'];
+        $address_details['lastname'] = $formdata['lastname'];
+        $address_details['email'] = $formdata['email'];
+        $address_details['phone_no'] = $formdata['phone_no'];
+        $address_details['house_no'] = $formdata['house_number'];
+        $address_details['landmark'] = $formdata['landmark'];
+        $address_details['state'] = $formdata['state'];
+        $address_details['district'] = $formdata['district'];
+        $address_details['city'] = $formdata['city'];
+        $address_details['zip'] = $address_details['pincode'] = $formdata['pincode'];
+        $address_details['address_type'] = $formdata['address_type'];
+        $update_order_address = Orders::where('order_id', $formdata['order_id'][0])->update($address_details);
+        return "success";
     }
 }

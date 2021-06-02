@@ -113,5 +113,5 @@ $(function () {
           $(this).siblings().find('.bootstrap-touchspin-up').addClass('disabled-max-min');
         }
       });
-  }
+  	}
 });

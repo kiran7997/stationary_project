@@ -27,7 +27,7 @@
                    ->leftjoin('aproducts','aproducts.product_id','add_to_carts.product_id')
                    ->where(['add_to_carts.deleted'=>0,'add_to_carts.customer_id'=>Auth::guard('customer')->user()->customer_id])
                    ->get();
-                  //  $count = count($my_card);
+                   $count = count($my_card);
           // dd($my_card);
           //App\AddToCart::where(['customer_id' => Auth::guard('customer')->user()->customer_id, 'deleted' => 0])->get(); ?>
       <li class="nav-item dropdown dropdown-cart mr-25"><a class="nav-link" href="javascript:void(0);"
