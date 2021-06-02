@@ -299,7 +299,6 @@
                                                     placeholder="Maharashtra" /> --}}
                                                 <select class="select2 form-control w-100" name="district" id="district" required>
                                                     <option value="">Select District</option>
-
                                                     @foreach($districts as $district)
                                                     <option value="{{ $district->districtid }}" {{ @$order_details['district'] == $district->districtid ? "selected" : "" }}>{{$district->district_title}}
                                                     </option>

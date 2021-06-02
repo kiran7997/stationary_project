@@ -33,8 +33,8 @@ class ShopController extends Controller
     {
         $cart_data = $order_details = $price_details = $states = $days_7 = $districts =array();
         $cart_data = AddToCart::join('aproducts', 'aproducts.product_id', 'add_to_carts.product_id')
-            ->join('customers', 'customers.customer_id', 'add_to_carts.customer_id')
-            ->join('orders', 'orders.order_id', 'add_to_carts.order_id')
+            ->leftjoin('customers', 'customers.customer_id', 'add_to_carts.customer_id')
+            ->leftjoin('orders', 'orders.order_id', 'add_to_carts.order_id')
             ->select("add_to_carts.cart_id", "add_to_carts.order_id", "add_to_carts.order_item_id", "add_to_carts.product_id", "add_to_carts.customer_id", "add_to_carts.quantity", "add_to_carts.product_price", "add_to_carts.amount", "customers.customer_firstname", "customers.customer_lastname", "aproducts.product_name", "aproducts.image_url", "aproducts.description", "orders.firstname", "orders.lastname", "orders.email", "orders.phone_no", "orders.address_type", "orders.house_no", "orders.landmark", "orders.pincode", "orders.city", "orders.state", "orders.district")
             ->where(["add_to_carts.deleted" => 0, 'add_to_carts.customer_id' => Auth::guard('customer')->user()->customer_id])
             ->get();
@@ -42,7 +42,7 @@ class ShopController extends Controller
         if(!empty($order_details)){
             $districts = DB::table('district')->select('districtid', 'district_title')->where('state_id', $order_details->state)->get();
         }
-        // dd($order_details);
+        // dd($cart_data);
         $price_details = AddToCart::where(['deleted' => 0, 'customer_id' => Auth::guard('customer')->user()->customer_id])->sum('amount');
         $states = DB::table('state')->select('state_id', 'state_title')->get();
         $days_7 = date('D M d', strtotime(Carbon::parse(Carbon::now()->addDays(7))));
