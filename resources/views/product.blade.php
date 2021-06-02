@@ -175,7 +175,7 @@
 					<label class="required" for="description">Product Image </label>
 					<div class="form-group">
 
-						<input type='file' class='form-control' name='image_url[]' id='image_url' accept=".jpg,.jpeg,.png" onchange="validateFileType()"multiple >
+						<input type='file' class='form-control' name='image_url[]' id='image_url' accept=".jpg,.jpeg,.png" onchange="validateFileType()"multiple required >
 
 					</div>
 					<div class="alert alert-danger alert-dismissible fade show" role="alert" id='err_img_url'
