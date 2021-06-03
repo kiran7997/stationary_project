@@ -378,7 +378,7 @@
                                         </p>
                                     </div>
                                     <div class="card-body">
-                                        <h6 class="card-holder-name my-75">John Doe</h6>
+                                        <!-- <h6 class="card-holder-name my-75">John Doe</h6> -->
                                         <h2>Pay With Razorpay</h2>
                                         <form action="{!!route('payment')!!}" method="POST" style="margine-top: 10px;">                        
                                             <script src="https://checkout.razorpay.com/v1/checkout.js"
