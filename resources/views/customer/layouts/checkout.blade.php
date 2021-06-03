@@ -479,8 +479,14 @@
                                             </li>
                                         </ul>
                                     </div>
+
+                                    <div class="col-12" style="margin-bottom: 20px;">
+                                        <button type="button" class="btn btn-primary btn-next delivery-address waves-effect waves-float waves-light" id="save-order-address">Pay From Here</button>
+                                    </div>
+
                                 </div>
                             </div>
+
                         <!-- </form> -->
                     </div>
                     <!-- Checkout Payment Ends -->
