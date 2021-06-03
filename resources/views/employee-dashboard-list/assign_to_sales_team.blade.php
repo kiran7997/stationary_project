@@ -3,12 +3,12 @@
 <!-- Responsive Datatable -->
 <!-- BEGIN: Content-->
 <!-- BEGIN: Page CSS-->
-<link rel="stylesheet" type="text/css" href="../../../app-assets/css/core/menu/menu-types/vertical-menu.css">
-<link rel="stylesheet" type="text/css" href="../../../app-assets/css/pages/app-ecommerce.css">
-<link rel="stylesheet" type="text/css" href="../../../app-assets/css/plugins/forms/pickers/form-pickadate.css">
-<link rel="stylesheet" type="text/css" href="../../../app-assets/css/plugins/forms/form-wizard.css">
-<link rel="stylesheet" type="text/css" href="../../../app-assets/css/plugins/extensions/ext-component-toastr.css">
-<link rel="stylesheet" type="text/css" href="../../../app-assets/css/plugins/forms/form-number-input.css">
+<link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/core/menu/menu-types/vertical-menu.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/pages/app-ecommerce.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/plugins/forms/pickers/form-pickadate.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/plugins/forms/form-wizard.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/plugins/extensions/ext-component-toastr.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/plugins/forms/form-number-input.css') }}">
 <!-- END: Page CSS-->
 
 <style>
@@ -41,9 +41,10 @@
                                 <div class="checkout-items">
                                     @foreach($order_item_data as $data)
                                     <div class="card ecommerce-card">
-                                        <div class="item-img">
+                                        <div class="item-img ml-1 mr-1 mb-2">
+                                        <?php $img_urls = json_decode($data->image_url); ?>
                                             <a href="app-ecommerce-details.html">
-                                                <img src="{{$data->image_url}}" alt="img-placeholder" />
+                                                <img src="{{url($img_urls[0])}}" alt="img-placeholder" />
                                             </a>
                                         </div>
                                         <div class="card-body">
@@ -195,7 +196,7 @@
                 success:function(res){
                     $('#sales_person').append('<option value="">Select Sales User</option>');
                     $.each(res, function(key,val) {
-                        $('#sales_person').append('<option value='+val.id+'>'+val.name+'</option>');
+                        $('#sales_person').append('<option value='+val.id+'>'+val.firstname + ' ' +val.lastname+'</option>');
                     });
                 }
             });

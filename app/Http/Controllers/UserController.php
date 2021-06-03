@@ -243,7 +243,7 @@ class UserController extends Controller
             return view('account_dash', compact('order_count','process_order_count'));
         } elseif ($user_role == 'Sales') { //Sales dashboard
 
-            $order_count = \App\Orders::where(['order_status' => 'order'])->count();
+            $order_count = \App\Orders::where(['order_status' => 'order', ])->count();
             return view('sales_dash', compact('order_count'));
         } elseif ($user_role == 'Logistic') { //Logistic dashboard
 
@@ -263,7 +263,7 @@ class UserController extends Controller
     {
         // $order_list = \App\Orders::where(['order_status' => 'order'])->get();
         $order_list = DB::table('orders')
-                    ->select('orders.*','users.name')
+                    ->select('orders.*','users.firstname', 'users.lastname')
                     ->leftjoin('users','users.id','=','orders.sales_person')
                     ->where(['order_status'=>'order'])
                     ->get();
@@ -338,7 +338,7 @@ class UserController extends Controller
     //Get sales users
     public function getSalesUser(Request $request)
     {
-        return DB::table('users')->select('id', 'name')->where('district', $request->district_id)->where(['role' => 2])->get();
+        return DB::table('users')->select('id', 'firstname', 'lastname')->where('district', $request->district_id)->where(['role' => 2])->get();
     }
 
     public function saveAssignSalesData(Request $request)

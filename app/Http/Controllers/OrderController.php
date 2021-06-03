@@ -101,6 +101,7 @@ class OrderController extends Controller
     public function save_payment(Request $request){
         $formdata = $request->all();
         $data = array();
+        // $data['order_status'] = "payment completed";
         $data['payment_date'] = date('Y-m-d');
         $data['payment_status'] = "yes";
         $update_order_address = Orders::where('order_id', $formdata['order_id'][0])->update($data);

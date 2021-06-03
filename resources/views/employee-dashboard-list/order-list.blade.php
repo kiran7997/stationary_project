@@ -65,11 +65,15 @@
                                             <td>{{ $order->amount }}</td>
                                             <td>
                                                 <div class="badge-wrapper mr-1">
+                                                    @if ($order->payment_status == "yes")
                                                     <div class="badge badge-pill badge-light-success">Yes</div>
+                                                    @else
+                                                    <div class="badge badge-pill badge-light-danger">No</div>
+                                                    @endif
                                                 </div>
                                             </td>
-                                            <td>{{ $order->name}}</td>
-                                            <?php if($order->sales_person == "" ){ ?>
+                                            <td>{{ $order->firstname}} {{ $order->lastname }}</td>
+                                            <?php if ($order->payment_status == "yes"){ if($order->sales_person == ""  ){ ?>
                                             <td>
                                                 <a href="{{ url('assign-to-sales-team/'.$order->order_id) }}" class="btn btn-primary " >Assign To Sales Team</a>
                                             </td>
@@ -77,7 +81,9 @@
                                             <td>
                                                 <a href="{{ url('assign-to-sales-team/'.$order->order_id) }}" class="btn btn-primary " ><i class="fa fa-edit " aria-hidden="true"></i></a>
                                             </td>
-                                            <?php } ?>
+                                            <?php } }else{ ?>
+                                                <td></td>
+                                           <?php  } ?>
                                         </tr>
                                         @endforeach
                                     </tbody>

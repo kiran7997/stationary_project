@@ -32,7 +32,7 @@
         align-items-center" href="{{url('/return-order-list')}}"><i data-feather='truck'></i><span
             class="menu-title text-truncate" data-i18n="Form Layout">Return Order</span></a>
       </li>
-      <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather="file-text"></i><span
+      <!-- <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather="file-text"></i><span
             class="menu-title text-truncate" data-i18n="Invoice">Reports</span></a>
         <ul class="menu-content">
           <li><a class="d-flex align-items-center" href="{{url('order-history')}}"><i data-feather="circle"></i><span
@@ -42,7 +42,7 @@
                 class="menu-item text-truncate" data-i18n="Preview">District Wise Order</span></a>
           </li> --}}
         </ul>
-      </li>
+      </li> -->
     </ul>
   </div>
 </div>

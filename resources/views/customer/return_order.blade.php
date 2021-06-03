@@ -87,9 +87,9 @@
                                             
                                         </div>
                                     </div>
-                                </div>
+                        
                                     <?php } }?>
-                                    
+                        </div>            
                                
                             </div>
                             <!-- Checkout Place order Ends -->
