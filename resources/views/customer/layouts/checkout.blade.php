@@ -75,7 +75,7 @@
                     </div>
                 </div>
                 <!-- Wizard ends -->
-
+                @if(count($cart_data) > 0)
                 <div class="bs-stepper-content">
                     <!-- Checkout Place order starts -->
                     <div id="step-cart" class="content">
@@ -492,6 +492,7 @@
                     <!-- Checkout Payment Ends -->
                     <!-- </div> -->
                 </div>
+                @endif
             </div>
 
         </div>
