@@ -461,7 +461,7 @@
                                     <div class="card-body">
                                         <ul class="list-unstyled price-details">
                                             <li class="price-detail">
-                                                <div class="details-title">Price of 3 items</div>
+                                                <div class="details-title">Price of {{ $total_qty }} items</div>
                                                 <div class="detail-amt">
                                                     <strong>Rs. {{ $price_details }}</strong>
                                                 </div>
