@@ -443,13 +443,13 @@
                                                 </div>
                                             </li>
                                         </ul>
-                                        <hr class="my-2" />
+                                        <!-- <hr class="my-2" />
                                         <div class="gift-card mb-25">
                                             <p class="card-text">
                                                 <i data-feather="plus-circle" class="mr-50 font-medium-5"></i>
                                                 <span class="align-middle">Add Gift Card</span>
                                             </p>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
                             </div>

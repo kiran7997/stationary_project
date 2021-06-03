@@ -46,8 +46,8 @@ class ShopController extends Controller
         $price_details = AddToCart::where(['deleted' => 0, 'customer_id' => Auth::guard('customer')->user()->customer_id])->sum('amount');
         $states = DB::table('state')->select('state_id', 'state_title')->get();
         $days_7 = date('D M d', strtotime(Carbon::parse(Carbon::now()->addDays(7))));
-
-        return view('customer/layouts/checkout', ['cart_data' => $cart_data, 'days_7' => $days_7, 'states' => $states, 'price_details' => $price_details, 'order_details' => $order_details, 'districts' => $districts]);
+        $total_qty = AddToCart::where(['customer_id' => Auth::guard('customer')->user()->customer_id, 'deleted' => 0])->sum('quantity');
+        return view('customer/layouts/checkout', ['cart_data' => $cart_data, 'days_7' => $days_7, 'states' => $states, 'price_details' => $price_details, 'order_details' => $order_details, 'districts' => $districts, 'total_qty' => $total_qty]);
     }
 
     public function InsertIntoCart(Request $request)
