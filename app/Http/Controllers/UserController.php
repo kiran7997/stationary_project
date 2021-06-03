@@ -242,16 +242,16 @@ class UserController extends Controller
             $process_order_count = \App\Orders::where(['order_status' => 'process'])->count();
             return view('account_dash', compact('order_count','process_order_count'));
         } elseif ($user_role == 'Sales') { //Sales dashboard
-
-            $order_count = \App\Orders::where(['order_status' => 'order', ])->count();
+            $user_id = Auth::user()->id;
+            $order_count = \App\Orders::where(['order_status' => 'payment_completed', 'sales_person'=>$user_id])->count();
             return view('sales_dash', compact('order_count'));
         } elseif ($user_role == 'Logistic') { //Logistic dashboard
 
             $order_count = \App\Orders::where(['order_status' => 'order'])->count();
             return view('logistic_dash', compact('order_count'));
         } elseif ($user_role == 'Manufacturing') { //Manufacturing dashboard
-
-            $order_count = \App\Orders::where(['order_status' => 'order'])->count();
+            // dd();
+            $order_count = \App\Orders::where(['order_status' => 'payment_completed','manufacturing_notification'=>1])->count();
             return view('manufactur_dash', compact('order_count'));
         } else {
             $order_count = \App\Orders::where(['order_status' => 'order'])->count();
@@ -344,7 +344,7 @@ class UserController extends Controller
     public function saveAssignSalesData(Request $request)
     {
         $requestData = $request->all();
-        $data_customer = DB::table('orders')->where(['order_id'=>$requestData['order_id']])->update(['sales_person' => $requestData['sales_person']]);
+        $data_customer = DB::table('orders')->where(['order_id'=>$requestData['order_id']])->update(['sales_person' => $requestData['sales_person'],'order_status'=>'payment_completed']);
         $notification['order_id'] = $requestData['order_id'];
         $notification['user_id'] = $requestData['sales_person'];
         $notification['role_id'] = 2;
@@ -361,7 +361,7 @@ class UserController extends Controller
         $order_list = DB::table('notifications')
                     ->select('notifications.order_id','orders.*')
                     ->leftjoin('orders','orders.order_id','notifications.order_id')
-                    ->where(['notifications.user_id'=>$user_id,'is_read'=>0,'order_status' => 'order'])
+                    ->where(['notifications.user_id'=>$user_id,'is_read'=>0,'order_status' => 'payment_completed'])
                     ->get();
         return view('employee-dashboard-list.sales-order-list',compact('order_list'));   
     }
@@ -405,7 +405,7 @@ class UserController extends Controller
         $order_list = DB::table('notifications')
                     ->select('notifications.order_id','orders.*')
                     ->leftjoin('orders','orders.order_id','notifications.order_id')
-                    ->where(['notifications.user_id'=>$user_id,'is_read'=>0])
+                    ->where(['notifications.user_id'=>$user_id,'is_read'=>0,'order_status' => 'payment_completed','manufacturing_notification'=>1])
                     ->get();
         return view('employee-dashboard-list.manufacturing-order-list',compact('order_list'));
     }
