@@ -231,7 +231,8 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col-md-6 col-sm-12">
+                                        <div class="col-md-6 col-sm-12">qty-change
+qty-change
                                             <div class="form-group mb-2">
                                                 <label for="checkout-name">First Name:</label>
                                                 <input type="text" id="firstname" class="form-control" name="firstname"
@@ -345,7 +346,7 @@
                                         <h4 class="card-title"><span
                                                 id='add_firstname'>{{ Auth::guard('customer')->user()->customer_firstname }}</span>&nbsp;
                                             <span
-                                                id='add_lastname'>{{ Auth::guard('customer')->user()->customer_lastname }}</span>
+                                                id='add_lastname'>{{ Auth::guard('customer')->user()->customer_lastname }}admin-login</span>
                                         </h4>
                                     </div>
                                     <div class="card-body actions">
@@ -592,7 +593,7 @@
 
         });
 
-        $('body').on('focusout', '.qty-div', function(){
+        $('body').on('click', '.qty-div', function(){
             
             var id = this.id;
             var id_new = id.split("-", 3);
