@@ -25,7 +25,7 @@ class ShopController extends Controller
     {
         $product_data = $add_to_cart = array();
         $product_data = Aproducts::find($product_id);
-        $add_to_cart = AddToCart::select('cart_id')->where(['product_id' => $product_id, 'customer_id' => Auth::guard('customer')->user()->customer_id])->first();
+        $add_to_cart = AddToCart::select('cart_id')->where(['product_id' => $product_id, 'customer_id' => Auth::guard('customer')->user()->customer_id, 'deleted' => 0])->first();
         return view('customer/layouts/details', ['product_data' => $product_data, 'add_to_cart_data' => $add_to_cart]);
     }
 
@@ -138,6 +138,7 @@ class ShopController extends Controller
                         ->leftjoin('aproducts','aproducts.product_id','order_items.product_id')
                         ->leftjoin('orders','orders.order_id','order_items.order_id')
                         ->where(['customer_id'=>$customer_id])
+                        ->where('orders.payment_status', "yes")
                         ->whereNull('order_items.order_status')
                         ->get();
         return view('customer.my_order',compact('order_item_data'));

@@ -481,7 +481,7 @@
                                     </div>
 
                                     <div class="col-12" style="margin-bottom: 20px;">
-                                        <button type="button" class="btn btn-primary btn-next delivery-address waves-effect waves-float waves-light" id="save-order-address">Pay From Here</button>
+                                        <button type="button" class="btn btn-primary btn-next waves-effect waves-float waves-light" id="save-order-payment">Pay From Here</button>
                                     </div>
 
                                 </div>
@@ -654,6 +654,26 @@
                         Swal.fire('Success!', 'Information Saved Successfully', 'success').then(function() {
                             window.location = "/checkout";
                             
+                        });
+                    }
+                },
+                error:function(){
+                    console.log("error");
+                }
+            });
+        });
+
+        $("#save-order-payment").click(function() {
+            var dataString = $("#form_card, #checkout-address").serialize();
+            $.ajax({
+                url:"/save_order_payment",
+                method:"POST",
+                data: dataString,
+                async: false,
+                success:function(response) {
+                    if(response == "success"){
+                        Swal.fire('Success!', 'Information Saved Successfully', 'success').then(function() {
+                            window.location = "/checkout";
                         });
                     }
                 },

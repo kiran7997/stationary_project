@@ -124,6 +124,7 @@ Route::post('check_customer_email', 'CustomerController@check_customer_email');
 Route::post('check_user_email', 'UserController@check_user_email');
 Route::post('save_order', 'OrderController@save_order');
 Route::post('save_order_address', 'OrderController@save_order_address');
+Route::post('save_order_payment', 'OrderController@save_payment');
 Route::post('get-district-list', 'ShopController@get_district');
 
 Route::get('my-order','ShopController@myOrder');

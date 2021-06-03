@@ -97,4 +97,16 @@ class OrderController extends Controller
         $update_order_address = Orders::where('order_id', $formdata['order_id'][0])->update($address_details);
         return "success";
     }
+
+    public function save_payment(Request $request){
+        $formdata = $request->all();
+        $data = array();
+        $data['payment_date'] = date('Y-m-d');
+        $data['payment_status'] = "yes";
+        $update_order_address = Orders::where('order_id', $formdata['order_id'][0])->update($data);
+        $data1= array();
+        $data1['deleted'] = 1;
+        $update_add_to_Cart = AddToCart::where('order_id', $formdata['order_id'][0])->update($data1);
+        return "success";
+    }
 }
