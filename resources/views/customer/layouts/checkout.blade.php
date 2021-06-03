@@ -196,7 +196,14 @@
                                                     <a href="javascript:void(0)"
                                                         class="detail-amt text-primary">Details</a>
                                                 </li> -->
-                                                <li class="price-detail">
+                                                <li class="pr<div class="col-md-6 col-sm-12">
+                                            <div class="form-group mb-2">
+                                                <label for="checkout-name">First Name:</label>
+                                                <input type="text" id="firstname" class="form-control" name="firstname"
+                                                    placeholder="John Doe"
+                                                    value="{{ !empty(@$order_details->customer_firstname) ? @$order_details->customer_firstname : Auth::guard('customer')->user()->customer_firstname }}" />
+                                            </div>
+                                        </div>ice-detail">
                                                     <div class="detail-title">Delivery Charges</div>
                                                     <div class="detail-amt discount-amt text-success">Free</div>
                                                 </li>
