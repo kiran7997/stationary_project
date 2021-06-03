@@ -93,14 +93,14 @@
                                         <div class="card ecommerce-card">
                                             <div class="item-img">
                                                 <?php $img_urls = json_decode($carts->image_url); ?>
-                                                <a href="app-ecommerce-details.html">
+                                                <a href="">
                                                     <img src="{{ $img_urls[0] }}" class="m-1"
                                                         alt="img-placeholder" style="height: 110px;" />
                                                 </a>
                                             </div>
                                             <div class="card-body">
                                                 <div class="item-name">
-                                                    <h6 class="mb-0"><a href="app-ecommerce-details.html"
+                                                    <h6 class="mb-0"><a href=""
                                                             class="text-body">{{ $carts->product_name }}</a></h6>
                                                     <!-- <span class="item-company">By <a href="javascript:void(0)"
                                                             class="company-name">Apple</a></span> -->
@@ -368,7 +368,7 @@
                     <!-- Checkout Customer Address Ends -->
 
                     <!-- Checkout Payment Starts -->
-                    <div id="step-payment" class="content">
+                    <div id="step-payment" class="content" style="margin-top: 2rem;">
                         <!-- <form id="checkout-payment" class="list-view product-checkout" onsubmit="return false;"> -->
                             <div class="payment-type">
                                 <div class="card">
@@ -380,7 +380,7 @@
                                     <div class="card-body">
                                         <h6 class="card-holder-name my-75">John Doe</h6>
                                         <h2>Pay With Razorpay</h2>
-                                        <form action="{!!route('payment')!!}" method="POST" >                        
+                                        <form action="{!!route('payment')!!}" method="POST" style="margine-top: 10px;">                        
                                             <script src="https://checkout.razorpay.com/v1/checkout.js"
                                                     data-key="{{ env('RAZOR_KEY') }}"
                                                     data-amount="100"
@@ -417,24 +417,21 @@
                                                 <div class="custom-control custom-radio">
                                                     <input type="radio" id="customColorRadio2" name="paymentOptions"
                                                         class="custom-control-input" />
-                                                    <label class="custom-control-label" for="customColorRadio2"> Credit
-                                                        / Debit / ATM Card </label>
+                                                    <label class="custom-control-label" for="customColorRadio2"> Razorpay </label>
                                                 </div>
                                             </li>
                                             <li class="py-50">
                                                 <div class="custom-control custom-radio">
                                                     <input type="radio" id="customColorRadio3" name="paymentOptions"
                                                         class="custom-control-inpparseFloatut" />
-                                                    <label class="custom-control-label" for="customColorRadio3"> Net
-                                                        Banking </label>
+                                                    <label class="custom-control-label" for="customColorRadio3"> Paytm </label>
                                                 </div>
                                             </li>
                                             <li class="py-50">
                                                 <div class="custom-control custom-radio">
                                                     <input type="radio" id="customColorRadio4" name="paymentOptions"
                                                         class="custom-control-input" />
-                                                    <label class="custom-control-label" for="customColorRadio4"> EMI
-                                                        (Easy Installment) </label>
+                                                    <label class="custom-control-label" for="customColorRadio4"> Bill Desk </label>
                                                 </div>
                                             </li>
                                             <li class="py-50">
@@ -466,7 +463,7 @@
                                             <li class="price-detail">
                                                 <div class="details-title">Price of 3 items</div>
                                                 <div class="detail-amt">
-                                                    <strong>$699.30</strong>
+                                                    <strong>Rs. {{ $price_details }}</strong>
                                                 </div>
                                             </li>
                                             <li class="price-detail">
@@ -478,7 +475,7 @@
                                         <ul class="list-unstyled price-details">
                                             <li class="price-detail">
                                                 <div class="details-title">Amount Payable</div>
-                                                <div class="detail-amt font-weight-bolder">$699.30</div>
+                                                <div class="detail-amt font-weight-bolder">Rs. {{ $price_details }}</div>
                                             </li>
                                         </ul>
                                     </div>
