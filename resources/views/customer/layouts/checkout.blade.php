@@ -231,8 +231,7 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col-md-6 col-sm-12">qty-change
-qty-change
+                                        <div class="col-md-6 col-sm-12">
                                             <div class="form-group mb-2">
                                                 <label for="checkout-name">First Name:</label>
                                                 <input type="text" id="firstname" class="form-control" name="firstname"
@@ -346,7 +345,7 @@ qty-change
                                         <h4 class="card-title"><span
                                                 id='add_firstname'>{{ Auth::guard('customer')->user()->customer_firstname }}</span>&nbsp;
                                             <span
-                                                id='add_lastname'>{{ Auth::guard('customer')->user()->customer_lastname }}admin-login</span>
+                                                id='add_lastname'>{{ Auth::guard('customer')->user()->customer_lastname }}</span>
                                         </h4>
                                     </div>
                                     <div class="card-body actions">
