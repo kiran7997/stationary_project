@@ -4,12 +4,12 @@
 <!-- Responsive Datatable -->
 <!-- BEGIN: Content-->
 <!-- BEGIN: Page CSS-->
-<link rel="stylesheet" type="text/css" href="../../../app-assets/css/core/menu/menu-types/vertical-menu.css">
-<link rel="stylesheet" type="text/css" href="../../../app-assets/css/pages/app-ecommerce.css">
-<link rel="stylesheet" type="text/css" href="../../../app-assets/css/plugins/forms/pickers/form-pickadate.css">
-<link rel="stylesheet" type="text/css" href="../../../app-assets/css/plugins/forms/form-wizard.css">
-<link rel="stylesheet" type="text/css" href="../../../app-assets/css/plugins/extensions/ext-component-toastr.css">
-<link rel="stylesheet" type="text/css" href="../../../app-assets/css/plugins/forms/form-number-input.css">
+<link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/core/menu/menu-types/vertical-menu.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/pages/app-ecommerce.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/plugins/forms/pickers/form-pickadate.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/plugins/forms/form-wizard.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/plugins/extensions/ext-component-toastr.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/plugins/forms/form-number-input.css') }}">
 <!-- END: Page CSS-->
 
 <style>
@@ -43,9 +43,10 @@
                                 <?php if(count($order_item_data)>0){
                                     foreach($order_item_data as $data){  ?>  
                                     <div class="card ecommerce-card">          
-                                        <div class="item-img">
+                                        <div class="item-img ml-1 mr-1">
+                                            <?php $img_urls = json_decode($data->image_url); ?>
                                             <a href="app-ecommerce-details.html">
-                                                <img src="{{$data->image_url}}" alt="img-placeholder" style="height: 110px;" />
+                                                <img src="{{ $img_urls[0] }}" alt="img-placeholder" style="height: 110px;" />
                                             </a>
                                         </div>
                                         <div class="card-body">
