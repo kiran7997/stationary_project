@@ -94,6 +94,7 @@ class UserController extends Controller
         $role = $request->input('roles')[0];
         $rol_id = DB::table("roles")->where('name', $role)->first()->id;
         $input['role'] = $rol_id;
+        $input['department'] = $rol_id;
         $user = User::create($input);
         $user->assignRole($request->input('roles'));
 
@@ -185,6 +186,7 @@ class UserController extends Controller
         $role = $request->input('roles')[0];
         $rol_id = DB::table("roles")->where('name', $role)->first()->id;
         $input['role'] = $rol_id;
+        $input['department'] = $rol_id;
         $user->update($input);
         DB::table('model_has_roles')->where('model_id', $id)->delete();
 
@@ -385,11 +387,11 @@ class UserController extends Controller
     }
 
     public function sendNotification($id){
-        $users = \App\User::select('id')->where(['role'=>4])->get();
+        $users = \App\User::select('id')->where(['role'=>3])->get();
         foreach($users as $row){
             $notification['order_id'] = $id;
             $notification['user_id'] = $row['id'];
-            $notification['role_id'] = 4;
+            $notification['role_id'] = 3;
             $notification['notification_type'] = 'Manufacturing';
             $notification['notification_date'] = date('Y-m-d');
             \App\Notification::create($notification);
@@ -401,6 +403,7 @@ class UserController extends Controller
     }
 
     public function getManufacturingOrder(){
+        
         $user_id = Auth::user()->id;
         $order_list = DB::table('notifications')
                     ->select('notifications.order_id','orders.*')
