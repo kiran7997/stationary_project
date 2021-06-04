@@ -38,6 +38,8 @@ class OrderController extends Controller
 
     public function store_order_items($order_id, $request){
         $i = 0;
+        $amount = 0.00;
+        $update_order_amount = array();
         for($i = 0; $i < sizeof($request->cart_id); $i++){
             $order_item_data = array();
             $order_item_data['product_id'] = $request->product_id[$i];
@@ -66,6 +68,8 @@ class OrderController extends Controller
             $order_item_data['created_by'] = Auth::guard('customer')->user()->customer_id;
             $order_item_data['updated_by'] = Auth::guard('customer')->user()->customer_id;
             
+            $amount = $amount + $order_item_data['amount'];
+
             if(!empty($request->order_item_id[$i])){
                 $order_item_data['order_id'] = $request->order_id[$i];
                 $save_item_data = OrderItems::where('order_item_id', $request->order_item_id[$i])->update($order_item_data);
@@ -75,9 +79,10 @@ class OrderController extends Controller
                 $save_item_data = OrderItems::create($order_item_data);
                 $order_item_id = $save_item_data->order_item_id;
             }
-                
             $update_order_id_in_addToCart = AddToCart::where('cart_id', $request->cart_id[$i])->update(array('order_id' => $order_id, 'order_item_id' => $order_item_id));
         }
+        $update_order_amount['amount'] = $amount;
+        $update_order_amount = Orders::where('order_id', $order_id)->update($update_order_amount);
     }
 
     public function save_order_address(Request $request){

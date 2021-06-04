@@ -131,8 +131,8 @@
 
                     <label class="required" for="supplier_contact">Supplier Contact </label>
                     <div class="form-group">
-                        <input type="number" name="supplier_contact" id="supplier_contact" class="form-control" required
-                            minlength="10" maxlength="10">
+                        <input type="number" name="supplier_contact" id="supplier_contact" class="form-control"
+                            minlength="10" maxlength="10" onKeyPress="if(this.value.length==10) return false;" required>
 
                     </div>
 
@@ -187,7 +187,7 @@
                     <label class="required" for="supplier_contact">Supplier Contact </label>
                     <div class="form-group">
                         <input type="number" name="supplier_contact" id="supplier_contact2" class="form-control"
-                            required minlength="10" maxlength="10">
+                        minlength="10" maxlength="10" onKeyPress="if(this.value.length==10) return false;" required>
 
                     </div>
 

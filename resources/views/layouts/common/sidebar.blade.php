@@ -26,15 +26,16 @@
                                     class="badge badge-light-warning badge-pill ml-auto mr-1"></span></a>
                   </li>
                   @endcan
-                  @can('employee-dashboard')
-                  <li class=" nav-item @if(Request::is('employee-dashboard')) active @endif"><a
-                              class="d-flex align-items-center active" href="{{ url('/employee-dashboard') }}"><i
-                                    data-feather="home"></i><span class="menu-title text-truncate"
-                                    data-i18n="Dashboards">Dashboards</span><span
-                                    class="badge badge-light-warning badge-pill ml-auto mr-1"></span></a>
-                  </li>
-                  @endcan
-
+                  <!-- @if(Auth::user()->id != 1) -->
+					@can('employee-dashboard')
+					<li class=" nav-item @if(Request::is('employee-dashboard')) active @endif"><a
+								class="d-flex align-items-center active" href="{{ url('/employee-dashboard') }}"><i
+										data-feather="home"></i><span class="menu-title text-truncate"
+										data-i18n="Dashboards">Dashboards</span><span
+										class="badge badge-light-warning badge-pill ml-auto mr-1"></span></a>
+					</li>
+					@endcan
+                  <!-- @endif -->
                   @canany(['role-list',
                   'catagories','units','product_variation','product','inventories','stock','supplier'])
                   <li
@@ -128,7 +129,7 @@
                   <li class=" nav-item @if(Request::is('listinvoice')) active @endif"><a
                               class="d-flex align-items-center active" href="{{ url('/listinvoice') }}"><i
                                     data-feather="user"></i><span class="menu-title text-truncate"
-                                    data-i18n="Dashboards">Invoice</span><span
+                                    data-i18n="Invoice">Invoice</span><span
                                     class="badge badge-light-warning badge-pill ml-auto mr-1"></span></a>
                   </li>
                   @endcan
