@@ -1,9 +1,9 @@
 @extends('layouts.app')
 @section('content')
 <!-- BEGIN: Page CSS-->
-<link rel="stylesheet" type="text/css" href="../../../app-assets/css/core/menu/menu-types/vertical-menu.css">
-<link rel="stylesheet" type="text/css" href="../../../app-assets/css/plugins/forms/pickers/form-flat-pickr.css">
-<link rel="stylesheet" type="text/css" href="../../../app-assets/css/pages/app-invoice.css">
+<link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/core/menu/menu-types/vertical-menu.css ') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/plugins/forms/pickers/form-flat-pickr.css ') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/pages/app-invoice.css ') }}">
 <!-- END: Page CSS-->
 <!-- BEGIN: Content-->
 <div class="app-content content ">
