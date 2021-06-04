@@ -149,7 +149,7 @@
 
                     <div class="form-group">
                         <label for="Transport">Add on Price</label>
-                        <input type="number" class="form-control" id="add_on_price1" name="add_on_price">
+                        <input type="number" class="form-control" id="add_on_price1" name="add_on_price" onchange="roundIt(this);" required>
                     </div>
                 </div>
                 <div class="modal-footer">
