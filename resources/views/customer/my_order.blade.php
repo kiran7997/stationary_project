@@ -58,7 +58,7 @@
                                         <div class="item-img ml-1 mr-1">
                                             <?php $img_urls = json_decode($data->image_url); ?>
                                             <a href="app-ecommerce-details.html">
-                                                <img src="{{ $img_urls[0] }}" alt="img-placeholder" style="height: 110px;" />
+                                                <img src="{{ @$img_urls[0] }}" alt="img-placeholder" style="height: 110px;" />
                                             </a>
                                         </div>
                                         <div class="card-body">

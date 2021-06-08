@@ -94,7 +94,7 @@
                                             <div class="item-img">
                                                 <?php $img_urls = json_decode($carts->image_url); ?>
                                                 <a href="">
-                                                    <img src="{{ $img_urls[0] }}" class="m-1"
+                                                    <img src="{{ @$img_urls[0] }}" class="m-1"
                                                         alt="img-placeholder" style="height: 110px;" />
                                                 </a>
                                             </div>

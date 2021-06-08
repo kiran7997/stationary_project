@@ -73,12 +73,14 @@
                                                     <a href="{{ url('generate-invoice/'.$order->order_id.'/view') }}" target="_blank" class="btn btn-primary " >Invoice</a>
                                                     <a href="{{ url('generate-invoice/'.$order->order_id.'/download') }}" target="_blank" class="btn btn-primary " ><i data-feather='download'></i> Invoice</a>
                                                <?php } ?>
+                                               <?php $dept = Auth::user()->department; if($order->manufacturing_notification == 0 && $dept == "Logistic"){  ?>
+                                                <a href="{{ url('send-manufacturing-notification/'.$order->order_id) }}" class="btn btn-primary " ><i data-feather='navigation'></i></a>
+                                                <?php } ?>
                                             </td>
                                         </tr>
                                         @endforeach
                                     </tbody>
                                     </table>
-
                             </div>
                         </div>
                     </div>

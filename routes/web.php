@@ -153,3 +153,4 @@ Route::post('update-order-status','UserController@updateOrderStatus');
 Route::get('generate-invoice/{id}/{id1}','UserController@GenerateInvoiceData');
 //Razorpay payment
 Route::post('razorpaypayment', 'ShopController@payment')->name('payment');
+Route::get('notification_read/{id}','UserController@notificationRead');

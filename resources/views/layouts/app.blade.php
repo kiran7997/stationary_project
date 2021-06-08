@@ -76,6 +76,39 @@ License: You must have a valid license purchased only from themeforest(the above
   @include('layouts/common/sidebar')
   @yield('content')
   @include('layouts/common/footer')
+  <script>
+  $(".media").on("click",function(){
+    var id = $(this).attr('id');
+    $.ajax({
+                url:"notification_read/"+id,
+                method:"get",
+                success:function(response) {
+                    if(response == "success"){
+                       location.reload();
+                    }
+                },
+                error:function(){
+                    console.log("error");
+                }
+            });
+  }) 
+
+  $("#read_all").on("click",function(){
+    var id = 'All';
+    $.ajax({
+                url:"notification_read/"+id,
+                method:"get",
+                success:function(response) {
+                    if(response == "success"){
+                       location.reload();
+                    }
+                },
+                error:function(){
+                    console.log("error");
+                }
+            });
+  })
+  </script>
 </body>
 <!-- END: Body-->
 

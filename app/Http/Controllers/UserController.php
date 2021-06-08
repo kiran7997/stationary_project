@@ -248,8 +248,11 @@ class UserController extends Controller
             $order_count = \App\Orders::where(['order_status' => 'payment_completed', 'sales_person'=>$user_id])->count();
             return view('sales_dash', compact('order_count'));
         } elseif ($user_role == 'Logistic') { //Logistic dashboard
-
-            $order_count = \App\Orders::where(['order_status' => 'order'])->count();
+            $user_id = Auth::user()->id;
+            $order_count = DB::table('notifications')
+                         ->select('notifications.*','orders.order_id')
+                         ->leftjoin('orders','orders.order_id','notifications.order_id')
+                         ->where(['user_id'=>$user_id,'orders.order_status'=>'process','is_read'=>0])->count();
             return view('logistic_dash', compact('order_count'));
         } elseif ($user_role == 'Manufacturing') { //Manufacturing dashboard
             // dd();
@@ -269,6 +272,7 @@ class UserController extends Controller
                     ->leftjoin('users','users.id','=','orders.sales_person')
                     ->where(['order_status'=>'order'])
                     ->get();
+        // \App\Notification::where(['user_id'=>$requestData['order_id']])->update(['sales_person' => $requestData['sales_person'],'order_status'=>'payment_completed']);
         return view('employee-dashboard-list.order-list', compact('order_list'));
     }
 
@@ -346,7 +350,9 @@ class UserController extends Controller
     public function saveAssignSalesData(Request $request)
     {
         $requestData = $request->all();
+        $id = Auth::user()->id;
         $data_customer = DB::table('orders')->where(['order_id'=>$requestData['order_id']])->update(['sales_person' => $requestData['sales_person'],'order_status'=>'payment_completed']);
+        \App\Notification::where(['user_id'=>$id])->update(['is_read' => 1]);
         $notification['order_id'] = $requestData['order_id'];
         $notification['user_id'] = $requestData['sales_person'];
         $notification['role_id'] = 2;
@@ -378,6 +384,22 @@ class UserController extends Controller
                             ->select('order_items.*','aproducts.image_url')
                             ->leftjoin('aproducts','aproducts.product_id','order_items.product_id')
                             ->where(['order_id'=>$id])->get();
+        if($order_list->order_status == "payment_completed"){
+            $data_customer = DB::table('orders')->where(['order_id'=>$id])->update(['order_status' => 'process']);
+            $users = \App\User::select('id')->where(['department'=>'Account'])->get();
+            $user_id = Auth::user()->id;
+            \App\Notification::where(['user_id'=>$user_id])->update(['is_read' => 1]);
+            //notification to account and sales 
+            foreach($users as $row){            
+                $notification['order_id'] = $id;
+                $notification['user_id'] = $row['id'];
+                $notification['role_id'] = 3;
+                $notification['notification_type'] = 'Account_PO';
+                $notification['notification_date'] = date('Y-m-d');
+                \App\Notification::create($notification);
+            }
+        } 
+
         if($id1 == "view"){            
             return view('employee-dashboard-list.po_data',compact('order_list','order_item_data','id'));
         }else{
@@ -398,7 +420,7 @@ class UserController extends Controller
         }
 
         $data_customer = DB::table('orders')->where(['order_id'=>$id])->update(['manufacturing_notification' => 1]);
-        return redirect('sales-assign-data');
+        return redirect('process-order-list');
         
     }
 
@@ -453,12 +475,40 @@ class UserController extends Controller
                             ->select('order_items.*','aproducts.image_url')
                             ->leftjoin('aproducts','aproducts.product_id','order_items.product_id')
                             ->where(['order_id'=>$id])->get();
+
+        if($order_list->invoice_status == 0){
+            $users = \App\User::select('id')->where(['department'=>'Logistic'])->get();
+            $user_id = Auth::user()->id;
+            \App\Notification::where(['user_id'=>$user_id])->update(['is_read' => 1]);
+            \App\Orders::where(['order_id'=>$id])->update(['invoice_status' => 1]);
+            //notification to account and sales 
+            foreach($users as $row){            
+                $notification['order_id'] = $id;
+                $notification['user_id'] = $row['id'];
+                $notification['role_id'] = 3;
+                $notification['notification_type'] = 'Logistic';
+                $notification['notification_date'] = date('Y-m-d');
+                \App\Notification::create($notification);
+            }
+        } 
+
         if($id1 == "view"){            
             return view('employee-dashboard-list.invoice_data',compact('order_list','order_item_data','id'));
         }else{
             $pdf = PDF::loadView("employee-dashboard-list.download_invoice_data",compact('order_list','order_item_data'));  
             return $pdf->stream('PO.pdf',array("Attachment" => false)); 
         }
+    }
+
+    public function notificationRead($id){
+        if($id == 'All'){
+            $user_id = Auth::user()->id;
+            \App\Notification::where(['user_id'=>$user_id])->update(['is_read' => 1]);
+        }else{
+            \App\Notification::where(['id'=>$id])->update(['is_read' => 1]);
+        }
+        
+        echo "success"; 
     }
     
 }
