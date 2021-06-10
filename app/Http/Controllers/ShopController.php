@@ -164,9 +164,10 @@ class ShopController extends Controller
 
     public function remove_cart(Request $request){
         $final_amount = 0.00;
+        $remove_cart = array();
         $remove_cart = AddToCart::where('cart_id', $request->cart_id)->update(array('deleted' => 1));
         if(!empty($request->order_item_id)){
-            $order_item_total_amount = OrderItems::select('order_id', 'amount')->where('order_item_id', $request->order_item_id);
+            $order_item_total_amount = OrderItems::select('order_id', 'amount')->where('order_item_id', $request->order_item_id)->first();
             if(!empty($order_item_total_amount)){
                 $order_total_amount = Orders::select('amount')->where('order_id', $order_item_total_amount->order_id)->first();
                 $final_amount = $order_total_amount->amount - $order_item_total_amount->amount;
