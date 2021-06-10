@@ -106,6 +106,7 @@ class OrderController extends Controller
     public function save_payment(Request $request){
         $formdata = $request->all();
         $data = array();
+        // dd($formdata);
         // $data['order_status'] = "payment completed";
         $data['payment_date'] = date('Y-m-d');
         $data['payment_status'] = "yes";
@@ -113,6 +114,16 @@ class OrderController extends Controller
         $data1= array();
         $data1['deleted'] = 1;
         $update_add_to_Cart = AddToCart::where('order_id', $formdata['order_id'][0])->update($data1);
+        $users = \App\User::select('id')->where(['department'=>'Account'])->get();
+        //notification to account and sales 
+        foreach($users as $row){            
+            $notification['order_id'] = $formdata['order_id'][0];
+            $notification['user_id'] = $row['id'];
+            $notification['role_id'] = 3;
+            $notification['notification_type'] = 'Account';
+            $notification['notification_date'] = date('Y-m-d');
+            \App\Notification::create($notification);
+        }
         return "success";
     }
 }

@@ -18,12 +18,12 @@
         <label class="form-label" for="register-username">Phone Number</label>
         <input class="form-control" id="customer_phone" type="number" name="customer_phone" placeholder="8955658555"
             aria-describedby="register-username" autofocus="" tabindex="1"
-            onKeyPress="if(this.value.length==10) return false;" required />
+            minlength="10" maxlength="10" onKeyPress="if(this.value.length==10) return false;" required />
     </div>
     <div class="form-group">
         <label class="form-label" for="register-email">Email</label>
         <input class="form-control" id="email" type="email" name="email" placeholder="john@example.com"
-            aria-describedby="register-email" tabindex="2" required />
+            aria-describedby="register-email" tabindex="2" onfocusout='IsEmail(this.value)' required />
         <div class="alert alert-danger alert-dismissible fade show mt-1" role="alert" id='err_email'
             style='display:none'>
             <div class="alert-body">
@@ -54,6 +54,7 @@
 @endsection
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
+
     $(document).ready(function() {
    $("#form").validate();
 
@@ -76,4 +77,17 @@
             });
         })
 });
+function IsEmail(email) {
+    
+    var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    if(!regex.test(email)) {
+      // return false;
+      $("#err_email").html("Invalid Email ");
+     //$("#email").val('');
+      $("#email").focus();
+    }else{
+      // return true;
+      $("#err_email").empty();
+    }
+  }
 </script>

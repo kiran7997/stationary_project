@@ -33,7 +33,7 @@
             <div class="card ecommerce-card">
                 <div class="item-img text-center m-1" style=" margin: auto;display: block;">
                     <a href="details/{{$data->product_id}}">
-                        <img src="{{ $list_img[0] }}" class="img-fluid" alt="img-placeholder" style="width: 250px; height: 200px;" />
+                        <img src="{{ @$list_img[0] }}" class="img-fluid" alt="img-placeholder" style="width: 250px; height: 200px;" />
                     </a>
                 </div>
                 <div class="card-body">
