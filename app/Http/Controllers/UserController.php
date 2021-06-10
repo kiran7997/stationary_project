@@ -94,7 +94,7 @@ class UserController extends Controller
         $role = $request->input('roles')[0];
         $rol_id = DB::table("roles")->where('name', $role)->first()->id;
         $input['role'] = $rol_id;
-        $input['department'] = $rol_id;
+        $input['department'] = DB::table("roles")->where('id', $rol_id)->first()->name;
         $user = User::create($input);
         $user->assignRole($request->input('roles'));
 
@@ -186,7 +186,7 @@ class UserController extends Controller
         $role = $request->input('roles')[0];
         $rol_id = DB::table("roles")->where('name', $role)->first()->id;
         $input['role'] = $rol_id;
-        $input['department'] = $rol_id;
+        $input['department'] = DB::table("roles")->where('id', $rol_id)->first()->name;
         $user->update($input);
         DB::table('model_has_roles')->where('model_id', $id)->delete();
 
@@ -279,7 +279,7 @@ class UserController extends Controller
             ->select('order_items.*', 'aproducts.image_url')
             ->leftjoin('aproducts', 'aproducts.product_id', 'order_items.product_id')
             ->where(['order_id' => $id])->get();
-        $users = \App\User::where(['role' => 4])->get();
+        $users = \App\User::where(['department' => "Sales"])->get();
         $states = DB::table('state')->select('state_id', 'state_title')->get();
         return view('employee-dashboard-list.assign_to_sales_team', compact('order_list', 'users', 'states', 'order_item_data', 'id'));
     }
@@ -340,7 +340,7 @@ class UserController extends Controller
     //Get sales users
     public function getSalesUser(Request $request)
     {
-        return DB::table('users')->select('id', 'firstname', 'lastname')->where('district', $request->district_id)->where(['role' => 2])->get();
+        return DB::table('users')->select('id', 'firstname', 'lastname')->where('district', $request->district_id)->where(['department' => "Sales"])->get();
     }
 
     public function saveAssignSalesData(Request $request)
@@ -387,7 +387,7 @@ class UserController extends Controller
     }
 
     public function sendNotification($id){
-        $users = \App\User::select('id')->where(['role'=>3])->get();
+        $users = \App\User::select('id')->where(['department' => 'Manufacturing'])->get();
         foreach($users as $row){
             $notification['order_id'] = $id;
             $notification['user_id'] = $row['id'];

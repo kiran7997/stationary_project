@@ -11,6 +11,7 @@ use DB;
 use Razorpay\Api\Api;
 use Redirect;
 use App\OrderItems;
+use App\Orders;
 
 class ShopController extends Controller
 {
@@ -158,6 +159,21 @@ class ShopController extends Controller
                         ->where(['customer_id'=>$customer_id,'order_items.order_status'=>'return'])
                         // ->whereNull('order_items.order_status')
                         ->get();
-               return view('customer.return_order',compact('order_item_data'));
+        return view('customer.return_order',compact('order_item_data'));
+    }
+
+    public function remove_cart(Request $request){
+        $final_amount = 0.00;
+        $remove_cart = AddToCart::where('cart_id', $request->cart_id)->update(array('deleted' => 1));
+        if(!empty($request->order_item_id)){
+            $order_item_total_amount = OrderItems::select('order_id', 'amount')->where('order_item_id', $request->order_item_id);
+            if(!empty($order_item_total_amount)){
+                $order_total_amount = Orders::select('amount')->where('order_id', $order_item_total_amount->order_id)->first();
+                $final_amount = $order_total_amount->amount - $order_item_total_amount->amount;
+                $order_amount = Orders::where('order_id', $order_item_total_amount->order_id)->update(array('amount' => $final_amount));
+            }
+            $order_item_remove = OrderItems::where('order_item_id', $request->order_item_id)->update(array('deleted' => 1));
+        }
+        return $remove_cart;
     }
 }

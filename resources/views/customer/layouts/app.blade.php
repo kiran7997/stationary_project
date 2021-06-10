@@ -70,7 +70,8 @@ License: You must have a valid license purchased only from themeforest(the above
     <!-- END: Page CSS-->
 
     <!-- BEGIN: Custom CSS-->
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
+    <!-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}"> -->
+
     <!-- END: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/forms/select/select2.min.css') }}" />
     <link rel="stylesheet" type="text/css"
@@ -95,7 +96,7 @@ License: You must have a valid license purchased only from themeforest(the above
         href="{{ asset('app-assets/css/core/menu/menu-types/vertical-menu.min.css') }}">
     <link rel="stylesheet" type="text/css"
         href="{{ asset('app-assets/css/plugins/extensions/ext-component-sliders.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/pages/app-ecommerce.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/pages/app-ecommerce.min.css') }}">
     <link rel="stylesheet" type="text/css"
         href="{{ asset('app-assets/css/plugins/extensions/ext-component-toastr.min.css') }}">
     <!-- END: Page CSS-->
@@ -127,6 +128,7 @@ License: You must have a valid license purchased only from themeforest(the above
     @yield('content')
     @include('customer/layouts/footer')
 </body>
+
 <!-- END: Body-->
 
 </html>

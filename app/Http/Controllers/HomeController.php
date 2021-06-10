@@ -12,6 +12,7 @@ use App\Units;
 use App\Categories;
 use App\Orders;
 use DB;
+
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -41,6 +42,8 @@ class HomeController extends Controller
             'units' => Units::where(['deleted' => 0])->count(),
             'stocks' => Stocks::where(['deleted' => 0])->count(),
             'aproducts' => Aproducts::where(['deleted' => 0])->count(),
+            'orders' => Orders::where(['deleted' => 0])->count(),
+            'order_return' => Orders::where(['deleted' => 0, 'order_status' => 'return'])->count(),
         ];
 
         $stock = array();

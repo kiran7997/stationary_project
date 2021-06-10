@@ -19,7 +19,7 @@ class AddNewColumnToUserTable extends Migration
             $table->string('username')->nullable();
             $table->string('phone_no', 20)->nullable();
             $table->text('address')->nullable();
-            $table->integer('department')->nullable();
+            $table->string('department', 100)->nullable();
             $table->integer('state')->nullable();
             $table->integer('district')->nullable();
             $table->text('profile_image')->nullable();

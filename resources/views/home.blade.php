@@ -74,7 +74,7 @@
                 <div class="card">
                   <div class="card-body pb-50">
                     <h6>Orders</h6>
-                    <h2 class="font-weight-bolder mb-1">2,76k</h2>
+                    <h2 class="font-weight-bolder mb-1">{{ $totals['orders'] }}</h2>
                     <div id="statistics-bar-chart">
                     </div>
                   </div>
@@ -87,7 +87,7 @@
                 <div class="card card-tiny-line-stats">
                   <div class="card-body pb-50">
                     <h6>Returns</h6>
-                    <h2 class="font-weight-bolder mb-1">6,24k</h2>
+                    <h2 class="font-weight-bolder mb-1">{{ $totals['order_return'] }}</h2>
                     <div id="statistics-line-chart"></div>
                   </div>
                 </div>

@@ -41,10 +41,10 @@
                                 <div class="checkout-items">
                                     @foreach($order_item_data as $data)
                                     <div class="card ecommerce-card">
-                                        <div class="item-img">
+                                        <div class="item-img mb-1 ml-1 mr-1">
                                         <?php $img_urls = json_decode($data->image_url); ?>
                                             <a href="app-ecommerce-details.html">
-                                                <img src="{{$img_urls[0]}}" alt="img-placeholder" />
+                                                <img src="{{ url($img_urls[0]) }}" alt="img-placeholder" />
                                             </a>
                                         </div>
                                         <div class="card-body">

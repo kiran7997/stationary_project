@@ -130,6 +130,7 @@ Route::post('get-district-list', 'ShopController@get_district');
 Route::get('my-order','ShopController@myOrder');
 Route::get('return-order/{id}','ShopController@returnOrder');
 Route::get('return-order-list','ShopController@returnOrderList');
+
 //Invoice controller
 Route::get('/listinvoice', 'InvoiceController@index');
 Route::get('/invoicepreview/{order_id}', 'InvoiceController@previewinvoice');
@@ -151,5 +152,7 @@ Route::get('manufacturing-order-list','UserController@getManufacturingOrder');
 Route::get('change-order-status/{id}','UserController@changeOrderStatus');
 Route::post('update-order-status','UserController@updateOrderStatus');
 Route::get('generate-invoice/{id}/{id1}','UserController@GenerateInvoiceData');
+
 //Razorpay payment
 Route::post('razorpaypayment', 'ShopController@payment')->name('payment');
+Route::post('remove_cart', 'ShopController@remove_cart');

@@ -146,7 +146,7 @@
                                                         </p>
                                                     </div>
                                                 </div>
-                                                <button type="button" class="btn btn-light mt-1 remove-wishlist">
+                                                <button type="button" class="btn btn-light mt-1 remove-wishlist" onclick="remove_cart({{ $carts->cart_id }}, {{$carts->order_item_id }})">
                                                     <i data-feather="x" class="align-middle mr-25"></i>
                                                     <span>Remove</span>
                                                 </button>
@@ -684,4 +684,23 @@
             });
         });
     });
+
+    function remove_cart(cart_id, order_item_id){
+        if(confirm("Do you want to delete this record?"))
+        {
+            $.ajax({
+                url:'remove_cart',
+                data: { _token: "{{ csrf_token() }}", 'cart_id': cart_id, 'order_item_id': order_item_id },
+                type:'post',
+                success:function(response)
+                {
+                    console.log(response);
+                    // $('#sid'+product_id).remove();
+                    // alert("Product Deleted Successfully");
+                }
+            
+            });
+        }
+    }
+
 </script>

@@ -1,9 +1,9 @@
 <!-- BEGIN: Main Menu-->
 <div class="main-menu menu-fixed menu-dark menu-accordion menu-shadow" data-scroll-to-active="true">
-      <div class="navbar-header">
-            <ul class="nav navbar-nav flex-row">
-                  <li class="nav-item mr-auto"><a class="navbar-brand" href="{{ url('/home') }}">
-                              <img src="{{ url('/logo/msb.png') }}" height="55"
+    <div class="navbar-header">
+        <ul class="nav navbar-nav flex-row">
+            <li class="nav-item mr-auto"><a class="navbar-brand" href="{{ url('/home') }}">
+                <img src="{{ url('/logo/msb.png') }}" height="55"
                                     style="margin-top:-18px;margin-left:-5px">
                               <h2 class="brand-text">MSB</h2>
                         </a></li>

@@ -22,7 +22,7 @@ class CreateAproductsTable extends Migration
             $table->text('variation_id')->nullable(false);
             $table->text('image_url')->nullable();
             $table->string('description')->nullable();
-            $table->float('base_price',5,2)->nullable();
+            $table->float('base_price',12,2)->nullable();
             $table->string('code')->nullable();
             $table->boolean('taxable')->default(0);
             $table->boolean('deleted')->default(0);

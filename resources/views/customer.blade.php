@@ -6,9 +6,10 @@
 
     <div class="content-body">
       <!-- Basic Tables start -->
-      <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#custModal">
+      <!-- <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#custModal">
         Add New Customer
-      </button><br>
+      </button> -->
+      <br>
       <div class="row" id="basic-table">
         <div class="col-12">
           <div class="card">

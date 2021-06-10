@@ -18,7 +18,7 @@ class CreateProductvariationsTable extends Migration
             $table->id('variation_id');
             $table->string('variation_name')->nullable();
             $table->string('variation_abbrevation')->nullable();
-            $table->float('add_on_price',5,2);
+            $table->float('add_on_price',10,2);
             $table->boolean('deleted')->default(0);
             $table->integer('created_by')->nullable();
             $table->integer('updated_by')->nullable();
