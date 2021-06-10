@@ -697,8 +697,8 @@
                     console.log(response);
                     // $('#sid'+product_id).remove();
                     // alert("Product Deleted Successfully");
+                    window.location = "/checkout";
                 }
-            
             });
         }
     }
