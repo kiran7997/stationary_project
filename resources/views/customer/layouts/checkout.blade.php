@@ -48,8 +48,8 @@
                     <div class="line">
                         <i data-feather="chevron-right" class="font-medium-2"></i>
                     </div>
-                    <div class="step" data-target="#step-address">
-                        <button type="button" class="step-trigger">
+                    <div class="step" data-target="#step-address" >
+                        <button type="button" class="step-trigger" id="address">
                             <span class="bs-stepper-box">
                                 <i data-feather="home" class="font-medium-3"></i>
                             </span>
@@ -62,8 +62,8 @@
                     <div class="line">
                         <i data-feather="chevron-right" class="font-medium-2"></i>
                     </div>
-                    <div class="step" data-target="#step-payment">
-                        <button type="button" class="step-trigger">
+                    <div class="step" data-target="#step-payment" >
+                        <button type="button" class="step-trigger" id="payment">
                             <span class="bs-stepper-box">
                                 <i data-feather="credit-card" class="font-medium-3"></i>
                             </span>
@@ -507,7 +507,8 @@
 <script>
     $(document).ready(function(){
         //state wise district
-
+        $("#address").attr('disabled', true);
+        $("#payment").attr('disabled', true);
         $.ajaxSetup({
 			headers: {
 				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -631,10 +632,32 @@
                 async: false,
                 success:function(response) {
                     if(response == "success"){
-                        Swal.fire('Success!', 'Information Saved Successfully', 'success').then(function() {
-                            window.location = "/checkout";
-                            
-                        });
+                        checkoutWizard = document.querySelector('.checkout-tab-steps');
+                        if (typeof checkoutWizard !== undefined && checkoutWizard !== null) {
+                            var wizard = new Stepper(checkoutWizard, {
+                                linear: false
+                            });
+
+                            $(checkoutWizard)
+                                .find('.btn-next')
+                                .each(function () {
+                                    $(this).on('click', function (e) {
+                                        // if(response == "success"){
+                                            wizard.next();
+                                        // }
+                                });
+                            });
+
+                            $(checkoutWizard)
+                                .find('.btn-prev')
+                                .on('click', function () {
+                                    wizard.previous();
+                            });
+                        }
+                        // Swal.fire('Success!', 'Information Saved Successfully', 'success').then(function() {
+                        //     // window.location = "/checkout";
+                        //     $("#address").attr('disabled', false);
+                        // });
                     }
                 },
                 error:function(){
@@ -653,8 +676,8 @@
                 success:function(response) {
                     if(response == "success"){
                         Swal.fire('Success!', 'Information Saved Successfully', 'success').then(function() {
-                            window.location = "/checkout";
-                            
+                            // window.location = "/checkout";
+                            $("#payment").attr('disabled', true);
                         });
                     }
                 },
@@ -674,7 +697,7 @@
                 success:function(response) {
                     if(response == "success"){
                         Swal.fire('Success!', 'Information Saved Successfully', 'success').then(function() {
-                            window.location = "/checkout";
+                            // window.location = "/checkout";
                         });
                     }
                 },
