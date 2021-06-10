@@ -157,3 +157,16 @@ Route::get('generate-invoice/{id}/{id1}','UserController@GenerateInvoiceData');
 Route::post('razorpaypayment', 'ShopController@payment')->name('payment');
 Route::post('remove_cart', 'ShopController@remove_cart');
 Route::get('notification_read/{id}','UserController@notificationRead');
+
+// District Reports
+Route::get('distinctReport', 'ReportController@index');
+Route::post('districttable', 'ReportController@districtTable');
+Route::post('district_preview', 'ReportController@previewDistrict');
+
+
+// Sales Report
+Route::get('salesWiseReoprt', 'ReportController@salesReport');
+Route::post('salestable', 'ReportController@salesTable');
+Route::post('sales_preview', 'ReportController@previewSales');
+
+
