@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Orders;
+
 class ReportController extends Controller
 {
     
@@ -36,12 +37,15 @@ class ReportController extends Controller
         // echo $order;exit;
         // if you try dd($students), you should see it in Network > Preview
             //echo "<pre>"; print_r($order);
+       
             return response()->json($order);
+            
        // return view('distinctReport', ['district' => $order])->with('no', 1);
     }
 
     public function previewDistrict(Request $requ)
     {
+
         $dis = new Orders();
         $district=$requ->district;
         //echo $dis;exit;
@@ -87,7 +91,7 @@ class ReportController extends Controller
             return response()->json($salesPerson);
        // return view('distinctReport', ['district' => $order])->with('no', 1);
     }
-    public function previewSales(Request $requ)
+    public function printSales(Request $requ)
     {
         $dis = new Orders();
         $sales=$requ->sales;
