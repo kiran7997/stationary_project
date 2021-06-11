@@ -1,12 +1,13 @@
 @extends('layouts.app')
 @section('title', 'District Wise Report')
 @section('content')
-     
-
-
+@import url('https://cdn.datatables.net/buttons/1.7.1/css/buttons.dataTables.min.css');
+@import url('https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css');
+<!-- 
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.7.1/css/buttons.dataTables.min.css">
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
 
+     -->
 
 
 <!-- Responsive Datatable -->
@@ -52,10 +53,10 @@
 							                @endforeach
 						                </select>
                                         <br>
-                                         <button  class="btn btn-primary" onclick="export_pdf()"> Print Report</button>
+                                          <button  class="btn btn-primary" onclick="export_pdf()"> Print Report</button>
                                         <button  class="btn btn-primary" onclick="export_data()">Excel Report</button>
-                                        
-                                        
+                                     
+                        
 					                    </div>
 					                 </form>
                                 </div>
@@ -96,17 +97,23 @@
     </div>
 </div>
 @endsection
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css"> 
+<link href="https://code.jquery.com/jquery-3.5.1.js" rel="stylesheet" />
+   
+  <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.7.1/js/dataTables.buttons.min.js"></script>
 
-<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.7.1/js/dataTables.buttons.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.html5.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
-<script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+      
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
+      <script src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.html5.min.js"></script>
+
+    <script>
 
 
 function export_pdf() {
@@ -129,20 +136,20 @@ function export_pdf() {
 //   $.get("announcements.php?selected="+selected, function(data){
 //       $('.result').html(data);
 
-    // $($(dropDown).parents('tr')[0]).find('input.price').val(data);
+//     $($(dropDown).parents('tr')[0]).find('input.price').val(data);
 
     
 function export_data() {
     alert('hi');
     console.log($('#printDiv').html());
-    // let file = new Blob([$('#printDiv').html()], {
-    //     type: "application/vnd.ms-excel"
-    // });
-    // let url = URL.createObjectURL(file);
-    // let a = $("<a/>", {
-    //     href: url,
-    //     download: "District Wise Activity Report.xls"
-    // }).appendTo("body").get(0).click();
+    let file = new Blob([$('#printDiv').html()], {
+        type: "application/vnd.ms-excel"
+    });
+    let url = URL.createObjectURL(file);
+    let a = $("<a/>", {
+        href: url,
+        download: "District Wise Activity Report.xls"
+    }).appendTo("body").get(0).click();
     e.preventDefault();
 }
 
@@ -180,29 +187,41 @@ $( "#district" ).change(function()
                 }
             });
         });
+    } );
 
-// $('#reportForm').validate({
-// rules: {
-//    "district": { required: true },
 
-//     },
-    
-//     submitHandler: function(form) {
-//        // var hidden_id = $('#unit_id').val();
-//       // alert('district');
-       
-//         var action = "{{url('district_preview')}}";
-        
-//         $('form').attr('action',action);
-//         form.submit();
-//         alert($('form').serialize() );
-//     }
-   
+// $(document).ready(function() {
+//     $('#example').DataTable({
+//           dom: 'Bfrtip',
+//           buttons: [
+//               'copy', 'excel', 'pdf', 'print'
+//           ],
+//           select: true,
+//           });
+// $( "#district" ).change(function() 
+//   {
+//      var district = $(this).val();
+//      var sr=1;
+//      var html="";
+//     alert(district);
+//     $.ajax({
+//                 url: "{{url('districttable')}}",
+//                 type: "POST",
+//                 data: {_token:'{{ csrf_token() }}',id:district},
+//                 success:function(res){
+//                     $("#appendData").empty();
+//                     //alert(res);
+//                     $.each(res, function(key,val) {
+//                         html+="<tr><td>"+sr+"</td><td>"+val.order_id+"</td><td>"+val.district_title+"</td><td>"+val.firstname+"</td><td>"+val.lastname+"</td><td>"+val.order_status+"</td></tr>";
+                       
+//                         // alert(val.order_id);
+//                         // alert(val.firstname);
+//            });$("#appendData").append(html);
+//                 }
+//             });
+//         });
 
-// });
-
-} );
-  
+//     });
 
 
 </script>  
