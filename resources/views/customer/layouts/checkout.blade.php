@@ -638,15 +638,17 @@
                                 linear: false
                             });
 
-                            $(checkoutWizard)
-                                .find('.btn-next')
-                                .each(function () {
-                                    $(this).on('click', function (e) {
-                                        // if(response == "success"){
-                                            wizard.next();
-                                        // }
-                                });
-                            });
+                            wizard.next();
+                            
+                            // $(checkoutWizard)
+                            //     .find('.btn-next')
+                            //     .each(function () {
+                            //         $(this).on('click', function (e) {
+                            //             // if(response == "success"){
+                            //                 wizard.next();
+                            //             // }
+                            //     });
+                            // });
 
                             $(checkoutWizard)
                                 .find('.btn-prev')
