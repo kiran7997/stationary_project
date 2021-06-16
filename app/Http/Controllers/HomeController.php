@@ -10,6 +10,7 @@ use App\Productvariation;
 use App\Stocks;
 use App\Units;
 use App\Categories;
+use App\OrderItems;
 use App\Orders;
 use DB;
 
@@ -35,34 +36,13 @@ class HomeController extends Controller
     public function index()
     {
         $totals = [
-            'catagories' => Categories::where(['deleted' => 0])->count(),
-            'Inventeries' => Inventeries::where(['deleted' => 0])->count(),
             'customers' => customers::where(['deleted' => 0])->count(),
-            'Productvariation' => Productvariation::where(['deleted' => 0])->count(),
-            'units' => Units::where(['deleted' => 0])->count(),
-            'stocks' => Stocks::where(['deleted' => 0])->count(),
             'aproducts' => Aproducts::where(['deleted' => 0])->count(),
             'orders' => Orders::where(['deleted' => 0])->count(),
-            'order_return' => Orders::where(['deleted' => 0, 'order_status' => 'return'])->count(),
+            'order_return' => OrderItems::where(['deleted' => 0, 'order_status' => 'return'])->count(),
         ];
 
-        $stock = array();
         $temp = array();
-        $stock_data = stocks::select('stocks.product_id', 'stocks.item_quantity', 'aproducts.product_id', 'aproducts.product_name')
-            ->leftjoin('aproducts', 'aproducts.product_id', '=', 'stocks.product_id')
-            ->where(['stocks.deleted' => 0])->get();
-        //this foreach for the overall stock data
-        // foreach ($stock_data as $st) {
-        //     $stock['name'][] =  $st->product_name;
-        //     $stock['qty'][] =  $st->item_quantity;
-        //     // $stock['data'][] = $stock;
-        // }
-        // for ($i = 0; $i < count($stock['name']); $i++) {
-        //     $temp['data'][$i][] = $stock['name'][$i];
-        //     $temp['data'][$i][] = $stock['qty'][$i];
-        // }
-
-
         $date = date('Y-m');
         //district wise order 
         $order_data = Orders::select('district.district_title', DB::raw('count(*) as count'))
