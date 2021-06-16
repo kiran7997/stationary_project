@@ -81,6 +81,7 @@ Route::get('/shop', 'ShopController@index');
 //Route::get('/getid/{product_id}','ShopController@getProductId');
 Route::get('/details/{product_id}', 'ShopController@details');
 Route::post('/add_to_cart', 'ShopController@add_to_cart');
+
 //Add Customer
 Route::get('/customer', 'CustomerController@index');
 Route::post('/addcust', 'CustomerController@store');
@@ -88,13 +89,11 @@ Route::get('/editc/{customer_id}', 'CustomerController@edit');
 Route::post('/editcust', 'CustomerController@update');
 Route::delete('/delec/{customer_id}', 'CustomerController@destroy');
 
-
 Route::get('/catagories', 'CategoriesController@index');
 Route::post('/store', 'CategoriesController@store');
 Route::get('/categories/{cat_id}', 'CategoriesController@getCatagoryrById');
 Route::post('/categories', 'CategoriesController@updateCategory');
 Route::delete('/categories/{cat_id}', 'CategoriesController@deleteCategories');
-
 
 Route::get('/product_variation', 'ProductsVariationController@index');
 Route::post('/storproductsv', 'ProductsVariationController@store');
@@ -163,10 +162,7 @@ Route::get('distinctReport', 'ReportController@index');
 Route::post('districttable', 'ReportController@districtTable');
 Route::post('district_preview', 'ReportController@previewDistrict');
 
-
 // Sales Report
 Route::get('salesWiseReoprt', 'ReportController@salesReport');
 Route::post('salestable', 'ReportController@salesTable');
 Route::post('sales_preview', 'ReportController@previewSales');
-
-
