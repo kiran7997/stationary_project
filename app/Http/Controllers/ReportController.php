@@ -7,7 +7,7 @@ use App\Orders;
 use App\Inventeries;
 use App\Suppliers;
 use App\Aproducts;
-
+use DB;
 class ReportController extends Controller
 {
     
@@ -19,13 +19,18 @@ class ReportController extends Controller
         ->leftjoin('district', 'district.districtid', '=', 'district')
         ->where(['orders.deleted' => 0])->get();
 
+        $state = DB::table('state')->select('state_id','state_title')
+        
+        ->where(['state.status' => 'Active'])->get();
+
+        //echo $state;exit;
         $dis = new Orders();
         $dis=$requ->district;
         //echo $dis;exit;
         $order = Orders::select('district.district_title','order_status','firstname','lastname','district','order_id')
         ->leftjoin('district', 'district.districtid', '=', 'district')
         ->where('district', $dis)->get();
-        return view('distinctReport', ['district' => $district],['district' => $order])->with('no', 1);
+        return view('distinctReport', ['district' => $district],['state' => $state])->with('no', 1);
     }    
 
     public function districtTable(Request $req)
