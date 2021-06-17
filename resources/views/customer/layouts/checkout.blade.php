@@ -678,7 +678,32 @@
                     if(response == "success"){
                         Swal.fire('Success!', 'Information Saved Successfully', 'success').then(function() {
                             // window.location = "/checkout";
-                            $("#payment").attr('disabled', true);
+                            $("#payment").attr('disabled', false);
+                            checkoutWizard = document.querySelector('.checkout-tab-steps');
+                        if (typeof checkoutWizard !== undefined && checkoutWizard !== null) {
+                            var wizard = new Stepper(checkoutWizard, {
+                                linear: false
+                            });
+
+                            wizard.next();
+                            
+                            // $(checkoutWizard)
+                            //     .find('.btn-next')
+                            //     .each(function () {
+                            //         $(this).on('click', function (e) {
+                            //             // if(response == "success"){
+                            //                 wizard.next();
+                            //             // }
+                            //     });
+                            // });
+
+                            $(checkoutWizard)
+                                .find('.btn-prev')
+                                .on('click', function () {
+                                    wizard.previous();
+                            });
+                        }
+
                         });
                     }
                 },
@@ -698,7 +723,7 @@
                 success:function(response) {
                     if(response == "success"){
                         Swal.fire('Success!', 'Information Saved Successfully', 'success').then(function() {
-                            // window.location = "/checkout";
+                            window.location = "/checkout";
                         });
                     }
                 },

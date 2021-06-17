@@ -73,7 +73,7 @@
 									<div class="card">
 										<div class="card-body pb-50">
 											<h6>Orders</h6>
-											<h2 class="font-weight-bolder mb-1">{{ $totals['orders'] }}</h2>
+											<h3 class="font-weight-bolder mb-1">{{ $totals['orders'] }}</h3>
 											<div id="statistics-order-chart"></div>
 										</div>
 									</div>
@@ -84,8 +84,8 @@
 								<div class="col-lg-2 col-6">
 									<div class="card card-tiny-line-stats">
 										<div class="card-body pb-50">
-											<h6>Returns</h6>
-											<h2 class="font-weight-bolder mb-1">{{ $totals['order_return'] }}</h2>
+											<h6>Revenue</h6>
+											<h3 class="font-weight-bolder mb-1">Rs. {{ $totals['revenue'] }}</h3>
 											<div id="statistics-profit-chart"></div>
 										</div>
 									</div>
@@ -105,12 +105,12 @@
 													<div class="media">
 														<div class="avatar bg-light-primary mr-2">
 															<div class="avatar-content">
-																<i data-feather="trending-up" class="avatar-icon"></i>
+																<i data-feather="user" class="avatar-icon"></i>
 															</div>
 														</div>
 														<div class="media-body my-auto">
-															<h4 class="font-weight-bolder mb-0">230k</h4>
-															<p class="card-text font-small-3 mb-0">Sales</p>
+															<h4 class="font-weight-bolder mb-0">{{ $totals['supplier'] }}</h4>
+															<p class="card-text font-small-3 mb-0">Suppliers</p>
 														</div>
 													</div>
 												</div>
@@ -144,12 +144,12 @@
 													<div class="media">
 														<div class="avatar bg-light-success mr-2">
 															<div class="avatar-content">
-																<i data-feather="dollar-sign" class="avatar-icon"></i>
+																<i data-feather="box" class="avatar-icon"></i>
 															</div>
 														</div>
-														<div class="media-body my-auto">
-															<h4 class="font-weight-bolder mb-0">$9745</h4>
-															<p class="card-text font-small-3 mb-0">Revenue</p>
+														<div class="media-body my-auto ">
+															<h4 class="font-weight-bolder mb-0">{{ $totals['order_return'] }}</h4>
+															<p class="card-text font-small-3 mb-0">Returns</p>
 														</div>
 													</div>
 												</div>
