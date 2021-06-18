@@ -42,26 +42,65 @@
                    
                                 <form id="reportForm" name="reportForm" >
                                         @csrf
-                                        <div class="modal-body">    
-                                        <label class="required"for="district">Select District </label>
-					                    <div class="form-group">
-						                <select class="form-control" name="district" id="district"   required>
-							                <option value="">Select District</option>
-							                @foreach($district as $dis)
-							                <option value="{{$dis->districtid}}">{{$dis->district_title}}
-				                			</option>
-							                @endforeach
-						                </select>
-                                        <br>
-                                          <button  class="btn btn-primary" onclick="export_pdf()"> Print Report</button>
-                                        <button  class="btn btn-primary" onclick="export_data()">Excel Report</button>
-                                     
-                        
-					                    </div>
-					                 </form>
+                                        <div class="row">
+                                        <div class="col-md-5 col-12 ml-5">
+                                            <div class="form-group">
+                                            <label for="state">State</label>
+                                                <select class="form-control " name="state" id="state"
+                                                    required>
+                                                    <option value="">Select State</option>
+                                                    @foreach($state as $sta)
+                                                    <option value="{{$sta->state_id}}">{{$sta->state_title}}
+                                                    </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-5 col-12">
+                                            <div class="form-group">
+                                            <label for="state">District</label>
+                                               <select class=" form-control" name="district" id="district" required>
+                                                    <option value="">Select District</option>
+                                                </select>
+                                                
+                                            </div>
+                                        </div>
+                                        <!-- <div class="col-md-4 col-12">
+                                            <div class="form-group">
+                                            <label for="state">State</label>
+                                                <select class="form-control " name="state" id="state"
+                                                    required>
+                                                    <option value="">Select State</option>
+                                                    @foreach($state as $sta)
+                                                    <option value="{{$sta->state_id}}">{{$sta->state_title}}
+                                                    </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div> -->
+
+                                       
+                                        <!-- <div class="col-md-4 col-12">
+                                            <div class="form-group">
+                                            <label for="state">District</label>
+                                               <select class=" form-control" name="district" id="district" required>
+                                                    <option value="">Select District</option>
+                                                </select>
+                                                
+                                            </div>
+                                        </div> -->
+                                        </div>
+                                    </div>
+					            </div>
+                            </form>
+                                     <div class=" col-12">
+                                          <button  class="btn btn-primary" onclick="export_pdf() " style="float:right;margin-left:5px;"> Print Report</button>
+                                        <button  class="btn btn-primary" onclick="export_data()" style="float:right;">Excel Report</button>
+                                        </div>
                                 </div>
-                            <!-- </div> -->
-                            <div id="printDiv" >
+                            </div>
+                        <div id="printDiv" >
                             <table id="example" class="display nowrap stripe" style="width:100%;text-align:center">
                            
                             <thead>
@@ -80,15 +119,15 @@
                                             <tr id="sid{{$dis->order_id}}">
                                             <td>{{ $no++ }}</td>
 									        <td>{{$dis->order_id}}</td>
-									        <td>{{$dis->district_title}}</td>
+									        <td>{{ucwords($dis->district_title)}}</td>
                                             <td>{{$dis->firstname}} </td>
                                             <td>{{$dis->lastname}} </td>
-                                            <td>{{$dis->order_status}} </td>
+                                            <td>{{ucwords($dis->order_status)}} </td>
                                              @endforeach
                                      </tbody>
                                 </table>
-                                </div >
-                               
+                             </div >
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -97,6 +136,7 @@
     </div>
 </div>
 @endsection
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css"> 
@@ -114,7 +154,7 @@
       <script src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.html5.min.js"></script>
 
     <script>
-
+    
 
 function export_pdf() {
     $('.dropdown2').hide();
@@ -156,7 +196,7 @@ function export_data() {
              
 
     $(document).ready(function() {
-    // $('#example').DataTable();
+  
     $('#example').DataTable( {
         // "scrollY": 200,
         "scrollX": true
@@ -165,12 +205,29 @@ function export_data() {
     $(".delete").on("click", function () {
     return confirm('Are you sure you want to Delete?');
 });
+
+$('#state').change(function(){
+            var state_id = this.value;
+            $('#district').empty();
+                $.ajax({
+                url: "{{url('get-district')}}",
+                type: "POST",
+                data: {_token:'{{ csrf_token() }}',state_id:state_id},
+                success:function(res){
+                    $('#district').append('<option value="">Select District</option>');
+                    $.each(res, function(key,val) {
+                        $('#district').append('<option value='+val.id+'>'+val.title+'</option>');
+                    });
+                }
+            });
+        })
+
 $( "#district" ).change(function() 
   {
      var district = $(this).val();
      var sr=1;
      var html="";
-    alert(district);
+   // alert(district);
     $.ajax({
                 url: "{{url('districttable')}}",
                 type: "POST",
@@ -189,40 +246,7 @@ $( "#district" ).change(function()
         });
     } );
 
-
-// $(document).ready(function() {
-//     $('#example').DataTable({
-//           dom: 'Bfrtip',
-//           buttons: [
-//               'copy', 'excel', 'pdf', 'print'
-//           ],
-//           select: true,
-//           });
-// $( "#district" ).change(function() 
-//   {
-//      var district = $(this).val();
-//      var sr=1;
-//      var html="";
-//     alert(district);
-//     $.ajax({
-//                 url: "{{url('districttable')}}",
-//                 type: "POST",
-//                 data: {_token:'{{ csrf_token() }}',id:district},
-//                 success:function(res){
-//                     $("#appendData").empty();
-//                     //alert(res);
-//                     $.each(res, function(key,val) {
-//                         html+="<tr><td>"+sr+"</td><td>"+val.order_id+"</td><td>"+val.district_title+"</td><td>"+val.firstname+"</td><td>"+val.lastname+"</td><td>"+val.order_status+"</td></tr>";
-                       
-//                         // alert(val.order_id);
-//                         // alert(val.firstname);
-//            });$("#appendData").append(html);
-//                 }
-//             });
-//         });
-
-//     });
-
+ 
 
 </script>  
 

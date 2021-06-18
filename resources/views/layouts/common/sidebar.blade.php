@@ -137,11 +137,11 @@
                   <li class=" navigation-header"><span data-i18n="Forms &amp; Tables">Reports</span><i
                               data-feather="more-horizontal"></i>
                   </li>
-                  <li class=" nav-item"><a class="d-flex align-items-center" href="form-layout.html"><i
+                  <li class=" nav-item"><a class="d-flex align-items-center" href="distinctReport"><i
                                     data-feather="box"></i><span class="menu-title text-truncate"
                                     data-i18n="Form Layout">Distinct Wise Order</span></a>
                   </li>
-                  <li class=" nav-item"><a class="d-flex align-items-center" href="form-wizard.html"><i
+                  <li class=" nav-item"><a class="d-flex align-items-center" href="salesWiseReoprt"><i
                                     data-feather="package"></i><span class="menu-title text-truncate"
                                     data-i18n="Form Wizard">Sales Person Wise
                                     Order</span></a>
