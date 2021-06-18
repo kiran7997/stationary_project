@@ -13,8 +13,6 @@ class ReportController extends Controller
     
     public function index(Request $requ)
     {
-        
-     
         $district = Orders::select('district.district_title','district.districtid','order_id','order_status','firstname','lastname','district')
         ->leftjoin('district', 'district.districtid', '=', 'district')
         ->where(['orders.deleted' => 0])->get();
@@ -128,63 +126,60 @@ class ReportController extends Controller
     {
         $product=new Aproducts();
         $product=$req->id;
-    // echo $product;exit;
-    //     $suppliers = Suppliers::select('supplier_id', 'supplier_companyName')->where(['deleted' => 0])->get();
-    //     $products_data = Aproducts::select('product_id', 'product_name')->where('deleted', 0)->get();
-    //     $data = Inventeries :: select('quantity','invntory_status','inventeries.created_at')
-    //     ->leftjoin('suppliers','product_id','=','product_id')->where('product_id','=',$product)->get();
-    //     echo $data;exit;
+        // echo $product;exit;
+        //     $suppliers = Suppliers::select('supplier_id', 'supplier_companyName')->where(['deleted' => 0])->get();
+        //     $products_data = Aproducts::select('product_id', 'product_name')->where('deleted', 0)->get();
+        //     $data = Inventeries :: select('quantity','invntory_status','inventeries.created_at')
+        //     ->leftjoin('suppliers','product_id','=','product_id')->where('product_id','=',$product)->get();
+        //     echo $data;exit;
 
-    if($product == 'all')
-    {
-        $suppliers = Suppliers::select('supplier_id', 'supplier_companyName')->where(['deleted' => 0])->get();
-        $products_data = Aproducts::select('product_id', 'product_name')->where('deleted', 0)->get();
-        $invens = Inventeries::leftjoin('aproducts', 'aproducts.product_id', 'inventeries.product_id')
-            ->leftjoin('suppliers', 'suppliers.supplier_id', 'inventeries.supplier_id')
-            ->select(
-                'inventeries.supplier_id',
-                'inventeries.inventory_id',
-                'inventeries.product_id',
-                'inventeries.quantity',
-                'inventeries.invntory_status',
-                'aproducts.product_name',
-                'inventeries.supplier_id',
-                'inventeries.created_at',
-                'suppliers.supplier_companyName'
-            )
-            ->where(['inventeries.deleted' => 0])->orderby('inventeries.inventory_id', 'DESC')->get();
+        if($product == 'all')
+        {
+            $suppliers = Suppliers::select('supplier_id', 'supplier_companyName')->where(['deleted' => 0])->get();
+            $products_data = Aproducts::select('product_id', 'product_name')->where('deleted', 0)->get();
+            $invens = Inventeries::leftjoin('aproducts', 'aproducts.product_id', 'inventeries.product_id')
+                ->leftjoin('suppliers', 'suppliers.supplier_id', 'inventeries.supplier_id')
+                ->select(
+                    'inventeries.supplier_id',
+                    'inventeries.inventory_id',
+                    'inventeries.product_id',
+                    'inventeries.quantity',
+                    'inventeries.invntory_status',
+                    'aproducts.product_name',
+                    'inventeries.supplier_id',
+                    'inventeries.created_at',
+                    'suppliers.supplier_companyName'
+                )
+                ->where(['inventeries.deleted' => 0])->orderby('inventeries.inventory_id', 'DESC')->get();
+                return response()->json($invens);
+            // dd($invens);
+            return view('overallData', ['products_data' => $products_data, 'invens' => $invens, 'suppliers' => $suppliers]);
+        }   
+        else
+        {
+            $suppliers = Suppliers::select('supplier_id', 'supplier_companyName')->where(['deleted' => 0])->get();
+            $products_data = Aproducts::select('product_id', 'product_name')->where('deleted', 0)->get();
+            $invens = Inventeries::leftjoin('aproducts', 'aproducts.product_id', 'inventeries.product_id','inventeries.created_at')
+                ->leftjoin('suppliers', 'suppliers.supplier_id', 'inventeries.supplier_id')
+                ->select(
+                    'inventeries.supplier_id',
+                    'inventeries.inventory_id',
+                    'inventeries.product_id',
+                    'inventeries.quantity',
+                    'inventeries.invntory_status',
+                    'aproducts.product_name',
+                    'inventeries.supplier_id',
+                    'inventeries.created_at',
+                    'suppliers.supplier_companyName'
+                )->where('aproducts.product_id','=',$product)->get();
             return response()->json($invens);
+        }
         // dd($invens);
-        return view('overallData', ['products_data' => $products_data, 'invens' => $invens, 'suppliers' => $suppliers]);
-    }   
-else
-{
- 
-    
-    $suppliers = Suppliers::select('supplier_id', 'supplier_companyName')->where(['deleted' => 0])->get();
-    $products_data = Aproducts::select('product_id', 'product_name')->where('deleted', 0)->get();
-    $invens = Inventeries::leftjoin('aproducts', 'aproducts.product_id', 'inventeries.product_id','inventeries.created_at')
-        ->leftjoin('suppliers', 'suppliers.supplier_id', 'inventeries.supplier_id')
-        ->select(
-            'inventeries.supplier_id',
-            'inventeries.inventory_id',
-            'inventeries.product_id',
-            'inventeries.quantity',
-            'inventeries.invntory_status',
-            'aproducts.product_name',
-            'inventeries.supplier_id',
-            'inventeries.created_at',
-            'suppliers.supplier_companyName'
-        )->where('aproducts.product_id','=',$product)->get();
-        return response()->json($invens);
+    }
 
-}
-    // dd($invens);
-    
+    public function viewOrders(Request $request){
+        $order_data = Orders::select('order_id', 'order_status', 'order_date', 'firstname', 'lastname', 'phone_no', 'address_type', 'house_no', 'city', 'zip', 'district')->where(['deleted' => 0])->get();
 
-}  
-
-
-    
- 
+        return view('view-orders', compact('order_data'));
+    }
 }

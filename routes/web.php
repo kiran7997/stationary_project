@@ -170,3 +170,4 @@ Route::post('sales_preview', 'ReportController@previewSales');
 //Inventory data For Report
 Route::get('item-inventory', 'ReportController@overallInventoryData');
 Route::post('overDataTable', 'ReportController@Table');
+Route::get('view-orders', 'ReportController@viewOrders');
