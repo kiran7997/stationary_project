@@ -70,14 +70,17 @@
 							<div class="row match-height">
 								<!-- Bar Chart -Orders -->
 								<div class="col-lg-2 col-6">
-									<div class="card">
-										<div class="card-body pb-50">
-											<h6>Orders</h6>
-											<h3 class="font-weight-bolder mb-1">{{ $totals['orders'] }}</h3>
-											<div id="statistics-order-chart"></div>
+									<a href="view-orders">
+										<div class="card">
+											<div class="card-body pb-50">
+												<h6>Orders</h6>
+												<h3 class="font-weight-bolder mb-1">{{ $totals['orders'] }}</h3>
+												<div id="statistics-order-chart"></div>
+											</div>
 										</div>
-									</div>
+									</a>
 								</div>
+							
 								<!--/ Bar Chart -->
 
 								<!-- Line Chart - Profit -->
@@ -102,43 +105,50 @@
 										<div class="card-body statistics-body">
 											<div class="row">
 												<div class="col-md-3 col-sm-6 col-12 mb-2 mb-md-0">
-													<div class="media">
-														<div class="avatar bg-light-primary mr-2">
-															<div class="avatar-content">
-																<i data-feather="user" class="avatar-icon"></i>
+													<a href="supplier">
+														<div class="media">
+															<div class="avatar bg-light-primary mr-2">
+																<div class="avatar-content">
+																	<i data-feather="user" class="avatar-icon"></i>
+																</div>
+															</div>
+															<div class="media-body my-auto">
+																<h4 class="font-weight-bolder mb-0">{{ $totals['supplier'] }}</h4>
+																<p class="card-text font-small-3 mb-0">Suppliers</p>
 															</div>
 														</div>
-														<div class="media-body my-auto">
-															<h4 class="font-weight-bolder mb-0">{{ $totals['supplier'] }}</h4>
-															<p class="card-text font-small-3 mb-0">Suppliers</p>
-														</div>
-													</div>
+													</a>
 												</div>
+												
 												<div class="col-md-3 col-sm-6 col-12 mb-2 mb-md-0">
-													<div class="media">
-														<div class="avatar bg-light-info mr-2">
-															<div class="avatar-content">
-																<i data-feather="user" class="avatar-icon"></i>
+													<a href="customer">
+														<div class="media">
+															<div class="avatar bg-light-info mr-2">
+																<div class="avatar-content">
+																	<i data-feather="user" class="avatar-icon"></i>
+																</div>
+															</div>
+															<div class="media-body my-auto">
+																<h4 class="font-weight-bolder mb-0">{{ $totals['customers'] }}</h4>
+																<p class="card-text font-small-3 mb-0">Customers</p>
 															</div>
 														</div>
-														<div class="media-body my-auto">
-															<h4 class="font-weight-bolder mb-0">{{ $totals['customers'] }}</h4>
-															<p class="card-text font-small-3 mb-0">Customers</p>
-														</div>
-													</div>
+													</a>
 												</div>
 												<div class="col-md-3 col-sm-6 col-12 mb-2 mb-sm-0">
-													<div class="media">
-														<div class="avatar bg-light-danger mr-2">
-															<div class="avatar-content">
-																<i data-feather="box" class="avatar-icon"></i>
+													<a href="product">
+														<div class="media">
+															<div class="avatar bg-light-danger mr-2">
+																<div class="avatar-content">
+																	<i data-feather="box" class="avatar-icon"></i>
+																</div>
+															</div>
+															<div class="media-body my-auto">
+																<h4 class="font-weight-bolder mb-0">{{ $totals['aproducts'] }}</h4>
+																<p class="card-text font-small-3 mb-0">Products</p>
 															</div>
 														</div>
-														<div class="media-body my-auto">
-															<h4 class="font-weight-bolder mb-0">{{ $totals['aproducts'] }}</h4>
-															<p class="card-text font-small-3 mb-0">Products</p>
-														</div>
-													</div>
+													</a>
 												</div>
 												<div class="col-md-3 col-sm-6 col-12">
 													<div class="media">

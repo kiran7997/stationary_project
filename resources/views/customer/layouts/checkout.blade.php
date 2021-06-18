@@ -355,10 +355,10 @@
                                         </p>
                                         <p class="card-text" id='add_phone_no'>
                                             {{ Auth::guard('customer')->user()->customer_phone }}</p>
-                                        <button type="button"
+                                        <!-- <button type="button"
                                             class="btn btn-primary btn-block btn-next delivery-address mt-2">
                                             Deliver To This Address
-                                        </button>
+                                        </button> -->
                                     </div>
                                 </div>
                             </div>
@@ -506,8 +506,8 @@
 <script>
     $(document).ready(function(){
         //state wise district
-        $("#address").attr('disabled', true);
-        $("#payment").attr('disabled', true);
+        // $("#address").attr('disabled', true);
+        // $("#payment").attr('disabled', true);
         $.ajaxSetup({
 			headers: {
 				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -556,7 +556,7 @@
 
         $('#city').keyup(function(){
             $('#add_city').empty();
-            $('#add_city').text(this.value);
+            $('#add_city').text(this.value + $("#$('#checkout-pincode')").text());
         });
 
         $('#house_number').keyup(function(){
@@ -567,6 +567,11 @@
         $('#landmark').keyup(function(){
             $('#add_landmark').empty();
             $('#add_landmark').text(this.value);
+        });
+
+        $('#checkout-pincode').keyup(function() {
+            $('#add_city').empty();
+            $('#add_city').text($('#add_city').text + $("#$('#checkout-pincode')").text());
         });
 
         $('body').on('focusout', '.qty-change', function(){

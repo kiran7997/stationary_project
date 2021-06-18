@@ -13,8 +13,6 @@
       <div class="row" id="basic-table">
         <div class="col-12">
           <div class="card">
-
-
             <div class="table-responsive">
               <table class="table">
                 <thead>
@@ -24,7 +22,6 @@
                   <th>Email</th>
                   <th>Phone</th>
                   <th>Username</th>
-
                   <th>Status</th>
                   <th>Login Ip</th>
                   <th>Last Login At</th>
@@ -40,15 +37,10 @@
                     <td>{{$customer->email}}</td>
                     <td>{{$customer->customer_phone}}</td>
                     <td>{{$customer->username}}</td>
-
                     <td>{{$customer->customer_status}}</td>
                     <td>{{$customer->login_ip}}</td>
                     <td>{{$customer->last_login_at}}</td>
-
-
                     <td>
-
-
                       <a href="javascript:void(0)" onclick="editcust({{$customer->customer_id}})" class="fa fa-edit"
                         style="font-size:24px"></a>
                       <a href="javascript:void(0)" onclick="deletecust({{$customer->customer_id}})" class="fa fa-trash"
@@ -65,11 +57,6 @@
     </div>
   </div>
 </div>
-
-
-
-
-
 
 <!-- Customer model -->
 <div class="modal fade text-left" id="custModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33"
