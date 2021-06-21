@@ -1,13 +1,24 @@
 @extends('layouts.app')
 @section('title', 'District Wise Report')
 @section('content')
-@import url('https://cdn.datatables.net/buttons/1.7.1/css/buttons.dataTables.min.css');
-@import url('https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css');
-<!-- 
+<style>
+table {
+    border-collapse: collapse;
+    border: 1px solid black; 
+}
+
+td {
+    padding: 20px; 
+    border: 1px solid black; 
+    text-align: center;
+}
+</style>
+<script type="text/javascript" src="https://oss.sheetjs.com/sheetjs/xlsx.full.min.js"></script>
+
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.7.1/css/buttons.dataTables.min.css">
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
 
-     -->
+    
 
 
 <!-- Responsive Datatable -->
@@ -45,7 +56,7 @@
                                         <div class="row">
                                         <div class="col-md-5 col-12 ml-5">
                                             <div class="form-group">
-                                            <label for="state">State</label>
+                                            <label for="state"><b>State</b></label>
                                                 <select class="form-control " name="state" id="state"
                                                     required>
                                                     <option value="">Select State</option>
@@ -59,64 +70,56 @@
 
                                         <div class="col-md-5 col-12">
                                             <div class="form-group">
-                                            <label for="state">District</label>
+                                            <label for="state"><b>District</b></label>
                                                <select class=" form-control" name="district" id="district" required>
                                                     <option value="">Select District</option>
                                                 </select>
                                                 
                                             </div>
                                         </div>
-                                        <!-- <div class="col-md-4 col-12">
-                                            <div class="form-group">
-                                            <label for="state">State</label>
-                                                <select class="form-control " name="state" id="state"
-                                                    required>
-                                                    <option value="">Select State</option>
-                                                    @foreach($state as $sta)
-                                                    <option value="{{$sta->state_id}}">{{$sta->state_title}}
-                                                    </option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div> -->
-
                                        
-                                        <!-- <div class="col-md-4 col-12">
-                                            <div class="form-group">
-                                            <label for="state">District</label>
-                                               <select class=" form-control" name="district" id="district" required>
-                                                    <option value="">Select District</option>
-                                                </select>
-                                                
-                                            </div>
-                                        </div> -->
                                         </div>
                                     </div>
 					            </div>
                             </form>
                                      <div class=" col-12">
-                                          <button  class="btn btn-primary" onclick="export_pdf() " style="float:right;margin-left:5px;"> Print Report</button>
-                                        <button  class="btn btn-primary" onclick="export_data()" style="float:right;">Excel Report</button>
+                                          <button  class="btn btn-primary" onclick="export_data() " style="float:right;margin-left:5px;"> Print Report</button>
+                                        <button  class="btn btn-primary" onclick="exportTableToExcel('example') " style="float:right;">Excel Report</button>
                                         </div>
                                 </div>
                             </div>
+                            <br>
                         <div id="printDiv" >
                             <table id="example" class="display nowrap stripe" style="width:100%;text-align:center">
                            
-                            <thead>
-                                    <tr>
-									    <th>Sr.No</th>
-									    <th>Order Number</th>
-                                        <th>Distinct Name</th>
-                                        <th>Firstname</th>
-                                        <th>LastName</th>
-                                        <th>Order Status</th>
-									<!-- <th>Actions</th>  -->
-								    </tr>
-                                        </thead>
-                                            <tbody id="appendData">
-                                            @foreach($district as $dis)
+                           
+                                           <thead>
+                                            <tr style="font-weight: bold;">
+                                            <td rowspan="2"><img src="\logo\msb.png" alt="logo"></td>
+                                            <td colspan="4" >Report</td>
+                                            <td rowspan="2"><?php $date = date('Y-m-d', time());
+                                                echo $date;
+                                            ?></td>
+                                            <tr>
+                                            <td colspan="4"><b>District  Wise Data Report</b></td>
+                                            </tr>
+                                            <tr style="font-weight: bold;">
+                                            
+                                        <td>Sr.No</td>
+									    <td>Order Number</td>
+                                        <td>Distinct Name</td>
+                                        <td>Firstname</td>
+                                        <td>LastName</td>
+                                        <td>Order Status</td>
+                                        </tr>
+                                        
+                                        </tr>
+                                            
+                                            </thead>
+                                           <tbody id="appendData">  
+                                           @foreach($district as $dis)
                                             <tr id="sid{{$dis->order_id}}">
+                                          
                                             <td>{{ $no++ }}</td>
 									        <td>{{$dis->order_id}}</td>
 									        <td>{{ucwords($dis->district_title)}}</td>
@@ -156,22 +159,23 @@
     <script>
     
 
-function export_pdf() {
-    $('.dropdown2').hide();
-    var doc = new jsPDF();
-    // var doc = new jsPDF('p', 'mm', [297, 210]);
-    // new jsPDF('l', 'mm', [297, 210]);
-    doc.addHTML($('#printDiv'), 15, 15, {
-        'background': '#fff',
-        // 'size': 'A4 landscape',
-        // 'height':'297 px',
-        // 'width':'210 px',
-        'border': '2px solid white',
-        // 'margin-left': '100px',
-    }, function() {
-        doc.save('District Wise Activity Report.pdf');
-    });
-}
+// function export_pdf() {
+//     $('.dropdown2').hide();
+//     var doc = new jsPDF();
+//     // var doc = new jsPDF('p', 'mm', [297, 210]);
+//     // new jsPDF('l', 'mm', [297, 210]);
+//     doc.addHTML($('#printDiv'), 15, 15, {
+//         'background': '#fff',
+//         // 'size': 'A4 landscape',
+//         // 'height':'297 px',
+//         // 'width':'210 px',
+//         'border': '2px solid white',
+//         // 'margin-left': '100px',
+//     }, function() {
+//         doc.save('District Wise Activity Report.pdf');
+//     });
+// }
+
 
 //   $.get("announcements.php?selected="+selected, function(data){
 //       $('.result').html(data);
@@ -179,19 +183,7 @@ function export_pdf() {
 //     $($(dropDown).parents('tr')[0]).find('input.price').val(data);
 
     
-function export_data() {
-    alert('hi');
-    console.log($('#printDiv').html());
-    let file = new Blob([$('#printDiv').html()], {
-        type: "application/vnd.ms-excel"
-    });
-    let url = URL.createObjectURL(file);
-    let a = $("<a/>", {
-        href: url,
-        download: "District Wise Activity Report.xls"
-    }).appendTo("body").get(0).click();
-    e.preventDefault();
-}
+
 
              
 
@@ -200,7 +192,7 @@ function export_data() {
     $('#example').DataTable( {
         // "scrollY": 200,
         "scrollX": true
-    } );
+    } );    
 
     $(".delete").on("click", function () {
     return confirm('Are you sure you want to Delete?');
@@ -209,6 +201,7 @@ function export_data() {
 $('#state').change(function(){
             var state_id = this.value;
             $('#district').empty();
+              
                 $.ajax({
                 url: "{{url('get-district')}}",
                 type: "POST",
@@ -246,7 +239,36 @@ $( "#district" ).change(function()
         });
     } );
 
- 
+    function exportTableToExcel(example, filename = ''){
+    var downloadLink;
+    var dataType = 'application/vnd.ms-excel';
+    var tableSelect = document.getElementById(example);
+    var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+    
+    // Specify file name
+    filename = filename?filename+'.xls':'District Wise Activity Report.xls';
+    
+    // Create download link element
+    downloadLink = document.createElement("a");
+    
+    document.body.appendChild(downloadLink);
+    
+    if(navigator.msSaveOrOpenBlob){
+        var blob = new Blob(['\ufeff', tableHTML], {
+            type: dataType
+        });
+        navigator.msSaveOrOpenBlob( blob, filename);
+    }else{
+        // Create a link to the file
+        downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+    
+        // Setting the file name
+        downloadLink.download = filename;
+        
+        //triggering the function
+        downloadLink.click();
+    }
+}
 
 </script>  
 

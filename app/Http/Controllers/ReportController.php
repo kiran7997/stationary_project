@@ -51,22 +51,7 @@ class ReportController extends Controller
        // return view('distinctReport', ['district' => $order])->with('no', 1);
     }
 
-    public function previewDistrict(Request $requ)
-    {
-
-        $dis = new Orders();
-        $district=$requ->district;
-        //echo $dis;exit;
-        $print=Orders::select('firstname','lastname','order_id','order_status','district')
-        ->leftjoin('district', 'district.districtid', '=', 'district')
-        ->where('district', $district)->get();
-       
-        //echo "<pre>"; print_r($print);
-        //print_r ($print);exit;
-        return view('preview', ['print' => $print])->with('no', 1);
-        //return view('district-preview')->with('print',$print);
-   
-    }
+    
     public function salesReport(Request $requ)
     {
         
