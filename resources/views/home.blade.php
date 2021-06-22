@@ -167,6 +167,80 @@
 										</div>
 									</div>
 								</div>
+								<div class="col-lg-12 col-12">
+									<div class="card card-statistics">
+										<div class="card-header">
+											<h4 class="card-title">Order Statuses</h4>
+											<!-- <div class="d-flex align-items-center">
+												<p class="card-text mr-25 mb-0">Updated 1 month ago</p>
+											</div> -->
+										</div>
+										<div class="card-body statistics-body">
+											<div class="row">
+												<div class="col-md-3 col-sm-6 col-12 mb-2 mb-md-0">
+													<a href="supplier">
+														<div class="media">
+															<div class="avatar bg-light-primary mr-2">
+																<div class="avatar-content">
+																	<i data-feather="user" class="avatar-icon"></i>
+																</div>
+															</div>
+															
+															<div class="media-body my-auto">
+																<h4 class="font-weight-bolder mb-0">{{ $totals['supplier'] }}</h4>
+																<p class="card-text font-small-3 mb-0">Suppliers</p>
+															</div>
+														</div>
+													</a>
+												</div>
+												
+												<div class="col-md-3 col-sm-6 col-12 mb-2 mb-md-0">
+													<a href="customer">
+														<div class="media">
+															<div class="avatar bg-light-info mr-2">
+																<div class="avatar-content">
+																	<i data-feather="user" class="avatar-icon"></i>
+																</div>
+															</div>
+															<div class="media-body my-auto">
+																<h4 class="font-weight-bolder mb-0">{{ $totals['customers'] }}</h4>
+																<p class="card-text font-small-3 mb-0">Customers</p>
+															</div>
+														</div>
+													</a>
+												</div>
+												<div class="col-md-3 col-sm-6 col-12 mb-2 mb-sm-0">
+													<a href="product">
+														<div class="media">
+															<div class="avatar bg-light-danger mr-2">
+																<div class="avatar-content">
+																	<i data-feather="box" class="avatar-icon"></i>
+																</div>
+															</div>
+															<div class="media-body my-auto">
+																<h4 class="font-weight-bolder mb-0">{{ $totals['aproducts'] }}</h4>
+																<p class="card-text font-small-3 mb-0">Products</p>
+															</div>
+														</div>
+													</a>
+												</div>
+												<div class="col-md-3 col-sm-6 col-12">
+													<div class="media">
+														<div class="avatar bg-light-success mr-2">
+															<div class="avatar-content">
+																<i data-feather="box" class="avatar-icon"></i>
+															</div>
+														</div>
+														<div class="media-body my-auto ">
+															<h4 class="font-weight-bolder mb-0">{{ $totals['order_return'] }}</h4>
+															<p class="card-text font-small-3 mb-0">Returns</p>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 						
