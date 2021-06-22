@@ -104,7 +104,7 @@
 										</div>
 										<div class="card-body statistics-body">
 											<div class="row">
-												<div class="col-md-3 col-sm-6 col-12 mb-2 mb-md-0">
+												<div class="col-md-4 col-sm-6 col-12 mb-2 mb-md-0">
 													<a href="supplier">
 														<div class="media">
 															<div class="avatar bg-light-primary mr-2">
@@ -120,7 +120,7 @@
 													</a>
 												</div>
 												
-												<div class="col-md-3 col-sm-6 col-12 mb-2 mb-md-0">
+												<div class="col-md-4 col-sm-6 col-12 mb-2 mb-md-0">
 													<a href="customer">
 														<div class="media">
 															<div class="avatar bg-light-info mr-2">
@@ -135,7 +135,7 @@
 														</div>
 													</a>
 												</div>
-												<div class="col-md-3 col-sm-6 col-12 mb-2 mb-sm-0">
+												<div class="col-md-4 col-sm-6 col-12 mb-2 mb-sm-0">
 													<a href="product">
 														<div class="media">
 															<div class="avatar bg-light-danger mr-2">
@@ -150,7 +150,7 @@
 														</div>
 													</a>
 												</div>
-												<div class="col-md-3 col-sm-6 col-12">
+												<!-- <div class="col-md-3 col-sm-6 col-12">
 													<div class="media">
 														<div class="avatar bg-light-success mr-2">
 															<div class="avatar-content">
@@ -162,7 +162,7 @@
 															<p class="card-text font-small-3 mb-0">Returns</p>
 														</div>
 													</div>
-												</div>
+												</div> -->
 											</div>
 										</div>
 									</div>
@@ -182,13 +182,13 @@
 														<div class="media">
 															<div class="avatar bg-light-primary mr-2">
 																<div class="avatar-content">
-																	<i data-feather="user" class="avatar-icon"></i>
+																	<i data-feather="box" class="avatar-icon"></i>
 																</div>
 															</div>
 															
 															<div class="media-body my-auto">
 																<h4 class="font-weight-bolder mb-0">{{ $totals['supplier'] }}</h4>
-																<p class="card-text font-small-3 mb-0">Suppliers</p>
+																<p class="card-text font-small-3 mb-0">Order</p>
 															</div>
 														</div>
 													</a>
@@ -199,12 +199,12 @@
 														<div class="media">
 															<div class="avatar bg-light-info mr-2">
 																<div class="avatar-content">
-																	<i data-feather="user" class="avatar-icon"></i>
+																	<i data-feather="box" class="avatar-icon"></i>
 																</div>
 															</div>
 															<div class="media-body my-auto">
 																<h4 class="font-weight-bolder mb-0">{{ $totals['customers'] }}</h4>
-																<p class="card-text font-small-3 mb-0">Customers</p>
+																<p class="card-text font-small-3 mb-0">Process</p>
 															</div>
 														</div>
 													</a>
@@ -219,7 +219,7 @@
 															</div>
 															<div class="media-body my-auto">
 																<h4 class="font-weight-bolder mb-0">{{ $totals['aproducts'] }}</h4>
-																<p class="card-text font-small-3 mb-0">Products</p>
+																<p class="card-text font-small-3 mb-0">Close</p>
 															</div>
 														</div>
 													</a>
@@ -300,7 +300,7 @@
 								});
 							</script>
 						</div>
-						<div class="col-12">
+						<div class="col-12 mt-1">
 							<figure class="highcharts-figure">
 								<div id="container3"></div>
 								<p class="highcharts-description text-center mb-1">
