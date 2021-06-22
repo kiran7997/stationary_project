@@ -74,7 +74,7 @@
 										<div class="card">
 											<div class="card-body pb-50">
 												<h6>Orders</h6>
-												<h3 class="font-weight-bolder mb-1">{{ $totals['orders'] }}</h3>
+												<h3 class="font-weight-bolder mb-1">{{ $totals['order_count'] }}</h3>
 												<div id="statistics-order-chart"></div>
 											</div>
 										</div>
@@ -187,7 +187,7 @@
 															</div>
 															
 															<div class="media-body my-auto">
-																<h4 class="font-weight-bolder mb-0">{{ $totals['supplier'] }}</h4>
+																<h4 class="font-weight-bolder mb-0">{{ $totals['order_count'] }}</h4>
 																<p class="card-text font-small-3 mb-0">Order</p>
 															</div>
 														</div>
@@ -203,7 +203,7 @@
 																</div>
 															</div>
 															<div class="media-body my-auto">
-																<h4 class="font-weight-bolder mb-0">{{ $totals['customers'] }}</h4>
+																<h4 class="font-weight-bolder mb-0">{{ $totals['order_process'] }}</h4>
 																<p class="card-text font-small-3 mb-0">Process</p>
 															</div>
 														</div>
@@ -218,7 +218,7 @@
 																</div>
 															</div>
 															<div class="media-body my-auto">
-																<h4 class="font-weight-bolder mb-0">{{ $totals['aproducts'] }}</h4>
+																<h4 class="font-weight-bolder mb-0">{{ $totals['order_close'] }}</h4>
 																<p class="card-text font-small-3 mb-0">Close</p>
 															</div>
 														</div>

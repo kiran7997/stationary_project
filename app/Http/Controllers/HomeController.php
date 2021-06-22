@@ -39,10 +39,12 @@ class HomeController extends Controller
         $totals = [
             'customers' => customers::where(['deleted' => 0])->count(),
             'aproducts' => Aproducts::where(['deleted' => 0])->count(),
-            'orders' => Orders::where(['deleted' => 0])->count(),
             'order_return' => OrderItems::where(['deleted' => 0, 'order_status' => 'return'])->count(),
             'supplier' => Suppliers::where(['deleted' => 0])->count(),
             'revenue' => Orders::where(['deleted' => 0])->sum('amount'),
+            'order_count' => Orders::where(['deleted' => 0, 'order_status' => 'order'])->count(),
+            'order_process' => Orders::where(['deleted' => 0, 'order_status' => 'process'])->count(),
+            'order_close' => Orders::where(['deleted' => 0, 'order_status' => 'close'])->count(),
         ];
 
         $temp = array();
