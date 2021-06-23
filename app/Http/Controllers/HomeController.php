@@ -66,6 +66,42 @@ class HomeController extends Controller
             $sale_temp['data'][$key][] =  $od->firstname;
             $sale_temp['data'][$key][] =  $od->count;
         }
-        return view('home', ['totals' => $totals, 'stock' => $temp, 'distwiseorder' => $dist, 'saleswiseorder' => $sale_temp]);
+        $order = Orders::where(['deleted' => 0])->get();
+        $order_data=Orders::select('order_id','order_status','firstname','lastname','email','phone_no')
+        ->where('order_status', '=', 'order')->get();
+        return view('home', ['totals' => $totals, 'stock' => $temp, 'distwiseorder' => $dist, 'saleswiseorder' => $sale_temp,'order_data'=> $order_data]);
     }
+    public function Order_type(Request $req)
+    {
+        $order = new Orders();
+        $order=$req->order_status;
+       // echo $order;exit;
+        if($order == 'order')
+        {
+        $order = Orders::where(['deleted' => 0])->get();
+        $order_data=Orders::select('order_id','order_status','firstname','lastname','email','phone_no')
+        ->where('order_status', '=', 'order')->get();
+        }
+        elseif($order == 'process')
+        {
+            $order = Orders::where(['deleted' => 0])->get();
+            $order_data=Orders::select('order_id','order_status','firstname','lastname','email','phone_no')
+            ->where('order_status', '=', 'process')->get();   
+        }
+        elseif($order == 'return')
+        {
+            $order = Orders::where(['deleted' => 0])->get();
+            $order_data=Orders::select('order_id','order_status','firstname','lastname','email','phone_no')
+            ->where('order_status', '=', 'return')->get();   
+        }
+            
+        return response()->json($order_data);
+        //return response::json(array(view('ordered')->with('order_data',$order_data)));
+        //return view('ordered', ['order_data'=> $order_data]);
+        
+       
+    }
+
+
+    
 }

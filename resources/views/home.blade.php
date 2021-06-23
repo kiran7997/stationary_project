@@ -178,8 +178,9 @@
 										<div class="card-body statistics-body">
 											<div class="row">
 												<div class="col-md-3 col-sm-6 col-12 mb-2 mb-md-0">
-													<a href="supplier">
-														<div class="media">
+													<a href="{{url('ordered_item_type')}} " onclick="status('order');">
+
+														<div class="media" >
 															<div class="avatar bg-light-primary mr-2">
 																<div class="avatar-content">
 																	<i data-feather="box" class="avatar-icon"></i>
@@ -188,14 +189,14 @@
 															
 															<div class="media-body my-auto">
 																<h4 class="font-weight-bolder mb-0">{{ $totals['order_count'] }}</h4>
-																<p class="card-text font-small-3 mb-0">Order</p>
+																<p  class="card-text font-small-3 mb-0">Order</p>
 															</div>
 														</div>
 													</a>
 												</div>
 												
 												<div class="col-md-3 col-sm-6 col-12 mb-2 mb-md-0">
-													<a href="customer">
+													<a href="{{url('ordered')}} " onclick="status('process');">
 														<div class="media">
 															<div class="avatar bg-light-info mr-2">
 																<div class="avatar-content">
@@ -210,7 +211,7 @@
 													</a>
 												</div>
 												<div class="col-md-3 col-sm-6 col-12 mb-2 mb-sm-0">
-													<a href="product">
+													<a href="{{url('ordered')}} " onclick="status('close');">
 														<div class="media">
 															<div class="avatar bg-light-danger mr-2">
 																<div class="avatar-content">
@@ -225,6 +226,7 @@
 													</a>
 												</div>
 												<div class="col-md-3 col-sm-6 col-12">
+												<a href="{{url('ordered')}} " onclick="status('return');">
 													<div class="media">
 														<div class="avatar bg-light-success mr-2">
 															<div class="avatar-content">
@@ -236,6 +238,7 @@
 															<p class="card-text font-small-3 mb-0">Returns</p>
 														</div>
 													</div>
+												</a>
 												</div>
 											</div>
 										</div>
@@ -364,6 +367,44 @@
 	</div>
 	<!-- END: Content-->
 @endsection
+
+<script>
+// $(document).ready(function () {
+//     $("#div_order").click(function(){
+// 		alert
+// });
+// });
+function status(order_status)
+{
+	
+     var sr=1;
+     var html="";
+    alert(order_status);
+	$.ajax({
+        
+		url: "{{url('ordered_item_type')}}",
+		type: "POST",
+		data: {_token:'{{ csrf_token() }}',order_status:order_status},
+		dataType: "json",
+		success:function(res){
+			$("#appendData").empty();
+			//alert(res);
+			$.each(res, function(key,val) {
+				var status=val.order_status;
+				//alert(status);
+				var status=status.charAt(0).toUpperCase() + status.slice(1)
+				//alert(status);
+				html+="<tr><td>"+sr+++"</td><td>"+val.order_id+"</td><td>"+val.firstname+"</td><td>"+val.lastname+"</td><td>"+val.email+"</td><td>"+val.phone_no+"</td><td>"+status+"</td></tr>";
+			   
+				// alert(val.order_id);
+				// alert(val.firstname);
+   });$("#appendData").append(html);
+		}
+	});
+
+}
+
+</script>
 
 <!-- BEGIN: Page Vendor JS-->
 <script src="{{ asset('app-assets/vendors/js/charts/apexcharts.min.js') }}"></script>

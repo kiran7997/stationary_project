@@ -171,3 +171,10 @@ Route::post('sales_preview', 'ReportController@previewSales');
 Route::get('item-inventory', 'ReportController@overallInventoryData');
 Route::post('overDataTable', 'ReportController@Table');
 Route::get('view-orders', 'ReportController@viewOrders');
+
+//Order Status 
+
+Route::get('ordered_item_type', 'HomeController@Order_type');
+Route::get('ordered', 'HomeController@Order_type');
+Route::get('close_order', 'HomeController@close_order');
+Route::get('return_order', 'HomeController@return_order');
