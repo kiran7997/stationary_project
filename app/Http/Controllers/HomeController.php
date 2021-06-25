@@ -78,27 +78,24 @@ class HomeController extends Controller
        // echo $order;exit;
         if($order == 'order')
         {
-        $order = Orders::where(['deleted' => 0])->get();
-        $order_data=Orders::select('order_id','order_status','firstname','lastname','email','phone_no')
-        ->where('order_status', '=', 'order')->get();
+            $order_data=Orders::select('order_id','order_status','firstname','lastname','email','phone_no')
+            ->where('order_status', '=', 'order')->where(['deleted' => 0])->get();
         }
         elseif($order == 'process')
         {
-            $order = Orders::where(['deleted' => 0])->get();
             $order_data=Orders::select('order_id','order_status','firstname','lastname','email','phone_no')
-            ->where('order_status', '=', 'process')->get();   
+            ->where('order_status', '=', 'process')->where(['deleted' => 0])->get();   
         }
         elseif($order == 'return')
         {
-            $order = Orders::where(['deleted' => 0])->get();
             $order_data=Orders::select('order_id','order_status','firstname','lastname','email','phone_no')
-            ->where('order_status', '=', 'return')->get();   
+            ->where('order_status', '=', 'return')->where(['deleted' => 0])->get();   
         }
             
-        return response()->json($order_data);
+        // return response()->json($order_data);
         //return response::json(array(view('ordered')->with('order_data',$order_data)));
-        //return view('ordered', ['order_data'=> $order_data]);
-        
+        return view('ordered', ['order_data'=> $order_data]);
+        // return $order_data;        
        
     }
 
