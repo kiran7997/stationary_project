@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Order')
+@section('title', 'Order Status')
 @section('content')
 
 <head>
@@ -20,12 +20,12 @@
             <div class="content-header-left col-md-9 col-12 mb-2">
                 <div class="row breadcrumbs-top">
                     <div class="col-12">
-                            <h2 class="content-header-title float-left mb-0">Order</h2>
+                            <h2 class="content-header-title float-left mb-0">Order Status</h2>
                         <div class="breadcrumb-wrapper">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{ url('home') }}">Home</a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="{{ url('ordered') }}">Order</a>
+                                <li class="breadcrumb-item"><a href="{{ url('ordered/{data}') }}">Order Status</a>
                                 </li>
                                 
                             </ol>
@@ -78,7 +78,6 @@
                                         <td>{{ucwords($order->lastname)}}</td>
                                         <td>{{$order->email}}</td>
                                         <td>{{$order->phone_no}}</td>
-                                       
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -112,37 +111,5 @@
     
 });
 
-
-function status(order_status)
-{
-	
-     var sr=1;
-     var html="";
-    alert(order_status);
-    alert(hi);
-	$.ajax({
-        
-		url: "{{url('ordered_item_type')}}",
-		
-		type: "POST",
-		data: {_token:'{{ csrf_token() }}',order_status:order_status},
-		dataType: "json",
-		success:function(res){
-			$("#appendData").empty();
-			//alert(res);
-			$.each(res, function(key,val) {
-				var status=val.order_status;
-				//alert(status);
-				var status=status.charAt(0).toUpperCase() + status.slice(1)
-				//alert(status);
-				html+="<tr><td>"+sr+++"</td><td>"+val.order_id+"</td><td>"+val.firstname+"</td><td>"+val.lastname+"</td><td>"+val.email+"</td><td>"+val.phone_no+"</td><td>"+status+"</td></tr>";
-			   
-				// alert(val.order_id);
-				// alert(val.firstname);
-   });$("#appendData").append(html);
-		}
-	});
-
-}
 
 </script>
