@@ -174,7 +174,7 @@ Route::get('view-orders', 'ReportController@viewOrders');
 
 //Order Status 
 
-Route::get('ordered/{data}', 'HomeController@Order_type');
+Route::get('ordered', 'HomeController@Order_type');
 
 Route::get('close_order', 'HomeController@close_order');
 Route::get('return_order', 'HomeController@return_order');
