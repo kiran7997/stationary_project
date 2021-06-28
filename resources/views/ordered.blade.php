@@ -25,7 +25,7 @@
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{ url('home') }}">Home</a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="{{ url('ordered/{data}') }}">Order Status</a>
+                                <li class="breadcrumb-item"><a href="">Order Status</a>
                                 </li>
                                 
                             </ol>

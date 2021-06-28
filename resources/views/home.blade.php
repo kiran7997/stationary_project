@@ -178,7 +178,7 @@
 										<div class="card-body statistics-body">
 											<div class="row">
 												<div class="col-md-3 col-sm-6 col-12 mb-2 mb-md-0">
-													<a href="javascript:void(0)" class="button" onclick="status('order');">
+												<a href="{{url('ordered?status=order')}} ">
 
 														<div class="media">
 															<div class="avatar bg-light-primary mr-2">
@@ -196,7 +196,7 @@
 												</div>
 												
 												<div class="col-md-3 col-sm-6 col-12 mb-2 mb-md-0">
-													<a href="{{url('ordered/process')}} ">
+												<a href="{{url('ordered?status=process')}} ">
 														<div class="media">
 															<div class="avatar bg-light-info mr-2">
 																<div class="avatar-content">
@@ -211,7 +211,8 @@
 													</a>
 												</div>
 												<div class="col-md-3 col-sm-6 col-12 mb-2 mb-sm-0">
-													<a href="{{url('ordered/close')}}">
+												<a href="{{url('ordered?status=close')}} ">
+
 														<div class="media">
 															<div class="avatar bg-light-danger mr-2">
 																<div class="avatar-content">
@@ -226,7 +227,8 @@
 													</a>
 												</div>
 												<div class="col-md-3 col-sm-6 col-12">
-												<a href="{{url('ordered/return')}}">
+												<a href="{{url('ordered?status=return')}} ">
+
 													<div class="media">
 														<div class="avatar bg-light-success mr-2">
 															<div class="avatar-content">
@@ -368,19 +370,6 @@
 	<!-- END: Content-->
 @endsection
 
-<script>
-function status(stat)
-{
-	alert(stat);
-	
-	
-	$.get({
-       url: '/ordered', 
-       data: { status: stat } 
-});
-}
-
-</script>
 <!-- BEGIN: Page Vendor JS-->
 <script src="{{ asset('app-assets/vendors/js/charts/apexcharts.min.js') }}"></script>
 <!-- END: Page Vendor JS-->

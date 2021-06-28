@@ -73,7 +73,8 @@ class HomeController extends Controller
     }
     public function Order_type(Request $req)
     {
-       $order=$req->status;
+        $order= $_GET['status']; 
+      // $order=$req->status;
         //echo $order;exit;
         if($order == 'order')
         {
