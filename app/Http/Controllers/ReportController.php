@@ -167,4 +167,25 @@ class ReportController extends Controller
 
         return view('view-orders', compact('order_data'));
     }
+    public function dailyOrder(Request $req)
+    {
+        $date = date('Y-m-d', time());
+       
+       
+        $daily_order=Orders::select('order_id', 'order_status', 'order_date', 'firstname', 'lastname', 'phone_no')
+        ->where('order_date','=',$date)->where(['deleted' => 0])->get();
+        return view('dailyOrderReport',['daily_order'=>$daily_order])->with('no', 1);
+    }
+    public function dailyOrderReport(Request $req)
+    {
+        $date = new Orders();
+        $date=$req->date; 
+        
+       // echo $date;
+        $daily_order=Orders::select('order_id', 'order_status', 'order_date', 'firstname', 'lastname', 'phone_no')
+        ->where('order_date','=',$date)->where(['deleted' => 0])->get();
+        //echo $daily_order;
+       // return view('dailyOrderReport',['daily_order'=>$daily_order])->with('no', 1);
+        return response()->json($daily_order);
+    }
 }
