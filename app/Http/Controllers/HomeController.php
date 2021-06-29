@@ -71,9 +71,11 @@ class HomeController extends Controller
         ->where('order_status', '=', 'order')->get();
         return view('home', ['totals' => $totals, 'stock' => $temp, 'distwiseorder' => $dist, 'saleswiseorder' => $sale_temp,'order_data'=> $order_data]);
     }
-    public function Order_type($order)
+    public function Order_type(Request $req)
     {
-       //echo $order;exit;
+        $order= $_GET['status']; 
+      // $order=$req->status;
+        //echo $order;exit;
         if($order == 'order')
         {
        
@@ -100,7 +102,4 @@ class HomeController extends Controller
         }
      return view('ordered', ['order_data'=> $order_data]);
     }
-
-
-    
 }

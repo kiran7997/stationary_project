@@ -178,4 +178,3 @@ Route::get('ordered/{data}', 'HomeController@Order_type');
 
 Route::get('close_order', 'HomeController@close_order');
 Route::get('return_order', 'HomeController@return_order');
-
