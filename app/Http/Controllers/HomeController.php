@@ -103,9 +103,5 @@ class HomeController extends Controller
             // echo $order_data;exit;
         }
      return view('ordered', ['order_data'=> $order_data]);
-     
     }
-
-
-    
 }
