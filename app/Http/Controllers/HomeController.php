@@ -66,6 +66,7 @@ class HomeController extends Controller
             $sale_temp['data'][$key][] =  $od->firstname;
             $sale_temp['data'][$key][] =  $od->count;
         }
+        
         $order = Orders::where(['deleted' => 0])->get();
         $order_data=Orders::select('order_id','order_status','firstname','lastname','email','phone_no')
         ->where('order_status', '=', 'order')->get();
