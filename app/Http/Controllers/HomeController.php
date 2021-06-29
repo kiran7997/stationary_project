@@ -71,32 +71,34 @@ class HomeController extends Controller
         ->where('order_status', '=', 'order')->get();
         return view('home', ['totals' => $totals, 'stock' => $temp, 'distwiseorder' => $dist, 'saleswiseorder' => $sale_temp,'order_data'=> $order_data]);
     }
-    public function Order_type(Request $req)
+    public function Order_type($order)
     {
-        $order = new Orders();
-        $order=$req->order_status;
-       // echo $order;exit;
+       //echo $order;exit;
         if($order == 'order')
         {
-            $order_data=Orders::select('order_id','order_status','firstname','lastname','email','phone_no')
-            ->where('order_status', '=', 'order')->where(['deleted' => 0])->get();
+       
+        $order_data=Orders::select('order_id','order_status','firstname','lastname','email','phone_no')
+        ->where('order_status', '=', 'order')->where(['deleted' => 0])->get();
+       
         }
         elseif($order == 'process')
         {
             $order_data=Orders::select('order_id','order_status','firstname','lastname','email','phone_no')
-            ->where('order_status', '=', 'process')->where(['deleted' => 0])->get();   
+            ->where('order_status', '=', 'process')->where(['deleted' => 0])->get();
+        }
+        elseif($order == 'close')
+        {
+            $order_data=Orders::select('order_id','order_status','firstname','lastname','email','phone_no')
+            ->where('order_status', '=', 'close')->where(['deleted' => 0])->get();
         }
         elseif($order == 'return')
         {
-            $order_data=Orders::select('order_id','order_status','firstname','lastname','email','phone_no')
-            ->where('order_status', '=', 'return')->where(['deleted' => 0])->get();   
+            $order_data=Orders::select('orders.order_id','order_items.order_status','firstname','lastname','email','phone_no')
+            ->leftjoin('order_items','orders.order_id','=','order_items.order_id')
+            ->where('order_items.order_status', '=', 'return')->where(['orders.deleted' => 0])->get(); 
+            // echo $order_data;exit;
         }
-            
-        // return response()->json($order_data);
-        //return response::json(array(view('ordered')->with('order_data',$order_data)));
-        return view('ordered', ['order_data'=> $order_data]);
-        // return $order_data;        
-       
+     return view('ordered', ['order_data'=> $order_data]);
     }
 
 

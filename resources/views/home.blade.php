@@ -178,9 +178,9 @@
 										<div class="card-body statistics-body">
 											<div class="row">
 												<div class="col-md-3 col-sm-6 col-12 mb-2 mb-md-0">
-													<!-- <a href="{{url('ordered_item_type')}} " > -->
+													<a href="{{url('ordered/order')}}">
 
-														<div class="media" onclick="status('order');">
+														<div class="media">
 															<div class="avatar bg-light-primary mr-2">
 																<div class="avatar-content">
 																	<i data-feather="box" class="avatar-icon"></i>
@@ -192,11 +192,11 @@
 																<p  class="card-text font-small-3 mb-0">Order</p>
 															</div>
 														</div>
-													<!-- </a> -->
+													</a>
 												</div>
 												
 												<div class="col-md-3 col-sm-6 col-12 mb-2 mb-md-0">
-													<a href="{{url('ordered')}} " onclick="status('process');">
+													<a href="{{url('ordered/process')}} ">
 														<div class="media">
 															<div class="avatar bg-light-info mr-2">
 																<div class="avatar-content">
@@ -211,7 +211,7 @@
 													</a>
 												</div>
 												<div class="col-md-3 col-sm-6 col-12 mb-2 mb-sm-0">
-													<a href="{{url('ordered')}} " onclick="status('close');">
+													<a href="{{url('ordered/close')}}">
 														<div class="media">
 															<div class="avatar bg-light-danger mr-2">
 																<div class="avatar-content">
@@ -226,7 +226,7 @@
 													</a>
 												</div>
 												<div class="col-md-3 col-sm-6 col-12">
-												<a href="{{url('ordered')}} " onclick="status('return');">
+												<a href="{{url('ordered/return')}}">
 													<div class="media">
 														<div class="avatar bg-light-success mr-2">
 															<div class="avatar-content">
@@ -368,33 +368,6 @@
 	<!-- END: Content-->
 @endsection
 
-<script>
-// $(document).ready(function () {
-//     $("#div_order").click(function(){
-// 		alert
-// });
-// });
-function status(order_status)
-{
-	
-     var sr=1;
-     var html="";
-    alert(order_status);
-	$.ajax({
-        
-		url: "{{url('ordered_item_type')}}",
-		type: "post",
-		data: {_token:'{{ csrf_token() }}',order_status:order_status},
-		dataType: "json",
-		success:function(res){
-			alert((res));
-			location.href = res;
-		}
-	});
-
-}
-
-</script>
 
 <!-- BEGIN: Page Vendor JS-->
 <script src="{{ asset('app-assets/vendors/js/charts/apexcharts.min.js') }}"></script>
