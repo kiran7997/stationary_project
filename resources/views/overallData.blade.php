@@ -47,7 +47,7 @@ td {
                                         @csrf
                                
                                         <div class="modal-body col-md-6 ">  
-                                        <label class="required"for="product_name"><b> Select Product Name</b> </label>
+                                        <label class="required"for="product_name"><b>  Products Name</b> </label>
 					                    <div class="form-group">
 						                <select class="form-control" name="product_name" id="product_name" required>
 							                <option value="">Select Product Name</option>
@@ -90,7 +90,7 @@ td {
                                     <tr style="font-weight: bold;">
                                             <td rowspan="2"><img src="\logo\msb.png" alt="logo"></td>
                                             <td colspan="4" >Report</td>
-                                            <td rowspan="2"><?php $date = date('Y-m-d', time());
+                                            <td rowspan="2"> Date <br><?php $date = date('Y-m-d', time());
                                                 echo $date;
                                             ?></td>
                                              
@@ -148,8 +148,22 @@ $( "#product_name" ).change(function()
                 data: {_token:'{{ csrf_token() }}',id:product_name},
                 success:function(res){
                     $("#appendData").empty();
+                        
+                   
                    // alert(res);
                     $.each(res, function(key,val) {
+                        if(val.supplier_companyName==null)
+                        {
+                            val.supplier_companyName='';
+                        }
+                        if(val.product_name==null)
+                        {
+                            val.product_name='';
+                        }
+                        if(val.quantity==null)
+                        {
+                            val.quantity='';
+                        }
                         var date = val.created_at;
                          var date = date.split("T")[0];
                          var upper=val.invntory_status;

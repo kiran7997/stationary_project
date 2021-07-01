@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Sales Wise Report')
+@section('title', 'Daily Order Report')
 @section('content')
 <style>
 table {
@@ -29,12 +29,12 @@ td {
             <div class="content-header-left col-md-9 col-12 mb-2">
                 <div class="row breadcrumbs-top">
                     <div class="col-12">
-                        <h2 class="content-header-title float-left mb-0">Sales Wise Report</h2>
+                        <h2 class="content-header-title float-left mb-0">Daily Order Report</h2>
                         <div class="breadcrumb-wrapper">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{ url('/home') }}">Home</a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="{{ url('salesWiseReoprt') }}">Sales Wise Report</a>
+                                <li class="breadcrumb-item"><a href="{{ url('dailyOrderReport') }}">Daily Order Report</a>
                                 </li>
                             </ol>
                         </div>
@@ -53,14 +53,9 @@ td {
                                         @csrf
                                         <div class="col-md-4 col-12">
                                             <div class="form-group"><br>
-                                                <label for="state"><b>Sales</b></label>
-                                                <select class="form-control" name="sales" id="salesid" required>
-							                <option value="">Select Sales Person</option>
-							                @foreach($sales as $sal)
-							                <option value="{{$sal->sales_person}}">{{$sal->firstname}}
-				                			</option>
-							                @endforeach
-						                </select>
+                                            <label for="date"><h4><b>Date :</b></h4> </label> &nbsp;
+        <input placeholder=" Select Your Date" class="form-control" type="text" onfocus="(this.type='date')"
+   onblur="(this.type='text')" id="date">
                                            
                                                 
                                             </div>
@@ -90,32 +85,32 @@ td {
                                             ?></td>
                                              
                                             <tr>
-                                            <td colspan="4"> <b>Sales Wise Data Report</b> </td>
+                                            <td colspan="4"> <b>Daily Order Report</b> </td>
                                             </tr>
                                             
-                                    <tr style="font-weight: bold;">
+                                            <tr style="font-weight: bold;">
 									    <td>Sr.No</td>
                                         <td>Order Number</td>
-                                        <td>City</td>
+                                        <td>Order status</td>
                                         <td>Firstname</td>
                                         <td>LastName</td>
-                                         <td>Order Status</td>
+                                         <td>Phone No</td>
 									<!-- <th>Actions</th>  -->
 								    </tr>
                                     </tr>
                                         </thead>
                                             <tbody id="appendData">
-                                            @foreach($sales as $sale)
-                                                <tr id="sid{{$sale->order_id}}">
+                                            @foreach($daily_order as $order)
+                                                <tr id="sid{{$order->order_id}}">
                                                 <td>{{ $no++ }}</td>
-                                                <td>{{$sale->order_id}}</td>
-                                                <td>{{ucwords($sale->city)}}</td>
-                                                <td>{{$sale->firstname}} </td>
-                                                <td>{{$sale->lastname}} </td>
-                                                <td>{{ucwords($sale->order_status)}} </td>
+                                                <td>{{$order->order_id}}</td>
+                                                <td>{{ucwords($order->order_status)}}</td>
+                                                <td>{{ucwords($order->firstname)}} </td>
+                                                <td>{{ucwords($order->lastname)}} </td>
+                                                <td>{{$order->phone_no}} </td>
                                             @endforeach
                                      </tbody>
-                                </table>
+                                </table>    
                              </div >
                             </div>
                         </div>
@@ -147,6 +142,8 @@ td {
 
              
 
+            
+
 $(document).ready(function() {
   
   $('#example').DataTable( {
@@ -158,21 +155,25 @@ $(document).ready(function() {
   return confirm('Are you sure you want to Delete?');
 });
 
-$( "#salesid").change(function() 
+$( "#date").change(function() 
   {
-     var sales = $(this).val();
+     var date = $(this).val();
      var sr=1;
      var html="";
-   // alert(sales);
+    //alert(date);
     $.ajax({
         
-                url: "{{url('salestable')}}",
+                url: "{{url('orderReport')}}",
                 
                 type: "POST",
-                data: {_token:'{{ csrf_token() }}',id:sales},
+                dataType:"json",
+                data: {_token:'{{ csrf_token() }}',date:date},
+                
                 success:function(res){
+              
+                    
                     $("#appendData").empty();
-                    //alert(res);
+                   
                     $.each(res, function(key,val) {
                         if(val.firstname==null){
                         val.firstname='';
@@ -181,9 +182,9 @@ $( "#salesid").change(function()
                         {
                             val.lastname='';
                         }
-                        if(val.city==null)
+                        if(val.phone_no==null)
                         {
-                            val.city='';
+                            val.phone_no='';
                         }
                         if(val.order_status==null)
                         {
@@ -193,15 +194,15 @@ $( "#salesid").change(function()
                         //alert(status);
                         var status=status.charAt(0).toUpperCase() + status.slice(1)
                         //alert(status);
-                        html+="<tr><td>"+sr+++"</td><td>"+val.order_id+"</td><td>"+val.city+"</td><td>"+val.firstname+"</td><td>"+val.lastname+"</td><td>"+status+"</td></tr>";
+                        html+="<tr><td>"+sr+++"</td><td>"+val.order_id+"</td><td>"+status+"</td><td>"+val.firstname+"</td><td>"+val.lastname+"</td><td>"+val.phone_no+"</td></tr>";
                        
                         // alert(val.order_id);
                         // alert(val.firstname);
-           });$("#appendData").append(html);
+            });$("#appendData").append(html);
                 }
             });
         });
-  } );
+  });
   function exportTableToExcel(example, filename = ''){
     var downloadLink;
     var dataType = 'application/vnd.ms-excel';

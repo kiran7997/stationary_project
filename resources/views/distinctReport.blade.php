@@ -55,7 +55,7 @@ td {
                                         @csrf
                                         <div class="row">
                                         <div class="col-md-5 col-12 ml-5">
-                                            <div class="form-group">
+                                            <div class="form-group"><br>
                                             <label for="state"><b>State</b></label>
                                                 <select class="form-control " name="state" id="state"
                                                     required>
@@ -69,7 +69,7 @@ td {
                                         </div>
 
                                         <div class="col-md-5 col-12">
-                                            <div class="form-group">
+                                            <div class="form-group"><br>
                                             <label for="state"><b>District</b></label>
                                                <select class=" form-control" name="district" id="district" required>
                                                     <option value="">Select District</option>
@@ -97,7 +97,7 @@ td {
                                             <tr style="font-weight: bold;">
                                             <td rowspan="2"><img src="\logo\msb.png" alt="logo"></td>
                                             <td colspan="4" >Report</td>
-                                            <td rowspan="2"><?php $date = date('Y-m-d', time());
+                                            <td rowspan="2">Date <br><?php $date = date('Y-m-d', time());
                                                 echo $date;
                                             ?></td>
                                             <tr>
@@ -227,8 +227,25 @@ $( "#district" ).change(function()
                 data: {_token:'{{ csrf_token() }}',id:district},
                 success:function(res){
                     $("#appendData").empty();
+                    
                     //alert(res);
                     $.each(res, function(key,val) {
+                        if(val.firstname==null){
+                        val.firstname='';
+                            }
+                        if(val.lastname==null)
+                        {
+                            val.lastname='';
+                        }
+                        if(val.district_title==null)
+                        {
+                            val.district_title='';
+                        }
+                        if(val.order_status==null)
+                        {
+                            val.order_status='';
+                        }
+                   
                         html+="<tr><td>"+sr+"</td><td>"+val.order_id+"</td><td>"+val.district_title+"</td><td>"+val.firstname+"</td><td>"+val.lastname+"</td><td>"+val.order_status+"</td></tr>";
                        
                         // alert(val.order_id);
