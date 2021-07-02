@@ -61,10 +61,7 @@ td {
                                         </div>
 					                 </form>
                                      
-                            <div class="card-header border-bottom">
-                                <h4 class="card-title"></h4>
-                                
-                                </div>
+                           
                     
                             </div>
                             <div class=" col-12">
@@ -72,18 +69,7 @@ td {
                                         <button  class="btn btn-primary" onclick="exportTableToExcel('example')" style="float:right;">Excel Report</button>
                                         </div>
                                 </div>
-                            <div style="margin:20px;">
-                                @if ($message = Session::get('success'))
-                                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                    <div class="alert-body">
-                                        <p>{{ $message }}</p>
-                                    </div>
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                @endif
-
+                           
                                    <div id="printDiv">
                                 <table id="example" class="display nowrap stripe" style="width:100%;text-align:center">
                                     <thead>

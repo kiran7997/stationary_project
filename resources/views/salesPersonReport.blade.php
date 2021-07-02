@@ -68,7 +68,7 @@ td {
                                        
                                         
                                         </div>
-					                    </div>
+					                    
 					                 </form>
                                      <div class=" col-12">
                                           <button  class="btn btn-primary" onclick="print() " style="float:right;margin-left :5px"> Print Report</button>

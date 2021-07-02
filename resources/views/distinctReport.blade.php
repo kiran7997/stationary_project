@@ -80,7 +80,7 @@ td {
                                        
                                         </div>
                                     </div>
-					            </div>
+					            
                             </form>
                                      <div class=" col-12">
                                           <button  class="btn btn-primary" onclick="export_data() " style="float:right;margin-left:5px;"> Print Report</button>
@@ -106,7 +106,7 @@ td {
                                             <tr style="font-weight: bold;">
                                             
                                         <td>Sr.No</td>
-									    <td>Order Number</td>
+									    <td>Order No</td>
                                         <td>Distinct Name</td>
                                         <td>Firstname</td>
                                         <td>LastName</td>
