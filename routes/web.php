@@ -176,3 +176,5 @@ Route::get('view-orders', 'ReportController@viewOrders');
 
 Route::get('ordered', 'HomeController@Order_type');
 
+Route::get('dailyOrderReport', 'ReportController@dailyOrder');
+Route::POST('orderReport', 'ReportController@dailyOrderReport');
