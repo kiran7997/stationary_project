@@ -182,7 +182,7 @@ class ReportController extends Controller
         $date=$req->date; 
         
        // echo $date;
-        $daily_order=Orders::select('orders.order_id', 'orders.order_status', 'order_date', 'firstname', 'lastname', 'phone_no','orders.amount','order_items.order_id','order_items.product_name','order_items.price','order_items.quantity','order_items.subtotal')
+        $daily_order=Orders::select('orders.order_id', 'orders.order_status', 'order_date', 'firstname', 'lastname', 'phone_no','orders.amount','order_items.product_name','order_items.price','order_items.quantity','order_items.subtotal')
         ->leftjoin('order_items','order_items.order_id','=' ,'orders.order_id')
         ->where('order_date','=',$date)->where(['orders.deleted' => 0])->get();
        // echo $daily_order;exit;

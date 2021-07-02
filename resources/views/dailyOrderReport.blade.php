@@ -105,7 +105,7 @@ td {
                                         <td>LastName</td>
                                         <td>Phone No</td>
                                         <td>Product Name</td>
-                                        <td>Product Quantity</td>
+                                        <td>Quantity</td>
                                         <td>Price</td>
                                         <td>Subtotal</td>
                                          <!-- <td>Amount</td> -->
@@ -167,7 +167,8 @@ $(document).ready(function() {
   
   $('#example').DataTable( {
      
-      "scrollX": true
+      "scrollX": true,
+      "scrollY": true
   } );
 
   $(".delete").on("click", function () {
