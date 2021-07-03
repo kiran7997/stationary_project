@@ -189,4 +189,29 @@ class ReportController extends Controller
        // return view('dailyOrderReport',['daily_order'=>$daily_order])->with('no', 1);
         return response()->json($daily_order);
     }
+    public function dailySales(Request $req)
+    {
+        $sales = Orders::select('users.id','users.firstname','users.lastname','sales_person','order_id','order_status','users.city')
+        ->leftjoin('users', 'users.id', '=', 'sales_person')
+        ->where(['orders.deleted' => 0])->get();
+
+        $date = date('Y-m-d', time());
+        $daily_order=Orders::select('order_id', 'order_status', 'order_date', 'firstname', 'lastname', 'phone_no')
+        ->where('order_date','=',$date)->where(['deleted' => 0])->get();
+        return view('dailySalesReport',['daily_order'=>$daily_order], ['sales' => $sales])->with('no', 1);
+    }
+    public function dailySalesReport(Request $req)
+    {
+        $date = new Orders();
+        $date=$req->date; 
+        $sales=$req->sales;
+        
+        $salesPerson = Orders::select('users.id','orders.firstname as fname','orders.lastname','sales_person','users.firstname as salename','orders.order_id','orders.order_status','users.city','order_items.product_name','order_items.price','order_items.quantity','order_items.subtotal')
+        ->leftjoin('users', 'users.id', '=', 'sales_person')
+        ->leftjoin('order_items','order_items.order_id','=' ,'orders.order_id')
+        ->where('id', $sales)->where('order_date','=',$date)->where(['orders.deleted' => 0])->get();
+        echo $salesPerson;exit;
+        return view('dailySalesReport',['salesPerson'=>$salesPerson])->with('no', 1);
+    }
+    
 }
