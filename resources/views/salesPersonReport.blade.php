@@ -57,7 +57,7 @@ td {
                                                 <select class="form-control" name="sales" id="salesid" required>
 							                <option value="">Select Sales Person</option>
 							                @foreach($sales as $sal)
-							                <option value="{{$sal->sales_person}}">{{$sal->firstname}}
+							                <option value="{{$sal->id}}">{{$sal->firstname}}
 				                			</option>
 							                @endforeach
 						                </select>
@@ -105,7 +105,7 @@ td {
                                     </tr>
                                         </thead>
                                             <tbody id="appendData">
-                                            @foreach($sales as $sale)
+                                            @foreach($salesPerson as $sale)
                                                 <tr id="sid{{$sale->order_id}}">
                                                 <td>{{ $no++ }}</td>
                                                 <td>{{$sale->order_id}}</td>
