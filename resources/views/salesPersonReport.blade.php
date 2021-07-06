@@ -70,7 +70,7 @@ td {
                                         </div>
 					                    
 					                 </form>
-                                     <div class=" col-12">
+                                     <div class=" col-12" id="hideDiv">
                                           <button  class="btn btn-primary" onclick="print() " style="float:right;margin-left :5px"> Print Report</button>
                                         <button  class="btn btn-primary" onclick="exportTableToExcel('example')" style="float:right;">Excel Report</button>
                                         </div>
@@ -117,6 +117,8 @@ td {
                                      </tbody>
                                 </table>
                              </div >
+                             <span id="showNotFOund">
+                             </span>
                             </div>
                         </div>
                     </div>
@@ -171,7 +173,23 @@ $( "#salesid").change(function()
                 type: "POST",
                 data: {_token:'{{ csrf_token() }}',id:sales},
                 success:function(res){
-                    $("#appendData").empty();
+                    $('#appendData').empty();
+                    if (res == '') {
+                       // alert("hi");
+                        $('#printDiv').hide();
+                        $('#hideDiv').hide();
+                        html="<center><h2>Data Not Found</h2></center>";
+                        $("#showNotFOund").append(html);
+                     } 
+                     else
+                     {
+                         
+                   //alert("HELLO");  
+                   $("#showNotFOund").hide();
+                   $('#printDiv').show()
+                        $('#hideDiv').show()
+                    
+                   
                     //alert(res);
                     $.each(res, function(key,val) {
                         if(val.firstname==null){
@@ -198,6 +216,7 @@ $( "#salesid").change(function()
                         // alert(val.order_id);
                         // alert(val.firstname);
            });$("#appendData").append(html);
+                }
                 }
             });
         });

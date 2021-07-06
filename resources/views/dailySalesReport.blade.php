@@ -219,8 +219,8 @@ $( "#date").change(function()
                    $('#printDiv').show()
                         $('#hideDiv').show()
                     $.each(res, function(key,val) {
-                        if(val.firstname==null){ val.salename='';}
-                        if(val.firstname==null){ val.fname='';}
+                        if(val.salename==null){ val.salename='';}
+                        if(val.fname==null){ val.fname='';}
                         if(val.lastname==null){val.lastname='';}
                         if(val.phone_no==null){val.phone_no='';}
                         if(val.order_status==null){val.order_status='';}
