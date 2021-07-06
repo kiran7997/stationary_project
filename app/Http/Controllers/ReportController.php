@@ -53,10 +53,10 @@ class ReportController extends Controller
     public function salesReport(Request $requ)
     {
         
-     
-        $sales = Orders::select('users.id','users.firstname','users.lastname','sales_person','order_id','order_status','users.city')
-        ->leftjoin('users', 'users.id', '=', 'sales_person')
-        ->where(['orders.deleted' => 0])->get();
+        $salesname=DB::table('users')->select('id','firstname','lastname','name')->where(['users.deleted'=>0])->get();
+        // $sales = Orders::select('users.id','users.firstname','users.lastname','sales_person','order_id','order_status','users.city')
+        // ->leftjoin('users', 'users.id', '=', 'sales_person')
+        // ->where(['orders.deleted' => 0])->get();
 
         $sale = new Orders();
         $sale=$requ->sales;
@@ -64,7 +64,7 @@ class ReportController extends Controller
         $salesPerson = Orders::select('users.id','users.firstname','users.lastname','sales_person','order_id','order_status','users.city')
         ->leftjoin('users', 'users.id', '=', 'sales_person')
         ->where('id', $sale)->get();
-        return view('salesPersonReport', ['sales' => $sales],['sales' => $salesPerson])->with('no', 1);
+        return view('salesPersonReport', ['sales' => $salesname],['salesPerson' => $salesPerson])->with('no', 1);
     }    
 
     public function salesTable(Request $req)
