@@ -1,6 +1,5 @@
 @extends('layouts.app')
 
-
 @section('content')
 <!-- Responsive Datatable -->
 <!-- BEGIN: Content-->
@@ -80,7 +79,6 @@
                                         @endforeach
                                     </tbody>
                                 </table>
-
                             </div>
                         </div>
                     </div>
@@ -102,8 +100,8 @@
     } );
 
     $(".delete").on("click", function () {
-    return confirm('Are you sure you want to Delete?');
-});
+        return confirm('Are you sure you want to Delete?');
+    });
 } );
 
 
