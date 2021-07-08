@@ -82,21 +82,21 @@ class ReportController extends Controller
             return response()->json($salesPerson);
        // return view('distinctReport', ['district' => $order])->with('no', 1);
     }
-    public function printSales(Request $requ)
-    {
-        $dis = new Orders();
-        $sales=$requ->sales;
-        //echo $sales;exit;
-        $salesPerson = Orders::select('users.id','users.firstname','users.lastname','sales_person','order_id','order_status','users.city')
-        ->leftjoin('users', 'users.id', '=', 'sales_person')
-        ->where('id', $sales)->get();
+    // public function printSales(Request $requ)
+    // {
+    //     $dis = new Orders();
+    //     $sales=$requ->sales;
+    //     //echo $sales;exit;
+    //     $salesPerson = Orders::select('users.id','users.firstname','users.lastname','sales_person','order_id','order_status','users.city')
+    //     ->leftjoin('users', 'users.id', '=', 'sales_person')
+    //     ->where('id', $sales)->get();
        
-        //echo "<pre>"; print_r($print);
-        //print_r ($print);exit;
-        return view('sales_preview', ['print' => $salesPerson])->with('no', 1);
-        //return view('district-preview')->with('print',$print);
+    //     //echo "<pre>"; print_r($print);
+    //     //print_r ($print);exit;
+    //     return view('sales_preview', ['print' => $salesPerson])->with('no', 1);
+    //     //return view('district-preview')->with('print',$print);
    
-    }
+    // }
     public function overallInventoryData(Request $req)
     {
         // $report = Inventory::select('aproducts.product_name','aproducts.product_id','order_id','order_status','firstname','lastname','district')
@@ -217,7 +217,7 @@ class ReportController extends Controller
         ->leftjoin('users', 'users.id', '=', 'sales_person')
         ->leftjoin('order_items','order_items.order_id','=' ,'orders.order_id')
         ->where('id', $sales)->where('order_date','=',$date)->where(['orders.deleted' => 0])->get();
-        echo $salesPerson;exit;
+      //  echo $salesPerson;exit;
         // $salesPerson= Orders::select('orders.order_id','orders.firstname','orders.lastname','sales_person','orders.order_status','order_items.product_name','order_items.price','order_items.quantity','order_items.subtotal')
         // ->leftjoin('order_items','order_items.order_id','=' ,'orders.order_id')
         // ->leftjoin('users', 'users.id', '=', $sales)
@@ -225,5 +225,44 @@ class ReportController extends Controller
         return response()->json($salesPerson);
      
     }
-    
+    public function productWiseData(Request $req)
+    {
+        // $report = Inventory::select('aproducts.product_name','aproducts.product_id','order_id','order_status','firstname','lastname','district')
+        // ->leftjoin('district', 'district.districtid', '=', 'district')
+        // ->where(['orders.deleted' => 0])->get();
+        
+        $products_data = Aproducts::select('product_id', 'product_name')->where('deleted', 0)->get();
+        return view('productWIseReport', ['products_data' => $products_data]); 
+        //$products_data = Inventeries::select('product_id')
+    }
+    public function productWiseReport(Request $req)
+    {
+        
+        $product=$req->product;
+        $start=$req->start;
+        $end=$req->end;
+        if($product == 'all')
+        {
+            $productWiseData=Orders::select('aproducts.product_id as aproduct_id', 'aproducts.product_name',
+            'order_items.order_id','order_items.price','order_items.subtotal','order_items.amount','order_items.product_id as order_product' ,'orders.order_id','order_items.quantity','order_items.order_status','order_items.amount')
+             ->leftjoin('order_items','orders.order_id','=','order_items.order_id')
+            ->leftjoin('aproducts','aproducts.product_id','=','order_items.product_id')
+            ->where(['orders.deleted' => 0])->get();
+            return response()->json($productWiseData);
+        }
+        else
+
+        $products = Aproducts::select('product_id', 'product_name')->where('deleted', 0)->get();
+        $productWiseData=Orders::select('aproducts.product_id as aproduct_id', 'aproducts.product_name',
+        'order_items.order_id','order_items.price','order_items.subtotal','order_items.amount','order_items.product_id as order_product' ,'orders.order_id','order_items.quantity','order_items.order_status','order_items.amount')
+         ->leftjoin('order_items','orders.order_id','=','order_items.order_id')
+        ->leftjoin('aproducts','aproducts.product_id','=','order_items.product_id')
+        ->where('order_items.product_id', $product)
+        ->where('orders.order_date','>=',$start)
+        ->where('orders.order_date','<=',$end)
+        ->where(['orders.deleted' => 0])->get();
+        //echo $productWiseData;exit;
+        return response()->json($productWiseData);
+       
+    }
 }
