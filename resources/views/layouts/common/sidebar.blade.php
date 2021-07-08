@@ -158,6 +158,10 @@
                                     data-feather="package"></i><span class="menu-title text-truncate"
                                     data-i18n="Form Wizard">Daily Sales Person Report</span></a>
                   </li>
+                  <li class=" nav-item"><a class="d-flex align-items-center" href="productWiseReport"><i
+                                    data-feather="package"></i><span class="menu-title text-truncate"
+                                    data-i18n="Form Wizard">Product Wise Report</span></a>
+                  </li>
                   @endcan
                   <!-- @can('employee-dashboard')
                   <li class=" nav-item"><a class="d-flex align-items-center" href="form-layout.html"><i
