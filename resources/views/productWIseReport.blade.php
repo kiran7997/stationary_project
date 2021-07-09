@@ -41,66 +41,60 @@ td {
             <section id="responsive-datatable">
                 <div class="row">
                     <div class="col-12">
-                        <div class="card">
-
-                        
-                                        @csrf
-                                        <div class="row" style="margin-left:100px">
-                                        <div class="col-md-5 col-12 ">
-                                        <form id="reportForm" name="reportForm" >
+                      <div class="card">
+                        <form id="reportForm" name="reportForm" >
+                            @csrf
+                            <div class="row" style ="margin-left:120px">
+                                        <div class="col-md-4 col-12 ">
                                             <div class="form-group"><br>
-                                            <label for="products"><b>All Products</b></label>
-                                            <select class="form-control" name="product_name" id="product_name" >
-							                    <option value="">Select Product Name</option>
-                                                <option value="all">All Data</option>
-							                        @foreach($products_data as $data)
-                                                   <option value="{{$data->product_id}}">{{$data->product_name}}
-                                                    @endforeach
-						                    </select>
-                                            </div>
-                                        </div>
-                                       
-                                        <div class="col-md-5 col-12">
-                                            <div class="form-group"><br>
-                                            <label for="date"><b> Staring Date:</h4> </label>
-                                                 <input placeholder=" Select Your Date" class="form-control" type="text" onfocus="(this.type='date')"
+                                                <label for="date"><b> Staring Date:</h4> </label>
+                                                <input placeholder=" Select Your Date" class="form-control" type="text" onfocus="(this.type='date')"
                                                  onblur="(this.type='text')" id="date1">
                                             </div>
                                         </div>
-                                        </div>
-                                     <div class="row " style="margin-left:100px">
-                                        <div class=" col-md-5 col-12">
-                                            <div class="form-group"><b></br>
-                                                <label for="date"><b>Ending Date:</h4> </label>
-                                                 <input placeholder=" Select Your Date" class="form-control" type="text" onfocus="(this.type='date')"
+
+                                        <div class="  col-12">
+                                            <div class="form-group"><br>
+                                                <label for="date"><b> Ending Date:</h4> </label>
+                                                <input placeholder=" Select Your Date" class="form-control" type="text" onfocus="(this.type='date')"
                                                  onblur="(this.type='text')" id="date2">
                                             </div>
                                         </div>
-                                        <div class=" col-md-5 col-12"  style="margin-top:25px">
-                                        <center>
-                                     <div class="form-group"><b></br>
-                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                       
+                             </div>
+                             <div class="row " style ="margin-left:120px">
+                                        <div class="col-md-4 col-12 ">
+                                            <div class="form-group"><br>
+                                                 <label for="products"><b>All Products</b></label>
+                                                     <select class="form-control" name="product_name" id="product_name" >
+					                                     <option value="">Select Product Name</option>
+                                                         <option value="all">All Data</option>					                        @foreach($products_data as $data)
+                                                         <option value="{{$data->product_id}}">{{$data->product_name}}
+                                                    @endforeach
+						                            </select>
                                             </div>
-                                            </center>
- 
                                         </div>
+
+                                        <div  style="margin-top:25px;">
+                                            <div class="form-group ml-5" ><br>
+                                                 <button type="submit" class="btn btn-primary">Submit</button>
+                                            </div>
                                         </div>
-                                    
-                                </div>
-                                
-                           </div>
-                        </div>
-                     </form>
+                                       
+                             </div>
+                        </form>
                 </div>
+                </div>
+                </div>
+    
+
                 <div class=" col-12" id="hideDiv">
-                                      <button  class="btn btn-primary" onclick="export_pdf() " style="float:right;margin-left:5px;"> Print Report</button>
-                                      <button  class="btn btn-primary" onclick="exportTableToExcel('example')" style="float:right;">Excel Report</button>
-                  </div>
-            </div>
-                           
+                    <button  class="btn btn-primary" onclick="export_pdf() " style="float:right;margin-left:5px;"> Print Report</button>
+                   <button  class="btn btn-primary" onclick="exportTableToExcel('example')" style="float:right;">Excel Report</button>
+                 </div>                           
                      <div id="printDiv">
-                                <table id="example" class="display nowrap stripe" style="width:100%;text-align:center">
-                                    <thead>
+                        <table id="example" class="display nowrap stripe" style="width:100%;text-align:center">
+                            <thead>
                                     <tr style="font-weight: bold;">
                                             <td rowspan="2"><img src="\logo\msb.png" alt="logo"></td>
                                             <td colspan="7" >Report</td>
@@ -108,7 +102,7 @@ td {
                                                 echo $date;
                                             ?></span></td>
                                              
-                                            <tr>
+                                        <tr>
                                             <td colspan="7"> <b>Product Data Report</b> </td>
                                             </tr>
                                         <tr style="font-weight: bold;">
@@ -123,23 +117,22 @@ td {
 										   <td>Amount</td>
 										</tr>
                                         </tr>   
-                                    </thead>
-                                    <tbody id="appendData">
-                                    
-                                    </tbody>
-                                </table>
-                                </div>
-                                <span id="showNotFOund">
+                            </thead>
+                            <tbody id="appendData">
+                             </tbody>
+                        </table>
+                    </div>
+                            <span id="showNotFOund">
                              </span>
-                            </div>
+                         </div>
                         </div>
                     </div>
                 </div>
-            </section>
-        </div>
+            </div>
+        </section>
     </div>
 </div>
-
+</div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
@@ -206,7 +199,7 @@ $("#reportForm").submit(function(e)
                         //alert(status);
                         var status=status.charAt(0).toUpperCase() + status.slice(1)
                        html+="<tr><td>"+sr+++"</td><td>"+val.order_id+"</td><td>"+val.product_name+"</td><td>"+val.product_type+"</td><td>"+val.price+"</td><td>"
-                       +val.quantity+"</td><td>"+status+"</td></td>"+val.subtotal+"</td><td>"+val.amount+"</td><td>";
+                       +val.quantity+"</td><td>"+status+"</td><td>"+val.subtotal+"</td><td>"+val.amount+"</td></tr>";
                         // alert(val.firstname);
            });$("#appendData").append(html);
                 }
