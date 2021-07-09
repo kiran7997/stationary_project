@@ -172,7 +172,7 @@ Route::get('item-inventory', 'ReportController@overallInventoryData');
 Route::post('overDataTable', 'ReportController@Table');
 Route::get('view-orders', 'ReportController@viewOrders');
 
-//Order Status 
+//Order Status data 
 
 Route::get('ordered', 'HomeController@Order_type');
 

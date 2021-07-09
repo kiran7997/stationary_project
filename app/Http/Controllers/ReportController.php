@@ -225,6 +225,7 @@ class ReportController extends Controller
         return response()->json($salesPerson);
      
     }
+    //Get Product Wise Data Here 
     public function productWiseData(Request $req)
     {
         // $report = Inventory::select('aproducts.product_name','aproducts.product_id','order_id','order_status','firstname','lastname','district')

@@ -214,6 +214,7 @@ $("#reportForm").submit(function(e)
             });
         });
     } );
+    //Excel And PDF
     function exportTableToExcel(example, filename = ''){
     var downloadLink;
     var dataType = 'application/vnd.ms-excel';
