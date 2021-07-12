@@ -187,3 +187,7 @@ Route::POST('salesDataReport', 'ReportController@dailySalesReport');
 Route::get('productWiseReport', 'ReportController@productWiseData');
 Route::POST('productDataReport', 'ReportController@productWiseReport');
 
+//Stock  Report
+Route::get('stockReport', 'ReportController@stockData');
+Route::POST('stockDataReport', 'ReportController@stockDataReport');
+

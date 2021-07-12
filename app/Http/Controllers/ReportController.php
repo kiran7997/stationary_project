@@ -266,4 +266,19 @@ class ReportController extends Controller
         return response()->json($productWiseData);
        
     }
+     public function stockData(Request $req)
+     {
+            $products_data = Aproducts::select('product_id', 'product_name')->where('deleted', 0)->get();
+            return view('stockReport', ['products_data' => $products_data]); 
+     }
+     public function stockDataReport(Request $req)
+     {
+            $product_name=$req->product_name;
+            $products_data = Aproducts::select('aproducts.product_id', 'product_name','stocks.product_id','stocks.item_quantity','stocks.stock_id')
+            ->leftjoin('stocks','stocks.product_id','=','aproducts.product_id')
+            ->where('stocks.product_id','=',$product_name)
+            ->where('aproducts.deleted', 0)->get();
+            
+            return response()->json($products_data);
+     }
 }
