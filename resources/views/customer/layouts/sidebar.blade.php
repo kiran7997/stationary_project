@@ -17,7 +17,7 @@
     <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
       <li class=" nav-item @if(Request::is('customer-dashboard')) active @endif"><a
           class="d-flex align-items-center active" href="{{ url('customer-dashboard')}}"><i
-            data-feather="home"></i><span class="menu-title text-truncate" data-i18n="Dashboards">Dashboards</span><span
+            data-feather="home"></i><span class="menu-title text-truncate" data-i18n="Dashboards">Welcome To MSB</span><span
             class="badge badge-light-warning badge-pill ml-auto mr-1"></span></a>
       </li>
       <li class=" nav-item @if(Request::is('checkout')) active @endif "><a class=" d-flex
