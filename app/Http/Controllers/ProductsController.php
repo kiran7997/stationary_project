@@ -56,6 +56,7 @@ class ProductsController extends Controller
         $products->base_price = $req->base_price;
         $products->code = $req->code;
         $products->taxable = $req->taxable;
+        $products->threshold_qty = $req->threshold_qty;
         $products['created_by'] = Auth::user()->id;
         $products['updated_by'] = Auth::user()->id;
 
@@ -64,6 +65,7 @@ class ProductsController extends Controller
         return redirect('product')->with('success', ' Product Inserted  successfully');
        
     }
+
     public function edit($product_id)
     {
         $products = Aproducts::select('product_id','product_name','cat_id','unit_id','variation_id','image_url','description','base_price','code','taxable')
@@ -83,7 +85,7 @@ class ProductsController extends Controller
         $products->base_price = $req->base_price;
         $products->code = $req->code;
         $products->taxable = $req->taxable;
-
+        $products->threshold_qty = $req->threshold_qty;
         
 
         $product_img = array();

@@ -172,12 +172,22 @@ Route::get('item-inventory', 'ReportController@overallInventoryData');
 Route::post('overDataTable', 'ReportController@Table');
 Route::get('view-orders', 'ReportController@viewOrders');
 
-//Order Status 
+//Order Status data 
 
 Route::get('ordered', 'HomeController@Order_type');
 
 Route::get('dailyOrderReport', 'ReportController@dailyOrder');
 Route::POST('orderReport', 'ReportController@dailyOrderReport');
 
+//Daily Sales wise Report
 Route::get('dailySalesReport', 'ReportController@dailySales');
 Route::POST('salesDataReport', 'ReportController@dailySalesReport');
+
+//Product Wise Report
+Route::get('productWiseReport', 'ReportController@productWiseData');
+Route::POST('productDataReport', 'ReportController@productWiseReport');
+
+//Stock  Report
+Route::get('stockReport', 'ReportController@stockData');
+Route::POST('stockDataReport', 'ReportController@stockDataReport');
+

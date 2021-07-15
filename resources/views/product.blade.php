@@ -80,6 +80,7 @@
 											<th>Base Price</th>
 											<th>Code</th>
 											<th>Taxable</th>
+											<th>Threshold Qty</th>
 											<th>Actions</th>
 										</tr>
 									</thead>
@@ -94,6 +95,7 @@
 											<td>{{$product->base_price}}</td>
 											<td>{{$product->code}}</td>
 											<td>{{ $product->taxable == 0 ? "Yes" : "No"}}</td>
+											<td>{{$product->threshold_qty}}</td>
 											<td>
 												<a href="javascript:void(0)"
 													onclick="editproduct({{$product->product_id}})" class="fa fa-edit"
@@ -196,7 +198,7 @@
 						<input oninput="this.value = this.value.replace(/[^A-Za-z0-9-,.;'&/.() ]|^ /g,'')" name="description" id="description" class="form-control" required>
 					</div>
 
-					<label class="required" for="base_price">Base_Price </label>
+					<label class="required" for="base_price">Base Price </label>
 
 					<div class="form-group">
 						<input type="number" name="base_price" id="base_price" class="form-control" onchange="roundIt(this);" required >
@@ -213,14 +215,17 @@
 
 
 					<label class="required" for="taxable">Taxable Type</label> &nbsp;&nbsp;
-					<select name="taxable" id="taxable" class="form-control" required>
+					<div class="form-group"><select name="taxable" id="taxable" class="form-control" required>
 						<option value="">Select Option</option>
 						<option value="0">Yes</option>
 						<option value="1">No</option>
 
-					</select>
-
-
+					</select></div>
+					<label class="required" for="base_price">Threshold Qty. </label>
+					<div class="form-group">
+						<input type="number" name="threshold_qty" id="threshold_qty" class="form-control" onchange="roundIt(this);" required >
+						
+					</div>
 
 				</div>
 				<div class="modal-footer">
@@ -308,7 +313,7 @@
 						<input oninput="this.value = this.value.replace(/[^A-Za-z0-9-,.;'&/.() ]|^ /g,'')"  name="code" id="code2" class="form-control" required>
 					</div>
 
-					<label class="required" for="taxable">taxable </label>
+					<label class="required" for="taxable">Taxable Type </label>
 					<div class="form-group">
 						<select name="taxable" id="taxable2" class="form-control" required>
 							<option value="">Select Option</option>
@@ -316,8 +321,11 @@
 							<option value="1">No</option>
 						</select>
 					</div>
-
-					<br>
+					<label class="required" for="base_price">Threshold Qty. </label>
+					<div class="form-group">
+						<input type="number" name="threshold_qty" id="threshold_qty" class="form-control" onchange="roundIt(this);" required >
+						
+					</div>
 					<div class="form-group">
 						<label class="required" for="description">Product Image </label>
 						<input type='file' class='form-control' accept=".jpg,.jpeg,.png" name='image_url[]'

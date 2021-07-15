@@ -26,7 +26,7 @@ class CustomerController extends Controller
 
     public function index()
     {
-        $customers = customers::where(['deleted' => 0])->paginate(5);
+        $customers = customers::where(['deleted' => 0])->get();
 
         return view('customer', compact('customers'));
     }
@@ -119,6 +119,15 @@ class CustomerController extends Controller
     public function customer_reg(Request $request)
     {
         $input = $request->all();
+      
+        $this->validate(request(), [
+            'customer_firstname' => 'required',
+            'customer_lastname'=>'required',
+            'customer_phone' =>'required|max:10|min:10',
+            'email'=>'required|email',
+            'password' =>'required'
+        ]);
+       
         $input['password'] = Hash::make($request->password);
         // $input['otp'] = '1234';
         // $api_key = '260A8BC52A8EAA';

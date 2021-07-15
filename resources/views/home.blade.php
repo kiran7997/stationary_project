@@ -253,7 +253,7 @@
 							<figure class="highcharts-figure">
 								<div id="container2"></div>
 								<p class="highcharts-description text-center mb-1">
-									<b> Sales Person Wise Order in This Month.</b>
+									<b> Sales Person Wise Order in This Month</b>
 								</p>
 							</figure>
 							<script>
@@ -262,7 +262,7 @@
 										type: 'column'
 									},
 									title: {
-										text: 'Sales Person Wise Order in This Month'
+										text: 'Monthly Sales Person Ranking '
 									},
 									xAxis: {
 										type: 'category',
@@ -303,13 +303,13 @@
 										}
 									}]
 								});
-							</script>
+							</script> 
 						</div>
 						<div class="col-12 mt-1">
 							<figure class="highcharts-figure">
 								<div id="container3"></div>
 								<p class="highcharts-description text-center mb-1">
-									<b>Distinct Wise Order in This Month.</b>
+									<b>Distinct Wise Order in This Month</b>
 								</p>
 							</figure>
 							<script>
@@ -318,7 +318,7 @@
 										type: 'column'
 									},
 									title: {
-									text: 'Distinct Wise Order in This Month'
+									text: 'Order By District '
 									},
 									xAxis: {
 										type: 'category',
