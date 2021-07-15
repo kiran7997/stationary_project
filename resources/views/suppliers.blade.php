@@ -2,16 +2,9 @@
 @section('title', 'Suppliers')
 @section('content')
 
-<head>
 
-    <style>
-        .required:after {
-            content: " *";
-            color: red;
-        }
-    </style>
-</head>
-
+<!-- Responsive Datatable -->
+<!-- BEGIN: Content-->
 <div class="app-content content ">
     <div class="content-overlay"></div>
     <div class="header-navbar-shadow"></div>
@@ -23,11 +16,10 @@
                         <h2 class="content-header-title float-left mb-0">Suppliers</h2>
                         <div class="breadcrumb-wrapper">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="{{ url('home') }}">Home</a>
+                                <li class="breadcrumb-item"><a href="{{ url('/home') }}">Home</a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="{{ url('supplier') }}">Suppliers</a>
+                                <li class="breadcrumb-item"><a href="{{ url('/supplier') }}">Suppliers</a>
                                 </li>
-                                
                             </ol>
                         </div>
                     </div>
@@ -35,30 +27,32 @@
             </div>
         </div>
         <div class="content-body">
-            <!-- Basic Tables start -->
+            <section id="responsive-datatable">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
 
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                    <div class="card-header border-bottom">
+
+
+                            <div class="card-header border-bottom">
                                 <h4 class="card-title"></h4>
-                                <button type="button" class="btn btn-outline-primary float-right" data-toggle="modal" data-target="#supplierPModal">
-                                    Add New Supplier
+                                <button type="button" class="btn btn-outline-primary float-right" data-toggle="modal"
+                                    data-target="#AddUnit">
+                                    Add New Suppliers
                                 </button>
                             </div>
-                       
-                        <div style="margin:20px;">
-                            @if ($message = Session::get('success'))
-                            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                <div class="alert-body">
-                                    <p>{{ $message }}</p>
+                            <div style="margin:20px;">
+                                @if ($message = Session::get('success'))
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <div class="alert-body">
+                                        <p>{{ $message }}</p>
+                                    </div>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
                                 </div>
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            @endif
-                            <table id="example" class="display nowrap stripe" style="width:100%;">
+                                @endif
+                                <table id="example" class="display nowrap stripe" style="width:100%;">
                                 <thead>
                                     <tr>
                                         <th>Company Name</th>
@@ -86,31 +80,28 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </section>
         </div>
     </div>
 </div>
 
-<hr />
 
 
-<!-- Add Stock Model -->
-
-<div class="modal fade text-left " id="supplierPModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33"
+<div class="modal fade text-left" id="AddUnit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-               
-                <h4 class="modal-title" id="myModalLabel33"> Add Supplier</h4>
-				<button type="button" class="close"  onclick="myFunction()" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
+                <h4 class="modal-title" id="myModalLabel33">Add Supplier</h4>
+                <button type="button" class="close"  data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-            
+
             <form id="supplierForm" name="supplierForm" method="post">
                 @csrf
                 <!-- <input type="hidden" name="inventory_id" id="inventory_id"> -->
@@ -146,16 +137,12 @@
                     <div class="modal-footer">
                         <button type="submit" id="form" class="btn btn-primary">Submit</button>
                     </div>
+                </div>
             </form>
         </div>
     </div>
 </div>
-
-
-</div>
-</div>
-
-<div class="modal fade text-left " id="supplierEditModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33"
+<div class="modal fade text-left" id="supplierEditModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -201,20 +188,36 @@
                     <div class="modal-footer">
                         <button type="submit" id="form" class="btn btn-primary">Update</button>
                     </div>
+                    </div>
             </form>
         </div>
     </div>
 </div>
+<!-- Add Categories Modal -->
 
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
+
+    <script>
+    $(document).ready(function() {
+    // $('#example').DataTable();
+    $('#example').DataTable( {
+        // "scrollY": 200,
+        "scrollX": true
+    } );
+
+    $(".delete").on("click", function () {
+    return confirm('Are you sure you want to Delete?');
+});
+} );
+
+
+</script>
 <script>
-function myFunction() {
-    
-	document.getElementById("supplierForm").reset();
-}
+
     $(document).ready(function() {
 
 $('#supplierForm').validate({
@@ -301,21 +304,3 @@ function deletesup(supplier_id)
 }
 </script>
 @endsection
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
-<script>
-    $(document).ready(function() {
-    // $('#example').DataTable();
-    $('#example').DataTable( {
-        // "scrollY": 200,
-        "scrollX": true
-    } );
-
-    $(".delete").on("click", function () {
-    return confirm('Are you sure you want to Delete?');
-});
-} );
-
-
-</script>

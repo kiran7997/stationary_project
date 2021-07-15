@@ -329,7 +329,7 @@
 					<div class="form-group">
 						<label class="required" for="description">Product Image </label>
 						<input type='file' class='form-control' accept=".jpg,.jpeg,.png" name='image_url[]'
-							id='image_url2' multiple onchange="validateFileType()">
+							id='image_url2' multiple onchange="validateFile()">
 						{{-- <input type='hidden' class='form-control' name='old_image' id='old_image'> --}}
 						<span class="text-danger" id="image-input-error"></span>
 					</div>
@@ -387,7 +387,20 @@ function roundIt(ctrl) {
 	}
 	
 	function validateFileType(){
-        var fileName = document.getElementById("image_url","image_url2").value;
+		// alert("hii");
+        var fileName = document.getElementById("image_url").value;
+        var idxDot = fileName.lastIndexOf(".") + 1;
+        var extFile = fileName.substr(idxDot, fileName.length).toLowerCase();
+        if (extFile=="jpg" || extFile=="jpeg" || extFile=="png"){
+            alert("File Upload Successfully");
+        }else{
+            alert("Only jpg/jpeg and png files are allowed!");
+			$("#image_url").val('');
+        }   
+    }
+	function validateFile(){
+		// alert("hii");
+        var fileName = document.getElementById("image_url2","image_url").value;
         var idxDot = fileName.lastIndexOf(".") + 1;
         var extFile = fileName.substr(idxDot, fileName.length).toLowerCase();
         if (extFile=="jpg" || extFile=="jpeg" || extFile=="png"){
