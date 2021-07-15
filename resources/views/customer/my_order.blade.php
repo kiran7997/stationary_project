@@ -50,6 +50,7 @@
                                                     
                                         // $order_count = count($order_item_data);
                                         // dd($order_item_data);
+                                       
                                         if(count($order_item_data)>0){
                                     foreach($order_item_data as $data){ 
                                         // $i++;
@@ -107,7 +108,9 @@
                                                 //if($day < 7) {
                                                 if( strtotime($data->order_date) > strtotime('-7 day') && $data->order_status != "return") {                                                        
                                                     ?>
-                                                <a href="{{ url('return-order/'.$data->order_item_id)}}" class="btn btn-primary mt-1  return_order">
+                                                     <button type="button" class="btn btn-outline-primary float-right" data-toggle="modal" 
+                                                     onclick="editReturn({{$data->order_id}})" data-target="#ReturnOrderModal">
+                                                <!-- <a href="{{ url('return-order/'.$data->order_item_id)}}" class="btn btn-primary mt-1 ReturnOrderModal "> -->
                                                     <!-- <i data-feather="x" class="align-middle mr-25"></i> -->
                                                     <span>Return</span>
                                                 </a>        
@@ -133,7 +136,53 @@
         </div>
     </div>
     <!-- END: Content-->
+<!-- Model Start -->
+<div class="modal fade text-left " id="ReturnOrderModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+               
+                <h4 class="modal-title" id="myModalLabel33"> Return Form</h4>
+				<button type="button" class="close"  data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+            </div>
+            
+            
+            <form id="returnForm" name="returnForm" method="post" action="{{url('updateProduct')}}">
+                @csrf
+                <input type="hidden" name="order_id" id="order_id">
+                <div class="modal-body">
+                <div class="form-group" >
+                <label for="products"><b>Product Name</b></label>
+                    <input type="text" name="product_name" id="product_name" class="form-control" readonly required>
+                    </div>
 
+                    <label class="required" for="quantity"><b>Ordered Item Count</b></label>
+                    <div class="form-group" >
+                        <input type="text" name="quantity" id="quantity" class="form-control" readonly required>
+                    </div>
+
+                    <label class="required" for="returnCount"><b>Return Item Count </b></label>
+                    <div class="form-group">
+                        <input type="number" name="returnCount" id="returnCount" class="form-control" onkeyup="greater()" required>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit"  class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+</div>
+</div>
+
+<!-- End Model -->
     <div class="sidenav-overlay"></div>
     <div class="drag-target"></div>
 
@@ -149,11 +198,12 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
     $(document).ready(function(){
-        $("#form").validate(); //form validation
-        //return alert
-        $(".return_order").on("click", function () {
-            return confirm('Are you sure to return ?');
-        });
+       
+        // $("#form").validate(); //form validation
+        // //return alert
+        // $(".return_order").on("click", function () {
+        //     return confirm('Are you sure to return ?');
+        // });
         $('#state').change(function(){
             var state_id = this.value;
             $('#district').empty();
@@ -187,7 +237,31 @@
         })
       
     });
+    
 
-   
-  
+    function editReturn(order_id)
+    {
+	
+        $.get('/editOrder/'+order_id,function(order){
+             
+                $("#order_id").val(order.order_id);
+                $("#product_name").val(order.product_name);
+                $("#quantity").val(order.quantity);
+                $("#ReturnOrderModal").modal('toggle');
+         });
+    }
+
+
+
+function greater()
+{
+ 
+ var max = document.getElementById("quantity").value;
+     var min = document.getElementById("returnCount").value;
+     if(min > max){
+         alert('Return Item Count Is Greater Than Ordered Count');
+          return false;
+     }
+}
 </script>
+

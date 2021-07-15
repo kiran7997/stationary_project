@@ -191,3 +191,8 @@ Route::POST('productDataReport', 'ReportController@productWiseReport');
 Route::get('stockReport', 'ReportController@stockData');
 Route::POST('stockDataReport', 'ReportController@stockDataReport');
 
+//Return Form
+Route::get('returnReport', 'OrderController@return_order');
+Route::POST('returnOrder', 'OrderController@orderReturnCount');
+Route::get('/editOrder/{order_id}', 'OrderController@editReturnProduct');
+Route::post('/updateProduct', 'OrderController@updateReturnProduct');

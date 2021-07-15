@@ -126,4 +126,21 @@ class OrderController extends Controller
         }
         return "success";
     }
+    public function editReturnProduct($order_id)
+    {
+        
+        $order = OrderItems::select('order_id','product_name','quantity')
+        ->where('order_id','=',$order_id)->first();
+      
+        return response()->json($order);
+    }
+    public function updateReturnProduct(Request $req)
+    {
+        
+        $order_id=$req->order_id;
+        // dd ($order_id);
+        $data_customer = OrderItems::select('order_status','order_id')->where(['order_item_id'=>$order_id])->update(['order_status' => 'return','return_date'=>date('Y-m-d')]);
+     return "success";
+         //return redirect('my-order');
+    }
 }
