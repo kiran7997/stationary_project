@@ -114,7 +114,9 @@
                                             <?php         
                                                 } //} 
                                             ?>
-                                            
+                                            <a href="{{ url('track_order/'.$data->order_item_id)}}" >
+                                                <button class="btn btn-sm btn-warning mt-1">Track Order</button>
+                                            </a>
                                         </div>
                                         </div>
                                     <?php } }?>

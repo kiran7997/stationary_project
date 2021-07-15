@@ -129,7 +129,7 @@ Route::post('get-district-list', 'ShopController@get_district');
 Route::get('my-order','ShopController@myOrder');
 Route::get('return-order/{id}','ShopController@returnOrder');
 Route::get('return-order-list','ShopController@returnOrderList');
-
+Route::get('track_order/{id}','ShopController@trackOrder');
 //Invoice controller
 Route::get('/listinvoice', 'InvoiceController@index');
 Route::get('/invoicepreview/{order_id}', 'InvoiceController@previewinvoice');

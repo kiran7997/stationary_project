@@ -55,7 +55,7 @@
                             </span>
                             <span class="bs-stepper-label">
                                 <span class="bs-stepper-title">Address</span>
-                                <span class="bs-stepper-subtitle">Enter Your Address</span>
+                                <span class="bs-stepper-subtitle">Enter Your Address </span>
                             </span>
                         </button>
                     </div>
@@ -378,70 +378,23 @@
                                         </p>
                                     </div>
                                     <div class="card-body">
-                                        <!-- <h6 class="card-holder-name my-75">John Doe</h6> -->
-                                        <h2>Pay With Razorpay</h2>
-                                        <form action="{!!route('payment')!!}" method="POST" style="margine-top: 10px;">                        
-                                            <script src="https://checkout.razorpay.com/v1/checkout.js"
-                                                    data-key="{{ env('RAZOR_KEY') }}"
-                                                    data-amount="100"
-                                                    data-buttontext="Pay 1 INR"
-                                                    data-name="MSB"
-                                                    data-description="Payment"
-                                                    data-image="http://127.0.0.1:8000/logo/msb.png"
-                                                    data-prefill.name="name"
-                                                    data-prefill.email="email"
-                                                    data-theme.color="#3c9b61">
-                                            </script>
-                                            <input type="hidden" name="_token" value="{!!csrf_token()!!}">
-                                        </form>
-                                        <!-- <div class="custom-control custom-radio">
-                                            <input type="radio" id="customColorRadio1" name="paymentOptions"
-                                                class="custom-control-input" checked />
-                                            <label class="custom-control-label" for="customColorRadio1">
-                                                US Unlocked Debit Card 12XX XXXX XXXX 0000
-                                            </label>
-                                        </div>
-                                        <div class="customer-cvv mt-1">
-                                            <div class="form-inline">
-                                                <label class="mb-50" for="card-holder-cvv">Enter CVV:</label>
-                                                <input type="password"
-                                                    class="form-control ml-sm-75 ml-0 mb-50 input-cvv" name="input-cvv"
-                                                    id="card-holder-cvv" />
-                                                <button type="button"
-                                                    class="btn btn-primary btn-cvv ml-0 ml-sm-1 mb-50">Continue</button>
-                                            </div>
-                                        </div> -->
-                                        <hr class="my-2" />
+                                        
                                         <ul class="other-payment-options list-unstyled">
                                             <li class="py-50">
                                                 <div class="custom-control custom-radio">
                                                     <input type="radio" id="customColorRadio2" name="paymentOptions"
                                                         class="custom-control-input" />
-                                                    <label class="custom-control-label" for="customColorRadio2"> Razorpay </label>
+                                                    <label class="custom-control-label" for="customColorRadio2"> Yes </label>
                                                 </div>
                                             </li>
                                             <li class="py-50">
                                                 <div class="custom-control custom-radio">
-                                                    <input type="radio" id="customColorRadio3" name="paymentOptions"
-                                                        class="custom-control-inpparseFloatut" />
-                                                    <label class="custom-control-label" for="customColorRadio3"> Paytm </label>
-                                                </div>
-                                            </li>
-                                            <li class="py-50">
-                                                <div class="custom-control custom-radio">
-                                                    <input type="radio" id="customColorRadio4" name="paymentOptions"
+                                                    <input type="radio" id="customColorRadio2" name="paymentOptions"
                                                         class="custom-control-input" />
-                                                    <label class="custom-control-label" for="customColorRadio4"> Bill Desk </label>
+                                                    <label class="custom-control-label" for="customColorRadio2"> No </label>
                                                 </div>
                                             </li>
-                                            <li class="py-50">
-                                                <div class="custom-control custom-radio">
-                                                    <input type="radio" id="customColorRadio5" name="paymentOptions"
-                                                        class="custom-control-input" />
-                                                    <label class="custom-control-label" for="customColorRadio5"> Cash On
-                                                        Delivery </label>
-                                                </div>
-                                            </li>
+                                            
                                         </ul>
                                         <!-- <hr class="my-2" />
                                         <div class="gift-card mb-25">
@@ -456,30 +409,11 @@
                             <div class="amount-payable checkout-options">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h4 class="card-title">Price Details</h4>
+                                        <h4 class="card-title">Upload Payment Receipts</h4>
                                     </div>
-                                    <div class="card-body">
-                                        <ul class="list-unstyled price-details">
-                                            <li class="price-detail">
-                                                <div class="details-title">Price of {{ $total_qty }} items</div>
-                                                <div class="detail-amt">
-                                                    <strong>Rs. {{ $price_details }}</strong>
-                                                </div>
-                                            </li>
-                                            <li class="price-detail">
-                                                <div class="details-title">Delivery Charges</div>
-                                                <div class="detail-amt discount-amt text-success">Free</div>
-                                            </li>
-                                        </ul>
-                                        <hr />
-                                        <ul class="list-unstyled price-details">
-                                            <li class="price-detail">
-                                                <div class="details-title">Amount Payable</div>
-                                                <div class="detail-amt font-weight-bolder">Rs. {{ $price_details }}</div>
-                                            </li>
-                                        </ul>
+                                    <div class="card-header">
+                                        <input type="file" name="payment_file" id="payment_file" />
                                     </div>
-
                                     <div class="col-12" style="margin-bottom: 20px;">
                                         <button type="button" class="btn btn-primary btn-next waves-effect waves-float waves-light" id="save-order-payment">Pay From Here</button>
                                     </div>
@@ -683,7 +617,7 @@
                     if(response == "success"){
                         Swal.fire('Success!', 'Information Saved Successfully', 'success').then(function() {
                             // window.location = "/checkout";
-                            $("#payment").attr('disabled', false);
+                            // $("#payment").attr('disabled', false);
                             checkoutWizard = document.querySelector('.checkout-tab-steps');
                         if (typeof checkoutWizard !== undefined && checkoutWizard !== null) {
                             var wizard = new Stepper(checkoutWizard, {
@@ -691,7 +625,7 @@
                             });
 
                             wizard.next();
-                            
+                            // $("#step-payment").click();
                             // $(checkoutWizard)
                             //     .find('.btn-next')
                             //     .each(function () {
@@ -701,7 +635,7 @@
                             //             // }
                             //     });
                             // });
-
+                                    alert();
                             $(checkoutWizard)
                                 .find('.btn-prev')
                                 .on('click', function () {

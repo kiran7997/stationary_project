@@ -177,4 +177,18 @@ class ShopController extends Controller
         }
         return $remove_cart;
     }
+
+    public function trackOrder($id){
+        $customer_id = Auth::guard('customer')->user()->customer_id;
+        $order_details =  DB::table('order_items')
+                    ->select('order_items.*','aproducts.image_url','orders.order_date','orders.order_id','orders.arrival_date')
+                    ->leftjoin('aproducts','aproducts.product_id','order_items.product_id')
+                    ->leftjoin('orders','orders.order_id','order_items.order_id')
+                    ->where(['customer_id'=>$customer_id,'order_item_id'=>$id])
+                    ->where('orders.payment_status', "yes")
+                    ->whereNull('order_items.order_status')
+                    ->first();
+                    // dd($order_details);
+        return view('customer.track_order',compact('order_details'));
+    }
 }
