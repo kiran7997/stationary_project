@@ -396,78 +396,83 @@
 
                     <!-- Checkout Payment Starts -->
                     <div id="step-payment" class="content" style="margin-top: 2rem;">
-                        <!-- <form id="checkout-payment" class="list-view product-checkout" onsubmit="return false;"> -->
-                        <div class="payment-type">
-                            <div class="card">
-                                <div class="card-header flex-column align-items-start">
-                                    <h4 class="card-title">Payment options</h4>
-                                    <p class="card-text text-muted mt-25">Be sure to click on correct payment option
-                                    </p>
-                                </div>
-                                <div class="card-body">
+                        <form id="checkout-payment" enctype="multipart/form-data">
+                            @csrf
+                            <div class="payment-type">
+                                <div class="card">
+                                    <div class="card-header flex-column align-items-start">
+                                        <h4 class="card-title">Payment options</h4>
+                                        <p class="card-text text-muted mt-25">Be sure to click on correct payment option
+                                        </p>
+                                    </div>
 
-                                    <ul class="other-payment-options list-unstyled">
-                                        <li class="py-50">
-                                            <div class="custom-control custom-radio">
-                                                <input type="radio" id="customColorRadio2" name="payment_option"
-                                                    class="custom-control-input pyment_option" value="Yes"
-                                                    onclick="getvalue('Yes')" />
-                                                <label class="custom-control-label" for="customColorRadio2"> Yes
-                                                </label>
-                                            </div>
-                                        </li>
-                                        <li class="py-50">
-                                            <div class="custom-control custom-radio">
-                                                <input type="radio" id="customColorRadio3" name="payment_option"
-                                                    class="custom-control-input pyment_option" value="No"
-                                                    onclick="getvalue('No')" />
-                                                <label class="custom-control-label" for="customColorRadio3"> No </label>
-                                            </div>
-                                        </li>
+                                    <div class="card-body">
 
-                                    </ul>
-                                    <!-- <hr class="my-2" />
+                                        <ul class="other-payment-options list-unstyled">
+                                            <li class="py-50">
+                                                <div class="custom-control custom-radio">
+                                                    <input type="radio" id="customColorRadio2" name="payment_status"
+                                                        class="custom-control-input pyment_option" value="yes"
+                                                        onclick="getvalue('yes')" />
+                                                    <label class="custom-control-label" for="customColorRadio2"> Yes
+                                                    </label>
+                                                </div>
+                                            </li>
+                                            <li class="py-50">
+                                                <div class="custom-control custom-radio">
+                                                    <input type="radio" id="customColorRadio3" name="payment_status"
+                                                        class="custom-control-input pyment_option" value="no"
+                                                        onclick="getvalue('no')" />
+                                                    <label class="custom-control-label" for="customColorRadio3"> No
+                                                    </label>
+                                                </div>
+                                            </li>
+
+                                        </ul>
+                                        <!-- <hr class="my-2" />
                                         <div class="gift-card mb-25">
                                             <p class="card-text">
                                                 <i data-feather="plus-circle" class="mr-50 font-medium-5"></i>
                                                 <span class="align-middle">Add Gift Card</span>
                                             </p>
                                         </div> -->
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="amount-payable checkout-options" style="display:none">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h4 class="card-title">Upload Payment Receipts</h4>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-4 m-1">
-                                        <div class="form-group">
-                                            <div class="custom-file">
-                                                <input type="file" class="custom-file-input" id="payment_file"
-                                                    name="payment_file" />
-                                                <label class="custom-file-label" for="customFile">Choose file</label>
+                            <div class="amount-payable checkout-options" style="display:none">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4 class="card-title">Upload Payment Receipts</h4>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4 m-1">
+                                            <div class="form-group">
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input" id="payment_file"
+                                                        name="payment_file" />
+                                                    <label class="custom-file-label" for="customFile">Choose
+                                                        file</label>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-2 text-center mb-2 preview_div" style="display:none">
-                                        <label for="basicInputFile mb-2"><b>Preview </b></label><br>
-                                        <img id="preview_img" width="120" height="150" />
+                                        <div class="col-md-2 text-center mb-2 preview_div" style="display:none">
+                                            <label for="basicInputFile mb-2"><b>Preview </b></label><br>
+                                            <img id="preview_img" width="120" height="150" />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
 
-                        <div class="col-12 text-center" style="margin-bottom: 20px;">
-                            <button type="button" class="btn btn-primary btn-next waves-effect waves-float waves-light"
-                                id="save-order-payment">Submit</button>
-                        </div>
+                            <div class="col-12 text-center" style="margin-bottom: 20px;">
+                                <button type="button"
+                                    class="btn btn-primary btn-next waves-effect waves-float waves-light"
+                                    id="save-order-payment">Submit</button>
+                            </div>
 
 
-                        <!-- </form> -->
+                        </form>
                     </div>
                     <!-- Checkout Payment Ends -->
                     <!-- </div> -->
@@ -681,23 +686,46 @@
         });
 
         $("#save-order-payment").click(function() {
-            var dataString = $("#form_card, #checkout-address").serialize();
-            $.ajax({
+            var dataString = $("#form_card, #checkout-address, #checkout-payment").serialize();
+            // $.ajax({
+            //     url:"/save_order_payment",
+            //     method:"POST",
+            //     data: dataString,
+            //     async: false,
+            //     success:function(response) {
+            //         if(response == "success"){
+            //             Swal.fire('Success!', 'Information Saved Successfully', 'success').then(function() {
+            //                 window.location = "/checkout";
+            //             });
+            //         }
+            //     },
+            //     error:function(){
+            //         console.log("error");
+            //     }
+            // });
+            var formData = new FormData($( "#checkout-payment" )[0]);  
+            // var formData = new FormData();
+            // formData.append('form1', $('#form_card').get(0));
+            // formData.append('form2', $('#checkout-address').get(0));
+            // formData.append('form3', $('#checkout-payment').get(0));
+            // alert(formData);
+            $.ajax({  
                 url:"/save_order_payment",
-                method:"POST",
-                data: dataString,
-                async: false,
-                success:function(response) {
-                    if(response == "success"){
-                        Swal.fire('Success!', 'Information Saved Successfully', 'success').then(function() {
-                            window.location = "/checkout";
-                        });
-                    }
-                },
-                error:function(){
-                    console.log("error");
-                }
-            });
+                type: 'POST',  
+                data: formData,  
+                async: false,  
+                cache: false,  
+                contentType: false,  
+                processData: false,  
+                success: function (returndata) {  
+                    alert(returndata);  
+                },  
+                error: function (returndata) {  
+                    alert(returndata);  
+                }  
+            });  
+
+            
         });
 
         function readURL(input) {
@@ -719,7 +747,7 @@
     });
 
     function getvalue(value){
-            if(value == 'Yes'){
+            if(value == 'yes'){
                 $('.checkout-options').show();
             }else{
                 $('.checkout-options').hide();
