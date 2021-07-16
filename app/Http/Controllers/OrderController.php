@@ -108,23 +108,24 @@ class OrderController extends Controller
 
     public function save_payment(Request $request)
     {
+        // dd($request->all());
         $formdata = $request->all();
         $data = array();
-        echo "<pre>";
-        print_r($request->all());
-        echo $request->file('payment_file');
+        // echo "<pre>";
+        // print_r($request->all());
+        // echo $request->file('payment_file');
         // dd($formdata);
-        exit;
+        // exit;
         if ($request->hasfile('payment_file')) {
 
             $file = $request->file('payment_file');
             $filename = rand(0, 999) . $file->getClientOriginalName();
             $destinationPath = public_path('payment_receipts/');
             $file->move($destinationPath, $filename);
-            echo $data['payment_file'] = $filename;
+            $data['payment_file'] = $filename;
         }
 
-        exit;
+        // exit;
         // $data['order_status'] = "payment completed";
         $data['payment_date'] = date('Y-m-d');
         $data['payment_status'] = "yes";
@@ -144,6 +145,7 @@ class OrderController extends Controller
         }
         return "success";
     }
+
     public function editReturnProduct($order_id)
     {
 

@@ -398,6 +398,8 @@
                     <div id="step-payment" class="content" style="margin-top: 2rem;">
                         <form id="checkout-payment" enctype="multipart/form-data">
                             @csrf
+                            <input type="hidden" id="order_id_{{ $i }}" name="order_id[]"
+                                        value="{{ $carts->order_id }}" />
                             <div class="payment-type">
                                 <div class="card">
                                     <div class="card-header flex-column align-items-start">
@@ -686,45 +688,27 @@
         });
 
         $("#save-order-payment").click(function() {
-            var dataString = $("#form_card, #checkout-address, #checkout-payment").serialize();
-            // $.ajax({
-            //     url:"/save_order_payment",
-            //     method:"POST",
-            //     data: dataString,
-            //     async: false,
-            //     success:function(response) {
-            //         if(response == "success"){
-            //             Swal.fire('Success!', 'Information Saved Successfully', 'success').then(function() {
-            //                 window.location = "/checkout";
-            //             });
-            //         }
-            //     },
-            //     error:function(){
-            //         console.log("error");
-            //     }
-            // });
-            var formData = new FormData($( "#checkout-payment" )[0]);  
-            // var formData = new FormData();
-            // formData.append('form1', $('#form_card').get(0));
-            // formData.append('form2', $('#checkout-address').get(0));
-            // formData.append('form3', $('#checkout-payment').get(0));
-            // alert(formData);
-            $.ajax({  
+            var form = $( "#checkout-payment" )[0]; // You need to use standard javascript object here
+            var formData = new FormData(form);
+            formData.append('iamge', $('input[type=file]')[0].files[0]);
+            $.ajax({
                 url:"/save_order_payment",
-                type: 'POST',  
-                data: formData,  
-                async: false,  
-                cache: false,  
-                contentType: false,  
-                processData: false,  
-                success: function (returndata) {  
-                    alert(returndata);  
-                },  
-                error: function (returndata) {  
-                    alert(returndata);  
-                }  
-            });  
-
+                type:"POST",
+                data: formData,
+                async: false,
+                contentType: false,
+                processData: false,
+                success:function(response) {
+                    if(response == "success"){
+                        Swal.fire('Success!', 'Information Saved Successfully', 'success').then(function() {
+                            window.location = "/checkout";
+                        });
+                    }
+                },
+                error:function(){
+                    console.log("error");
+                }
+            });
             
         });
 
