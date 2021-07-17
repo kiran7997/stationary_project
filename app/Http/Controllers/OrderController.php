@@ -111,11 +111,6 @@ class OrderController extends Controller
         // dd($request->all());
         $formdata = $request->all();
         $data = array();
-        // echo "<pre>";
-        // print_r($request->all());
-        // echo $request->file('payment_file');
-        // dd($formdata);
-        // exit;
         if ($request->hasfile('payment_file')) {
 
             $file = $request->file('payment_file');
@@ -128,7 +123,7 @@ class OrderController extends Controller
         // exit;
         // $data['order_status'] = "payment completed";
         $data['payment_date'] = date('Y-m-d');
-        $data['payment_status'] = "yes";
+        $data['payment_status'] = $request->payment_status;
         $update_order_address = Orders::where('order_id', $formdata['order_id'][0])->update($data);
         $data1 = array();
         $data1['deleted'] = 1;
