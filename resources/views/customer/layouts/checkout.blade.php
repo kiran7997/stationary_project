@@ -48,8 +48,8 @@
                     <div class="line">
                         <i data-feather="chevron-right" class="font-medium-2"></i>
                     </div>
-                    <div class="step" data-target="#step-address" >
-                        <button type="button" class="step-trigger" id="address">
+                    <div class="step" data-target="#step-address" id="address_tab">
+                        <button type="button" class="step-trigger" id="address" disabled>
                             <span class="bs-stepper-box">
                                 <i data-feather="home" class="font-medium-3"></i>
                             </span>
@@ -62,8 +62,8 @@
                     <div class="line">
                         <i data-feather="chevron-right" class="font-medium-2"></i>
                     </div>
-                    <div class="step" data-target="#step-payment" >
-                        <button type="button" class="step-trigger" id="payment">
+                    <div class="step" data-target="#step-payment" id="payment_tab">
+                        <button type="button" class="step-trigger" id="payment" disabled>
                             <span class="bs-stepper-box">
                                 <i data-feather="credit-card" class="font-medium-3"></i>
                             </span>
@@ -86,25 +86,29 @@
                                 <form id="form_card" method="post">
                                     @csrf
                                     @foreach($cart_data as $carts)
-                                        <input type="hidden" id="cart_id_{{ $i }}" name="cart_id[]" value="{{ $carts->cart_id }}" />
-                                        <input type="hidden" id="order_id_{{ $i }}" name="order_id[]" value="{{ $carts->order_id }}" />
-                                        <input type="hidden" id="order_item_id_{{ $i }}" name="order_item_id[]" value="{{ $carts->order_item_id }}" />
-                                        <input type="hidden" id="product_id_{{ $i }}" name="product_id[]" value="{{ $carts->product_id }}" />
-                                        <div class="card ecommerce-card">
-                                            <div class="item-img">
-                                                <?php $img_urls = json_decode($carts->image_url); ?>
-                                                <a href="">
-                                                    <img src="{{ @$img_urls[0] }}" class="m-1"
-                                                        alt="img-placeholder" style="height: 110px;" />
-                                                </a>
-                                            </div>
-                                            <div class="card-body">
-                                                <div class="item-name">
-                                                    <h6 class="mb-0"><a href=""
-                                                            class="text-body">{{ $carts->product_name }}</a></h6>
-                                                    <!-- <span class="item-company">By <a href="javascript:void(0)"
+                                    <input type="hidden" id="cart_id_{{ $i }}" name="cart_id[]"
+                                        value="{{ $carts->cart_id }}" />
+                                    <input type="hidden" id="order_id_{{ $i }}" name="order_id[]"
+                                        value="{{ $carts->order_id }}" />
+                                    <input type="hidden" id="order_item_id_{{ $i }}" name="order_item_id[]"
+                                        value="{{ $carts->order_item_id }}" />
+                                    <input type="hidden" id="product_id_{{ $i }}" name="product_id[]"
+                                        value="{{ $carts->product_id }}" />
+                                    <div class="card ecommerce-card">
+                                        <div class="item-img">
+                                            <?php $img_urls = json_decode($carts->image_url); ?>
+                                            <a href="">
+                                                <img src="{{ @$img_urls[0] }}" class="m-1" alt="img-placeholder"
+                                                    style="height: 110px;" />
+                                            </a>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="item-name">
+                                                <h6 class="mb-0"><a href=""
+                                                        class="text-body">{{ $carts->product_name }}</a></h6>
+                                                <!-- <span class="item-company">By <a href="javascript:void(0)"
                                                             class="company-name">Apple</a></span> -->
-                                                    <!-- <div class="item-rating">
+                                                <!-- <div class="item-rating">
                                                         <ul class="unstyled-list list-inline">
                                                             <li class="ratings-list-item"><i data-feather="star"
                                                                     class="filled-star"></i></li>
@@ -118,45 +122,53 @@
                                                                     class="unfilled-star"></i></li>
                                                         </ul>
                                                     </div> -->
-                                                </div>
-                                                <span class="text-success mb-1">In Stock</span>
-                                                <div class="item-quantity">
-                                                    <span class="quantity-title">Qty:</span>
-                                                    <div class="input-group quantity-counter-wrapper qty-div" id="qty-div-{{ $i }}">
-                                                        <input type="text" id="quantity_{{ $i }}" name="qyantity[]"  class="quantity-counter qty-change" value="<?php if(!empty($carts->quantity)){ echo $carts->quantity; }else{ echo "1";} ?>" />
-                                                    </div>
-                                                </div>
-                                                <span class="delivery-date text-muted">Delivery by, {{ $days_7 }}</span>
-                                                <!-- <span class="text-success">17% off 4 offers Available</span> -->
                                             </div>
-                                            <div class="item-options text-center">
-                                                <div class="item-wrapper">
-                                                    <div class="item-cost">
-                                                        <h4 class="item-price" id="item-price-{{ $i }}">Rs. {{ $carts->product_price }}</h4>
-                                                        <p class="card-text shipping">
-                                                            <!-- <span class="badge badge-pill badge-light-success">Free Shipping</span> -->
-                                                        </p>
-                                                    </div>
+                                            <span class="text-success mb-1">In Stock</span>
+                                            <div class="item-quantity">
+                                                <span class="quantity-title">Qty:</span>
+                                                <div class="input-group quantity-counter-wrapper qty-div"
+                                                    id="qty-div-{{ $i }}">
+                                                    <input type="text" id="quantity_{{ $i }}" name="qyantity[]"
+                                                        class="quantity-counter qty-change"
+                                                        value="<?php if(!empty($carts->quantity)){ echo $carts->quantity; }else{ echo "1";} ?>" />
                                                 </div>
-                                                <div class="item-wrapper">
-                                                    <div class="item">
-                                                        <h5 class="item-price total-item-price" id="total_price_{{ $i }}">Rs. <?php if(!empty($carts->quantity)){ echo ((float)($carts->quantity) * (float)($carts->product_price)); }else{ echo $carts->product_price;} ?></h5>
-                                                        <p class="card-text shipping">
-                                                            <!-- <span class="badge badge-pill badge-light-success">Free Shipping</span> -->
-                                                        </p>
-                                                    </div>
+                                            </div>
+                                            <span class="delivery-date text-muted">Delivery by, {{ $days_7 }}</span>
+                                            <!-- <span class="text-success">17% off 4 offers Available</span> -->
+                                        </div>
+                                        <div class="item-options text-center">
+                                            <div class="item-wrapper">
+                                                <div class="item-cost">
+                                                    <h4 class="item-price" id="item-price-{{ $i }}">Rs.
+                                                        {{ $carts->product_price }}</h4>
+                                                    <p class="card-text shipping">
+                                                        <!-- <span class="badge badge-pill badge-light-success">Free Shipping</span> -->
+                                                    </p>
                                                 </div>
-                                                <button type="button" class="btn btn-light mt-1 remove-wishlist" onclick="remove_cart({{ $carts->cart_id }}, {{$carts->order_item_id }})">
-                                                    <i data-feather="x" class="align-middle mr-25"></i>
-                                                    <span>Remove</span>
-                                                </button>
-                                                <!-- <button type="button" class="btn btn-primary btn-cart move-cart">
+                                            </div>
+                                            <div class="item-wrapper">
+                                                <div class="item">
+                                                    <h5 class="item-price total-item-price" id="total_price_{{ $i }}">
+                                                        Rs.
+                                                        <?php if(!empty($carts->quantity)){ echo ((float)($carts->quantity) * (float)($carts->product_price)); }else{ echo $carts->product_price;} ?>
+                                                    </h5>
+                                                    <p class="card-text shipping">
+                                                        <!-- <span class="badge badge-pill badge-light-success">Free Shipping</span> -->
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <button type="button" class="btn btn-light mt-1 remove-wishlist"
+                                                onclick="remove_cart({{ $carts->cart_id }}, {{$carts->order_item_id }})">
+                                                <i data-feather="x" class="align-middle mr-25"></i>
+                                                <span>Remove</span>
+                                            </button>
+                                            <!-- <button type="button" class="btn btn-primary btn-cart move-cart">
                                                     <i data-feather="heart" class="align-middle mr-25"></i>
                                                     <span class="text-truncate">Add to Wishlist</span>
                                                 </button> -->
-                                            </div>
                                         </div>
-                                        <?php $i++; ?>
+                                    </div>
+                                    <?php $i++; ?>
                                     @endforeach
                                 </form>
                             </div>
@@ -205,11 +217,13 @@
                                             <ul class="list-unstyled">
                                                 <li class="price-detail">
                                                     <div class="detail-title detail-total">Total</div>
-                                                    <div class="detail-amt font-weight-bolder">Rs. {{ $price_details }}</div>
+                                                    <div class="detail-amt font-weight-bolder">Rs. {{ $price_details }}
+                                                    </div>
                                                 </li>
                                             </ul>
                                             <button type="button"
-                                                class="btn btn-primary btn-block btn-next place-order mt-2" id="save-cart-details">Place Order</button>
+                                                class="btn btn-primary btn-block btn-next place-order mt-2"
+                                                id="save-cart-details">Place Order</button>
                                         </div>
                                     </div>
                                 </div>
@@ -221,7 +235,7 @@
                     <!-- Checkout Customer Address Starts -->
                     <div id="step-address" class="content">
                         <form id="checkout-address" class="list-view product-checkout">
-                        @csrf
+                            @csrf
                             <!-- Checkout Customer Address Left starts -->
                             <div class="card">
                                 <div class="card-header flex-column align-items-start">
@@ -267,14 +281,16 @@
                                             <div class="form-group mb-2">
                                                 <label for="checkout-apt-number">Flat, House No:</label>
                                                 <input type='text' id="house_number" class="form-control"
-                                                    name="house_number" placeholder="9447 Glen Eagles Drive" value="{{ @$order_details['house_no'] }}"/>
+                                                    name="house_number" placeholder="9447 Glen Eagles Drive"
+                                                    value="{{ @$order_details['house_no'] }}" />
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-sm-12">
                                             <div class="form-group mb-2">
                                                 <label for="checkout-landmark">Landmark </label>
                                                 <input type="text" id="landmark" class="form-control" name="landmark"
-                                                    placeholder="Near Apollo Hospital" value="{{ @$order_details['landmark'] }}" />
+                                                    placeholder="Near Apollo Hospital"
+                                                    value="{{ @$order_details['landmark'] }}" />
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-sm-12">
@@ -286,7 +302,9 @@
                                                     required>
                                                     <option value="">Select State</option>
                                                     @foreach($states as $state)
-                                                    <option value="{{ $state->state_id }}" {{ @$order_details['state'] == $state->state_id ? "selected" : "" }}>{{$state->state_title}}
+                                                    <option value="{{ $state->state_id }}"
+                                                        {{ @$order_details['state'] == $state->state_id ? "selected" : "" }}>
+                                                        {{$state->state_title}}
                                                     </option>
                                                     @endforeach
                                                 </select>
@@ -297,10 +315,13 @@
                                                 <label for="checkout-state">District:</label>
                                                 {{-- <input type="text" id="state" class="form-control" name="state"
                                                     placeholder="Maharashtra" /> --}}
-                                                <select class="select2 form-control w-100" name="district" id="district" required>
+                                                <select class="select2 form-control w-100" name="district" id="district"
+                                                    required>
                                                     <option value="">Select District</option>
                                                     @foreach($districts as $district)
-                                                    <option value="{{ $district->districtid }}" {{ @$order_details['district'] == $district->districtid ? "selected" : "" }}>{{$district->district_title}}
+                                                    <option value="{{ $district->districtid }}"
+                                                        {{ @$order_details['district'] == $district->districtid ? "selected" : "" }}>
+                                                        {{$district->district_title}}
                                                     </option>
                                                     @endforeach
                                                 </select>
@@ -317,20 +338,26 @@
                                             <div class="form-group mb-2">
                                                 <label for="checkout-pincode">Pincode:</label>
                                                 <input type="number" id="checkout-pincode" class="form-control"
-                                                    name="pincode" placeholder="201301" value="{{ @$order_details['pincode'] }}"/>
+                                                    name="pincode" placeholder="201301"
+                                                    value="{{ @$order_details['pincode'] }}" />
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-sm-12">
                                             <div class="form-group mb-2">
                                                 <label for="add-type">Address Type:</label>
                                                 <select class="form-control" id="add-type" name='address_type'>
-                                                    <option value="Home" {{ @$order_details['address_type'] == $state->state_id ? "selected" : "" }}>Home</option>
-                                                    <option value="Work" {{ @$order_details['address_type'] == $state->state_id ? "selected" : "" }}>Work</option>
+                                                    <option value="Home"
+                                                        {{ @$order_details['address_type'] == $state->state_id ? "selected" : "" }}>
+                                                        Home</option>
+                                                    <option value="Work"
+                                                        {{ @$order_details['address_type'] == $state->state_id ? "selected" : "" }}>
+                                                        Work</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-12">
-                                            <button type="button" class="btn btn-primary btn-next delivery-address" id="save-order-address">Save
+                                            <button type="button" class="btn btn-primary btn-next delivery-address"
+                                                id="save-order-address">Save
                                                 And Deliver Here</button>
                                         </div>
                                     </div>
@@ -353,6 +380,9 @@
                                         <p class="card-text" id='add_landmark'></p>
                                         <p class="card-text"><span id='add_state'></span><span id='add_city'></span>
                                         </p>
+                                        <p>Pincode - <span
+                                                id='add_pincode'>{{ Auth::guard('customer')->user()->pincode }}</span>
+                                        </p>
                                         <p class="card-text" id='add_phone_no'>
                                             {{ Auth::guard('customer')->user()->customer_phone }}</p>
                                         <!-- <button type="button"
@@ -369,7 +399,10 @@
 
                     <!-- Checkout Payment Starts -->
                     <div id="step-payment" class="content" style="margin-top: 2rem;">
-                        <!-- <form id="checkout-payment" class="list-view product-checkout" onsubmit="return false;"> -->
+                        <form id="checkout-payment" enctype="multipart/form-data">
+                            @csrf
+                            <input type="hidden" id="order_id_{{ $i }}" name="order_id[]"
+                                value="{{ $carts->order_id }}" />
                             <div class="payment-type">
                                 <div class="card">
                                     <div class="card-header flex-column align-items-start">
@@ -377,24 +410,29 @@
                                         <p class="card-text text-muted mt-25">Be sure to click on correct payment option
                                         </p>
                                     </div>
+
                                     <div class="card-body">
-                                        
+
                                         <ul class="other-payment-options list-unstyled">
                                             <li class="py-50">
                                                 <div class="custom-control custom-radio">
-                                                    <input type="radio" id="customColorRadio2" name="paymentOptions"
-                                                        class="custom-control-input" />
-                                                    <label class="custom-control-label" for="customColorRadio2"> Yes </label>
+                                                    <input type="radio" id="customColorRadio2" name="payment_status"
+                                                        class="custom-control-input pyment_option" value="yes"
+                                                        onclick="getvalue('yes')" />
+                                                    <label class="custom-control-label" for="customColorRadio2"> Yes
+                                                    </label>
                                                 </div>
                                             </li>
                                             <li class="py-50">
                                                 <div class="custom-control custom-radio">
-                                                    <input type="radio" id="customColorRadio2" name="paymentOptions"
-                                                        class="custom-control-input" />
-                                                    <label class="custom-control-label" for="customColorRadio2"> No </label>
+                                                    <input type="radio" id="customColorRadio3" name="payment_status"
+                                                        class="custom-control-input pyment_option" value="no"
+                                                        onclick="getvalue('no')" />
+                                                    <label class="custom-control-label" for="customColorRadio3"> No
+                                                    </label>
                                                 </div>
                                             </li>
-                                            
+
                                         </ul>
                                         <!-- <hr class="my-2" />
                                         <div class="gift-card mb-25">
@@ -406,22 +444,40 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="amount-payable checkout-options">
+
+                            <div class="amount-payable checkout-options" style="display:none">
                                 <div class="card">
                                     <div class="card-header">
                                         <h4 class="card-title">Upload Payment Receipts</h4>
                                     </div>
-                                    <div class="card-header">
-                                        <input type="file" name="payment_file" id="payment_file" />
+                                    <div class="row">
+                                        <div class="col-md-4 m-1">
+                                            <div class="form-group">
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input" id="payment_file"
+                                                        name="payment_file" />
+                                                    <label class="custom-file-label" for="customFile">Choose
+                                                        file</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 text-center mb-2 preview_div" style="display:none">
+                                            <label for="basicInputFile mb-2"><b>Preview </b></label><br>
+                                            <img id="preview_img" width="120" height="150" />
+                                        </div>
                                     </div>
-                                    <div class="col-12" style="margin-bottom: 20px;">
-                                        <button type="button" class="btn btn-primary btn-next waves-effect waves-float waves-light" id="save-order-payment">Pay From Here</button>
-                                    </div>
-
                                 </div>
                             </div>
 
-                        <!-- </form> -->
+
+                            <div class="col-12 text-center" style="margin-bottom: 20px;">
+                                <button type="button"
+                                    class="btn btn-primary btn-next waves-effect waves-float waves-light"
+                                    id="save-order-payment">Submit</button>
+                            </div>
+
+
+                        </form>
                     </div>
                     <!-- Checkout Payment Ends -->
                     <!-- </div> -->
@@ -490,7 +546,7 @@
 
         $('#city').keyup(function(){
             $('#add_city').empty();
-            $('#add_city').text(this.value + $("#$('#checkout-pincode')").text());
+            $('#add_city').text(this.value);
         });
 
         $('#house_number').keyup(function(){
@@ -503,9 +559,11 @@
             $('#add_landmark').text(this.value);
         });
 
+        
+        $('#add_pincode').text($('#checkout-pincode').val());
         $('#checkout-pincode').keyup(function() {
-            $('#add_city').empty();
-            $('#add_city').text($('#add_city').text + $("#$('#checkout-pincode')").text());
+            $('#add_pincode').empty();
+            $('#add_pincode').text(this.value);
         });
 
         $('body').on('focusout', '.qty-change', function(){
@@ -570,6 +628,7 @@
                 async: false,
                 success:function(response) {
                     if(response == "success"){
+                        $('#address').prop('disabled', false);
                         checkoutWizard = document.querySelector('.checkout-tab-steps');
                         if (typeof checkoutWizard !== undefined && checkoutWizard !== null) {
                             var wizard = new Stepper(checkoutWizard, {
@@ -615,35 +674,18 @@
                 async: false,
                 success:function(response) {
                     if(response == "success"){
+                        $('#payment').prop('disabled', false);
                         Swal.fire('Success!', 'Information Saved Successfully', 'success').then(function() {
-                            // window.location = "/checkout";
-                            // $("#payment").attr('disabled', false);
-                            checkoutWizard = document.querySelector('.checkout-tab-steps');
-                        if (typeof checkoutWizard !== undefined && checkoutWizard !== null) {
-                            var wizard = new Stepper(checkoutWizard, {
-                                linear: false
-                            });
-
-                            wizard.next();
-                            // $("#step-payment").click();
-                            // $(checkoutWizard)
-                            //     .find('.btn-next')
-                            //     .each(function () {
-                            //         $(this).on('click', function (e) {
-                            //             // if(response == "success"){
-                            //                 wizard.next();
-                            //             // }
-                            //     });
-                            // });
-                                    alert();
-                            $(checkoutWizard)
-                                .find('.btn-prev')
-                                .on('click', function () {
-                                    wizard.previous();
-                            });
-                        }
-
                         });
+                        $('#address_tab').addClass('crossed');
+                        $('#address_tab').removeClass('active');
+                        $('#payment_tab').addClass('active');
+                        $('#address').attr('aria-selected', false);
+                        $('#payment').attr('aria-selected', true);
+                        $('#step-payment').addClass('dstepper-block');
+                        $('#step-payment').addClass('active');
+                        $('#step-address').removeClass('dstepper-block');
+                        $('#step-address').removeClass('active');
                     }
                 },
                 error:function(){
@@ -653,12 +695,16 @@
         });
 
         $("#save-order-payment").click(function() {
-            var dataString = $("#form_card, #checkout-address").serialize();
+            var form = $( "#checkout-payment" )[0]; // You need to use standard javascript object here
+            var formData = new FormData(form);
+            formData.append('iamge', $('input[type=file]')[0].files[0]);
             $.ajax({
                 url:"/save_order_payment",
-                method:"POST",
-                data: dataString,
+                type:"POST",
+                data: formData,
                 async: false,
+                contentType: false,
+                processData: false,
                 success:function(response) {
                     if(response == "success"){
                         Swal.fire('Success!', 'Information Saved Successfully', 'success').then(function() {
@@ -670,8 +716,34 @@
                     console.log("error");
                 }
             });
+            
         });
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#preview_img').attr('src', e.target.result);
+                    $("#preview_img").show();
+                }
+                reader.readAsDataURL(input.files[0]);
+                $('.preview_div').show();
+            }
+        }
+    
+        $("#payment_file").change(function(){
+            readURL(this);
+        });
+
     });
+
+    function getvalue(value){
+            if(value == 'yes'){
+                $('.checkout-options').show();
+            }else{
+                $('.checkout-options').hide();
+            }
+    }
 
     function remove_cart(cart_id, order_item_id){
         if(confirm("Do you want to delete this record?"))
@@ -691,4 +763,5 @@
         }
     }
 
+   
 </script>

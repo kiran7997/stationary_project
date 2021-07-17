@@ -33,6 +33,7 @@ class Orders extends Migration
             $table->date('payment_date')->nullable();
             $table->float('amount', 15, 2)->default(0);
             $table->text('payment_status')->nullable();
+            $table->text('payment_file')->nullable();
             $table->boolean('manufacturing_notification')->default(0);
             $table->date('return_date')->nullable();
             $table->boolean('invoice_status')->default(0);
