@@ -79,7 +79,7 @@
                                 <div class="row">
                                     <div class="col-12">
                                         <button type="submit" class="btn btn-primary" id='btn_submit'>
-                                            Submit
+                                            Update
                                         </button>
                                         <a href="{{route('roles.index')}}"><button type="button"
                                                 class="btn btn-outline-danger">

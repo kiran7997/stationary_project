@@ -14,7 +14,7 @@
             data-feather="search"></i></a>
         <div class="search-input">
           <div class="search-input-icon"><i data-feather="search"></i></div>
-          <input class="form-control input" type="text" placeholder="Explore Vuexy..." tabindex="-1"
+          <input class="form-control input" type="text" placeholder="Explore Stationary Application..." tabindex="-1"
             data-search="search">
           <div class="search-input-close"><i data-feather="x"></i></div>
           <ul class="search-list search-list-main"></ul>
@@ -205,7 +205,7 @@
   <li class="d-flex align-items-center"><a href="javascript:void(0);">
       <h6 class="section-label mt-75 mb-0">Files</h6>
     </a></li>
-  <li class="auto-suggestion"><a class="d-flex align-items-center justify-content-between w-100"
+  <!-- <li class="auto-suggestion"><a class="d-flex align-items-center justify-content-between w-100"
       href="app-file-manager.html">
       <div class="d-flex">
         <div class="mr-75"><img src="{{ asset('app-assets/images/icons/xls.png') }}" alt="png" height="32"></div>
@@ -265,8 +265,9 @@
           <p class="search-data-title mb-0">Michal Clark</p><small class="text-muted">FontEnd Developer</small>
         </div>
       </div>
-    </a></li>
-  <li class="auto-suggestion"><a class="d-flex align-items-center justify-content-between py-50 w-100"
+    </a></li> -->
+  <li class="auto-suggestion">
+    <!-- <a class="d-flex align-items-center justify-content-between py-50 w-100"
       href="app-user-view.html">
       <div class="d-flex align-items-center">
         <div class="avatar mr-75"><img src="{{ asset('app-assets/images/portrait/small/avatar-s-14.jpg') }}" alt="png"
@@ -275,8 +276,10 @@
           <p class="search-data-title mb-0">Milena Gibson</p><small class="text-muted">Digital Marketing Manager</small>
         </div>
       </div>
-    </a></li>
-  <li class="auto-suggestion"><a class="d-flex align-items-center justify-content-between py-50 w-100"
+    </a>
+  </li> -->
+  <li class="auto-suggestion">
+    <!-- <a class="d-flex align-items-center justify-content-between py-50 w-100"
       href="app-user-view.html">
       <div class="d-flex align-items-center">
         <div class="avatar mr-75"><img src="{{ asset('app-assets/images/portrait/small/avatar-s-6.jpg') }}" alt="png"
@@ -285,7 +288,8 @@
           <p class="search-data-title mb-0">Anna Strong</p><small class="text-muted">Web Designer</small>
         </div>
       </div>
-    </a></li>
+    </a>
+  </li> -->
 </ul>
 <ul class="main-search-list-defaultlist-other-list d-none">
   <li class="auto-suggestion justify-content-between"><a
