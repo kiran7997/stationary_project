@@ -49,7 +49,7 @@
                         <i data-feather="chevron-right" class="font-medium-2"></i>
                     </div>
                     <div class="step" data-target="#step-address" id="address_tab">
-                        <button type="button" class="step-trigger" id="address">
+                        <button type="button" class="step-trigger" id="address" disabled>
                             <span class="bs-stepper-box">
                                 <i data-feather="home" class="font-medium-3"></i>
                             </span>
@@ -63,7 +63,7 @@
                         <i data-feather="chevron-right" class="font-medium-2"></i>
                     </div>
                     <div class="step" data-target="#step-payment" id="payment_tab">
-                        <button type="button" class="step-trigger" id="payment">
+                        <button type="button" class="step-trigger" id="payment" disabled>
                             <span class="bs-stepper-box">
                                 <i data-feather="credit-card" class="font-medium-3"></i>
                             </span>
@@ -380,6 +380,9 @@
                                         <p class="card-text" id='add_landmark'></p>
                                         <p class="card-text"><span id='add_state'></span><span id='add_city'></span>
                                         </p>
+                                        <p>Pincode - <span
+                                                id='add_pincode'>{{ Auth::guard('customer')->user()->pincode }}</span>
+                                        </p>
                                         <p class="card-text" id='add_phone_no'>
                                             {{ Auth::guard('customer')->user()->customer_phone }}</p>
                                         <!-- <button type="button"
@@ -399,7 +402,7 @@
                         <form id="checkout-payment" enctype="multipart/form-data">
                             @csrf
                             <input type="hidden" id="order_id_{{ $i }}" name="order_id[]"
-                                        value="{{ $carts->order_id }}" />
+                                value="{{ $carts->order_id }}" />
                             <div class="payment-type">
                                 <div class="card">
                                     <div class="card-header flex-column align-items-start">
@@ -543,7 +546,7 @@
 
         $('#city').keyup(function(){
             $('#add_city').empty();
-            $('#add_city').text(this.value + $('#checkout-pincode').text());
+            $('#add_city').text(this.value);
         });
 
         $('#house_number').keyup(function(){
@@ -556,9 +559,11 @@
             $('#add_landmark').text(this.value);
         });
 
+        
+        $('#add_pincode').text($('#checkout-pincode').val());
         $('#checkout-pincode').keyup(function() {
-            $('#add_city').empty();
-            $('#add_city').text($('#add_city').text + $("checkout-pincode").text());
+            $('#add_pincode').empty();
+            $('#add_pincode').text(this.value);
         });
 
         $('body').on('focusout', '.qty-change', function(){
@@ -623,6 +628,7 @@
                 async: false,
                 success:function(response) {
                     if(response == "success"){
+                        $('#address').prop('disabled', false);
                         checkoutWizard = document.querySelector('.checkout-tab-steps');
                         if (typeof checkoutWizard !== undefined && checkoutWizard !== null) {
                             var wizard = new Stepper(checkoutWizard, {
@@ -668,6 +674,7 @@
                 async: false,
                 success:function(response) {
                     if(response == "success"){
+                        $('#payment').prop('disabled', false);
                         Swal.fire('Success!', 'Information Saved Successfully', 'success').then(function() {
                         });
                         $('#address_tab').addClass('crossed');
