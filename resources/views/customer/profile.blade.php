@@ -13,7 +13,7 @@
                         <h2 class="content-header-title float-left mb-0">Profile</h2>
                         <div class="breadcrumb-wrapper">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.html">Home</a>
+                                <li class="breadcrumb-item"><a href="{{ url('customer-dashboard') }}">Home</a>
                                 </li>
 
                             </ol>
@@ -60,9 +60,9 @@
                                         <div class="card-body">
                                             <div class="row">
                                                 <div
-                                                    class="col-xl-6 col-lg-12 d-flex flex-column justify-content-between border-container-lg">
+                                                    class="col-xl-6 col-lg-12 d-flex flex-column justify-content-between border-container-lg" >
                                                     <div class="user-avatar-section">
-                                                        <div class="d-flex justify-content-start">
+                                                        <div class="d-flex justify-content-start" style="margin-left:50px;margin-top:20px">
                                                             @if(Auth::guard('customer')->user()->customer_profile_image)
                                                             <img class="img-fluid rounded"
                                                                 src="{{url('customer_images/'.Auth::guard('customer')->user()->customer_profile_image)}}"
@@ -71,21 +71,34 @@
                                                             <img class='img-fluid' width="104" height="104">
                                                             @endif
 
-                                                            <div class="d-flex flex-column ml-1">
-                                                                <div class="user-info mb-1">
-                                                                    <h4 class="mb-0">
-                                                                        {{ Auth::guard('customer')->user()->customer_firstname }}
-                                                                    </h4>
-                                                                    <span
-                                                                        class="card-text">{{ Auth::guard('customer')->user()->email }}</span>
-                                                                </div>
-                                                            </div>
+                                                            
                                                         </div>
                                                     </div>
 
                                                 </div>
                                                 <div class="col-xl-6 col-lg-12 mt-2 mt-xl-0">
                                                     <div class="user-info-wrapper">
+                                                        
+                                                        <div class="d-flex flex-wrap">
+                                                            <div class="user-info-title">
+                                                                <i data-feather="user" class="mr-1"></i>
+                                                                <span
+                                                                    class="card-text user-info-title font-weight-bold mb-0">Name</span>
+                                                            </div>
+                                                            <p class="card-text mb-0">
+                                                                &nbsp;&nbsp;&nbsp;{{ Auth::guard('customer')->user()->customer_firstname }}
+                                                            </p>
+                                                        </div>
+                                                        <div class="d-flex flex-wrap">
+                                                            <div class="user-info-title">
+                                                                <i data-feather="mail" class="mr-1"></i>
+                                                                <span
+                                                                    class="card-text user-info-title font-weight-bold mb-0">Email</span>
+                                                            </div>
+                                                            <p class="card-text mb-0">&nbsp;
+                                                                {{ Auth::guard('customer')->user()->email }}
+                                                            </p>
+                                                        </div>
                                                         <div class="d-flex flex-wrap">
                                                             <div class="user-info-title">
                                                                 <i data-feather="user" class="mr-1"></i>
@@ -96,6 +109,7 @@
                                                                 &nbsp;{{ Auth::guard('customer')->user()->username }}
                                                             </p>
                                                         </div>
+
                                                         <div class="d-flex flex-wrap my-50">
                                                             <div class="user-info-title">
                                                                 <i data-feather="star" class="mr-1"></i>
