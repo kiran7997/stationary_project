@@ -196,3 +196,6 @@ Route::get('returnReport', 'OrderController@return_order');
 Route::POST('returnOrder', 'OrderController@orderReturnCount');
 Route::get('/editOrder/{order_id}', 'OrderController@editReturnProduct');
 Route::post('/updateProduct', 'OrderController@updateReturnProduct');
+//import customer
+Route::get('import', 'CustomerController@view_import');
+Route::post('import', 'CustomerController@import');
