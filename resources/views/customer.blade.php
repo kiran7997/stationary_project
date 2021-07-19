@@ -43,9 +43,8 @@
                     <div class="card">
                     <div class="card-header border-bottom">
                                 <h4 class="card-title"></h4>
-                                <!-- <button type="button" class="btn btn-outline-primary float-right" data-toggle="modal" data-target="#supplierPModal">
-                                    Add New Supplier
-                                </button> -->
+                                <a class="btn btn-outline-primary pull-right" href="{{ url('import') }}">
+                                    Import Customer</a>
                             </div>
                        
                         <div style="margin:20px;">
@@ -61,9 +60,8 @@
                             @endif
                             <table id="example" class="display nowrap stripe" style="width:100%;">
                             <thead>
-                                   <th>Company Name</th>
-                                   <th>Firstname</th>
-                                   <th>Lastname</th>
+                                   <th>FPS ID</th>
+                                   <th>FPS Name</th>
                                    <th>Email</th>
                                    <th>Phone</th>
                                    <th>Username</th>
@@ -75,9 +73,8 @@
                                 <tbody>
                                 @foreach($customers as $customer)
                                  <tr id="sid{{$customer->customer_id}}">
-                                    <td>{{$customer->company_name}}</td>
+                                    <td>{{$customer->fps_id}}</td>
                                     <td>{{$customer->customer_firstname}}</td>
-                                    <td>{{$customer->customer_lastname}}</td>
                                     <td>{{$customer->email}}</td>
                                     <td>{{$customer->customer_phone}}</td>
                                     <td>{{$customer->username}}</td>

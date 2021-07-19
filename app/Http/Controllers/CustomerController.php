@@ -9,6 +9,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Arr;
 use Hash;
+use App\Exports\UsersExport;
+use App\Imports\CustomerImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class CustomerController extends Controller
 {
@@ -166,5 +169,15 @@ class CustomerController extends Controller
         // print_r($data);
         // exit;
         return view('customer.order_history', compact('data'));
+    }
+
+    public function view_import(){
+        return view('import_customer');
+    }
+
+    public function import(){
+        $data = Excel::import(new CustomerImport,request()->file('file'));
+        return redirect('customer');
+
     }
 }
