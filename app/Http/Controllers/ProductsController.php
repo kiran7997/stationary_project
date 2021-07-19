@@ -17,7 +17,7 @@ class ProductsController extends Controller
     }
     public function index()
     {
-        
+
         $products = Aproducts::select('aproducts.*', 'categories.cat_name', 'units.unit_name', 'productvariations.variation_name')
             ->leftjoin('categories', 'categories.cat_id', '=', 'aproducts.product_id')
             ->leftjoin('units', 'units.unit_id', '=', 'aproducts.unit_id')
@@ -30,14 +30,14 @@ class ProductsController extends Controller
     }
     public function store(Request $req)
     {
-       
+
         $products = new Aproducts();
         $products->product_name = $req->product_name;
         $products->cat_id = $req->cat_id;
         $products->unit_id = $req->unit_id;
         $products->variation_id = $req->variation_id;
 
-       
+
         $product_img = array();
         $images = $req->file('image_url');
 
@@ -45,7 +45,7 @@ class ProductsController extends Controller
 
             $filename = rand(0, 999) . $image->getClientOriginalName();
             $destinationPath = public_path('product_images/');
-            
+
             $image->move($destinationPath, $filename);
             $product_img[] = 'product_images/' . $filename;
         }
@@ -57,20 +57,23 @@ class ProductsController extends Controller
         $products->code = $req->code;
         $products->taxable = $req->taxable;
         $products->threshold_qty = $req->threshold_qty;
+        $products->brand = $req->brand;
+        $products->inner_carton = $req->inner_carton;
+        $products->actual_mrp = $req->actual_mrp;
+        $products->fps_mrp = $req->fps_mrp;
         $products['created_by'] = Auth::user()->id;
         $products['updated_by'] = Auth::user()->id;
 
         $products->save();
-        
+
         return redirect('product')->with('success', ' Product Inserted  successfully');
-       
     }
 
     public function edit($product_id)
     {
-        $products = Aproducts::select('product_id','product_name','cat_id','unit_id','variation_id','image_url','description','base_price','code','taxable')
-        ->where('product_id','=',$product_id)->first();
-       
+        // $products = Aproducts::select('product_id', 'product_name', 'cat_id', 'unit_id', 'variation_id', 'image_url', 'description', 'base_price', 'code', 'taxable')
+        //     ->where('product_id', '=', $product_id)->first();
+        $products = Aproducts::where('product_id', '=', $product_id)->first();
         return response()->json($products);
     }
     public function update(Request $req)
@@ -80,13 +83,17 @@ class ProductsController extends Controller
         $products->cat_id = $req->cat_id;
         $products->unit_id = $req->unit_id;
         $products->variation_id = $req->variation_id;
-       
+
         $products->description = $req->description;
         $products->base_price = $req->base_price;
         $products->code = $req->code;
         $products->taxable = $req->taxable;
         $products->threshold_qty = $req->threshold_qty;
-        
+        $products->brand = $req->brand;
+        $products->inner_carton = $req->inner_carton;
+        $products->actual_mrp = $req->actual_mrp;
+        $products->fps_mrp = $req->fps_mrp;
+
 
         $product_img = array();
         if ($req->file('image_url')) {
@@ -96,7 +103,7 @@ class ProductsController extends Controller
 
                 $filename = rand(0, 999) . $image->getClientOriginalName();
                 $destinationPath = public_path('product_images/');
-                
+
                 $image->move($destinationPath, $filename);
                 $product_img[] = 'product_images/' . $filename;
             }
@@ -115,13 +122,11 @@ class ProductsController extends Controller
 
         $products->save();
         return redirect('product')->with('success', 'Product Updated successfully');
-      
     }
     public function destroy($product_id)
     {
         $products = Aproducts::where('product_id', $product_id)
             ->update(['deleted' => 1]);
         return response()->json(['success' => 'Record has Been Deleted']);
-       
     }
 }
