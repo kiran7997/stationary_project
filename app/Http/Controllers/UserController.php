@@ -280,7 +280,7 @@ class UserController extends Controller
     {
         $order_list = \App\Orders::where(['order_id' => $id])->first();
         $order_item_data = DB::table('order_items')
-            ->select('order_items.*', 'aproducts.image_url')
+            ->select('order_items.*','aproducts.image_url')
             ->leftjoin('aproducts', 'aproducts.product_id', 'order_items.product_id')
             ->where(['order_id' => $id])->get();
         $users = \App\User::where(['department' => "Sales"])->get();
@@ -465,16 +465,17 @@ class UserController extends Controller
                     ->get();
         return view('employee-dashboard-list.process-order-list', compact('order_list'));
     }
-
+//invoice 
     public function GenerateInvoiceData($id,$id1){
         $order_list = DB::table('orders')
                             ->select('orders.*','orders.phone_no','users.name')
                             ->leftjoin('users','users.id','orders.sales_person')
                             ->where(['order_id'=>$id])->first();
         $order_item_data = DB::table('order_items')
-                            ->select('order_items.*','aproducts.image_url')
+                            ->select('order_items.*','orders.*','aproducts.image_url')
+                            ->leftjoin('orders', 'orders.order_id', 'order_items.order_id')
                             ->leftjoin('aproducts','aproducts.product_id','order_items.product_id')
-                            ->where(['order_id'=>$id])->get();
+                            ->where(['orders.order_id'=>$id])->get();
 
         if($order_list->invoice_status == 0){
             $users = \App\User::select('id')->where(['department'=>'Logistic'])->get();

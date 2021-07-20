@@ -1,6 +1,43 @@
 @extends('layouts.app')
 @section('content')
+<style>
+   #example2 {
+  box-sizing: border-box;
+  width: 50%;
+  height: 250px;
+  padding: 30px;  
+  border: 1px solid black;
+}
+  
+.tdd{
+     border:1px solid black ;
+   
+     padding: 30px; 
+}
+#example1 {
+  box-sizing: border-box;
+  width: 50%;
+  height: 250px;
+  border: 1px solid black;
+}
+.col-8{
+width: 12.5%;
+}
+
+/* Create two equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+  height: 100px; /* Should be removed. Only for demonstration */
+}
+
+/* Clear floats after the columns */
+
+</style>
 <!-- BEGIN: Page CSS-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/core/menu/menu-types/vertical-menu.css ') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/plugins/forms/pickers/form-flat-pickr.css ') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/pages/app-invoice.css ') }}">
@@ -16,42 +53,77 @@
                 <section class="invoice-preview-wrapper">
                     <div class="row invoice-preview">
                         <!-- Invoice -->
-                        <div class="col-xl-9 col-md-8 col-12">
-                            <div class="card invoice-preview-card">
+                        <div class="col-12">
+                            <!-- <div class="card invoice-preview-card"> -->
                                 <div class="card-body invoice-padding pb-0">
                                     <!-- Header starts -->
-                                    <div class="d-flex justify-content-between flex-md-row flex-column invoice-spacing mt-0">
-                                        <div>
-                                            <div class="logo-wrapper">
-                                            <img src="http://127.0.0.1:8000/logo/msb.png" height="55" >
-                                                <h3 class="text-primary invoice-logo">MSB</h3>
+                                    <h3><center>INVOICE</center></h3>
+                                        <div class="row">
+                                            <div class="column" id="example2">
+                                                <h4>  MSB Corporation Private Limited</h4>
+                                                <p>Off No12, Mangal Wadi,</p>
+                                                <p>Girgaum, Mumbai: 400 004.</p>
+                                                <p>GSTIN/UIN: 27AANCM3983C1Z7</p>
+                                                <p>State Name : Maharashtra, Code : 27</p>
+                                                <p>E-Mail : info@msbcorporation.com</p>
                                             </div>
-                                            <p class="card-text mb-25">Office 149, 450 South Brand Brooklyn</p>
-                                            <p class="card-text mb-25">San Diego County, CA 91905, USA</p>
-                                            <p class="card-text mb-0">+1 (123) 456 7891, +44 (876) 543 2198</p>
-                                        </div>
-                                        <div class="mt-md-0 mt-2">
-                                            <h4 class="invoice-title">
-                                                Invoice
-                                                <span class="invoice-number">#3492</span>
-                                            </h4>
-                                            <div class="invoice-date-wrapper">
-                                                <p class="invoice-date-title">Date Issued:</p>
-                                                <p class="invoice-date">{{$order_list->order_date}}</p>
+                                            <div class="column" id="example1">
+                                            <?php if(count($order_item_data)>0){ ?>
+                                            @foreach($order_item_data as $item)
+                                            <table class="table table-bordered" style="font-size: 13px;" >
+                                                <thead>
+                                                <tr>
+                                                     <td>Invoice Rs <br> {{$item->amount}}</td>
+                                                     <td>Dated  <br>{{$item->order_date}}</td>
+                                                </tr>
+                                                <tr>
+                                                     <td>Delivary Note</td>
+                                                     <td>Mode/Terms of Payment <br> {{$item->payment_status}}</td>
+                                                </tr>
+                                                <tr>
+                                                     <td>Supplier’s Ref <br> {{$item->sales_person}}</td>
+                                                     <td>Other Reference(s)</td>
+                                                </tr>
+                                                <tr>
+                                                     <td>Buyer’s Order No.</td>
+                                                     <td>Dated</td>
+                                                </tr> 
+                                                <tr>
+                                                    <td>Despatch Document No.</td>
+                                                    <td>Delivery Note Date</td>
+                                                </tr>   
+                                                <tr>
+                                                    <td>Despatched through</td>
+                                                    <td>Destination {{$item->address_type}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Terms of Delivery</td>
+                                                </tr>
+                                             </thead>
+                                           
+                                            
+                                             </table>
+                                             
                                             </div>
-                                            <div class="invoice-date-wrapper">
-                                                <p class="invoice-date-title">Due Date:</p>
-                                                <p class="invoice-date">{{$order_list->arrival_date}}</p>
+                                                <div class="w-100"></div>
+                                                <div class="column"id="example2">
+                                                <p>Buyer</p>
+                                                <p><b>{{$item->firstname}} &nbsp;{{$item->lastname}}</b></p>
+                                                <p>PAN/IT No :</p>
+                                                <p>State Name : Maharashtra, Code : 27</p>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <!-- Header ends -->
-                                </div>
-
-                                <hr class="invoice-spacing" />
+                                            @endforeach
+                                            <?php } ?>
+                                                <div id="example2"></div>
+                                            </div>
+                                      
+                                </div>   
+                            <!-- </div>     -->
+                        </div>  
+                                <!-- <hr class="invoice-spacing" /> -->
 
                                 <!-- Address and Contact starts -->
-                                <div class="card-body invoice-padding pt-0">
+                                <!-- <div class="card-body invoice-padding pt-0">
                                     <div class="row invoice-spacing">
                                         <div class="col-xl-8 p-0">
                                             <h6 class="mb-2">Invoice To:</h6>
@@ -89,17 +161,23 @@
                                             </table>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                                 <!-- Address and Contact ends -->
 
                                 <!-- Invoice Description starts -->
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <thead>
+                                <br><br>
+                                <div >
+                                    <table class=" table table-bordered column tdd"   >
+                                        <thead >
                                             <tr>
-                                                <th class="py-1">Item</th>
-                                                <th class="py-1">Qty</th>
-                                                <th class="py-1">Total</th>
+                                                <th >Sr.No</th>
+                                                <th >Description of Goods</th>
+                                                <th >HSN/SAC</th>
+                                                <th >GST Rate</th>
+                                                <th >Quantity</th>
+                                                <th >Rate</th>
+                                                <th >Per</th>
+                                                <th >Amount</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -107,62 +185,114 @@
                                             @foreach($order_item_data as $item)
                                             <tr>
                                                 <td class="py-1">
+                                                    <span class="font-weight-bold">1</span>
+                                                </td>
+                                                <td class="py-1">
                                                     <p class="card-text font-weight-bold mb-25">{{$item->product_name}}</p>
+                                                    Less : CGST @6% OUTWARD
+                                                    SGST @6% OUTWARD
+                                                    Rounded Off
 <!--                                                    <p class="card-text text-nowrap">
                                                         Developed a full stack native app using React Native, Bootstrap & Python
                                                     </p>-->
                                                 </td>
                                                 <td class="py-1">
+                                                    <span class="font-weight-bold">HSN</span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="font-weight-bold">GST</span>
+                                                </td>
+                                                <td class="py-1">
                                                     <span class="font-weight-bold">{{$item->quantity}}</span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="font-weight-bold">{{$item->tax_rate}}</span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="font-weight-bold">{{$item->tax_amount}}</span>
                                                 </td>
                                                 <td class="py-1">
                                                     <span class="font-weight-bold">Rs.{{$item->amount}}</span>
                                                 </td>
                                             </tr>
+                                            
+                                            <tr>
+                                                <td colspan="2" style="text-align: right;">Total</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>{{$item->quantity}}</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>Rs.{{$item->amount}}</td>
+                                            </tr>
+                                            <tr>
+                                                <tr> <td colspan="8">Amount Chargeable (in words) <br><b>INR Eleven Only</b></td> </tr>
+                                            </tr>
+                                            <tr style="text-align: center;">
+                                                
+                                                <th colspan="2">HSN/SAC</th>
+                                                <th >Taxable Value</th>
+                                                <th colspan="2">Central Tax</th>
+                                               <th colspan="2" >State Tax</th>
+                                               <th>Total</th>
+
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2"></td>
+                                                <td></td>
+                                                <td><b>Rate</b></td>
+                                                <td><b>Amount</b></td>
+                                                
+                                               
+                                                <td><b>Rate</b></td>
+                                                <td><b>Amount</b></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr style="text-align: right;">
+                                                <td colspan="2">HSN/SAC</td>
+                                                <td>{{$item->tax_amount}}</td>
+                                                <td colspan="2"></td>
+                                                <td colspan="2"></td>
+                                                <td>Rs.{{$item->amount}}</td>
+                                            </tr>
+                                            <tr style="text-align: right;">
+                                                <td  colspan="2" >Toatl</td>
+                                                <td>{{$item->tax_amount}}</td>
+                                                <td colspan="2"></td>
+                                                <td colspan="2"></td>
+
+                                               
+                                                <td>Rs.{{$item->amount}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="8">Tax Amount (in words) : <b>INR One and Twenty paise Only</b> </td>
+                                            </tr>
+                                            <tr >
+                                            <td style=" margin-right:500px" colspan="8"> <b style=" margin-left:430px">Company’s Bank Details</b><br>
+                                            <p style=" margin-left:450px">Bank Name: <b> Axis Bank Ltd A/C 921020002017808 </b><br>
+                                            A/c No. : <b>921020002017808</b><br>
+                                            Branch & IFS Code : <b>Charni Road Br. & UTIB0002274</b></p>
+                                            </td>
+                                            </tr>
+                                            <tr id="col-8">
+                                                <td colspan="8">
+                                                <p id="tdd">
+                                                Company’s PAN: <b> AANCM3983C</b><br>
+                                               <u> Declaration </u><br>
+                                                We declare that this invoice shows the actual price of <br> the
+                                                goods described and that all particulars are true an
+                                                 <b style="margin-left:120px"> for MSB Corporation Private Limited </p>
+                                                        <p style="margin-left:600px">Authorised Signatory</p></b>
+                                                </td>
+                                            </tr>
+                                          
                                             @endforeach
                                             <?php } ?>
                                         </tbody>
                                     </table>
                                 </div>
 
-                                <div class="card-body invoice-padding pb-0">
-                                    <div class="row invoice-sales-total-wrapper">
-                                        <div class="col-md-6 order-md-1 order-2 mt-md-0 mt-3">
-                                            <p class="card-text mb-0">
-                                                <span class="font-weight-bold">Salesperson:</span> <span class="ml-75">{{$order_list->name}}</span>
-                                            </p>
-                                        </div>
-                                        <div class="col-md-6 d-flex justify-content-end order-md-2 order-1">
-                                            <div class="invoice-total-wrapper">
-                                                <div class="invoice-total-item">
-                                                    <p class="invoice-total-title">Subtotal:</p>
-                                                    <p class="invoice-total-amount">$1800</p>
-                                                </div>
-                                                <div class="invoice-total-item">
-                                                    <p class="invoice-total-title">Discount:</p>
-                                                    <p class="invoice-total-amount">$28</p>
-                                                </div>
-                                                <div class="invoice-total-item">
-                                                    <p class="invoice-total-title">Tax:</p>
-                                                    <p class="invoice-total-amount">21%</p>
-                                                </div>
-                                                <hr class="my-50" />
-                                                <div class="invoice-total-item">
-                                                    <p class="invoice-total-title">Total:</p>
-                                                    <p class="invoice-total-amount">$1690</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Invoice Description ends -->
-
                                 
-                                <!-- Invoice Note ends -->
-                            </div>
-                        </div>
-                        <!-- /Invoice -->
-
                         <!-- Invoice Actions -->
                         <div class="col-xl-3 col-md-4 col-12 invoice-actions mt-md-0 mt-2">
                             <div class="card">
