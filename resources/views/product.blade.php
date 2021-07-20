@@ -136,7 +136,8 @@
 
 					<label class="required" for="product_name">Product Name </label>
 					<div class="form-group">
-						<input oninput="this.value = this.value.replace(/[^A-Za-z0-9-,.;'&/.() ]|^ /g,'')" name="product_name" id="product_name" class="form-control" required>
+						<input oninput="this.value = this.value.replace(/[^A-Za-z0-9-,.;'&/.() ]|^ /g,'')"
+							name="product_name" id="product_name" class="form-control" required>
 					</div>
 
 					<label class="required" for="cat_id">Catagory </label>
@@ -177,7 +178,8 @@
 					<label class="required" for="description">Product Image </label>
 					<div class="form-group">
 
-						<input type='file' class='form-control' name='image_url[]' id='image_url' accept=".jpg,.jpeg,.png" onchange="validateFileType()"multiple required >
+						<input type='file' class='form-control' name='image_url[]' id='image_url'
+							accept=".jpg,.jpeg,.png" onchange="validateFileType()" multiple required>
 
 					</div>
 					<div class="alert alert-danger alert-dismissible fade show" role="alert" id='err_img_url'
@@ -188,45 +190,55 @@
 						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
-
 					</div>
 
 
 					<label class="required" for="description">Description </label>
-
 					<div class="form-group">
-						<input oninput="this.value = this.value.replace(/[^A-Za-z0-9-,.;'&/.() ]|^ /g,'')" name="description" id="description" class="form-control" required>
+						<input oninput="this.value = this.value.replace(/[^A-Za-z0-9-,.;'&/.() ]|^ /g,'')"
+							name="description" id="description" class="form-control" required>
 					</div>
 
 					<label class="required" for="base_price">Base Price </label>
-
 					<div class="form-group">
-						<input type="number" name="base_price" id="base_price" class="form-control" onchange="roundIt(this);" required >
-						
+						<input type="number" name="base_price" id="base_price" class="form-control"
+							onchange="roundIt(this);" required>
 					</div>
-
-
-
-
 					<label class="required" for="code">Code </label>
 					<div class="form-group">
-						<input oninput="this.value = this.value.replace(/[^A-Za-z0-9-,.;'&/.() ]|^ /g,'')" name="code" id="code" class="form-control" required> </div>
-
-
-
+						<input oninput="this.value = this.value.replace(/[^A-Za-z0-9-,.;'&/.() ]|^ /g,'')" name="code"
+							id="code" class="form-control" required>
+					</div>
 					<label class="required" for="taxable">Taxable Type</label> &nbsp;&nbsp;
 					<div class="form-group"><select name="taxable" id="taxable" class="form-control" required>
-						<option value="">Select Option</option>
-						<option value="0">Yes</option>
-						<option value="1">No</option>
-
-					</select></div>
+							<option value="">Select Option</option>
+							<option value="0">Yes</option>
+							<option value="1">No</option>
+						</select>
+					</div>
 					<label class="required" for="base_price">Threshold Qty. </label>
 					<div class="form-group">
-						<input type="number" name="threshold_qty" id="threshold_qty" class="form-control" onchange="roundIt(this);" required >
-						
+						<input type="number" name="threshold_qty" id="threshold_qty" class="form-control"
+							onchange="roundIt(this);" required>
 					</div>
-
+					<label class="required" for="brand">Brand</label>
+					<div class="form-group">
+						<input type="text" name="brand" id="brand" class="form-control" required>
+					</div>
+					<label class="required" for="inner_carton">Inner Carton</label>
+					<div class="form-group">
+						<input type="text" name="inner_carton" id="inner_carton" class="form-control" required>
+					</div>
+					<label class="required" for="code">Actual MRP</label>
+					<div class="form-group">
+						<input type="text" onchange="roundIt(this);" name="actual_mrp" id="actual_mrp"
+							class="form-control" required>
+					</div>
+					<label class="required" for="fps_mrp">FPS MRP</label>
+					<div class="form-group">
+						<input type="text" onchange="roundIt(this);" name="fps_mrp" id="fps_mrp" class="form-control"
+							required>
+					</div>
 				</div>
 				<div class="modal-footer">
 					<button type="submit" class="btn btn-primary">Submit</button>
@@ -252,11 +264,10 @@
 				@csrf
 				<div class="modal-body">
 					<input type="hidden" name="product_id" id="product_id">
-
-					<label class="required" for="product_name">Product Name
-					</label>
+					<label class="required" for="product_name">Product Name </label>
 					<div class="form-group">
-						<input oninput="this.value = this.value.replace(/[^A-Za-z0-9-,.;'&/.() ]|^ /g,'')" name="product_name" id="product_name2" class="form-control" required>
+						<input oninput="this.value = this.value.replace(/[^A-Za-z0-9-,.;'&/.() ]|^ /g,'')"
+							name="product_name" id="product_name2" class="form-control" required>
 					</div>
 
 					<label class="required" for="cat_id">Catagory </label>
@@ -271,7 +282,6 @@
 					</div>
 
 					<label class="required" for="unit_id">Unit </label>
-
 					<div class="form-group">
 						<select class="form-control" name="unit_id" id="unit_id2" required>
 							<option value="">Select Unit</option>
@@ -295,22 +305,23 @@
 					<br>
 
 					<label class="required" for="description">Description </label>
-
 					<div class="form-group">
-						<input oninput="this.value = this.value.replace(/[^A-Za-z0-9-,.;'&/.() ]|^ /g,'')" name="description" id="description2" class="form-control" required>
+						<input oninput="this.value = this.value.replace(/[^A-Za-z0-9-,.;'&/.() ]|^ /g,'')"
+							name="description" id="description2" class="form-control" required>
 					</div>
 
 					<label class="required" for="base_price">Base Price </label>
-
 					<div class="form-group">
-						<input type="number" name="base_price" id="base_price2" class="form-control" onchange="roundIt(this);" required>
+						<input type="number" name="base_price" id="base_price2" class="form-control"
+							onchange="roundIt(this);" required>
 					</div>
 
 
 
 					<label class="required" for="code">Code </label>
 					<div class="form-group">
-						<input oninput="this.value = this.value.replace(/[^A-Za-z0-9-,.;'&/.() ]|^ /g,'')"  name="code" id="code2" class="form-control" required>
+						<input oninput="this.value = this.value.replace(/[^A-Za-z0-9-,.;'&/.() ]|^ /g,'')" name="code"
+							id="code2" class="form-control" required>
 					</div>
 
 					<label class="required" for="taxable">Taxable Type </label>
@@ -323,8 +334,26 @@
 					</div>
 					<label class="required" for="base_price">Threshold Qty. </label>
 					<div class="form-group">
-						<input type="number" name="threshold_qty" id="threshold_qty" class="form-control" onchange="roundIt(this);" required >
-						
+						<input type="number" name="threshold_qty" id="threshold_qty1" class="form-control"
+							onchange="roundIt(this);" required>
+					</div>
+					<label class="required" for="brand">Brand</label>
+					<div class="form-group">
+						<input type="text" name="brand" id="brand1" class="form-control" required>
+					</div>
+					<label class="required" for="inner_carton">Inner Carton</label>
+					<div class="form-group">
+						<input type="text" name="inner_carton" id="inner_carton1" class="form-control" required>
+					</div>
+					<label class="required" for="code">Actual MRP</label>
+					<div class="form-group">
+						<input type="text" onchange="roundIt(this);" name="actual_mrp" id="actual_mrp1"
+							class="form-control" required>
+					</div>
+					<label class="required" for="fps_mrp">FPS MRP</label>
+					<div class="form-group">
+						<input type="text" onchange="roundIt(this);" name="fps_mrp" id="fps_mrp1" class="form-control"
+							required>
 					</div>
 					<div class="form-group">
 						<label class="required" for="description">Product Image </label>
@@ -363,7 +392,7 @@
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 
 <script>
-function myFunction() {
+	function myFunction() {
     
 	document.getElementById("productForm").reset();
 }
@@ -472,6 +501,11 @@ rules: {
 			$("#base_price2").val(product.base_price);
 			$("#code2").val(product.code);
 			$("#taxable2").val(product.taxable);
+			$("#threshold_qty1").val(product.threshold_qty);
+			$("#brand1").val(product.brand);
+			$("#inner_carton1").val(product.inner_carton);
+			$("#actual_mrp1").val(product.actual_mrp);
+			$("#fps_mrp1").val(product.fps_mrp);
 			$("#productEditModal").modal('toggle');
 			});
     }

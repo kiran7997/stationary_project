@@ -15,8 +15,10 @@ class Customer extends Authenticatable
 
     protected $primaryKey = 'customer_id';
     protected $fillable = [
-        'company_name', 'customer_firstname', 'customer_lastname', 'customer_email', 'customer_phone',
-        'customer_username', 'customer_password', 'customer_status', 'login_ip', 'last_login_at', 'password'
+        'company_name', 'customer_firstname', 'customer_lastname', 'email', 'customer_phone',
+        'username', 'password', 'customer_status', 'login_ip', 'last_login_at', 'deleted',
+        'otp','sms_verification','customer_profile_image','state_id','district_id','sub_district',
+        'fps_id','latitude','longitude','accuracy'
     ];
     protected $hidden = [
         'customer_password', 'remember_token',
