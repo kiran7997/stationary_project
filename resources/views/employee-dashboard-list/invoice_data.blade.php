@@ -297,9 +297,7 @@ width: 12.5%;
                         <div class="col-xl-3 col-md-4 col-12 invoice-actions mt-md-0 mt-2">
                             <div class="card">
                                 <div class="card-body">
-                                    <!-- <button class="btn btn-primary btn-block mb-75" data-toggle="modal" data-target="#send-invoice-sidebar">
-                                        Send Invoice
-                                    </button> -->
+                                    
                                     <a href="{{ url('generate-invoice/'.$id.'/download') }}" target="_blank" class="btn btn-success btn-block btn-download-invoice mb-75">Download</a>
                                     <!-- <a class="btn btn-outline-secondary btn-block mb-75" href="./app-invoice-print.html" target="_blank">
                                         Print

@@ -151,7 +151,6 @@ class OrderController extends Controller
     }
     public function updateReturnProduct(Request $req)
     {
-
         $order_id = $req->order_id;
         // dd ($order_id);
         $data_customer = OrderItems::select('order_status', 'order_id')->where(['order_item_id' => $order_id])->update(['order_status' => 'return', 'return_date' => date('Y-m-d')]);
