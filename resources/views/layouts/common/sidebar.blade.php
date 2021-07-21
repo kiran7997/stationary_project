@@ -86,12 +86,12 @@
                                                 data-i18n="Add">Inventory</span></a>
                               </li>
                               @endcan
-                              @can('stock')
+                              <!-- @can('stock')
                               <li><a class="d-flex align-items-center" href="{{url('/stock')}}"><i
                                                 data-feather="circle"></i><span class="menu-item text-truncate"
                                                 data-i18n="Add">Stock</span></a>
                               </li>
-                              @endcan
+                              @endcan -->
                         </ul>
                   </li>
                   @endcanany

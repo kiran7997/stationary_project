@@ -182,7 +182,7 @@
                                                 <option value="">Select State</option>
                                                 @foreach($states as $state)
                                                 <option value="{{$state->state_id}}" @if($user->state==$state->state_id)
-                                                    selected @endif>{{$state->state_title}}</option>
+                                                    selected @endif>{{$state->state_id}}</option>
                                                 @endforeach
                                             </select>
                                             <div class="valid-feedback">Looks good!</div>
@@ -198,9 +198,9 @@
                                                 required>
                                                 <option value="">Select District</option>
                                                 @foreach($districts as $district)
-                                                <option value="{{$district->districtid}}" @if($user->
-                                                    district==$district->districtid)
-                                                    selected @endif>{{$district->district_title}}</option>
+                                                <option value="{{$district->id}}" @if($user->
+                                                    district==$district->id)
+                                                    selected @endif>{{$district->id}}</option>
                                                 @endforeach
                                             </select>
                                             <div class="valid-feedback">Looks good!</div>
@@ -212,9 +212,15 @@
                                     <div class="col-md-4 col-12">
                                         <div class="form-group">
                                             <label class="form-label" for="city">City</label>
-                                            <input type="text" id="city" class="form-control" placeholder="City"
-                                                aria-label="city" aria-describedby="city" name="city"
-                                                value="{{$user->city}}" />
+                                            <select class="select2 w-100 form-control" name="city" id="city"
+                                                required>
+                                                <option value="">Select Sub District</option>
+                                                @foreach($city as $city)
+                                                <option value="{{$city->id}}" @if($user->
+                                                city==$city->id)
+                                                    selected @endif>{{$city->id}}</option>
+                                                @endforeach
+                                            </select>
                                             <div class="valid-feedback">Looks good!</div>
                                             <div class="invalid-feedback">
                                                 Please enter your city.
@@ -308,12 +314,26 @@
                 success:function(res){
                     $('#district').append('<option value="">Select District</option>');
                     $.each(res, function(key,val) {
-                        $('#district').append('<option value='+val.id+'>'+val.title+'</option>');
+                        $('#district').append('<option value='+val.id+'>'+val.id+'</option>');
                     });
                 }
             });
         })
-
+        $('#district').change(function(){
+            var district_id = this.value;
+            $('#city').empty();
+                $.ajax({
+                url: "{{url('get-city')}}",
+                type: "POST",
+                data: {_token:'{{ csrf_token() }}',district_id:district_id},
+                success:function(res){
+                    $('#city').append('<option value="">Select Sub District</option>');
+                    $.each(res, function(key,val) {
+                        $('#city').append('<option value='+val.id+'>'+val.id+'</option>');
+                    });
+                }
+            });
+        })
         $('#profile_image').change(function(){
             var size=this.files[0].size;
             if (size >= 2097152)
