@@ -406,6 +406,19 @@
                             <div class="payment-type">
                                 <div class="card">
                                     <div class="card-header flex-column align-items-start">
+                                        <h4 class="card-title">Bank Details</h4>
+                                        <p class="card-text text-muted mt-25">Use this bank details for payment.
+                                        </p>
+                                    </div>
+                                    <div class="card-body">
+                                        <p><strong>Name : MSB CORPORATION PVT LTD</strong></p>
+                                        <p><strong>Account No : 006630110000101</strong></p>
+                                        <p><strong>IFSC Code : BKID0000066</strong></p>
+                                        <p><strong>Place : Altamount Road Mumbai</strong></p>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-header flex-column align-items-start">
                                         <h4 class="card-title">Payment options</h4>
                                         <p class="card-text text-muted mt-25">Be sure to click on correct payment option
                                         </p>
