@@ -38,6 +38,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('products', 'ProductController');
     Route::resource('departments', 'DepartmentController');
     Route::post('get-district', 'UserController@get_district');
+    Route::post('get-city', 'UserController@get_city');
     Route::post('check_username', 'UserController@check_username');
 
     Route::post('get-sales-user', 'UserController@getSalesUser');

@@ -43,7 +43,8 @@ class UserController extends Controller
     public function create()
     {
         $roles = Role::where('name', '!=', 'Admin')->pluck('name', 'name')->all();
-        $states = DB::table('state')->select('state_id', 'state_title')->get();
+        $states = DB::table('customers')->select('state_id')->groupBy('state_id')->get();
+        // dd($state/s);
         $departments = Department::where('is_active', 0)->get();
         return view('users.create', compact('roles', 'states', 'departments'));
     }
@@ -125,10 +126,13 @@ class UserController extends Controller
         $user = User::find($id);
         $roles = Role::where('name', '!=', 'Admin')->pluck('name', 'name')->all();
         $userRole = $user->roles->pluck('name', 'name')->all();
-        $states = DB::table('state')->select('state_id', 'state_title')->get();
-        $districts = DB::table('district')->select('districtid', 'district_title')->where('state_id', $user->state)->get();
+        //$states = DB::table('state')->select('state_id', 'state_title')->get();
+        $states = DB::table('customers')->select('state_id')->groupBy('state_id')->get();
+        $districts = DB::table('customers')->select('district_id as id')->where(['state_id'=>$user->state])->groupBy('district_id')->get();
+        $city = DB::table('customers')->select('sub_district as id')->where(['district_id'=>$user->district])->groupBy('sub_district')->get();
+        // $districts = DB::table('district')->select('districtid', 'district_title')->where('state_id', $user->state)->get();
         $departments = Department::where('is_active', 0)->get();
-        return view('users.edit', compact('user', 'roles', 'userRole', 'states', 'districts', 'departments'));
+        return view('users.edit', compact('user', 'roles', 'userRole', 'states', 'districts', 'departments','city'));
     }
 
     /**
@@ -211,7 +215,14 @@ class UserController extends Controller
 
     public function get_district(Request $request)
     {
-        return DB::table('district')->select('districtid as id', 'district_title as title')->where('state_id', $request->state_id)->get();
+        return DB::table('customers')->select('district_id as id')->where(['state_id'=>$request->state_id])->groupBy('district_id')->get();
+        // return DB::table('district')->select('districtid as id', 'district_title as title')->where('state_id', $request->state_id)->get();
+    }
+
+    public function get_city(Request $request)
+    {
+        return DB::table('customers')->select('sub_district as id')->where(['district_id'=>$request->district_id])->groupBy('sub_district')->get();
+        // return DB::table('district')->select('districtid as id', 'district_title as title')->where('state_id', $request->state_id)->get();
     }
 
     public function check_username(Request $request)
@@ -268,7 +279,8 @@ class UserController extends Controller
     {
         // $order_list = \App\Orders::where(['order_status' => 'order'])->get();
         $order_list = DB::table('orders')
-                    ->select('orders.*','users.firstname', 'users.lastname')
+                    ->select('orders.*','users.firstname', 'users.lastname','customers.customer_firstname', 'customers.customer_lastname')
+                    ->leftjoin('customers','customers.customer_id','=','orders.customer_id')
                     ->leftjoin('users','users.id','=','orders.sales_person')
                     ->where(['order_status'=>'order'])
                     ->get();
@@ -278,14 +290,25 @@ class UserController extends Controller
 
     public function assignSalesTeam($id)
     {
-        $order_list = \App\Orders::where(['order_id' => $id])->first();
-        $order_item_data = DB::table('order_items')
-            ->select('order_items.*','aproducts.image_url')
-            ->leftjoin('aproducts', 'aproducts.product_id', 'order_items.product_id')
-            ->where(['order_id' => $id])->get();
-        $users = \App\User::where(['department' => "Sales"])->get();
-        $states = DB::table('state')->select('state_id', 'state_title')->get();
-        return view('employee-dashboard-list.assign_to_sales_team', compact('order_list', 'users', 'states', 'order_item_data', 'id'));
+        $u_id = Auth::user()->id;
+        $order_data = DB::table('orders')
+                    ->select('orders.customer_id','customers.state_id','customers.district_id','customers.sub_district')
+                    ->leftjoin('customers','customers.customer_id','=','orders.customer_id')
+                    ->where(['order_id'=>$id])
+                    ->first();
+                    // dd($order_data);
+        $user = User::select('id')->where(['state'=>$order_data->state_id,'district'=>$order_data->district_id,'city'=>$order_data->sub_district,'department'=>'Sales'])->first();
+        // dd($user);
+        $data_customer = DB::table('orders')->where(['order_id'=>$id])->update(['sales_person' => $user->id,'order_status'=>'payment_completed']);
+        \App\Notification::where(['user_id'=>$u_id])->update(['is_read' => 1]);
+        $notification['order_id'] = $id;
+        $notification['user_id'] = $user->id;
+        $notification['role_id'] = 2;
+        $notification['notification_type'] = 'Sales';
+        $notification['notification_date'] = date('Y-m-d');
+        \App\Notification::create($notification);
+        // dd($requestData);
+        return redirect('employee-order-list');
     }
 
     public function profile()
@@ -351,7 +374,12 @@ class UserController extends Controller
     {
         $requestData = $request->all();
         $id = Auth::user()->id;
-        $data_customer = DB::table('orders')->where(['order_id'=>$requestData['order_id']])->update(['sales_person' => $requestData['sales_person'],'order_status'=>'payment_completed']);
+        $order_data = DB::table('orders')
+                    ->select('customer_id','customers.state_id','customers.district_id','customers.sub_district')
+                    ->where(['order_id'=>$requestData['order_id']])
+                    ->first();
+        $user = User::select('id')->where(['state'=>$order_data->state_id,'district'=>$order_data->district_id,'city'=>$order_data->sub_district])->first();
+        $data_customer = DB::table('orders')->where(['order_id'=>$requestData['order_id']])->update(['sales_person' => $user->id,'order_status'=>'payment_completed']);
         \App\Notification::where(['user_id'=>$id])->update(['is_read' => 1]);
         $notification['order_id'] = $requestData['order_id'];
         $notification['user_id'] = $requestData['sales_person'];

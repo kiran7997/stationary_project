@@ -65,9 +65,9 @@
 										<th>Company Name</th>
 										<th>Product Id</th>
 										<th>Quantity</th>
-										<th>Inventory Status</th>
+										<!-- <th>Inventory Status</th> -->
 										<th>Created Date</th>
-										<th>Actions</th>
+										<!-- <th>Actions</th> -->
 									</tr>
 								</thead>
 								<tbody>
@@ -76,18 +76,18 @@
 										<td>{{ucwords($inven->supplier_companyName)}}</td>
 										<td>{{$inven->product_name}}</td>
 										<td>{{$inven->quantity}}</td>
-										<td><label
+										<!-- <td><label
 												class="badge badge-success">{{ucwords($inven->invntory_status)}}</label>
-										</td>
+										</td> -->
 										<td>{{ date('Y-m-d',strtotime($inven->created_at))}}</td>
-										<td>
+										<!-- <td>
 											<a href="javascript:void(0)" onclick="editinven({{$inven->inventory_id}})"
 												class="fa fa-edit" style="font-size:24px"></a>
 											<a href="javascript:void(0)"
 												onclick="deleteinven({{$inven->inventory_id}},{{$inven->product_id}},'{{$inven->invntory_status}}',{{$inven->quantity}})"
 												class="fa fa-trash" style="font-size:24px;color:red"></a>
 
-										</td>
+										</td> -->
 									</tr>
 									@endforeach
 								</tbody>
@@ -143,14 +143,14 @@
 						<input type="number" name="quantity" id="quantity"  class="form-control" required>
 
 					</div>
-					<label class="required" for="invntory_status">Inventory Status </label>
+					<!-- <label class="required" for="invntory_status">Inventory Status </label>
 					<select name="invntory_status" id="invntory_status" class="form-control" required>
 						<option value="">Select Option</option>
 						<option value="add">Add</option>
 						<option value="minus">Minus</option>
 						<option value="set">Set</option>
 
-					</select>
+					</select> -->
 
 				</div>
 
