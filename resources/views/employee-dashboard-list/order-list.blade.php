@@ -57,7 +57,7 @@
                                         @foreach ($order_list as $order)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-                                            <td>{{ $order->firstname }} {{$order->lastname}}</td>
+                                            <td>{{ $order->customer_firstname }} {{$order->customer_lastname}}</td>
                                             <td>{{ $order->email }}</td>
                                             <td>{{ $order->phone_no }}</td>
                                             <td>{{ $order->address_type }}</td>

@@ -25,6 +25,7 @@ class CreateAproductsTable extends Migration
             $table->float('base_price', 12, 2)->nullable();
             $table->string('code')->nullable();
             $table->string('brand')->nullable();
+            $table->string('threshold_qty',50)->nullable();
             $table->float('inner_carton', 12, 2)->nullable();
             $table->float('actual_mrp', 12, 2)->nullable();
             $table->float('fps_mrp', 12, 2)->nullable();
