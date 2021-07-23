@@ -8,19 +8,10 @@
     
   border: 1px solid black;
 }
-table, th, td {
+td {
   border: 1px solid black;
   border-collapse: collapse;
 }
-th, td {
-  padding: 5px;
-  text-align: left;    
-}
-#block1, #block2
-{
-    display:inline;
-}
-
 
 </style>
 <!-- BEGIN: Page CSS-->
@@ -49,90 +40,85 @@ th, td {
                 <center><h3>Purchase Order</h3></center>
             <table  id="example2"  >
                <tr>
-                 <td style="padding:2.5px; width: 50%;" rowspan="2">GST NO</td>
+                 <td style="padding:2.5px; width: 50%; border: 1px solid black;border-collapse: collapse;" rowspan="2">GST NO</td>
                  <td style="padding:2.5px; width: 50%;" rowspan="2"></td>
                </tr>
             </table>
                <br>
                <table  id="example2"  >
                <tr>
-                    <th style="padding:2.5px; width: 50%;" rowspan="2">To,</th>
-                    <td style="padding:2.5px; width: 50%;" >P. O. No: MSBCPL /PO/2021-22/42</td>
+                    <th rowspan="2">To,</th>
+                    <td style="padding:2.5px; width: 50%; " >P. O. No: MSBCPL /PO/2021-22/42</td>
                  </tr>
                <tr>
-                    <td>DATE</td>
+                    <td >DATE : <?php $date = date('Y-m-d', time());echo $date;?></td>
+                   
                 </tr>
+             
                </table>
                <br>
-               <table style="width: 100%; margin-top: 10px; font-size: 0.8em;" border="1px">
-    <tr align="center" >
-      
-        <th style="padding:2.5px; width: 50%;" colspan="2" >DESCRIPTION</th>
-        <th style="padding:2.5px;" >HSN <br>(CODE)</th>
-        <th style="padding:2.5px;" >Quantity</th>
-        <th style="padding:2.5px;" >RATE <br>(INR)</th>
-        <th style="padding:2.5px;" >Total</th>
-        <!-- <th style="padding:2.5px;" colspan="2">Rate per Item</th>
-        <th style="padding:2.5px;" colspan="2">AMOUNT</th> -->
-    </tr>
-            <tr>
-                <td colspan="2" rowspan='4'></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-     </tr>
-     <tr>
-    
-    <td colspan="3">Total</td>
-     <td></td>
-   <!-- <td></td>
-    <td></td> -->
-     </tr>
-
-<tr>
-<td>GST </td>
-     <td>18%</td>
-   <td></td>
-    <td></td>
-    
-     </tr>
-     <tr>
-    
-    <td colspan="3" rowspan="3">Grand Total</td>
-     <td></td>
-   <!-- <td></td>
-    <td></td> -->
-     </tr>
-</table>
-<br>
-<div id="block1" style="text-align:left">
-    <p>Payment Terms:</p>
-    <p>Delivary Terms:</p>
-    <p>Autho Sign </p>
-</div>
-<div id="block2" style="text-align:right">
-    <p><b>Delivery Address:</b> </p>
-    <p>Office no. 12, Mangal Wadi</p>
-    <p>Girgaum Mumbai 400004</p>
-    <p>Maharashtra</p>
-</div>
-        <div class="content-body">
-                <section class="invoice-preview-wrapper">
-                    <div class="row invoice-preview">
-                      <!-- start -->
-                      <div>
-                     
-                      
-                      </div>
-                      <!-- end -->
+               <?php if(count($order_item_data)>0){ ?>
+                              @foreach($order_item_data as $item)
+               <table style="width: 100%; margin-top: 10px; font-size: 15   px;" border="1px">
+                         <tr align="center" >
+                             <th style="padding:2.5px; width: 50%;" colspan="2" >DESCRIPTION</th>
+                             <th style="padding:2.5px;" >HSN <br>(CODE)</th>
+                             <th style="padding:2.5px;" >Quantity</th>
+                             <th style="padding:2.5px;" >RATE <br>(INR)</th>
+                             <th style="padding:2.5px;" >Total</th>
+                            <!-- <th style="padding:2.5px;" colspan="2">Rate per Item</th>
+                                <th style="padding:2.5px;" colspan="2">AMOUNT</th> -->
+                         </tr>
+                         <tr>
+                            <td colspan="2" rowspan='4'>{{$item->product_name}}</td>
+                                <td></td>
+                                <td>{{$item->quantity}}</td>
+                                <td>{{$item->price}}</td>
+                                <td>Rs.{{$item->amount}}</td>
+                         </tr>
+                         <tr>
+                            <td colspan="3">Total</td>
+                            <td>Rs.{{$item->amount}}</td>
+                            <!-- <td></td>
+                            <td></td> -->
+                        </tr>
+                        <tr>
+                        <td>GST </td>
+                        <td>18%</td>
+                        <td></td>
+                        <td></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" rowspan="3">Grand Total</td>
+                            <td>Rs.{{$item->amount}}</td>
+                            <!-- <td></td>
+                            <td></td> -->
+                        </tr>
+                        @endforeach
+                 <?php } ?>
+                </table><br>
+                    <div style="float:left; margin-left:5px" >
+                        <p>Payment Terms:</p>
+                        <p>Delivary Terms:</p>
+                        <p>Autho Sign </p>
+                    </div>
+                    <div style="float:right; margin-left:30px" >
+                       <p><b>Delivery Address:</b> </p>
+                       <p>Office no. 12, Mangal Wadi</p>
+                       <p>Girgaum Mumbai 400004</p>
+                       <p>Maharashtra</p>
+                    </div>
+                    <br><br><br><br><br>
+                    <div >
+                        <section class="invoice-preview-wrapper">
+                        <div class="row invoice-preview">
                         <!-- Invoice Actions -->
-                        <div class="col-xl-3 col-md-4 col-12 invoice-actions mt-md-0 mt-2">
-                            <div class="card">
+                        <div class="col-xl-5 col-md-4 col-12 invoice-actions mt-md-0 mt-2">
+                            <!-- <div class="card"> -->
                                 <div class="card-body">
-                                    <a href="{{url('generate-po/'.$id.'/download')}}" class="btn btn-success btn-block btn-download-invoice mb-75" target="_blank">Download</a>
+                                    <a href="{{url('generate-po/'.$id.'/download')}}" class="btn btn-success btn-block btn-download-invoice mb-75 " target="_blank">Download</a>
                                 </div>
-                            </div>
+                            <!-- </div> -->
                         </div>
                         <!-- /Invoice Actions -->
                     </div>
