@@ -297,8 +297,9 @@ class UserController extends Controller
                     ->where(['order_id'=>$id])
                     ->first();
                     // dd($order_data);
+                    //dd($id);
         $user = User::select('id')->where(['state'=>$order_data->state_id,'district'=>$order_data->district_id,'city'=>$order_data->sub_district,'department'=>'Sales'])->first();
-        // dd($user);
+        //dd($user);
         $data_customer = DB::table('orders')->where(['order_id'=>$id])->update(['sales_person' => $user->id,'order_status'=>'payment_completed']);
         \App\Notification::where(['user_id'=>$u_id])->update(['is_read' => 1]);
         $notification['order_id'] = $id;
@@ -525,7 +526,7 @@ class UserController extends Controller
             return view('employee-dashboard-list.invoice_data',compact('order_list','order_item_data','id'));
         }else{
             $pdf = PDF::loadView("employee-dashboard-list.download_invoice_data",compact('order_list','order_item_data'));  
-            return $pdf->stream('PO.pdf',array("Attachment" => false)); 
+            return $pdf->stream('INVOICE.pdf',array("Attachment" => false)); 
         }
     }
 
